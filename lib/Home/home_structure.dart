@@ -63,7 +63,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.send),
-            label: 'Chats',
+            label: 'Chat',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications_none),
