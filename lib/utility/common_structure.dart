@@ -9,20 +9,24 @@ Widget commonStructure({
   Widget? bottomNavigation,
 }) {
   ///Pass null in appbar when it's optional ex = appBar : null
-  return Stack(
-    children: [
-      Scaffold(
-        backgroundColor: bgColor ?? colorWhite,
-        resizeToAvoidBottomInset: true,
-        appBar: appBar,
-        bottomNavigationBar: bottomNavigation,
-        ///adding listView cause scroll issue
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          color: Colors.transparent,
-          child: child,
+  return SafeArea(
+    child: Stack(
+      children: [
+        Scaffold(
+          backgroundColor: bgColor ?? colorWhite,
+          resizeToAvoidBottomInset: true,
+          appBar: appBar,
+          bottomNavigationBar: bottomNavigation,
+
+          ///adding listView cause scroll issue
+          body: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            height: MediaQuery.of(context).size.height,
+            color: Colors.transparent,
+            child: child,
+          ),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }

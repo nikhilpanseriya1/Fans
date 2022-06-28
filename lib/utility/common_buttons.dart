@@ -13,18 +13,19 @@ Widget commonFillButtonView(
     Color? color,
     Color? fontColor,
     Widget? child,
-    double? height = 60.0,
+    double? height = 50.0,
     double? width}) {
   return Builder(
     builder: (BuildContext context) {
       return Container(
         width: width ?? getScreenWidth(context) - 20,
         height: height,
-        decoration: BoxDecoration(color: color ?? colorDarkBlack, borderRadius: BorderRadius.circular(7)),
+        decoration: BoxDecoration(color: color ?? deepPurpleColor, borderRadius: BorderRadius.circular(50)),
         child: TextButton(
             onPressed: tapOnButton,
             child: child ??
-                Text(title,
+                Text(
+                  title,
                   style: FontStyleUtility.blackInter16W600.copyWith(color: fontColor ?? colorWhite),
                 )),
       );
