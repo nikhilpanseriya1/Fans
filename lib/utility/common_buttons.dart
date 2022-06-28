@@ -1,6 +1,8 @@
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/font_style_utility.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'common_widgets.dart';
 
 Widget commonFillButtonView(
@@ -133,20 +135,61 @@ Widget commonButtonView(
   );
 }
 
-Widget commonRoundedCornerButton({required Function() onTap, required String title, Widget? icon}) {
+Widget commonRoundedCornerButton(
+    {required Function() onTap, required String title, Widget? icon}) {
   return InkWell(
     onTap: onTap,
     highlightColor: colorWhite,
     child: Container(
-      decoration: BoxDecoration(color: colorDarkBlue.withOpacity(0.5), borderRadius: BorderRadius.circular(25)),
+      decoration: BoxDecoration(
+          color: colorDarkBlue.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(25)),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          commonText(text: title, style: FontStyleUtility.blackInter16W600.copyWith(color: colorWhite, fontSize: 18)),
+          commonText(
+              text: title,
+              style: FontStyleUtility.blackInter16W600
+                  .copyWith(color: colorWhite, fontSize: 18)),
           widthBox(10),
           SizedBox(child: icon ?? const SizedBox()),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget materialButton(
+    {double? height,
+    String? text,
+    Function()? onTap,
+    TextStyle? textStyle,
+    MaterialStateProperty<Color?>? background,
+    Widget? icon}) {
+  return SizedBox(
+    height: height ?? 50,
+    child: ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor:
+            background ?? MaterialStateProperty.all(deepPurpleColor),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+        ),
+      ),
+      onPressed: onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon ?? const SizedBox(),
+          10.widthBox,
+          Text(
+            text ?? '',
+            style: textStyle,
+          ),
         ],
       ),
     ),

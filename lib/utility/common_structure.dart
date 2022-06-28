@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'colors_utility.dart';
 
@@ -20,8 +21,8 @@ Widget commonStructure({
 
           ///adding listView cause scroll issue
           body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
             height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             color: Colors.transparent,
             child: child,
           ),
