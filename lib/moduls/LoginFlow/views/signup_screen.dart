@@ -7,6 +7,8 @@ import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../Home/home_structure.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
@@ -33,8 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               heightBox(50.0),
               Text('Join now and Start making money\nwith your content!',
-                  textAlign: TextAlign.center,
-                  style: FontStyleUtility.greyInter16W500),
+                  textAlign: TextAlign.center, style: FontStyleUtility.greyInter16W500),
               heightBox(50.0),
               Row(
                 children: [
@@ -99,9 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 24,
                       width: 24,
                       child: Theme(
-                        data: ThemeData(
-                            unselectedWidgetColor:
-                                colorSemiDarkBlack.withOpacity(0.3)),
+                        data: ThemeData(unselectedWidgetColor: colorSemiDarkBlack.withOpacity(0.3)),
                         child: Checkbox(
                             activeColor: colorDarkBlack,
                             value: isRemember.value,
@@ -113,8 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   widthBox(10),
                   commonText(
-                      text:
-                          'I agree with the processing of personal data privacy policy',
+                      text: 'I agree with the processing of personal data privacy policy',
                       style: FontStyleUtility.greyInter16W500),
                 ],
               ),
@@ -130,11 +128,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => const HomeStructureView());
+                  },
                   child: Text(
                     "Sign up",
-                    style: FontStyleUtility.blackInter16W500
-                        .copyWith(color: colorWhite),
+                    style: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite),
                   ),
                 ),
               ),
@@ -146,8 +145,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 child: Text(
                   ' Already have account?',
-                  style: FontStyleUtility.blackInter20W500.copyWith(
-                      color: deepPurpleColor, fontWeight: FontWeight.w800),
+                  style: FontStyleUtility.blackInter20W500.copyWith(color: deepPurpleColor, fontWeight: FontWeight.w800),
                 ),
               )),
               heightBox(30.0)
