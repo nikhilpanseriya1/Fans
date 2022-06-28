@@ -22,14 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         child: ListView(
           physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           children: [
             50.heightBox,
             materialButton(
                 height: 50.0,
                 text: 'Explore Posts',
-                textStyle: FontStyleUtility.blackInter16W500
-                    .copyWith(color: colorWhite),
+                textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite),
                 icon: const Icon(
                   CupertinoIcons.compass,
                   color: colorWhite,
@@ -100,8 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     background: MaterialStateProperty.all(lightPurpleColor),
                     text: 'Publish',
                     height: 45.0,
-                    textStyle: FontStyleUtility.blackInter16W500
-                        .copyWith(color: colorWhite)),
+                    textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite)),
                 10.heightBox,
                 Align(
                     alignment: Alignment.centerRight,
@@ -147,9 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Text(
                                       'Admin',
                                       style: FontStyleUtility.blackInter22W500
-                                          .copyWith(
-                                          color: deepPurpleColor,
-                                          fontWeight: FontWeight.w900),
+                                          .copyWith(color: deepPurpleColor, fontWeight: FontWeight.w900),
                                     ),
                                     5.widthBox,
                                     const Icon(
@@ -231,10 +226,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     }
                                   },
                                 );
-
-                                },
+                              },
                             ),
-
                           ],
                         ),
                         30.heightBox,
@@ -300,6 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ));
   }
+
   void _showDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -319,5 +313,4 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-
 }

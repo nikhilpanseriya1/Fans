@@ -1,3 +1,4 @@
+import 'package:fans/Home/home/home_screen.dart';
 import 'package:fans/Home/home_structure.dart';
 import 'package:fans/moduls/SplashScreen/splash_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
           background: Container(color: colorWhite)),
-      home: const SplashScreen(),
+      home: const HomeStructureView(),
     );
   }
 }
