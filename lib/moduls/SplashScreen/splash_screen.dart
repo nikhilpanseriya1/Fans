@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:fans2_project/moduls/LoginFlow/views/signin_screen.dart';
-import 'package:fans2_project/utility/colors_utility.dart';
-import 'package:fans2_project/utility/common_structure.dart';
+import 'package:fans/moduls/LoginFlow/views/signin_screen.dart';
+import 'package:fans/utility/colors_utility.dart';
+import 'package:fans/utility/common_structure.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

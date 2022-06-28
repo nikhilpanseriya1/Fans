@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:fans2_project/main.dart';
-import 'package:fans2_project/utility/string_utility.dart';
+import 'package:fans/main.dart';
+import 'package:fans/utility/string_utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

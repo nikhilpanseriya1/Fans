@@ -1,5 +1,5 @@
-import 'package:fans2_project/utility/colors_utility.dart';
-import 'package:fans2_project/utility/font_style_utility.dart';
+import 'package:fans/utility/colors_utility.dart';
+import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

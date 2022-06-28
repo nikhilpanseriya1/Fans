@@ -1,6 +1,6 @@
-import 'package:fans2_project/moduls/SplashScreen/splash_screen.dart';
-import 'package:fans2_project/utility/colors_utility.dart';
-import 'package:fans2_project/utility/string_utility.dart';
+import 'package:fans/moduls/SplashScreen/splash_screen.dart';
+import 'package:fans/utility/colors_utility.dart';
+import 'package:fans/utility/string_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
           backgroundColor: colorWhite,
           splashColor: Colors.transparent,
           hoverColor: Colors.transparent
-        // primarySwatch: Colors.blue,
-      ),
+          // primarySwatch: Colors.blue,
+          ),
       builder: (context, widget) => ResponsiveWrapper.builder(BouncingScrollWrapper.builder(context, widget!),
           maxWidth: MediaQuery.of(context).size.width,
           minWidth: 420,

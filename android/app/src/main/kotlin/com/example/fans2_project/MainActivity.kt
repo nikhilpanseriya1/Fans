@@ -1,4 +1,4 @@
-package com.example.fans2_project
+package com.example.fans
 
 import io.flutter.embedding.android.FlutterActivity
 
