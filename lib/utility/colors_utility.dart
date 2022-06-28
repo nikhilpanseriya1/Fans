@@ -15,6 +15,7 @@ const Color colorBlack = Color(0xFF000000);
 const Color colorRed = Color(0xFFFF0000);
 const Color colorFacebook = Color(0xFF4267B2);
 const Color deepPurpleColor = Color(0xFF450ea7);
+const Color lightPurpleColor = Color(0xFF6f42c1);
 
 const Color textColor = Color(0xFF1A202C);
 const Color textFieldColor = Color(0xFFFFFFFF);

@@ -41,6 +41,7 @@ class FontStyleUtility{
   static TextStyle greyInter12W600 = const TextStyle(color: colorGrey, fontSize: 12, fontFamily: 'Inter', fontWeight: FontWeight.w600);
   static TextStyle greyInter12W500 = const TextStyle(color: colorGrey, fontSize: 12, fontFamily: 'Inter', fontWeight: FontWeight.w500);
   static TextStyle greyInter14W400 = const TextStyle(color: colorGrey, fontSize: 14, fontFamily: 'Inter', fontWeight: FontWeight.w400);
+  static TextStyle greyInter22W800 = const TextStyle(color: colorGrey, fontSize: 22, fontFamily: 'Inter', fontWeight: FontWeight.w800);
 
 
 
