@@ -1,4 +1,4 @@
-# fans2_project
+# fans
 
 A new Flutter project.
 
