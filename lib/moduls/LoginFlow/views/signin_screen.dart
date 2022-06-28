@@ -1,6 +1,5 @@
 import 'package:fans/moduls/LoginFlow/views/signup_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
-import 'package:fans/utility/common_buttons.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_textfield.dart';
 import 'package:fans/utility/common_widgets.dart';
