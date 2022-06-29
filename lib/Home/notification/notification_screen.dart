@@ -1,7 +1,4 @@
-import 'dart:ui';
-
 import 'package:fans/utility/colors_utility.dart';
-import 'package:fans/utility/common_buttons.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
@@ -42,7 +39,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     10.widthBox,
                     Text(
                       'Notifications',
-                      style: FontStyleUtility.greyInter18W500.copyWith(fontSize: 30, fontWeight: FontWeight.w700),
+                      style: FontStyleUtility.greyInter18W500
+                          .copyWith(fontSize: 30, fontWeight: FontWeight.w700),
                     ),
                     10.widthBox,
                     IconButton(
@@ -51,23 +49,31 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Receive notification when:', style: FontStyleUtility.greyInter16W600),
+                                title: Text('Receive notification when:',
+                                    style: FontStyleUtility.greyInter16W600),
                                 content: SingleChildScrollView(
                                   child: ListBody(
                                     children: <Widget>[
-                                      Text('msg', style: FontStyleUtility.blackInter16W500.copyWith(height: 1.5)),
+                                      Text('msg',
+                                          style: FontStyleUtility
+                                              .blackInter16W500
+                                              .copyWith(height: 1.5)),
                                     ],
                                   ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
-                                    child: Text('No', style: FontStyleUtility.blackInter16W600),
+                                    child: Text('No',
+                                        style:
+                                            FontStyleUtility.blackInter16W600),
                                     onPressed: () {
                                       Get.back();
                                     },
                                   ),
                                   TextButton(
-                                    child: Text('Yes', style: FontStyleUtility.blackInter16W600),
+                                    child: Text('Yes',
+                                        style:
+                                            FontStyleUtility.blackInter16W600),
                                     onPressed: () {
                                       Get.back();
                                     },
@@ -93,14 +99,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
               5.heightBox,
               Text(
                 'New subscribers, likes and comments',
-                style: FontStyleUtility.greyInter18W500.copyWith(color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
+                style: FontStyleUtility.greyInter18W500.copyWith(
+                    color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
               ),
               30.heightBox,
               StreamBuilder<Object>(
                   stream: isExpansionTileOpen.stream,
                   builder: (context, snapshot) {
                     return Theme(
-                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      data: ThemeData()
+                          .copyWith(dividerColor: Colors.transparent),
                       child: ExpansionTile(
                         tilePadding: EdgeInsets.zero,
                         initiallyExpanded: isExpansionTileOpen.value,
@@ -117,7 +125,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         title: Container(
                             width: getScreenWidth(context) - 20,
                             height: 50,
-                            decoration: BoxDecoration(color: deepPurpleColor, borderRadius: BorderRadius.circular(50)),
+                            decoration: BoxDecoration(
+                                color: deepPurpleColor,
+                                borderRadius: BorderRadius.circular(50)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -128,7 +138,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 10.widthBox,
                                 Text(
                                   'Menu',
-                                  style: FontStyleUtility.blackDMSerifDisplay18W400.copyWith(color: colorWhite),
+                                  style: FontStyleUtility
+                                      .blackDMSerifDisplay18W400
+                                      .copyWith(color: colorWhite),
                                 ),
                               ],
                             )),
@@ -137,16 +149,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+                              border: Border.all(
+                                  color: colorGrey.withOpacity(0.2), width: 1),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 15, top: 15),
+                                  padding:
+                                      const EdgeInsets.only(left: 15, top: 15),
                                   child: Text(
                                     'ACCOUNT',
-                                    style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+                                    style: FontStyleUtility.greyInter18W500
+                                        .copyWith(fontWeight: FontWeight.w700),
                                   ),
                                 ),
                                 ListTile(
@@ -175,7 +190,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       size: 18,
                                       color: colorGrey,
                                     ),
-                                    leading: const Icon(Icons.mode_edit_outline_outlined),
+                                    leading: const Icon(
+                                        Icons.mode_edit_outline_outlined),
                                     title: const Text('Edit my page')),
                                 ListTile(
                                     onTap: () {},
@@ -184,7 +200,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       size: 18,
                                       color: colorGrey,
                                     ),
-                                    leading: const Icon(Icons.account_balance_wallet_outlined),
+                                    leading: const Icon(
+                                        Icons.account_balance_wallet_outlined),
                                     title: const Text('Wallet')),
                                 ListTile(
                                     onTap: () {},
@@ -193,7 +210,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       size: 18,
                                       color: colorGrey,
                                     ),
-                                    leading: const Icon(Icons.verified_outlined),
+                                    leading:
+                                        const Icon(Icons.verified_outlined),
                                     title: const Text('Verified account!')),
                               ],
                             ),
@@ -202,16 +220,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+                              border: Border.all(
+                                  color: colorGrey.withOpacity(0.2), width: 1),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 15, top: 15),
+                                  padding:
+                                      const EdgeInsets.only(left: 15, top: 15),
                                   child: Text(
                                     'SUBSCRIPTION',
-                                    style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+                                    style: FontStyleUtility.greyInter18W500
+                                        .copyWith(fontWeight: FontWeight.w700),
                                   ),
                                 ),
                                 ListTile(
@@ -221,7 +242,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       size: 18,
                                       color: colorGrey,
                                     ),
-                                    leading: const Icon(Icons.subscriptions_outlined),
+                                    leading: const Icon(
+                                        Icons.subscriptions_outlined),
                                     title: const Text('Subscription price')),
                                 ListTile(
                                     onTap: () {},
@@ -239,7 +261,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       size: 18,
                                       color: colorGrey,
                                     ),
-                                    leading: const Icon(CupertinoIcons.person_crop_circle_badge_checkmark),
+                                    leading: const Icon(CupertinoIcons
+                                        .person_crop_circle_badge_checkmark),
                                     title: const Text('My subscriptions')),
                               ],
                             ),
@@ -248,16 +271,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+                              border: Border.all(
+                                  color: colorGrey.withOpacity(0.2), width: 1),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 15, top: 15),
+                                  padding:
+                                      const EdgeInsets.only(left: 15, top: 15),
                                   child: Text(
                                     'PRIVACY AND SECURITY',
-                                    style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+                                    style: FontStyleUtility.greyInter18W500
+                                        .copyWith(fontWeight: FontWeight.w700),
                                   ),
                                 ),
                                 ListTile(
@@ -267,7 +293,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       size: 18,
                                       color: colorGrey,
                                     ),
-                                    leading: const Icon(Icons.privacy_tip_outlined),
+                                    leading:
+                                        const Icon(Icons.privacy_tip_outlined),
                                     title: const Text('Privacy and security')),
                                 ListTile(
                                     onTap: () {},
@@ -285,7 +312,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       size: 18,
                                       color: colorGrey,
                                     ),
-                                    leading: const Icon(CupertinoIcons.eye_slash),
+                                    leading:
+                                        const Icon(CupertinoIcons.eye_slash),
                                     title: const Text('Block countries')),
                                 ListTile(
                                     onTap: () {},
@@ -312,7 +340,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+                      border: Border.all(
+                          color: colorGrey.withOpacity(0.2), width: 1),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -320,16 +349,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         title: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                                text: 'Your video has been processed successfully (Post) ',
-                                style: FontStyleUtility.blackInter20W600.copyWith(color: colorGrey, height: 1.2)),
+                                text:
+                                    'Your video has been processed successfully (Post) ',
+                                style: FontStyleUtility.blackInter20W600
+                                    .copyWith(color: colorGrey, height: 1.2)),
                             TextSpan(
                                 text: 'Testing 1',
-                                style: FontStyleUtility.blackInter20W600.copyWith(color: colorPrimary, height: 1.2)),
+                                style: FontStyleUtility.blackInter20W600
+                                    .copyWith(
+                                        color: colorPrimary, height: 1.2)),
                           ]),
                         ),
                         subtitle: Text(
                           '5 days ago',
-                          style: FontStyleUtility.greyInter14W400.copyWith(height: 2),
+                          style: FontStyleUtility.greyInter14W400
+                              .copyWith(height: 2),
                         ),
                         leading: const Icon(
                           Icons.play_circle_outline,

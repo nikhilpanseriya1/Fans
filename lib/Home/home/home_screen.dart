@@ -1,7 +1,13 @@
+import 'dart:io';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:fans/Home/home/explore_posts_screen.dart';
 import 'package:fans/utility/common_structure.dart';
+import 'package:fans/utility/constant.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
@@ -16,16 +22,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
         child: ListView(
           physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           children: [
             50.heightBox,
             materialButton(
+                onTap: () {
+                  Get.to(() => const ExplorePostsScreen());
+                },
                 height: 50.0,
                 text: 'Explore Posts',
                 textStyle: FontStyleUtility.blackInter16W500
@@ -115,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 1,
+                itemCount: 3,
                 itemBuilder: (context, index) {
                   return Container(
                     child: Column(
@@ -148,8 +158,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       'Admin',
                                       style: FontStyleUtility.blackInter22W500
                                           .copyWith(
-                                          color: deepPurpleColor,
-                                          fontWeight: FontWeight.w900),
+                                              color: deepPurpleColor,
+                                              fontWeight: FontWeight.w900),
                                     ),
                                     5.widthBox,
                                     const Icon(
@@ -179,62 +189,69 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             const Spacer(),
-                            IconButton(
+                            PopupMenuButton(
                               icon: const Icon(
                                 Icons.more_horiz,
                                 size: 35,
                                 color: colorGrey,
                               ),
-                              onPressed: () {
-                                PopupMenuButton<int>(
-                                  itemBuilder: (context) => [
-                                    // PopupMenuItem 1
-                                    PopupMenuItem(
-                                      value: 1,
-                                      // row with 2 children
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.star),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text("Get The App")
-                                        ],
-                                      ),
+                              itemBuilder: (context) {
+                                return [
+                                  PopupMenuItem(
+                                    value: 'edit',
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.ios_share_outlined),
+                                        10.widthBox,
+                                        const Text('Go to post'),
+                                      ],
                                     ),
-                                    // PopupMenuItem 2
-                                    PopupMenuItem(
-                                      value: 2,
-                                      // row with two children
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.chrome_reader_mode),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text("About")
-                                        ],
-                                      ),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'delete',
+                                    child: Row(
+                                      children: [
+                                        const Icon(CupertinoIcons.pin),
+                                        10.widthBox,
+                                        const Text('Pin your Profile'),
+                                      ],
                                     ),
-                                  ],
-                                  offset: Offset(0, 100),
-                                  color: Colors.grey,
-                                  elevation: 2,
-                                  // on selected we show the dialog box
-                                  onSelected: (value) {
-                                    // if value 1 show dialog
-                                    if (value == 1) {
-                                      _showDialog(context);
-                                      // if value 2 show dialog
-                                    } else if (value == 2) {
-                                      _showDialog(context);
-                                    }
-                                  },
-                                );
-
-                                },
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'delete',
+                                    child: Row(
+                                      children: [
+                                        const Icon(CupertinoIcons.link),
+                                        10.widthBox,
+                                        const Text('Copy link'),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'delete',
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.edit_outlined),
+                                        10.widthBox,
+                                        const Text('Edit post'),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'delete',
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.delete_outline),
+                                        10.widthBox,
+                                        const Text('Delete post'),
+                                      ],
+                                    ),
+                                  ),
+                                ];
+                              },
+                              onSelected: (String value) =>
+                                  actionPopUpItemSelected(value, 'name'),
                             ),
-
                           ],
                         ),
                         30.heightBox,
@@ -250,74 +267,117 @@ class _HomeScreenState extends State<HomeScreen> {
                         10.heightBox,
                         Row(
                           children: [
-                            GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  CupertinoIcons.suit_heart,
-                                  size: 28,
-                                  color: colorGrey,
-                                )),
-                            3.widthBox,
+                            StreamBuilder<Object>(
+                                stream: kHomeController.likeButton.stream,
+                                builder: (context, snapshot) {
+                                  return IconButton(
+                                      splashColor: colorRed,
+                                      splashRadius: 20.0,
+                                      onPressed: () {
+                                        kHomeController.likeButton.value =
+                                            !kHomeController.likeButton.value;
+                                      },
+                                      icon: Icon(
+                                        kHomeController.likeButton.value == true
+                                            ? CupertinoIcons.heart_fill
+                                            : CupertinoIcons.suit_heart,
+                                        size: 25,
+                                        color:
+                                            kHomeController.likeButton.value ==
+                                                    true
+                                                ? colorRed
+                                                : colorGrey,
+                                      ));
+                                }),
                             Text(
                               '1',
-                              style: FontStyleUtility.greyInter22W800,
+                              overflow: TextOverflow.ellipsis,
+                              style: FontStyleUtility.greyInter18W500,
                             ),
-                            8.widthBox,
-                            GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  CupertinoIcons.chat_bubble,
-                                  size: 28,
-                                  color: colorGrey,
-                                )),
-                            3.widthBox,
-                            Text(
-                              '1',
-                              style: FontStyleUtility.greyInter22W800,
-                            ),
-                            8.widthBox,
-                            GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  CupertinoIcons.share,
-                                  size: 28,
-                                  color: colorGrey,
-                                )),
-                            const Spacer(),
+                            2.widthBox,
                             IconButton(
                                 onPressed: () {},
                                 icon: const Icon(
-                                  Icons.bookmark_border,
-                                  size: 28,
+                                  CupertinoIcons.chat_bubble,
+                                  size: 22,
                                   color: colorGrey,
-                                ))
+                                )),
+                            Text(
+                              '1',
+                              overflow: TextOverflow.ellipsis,
+                              style: FontStyleUtility.greyInter18W500,
+                            ),
+                            2.widthBox,
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  CupertinoIcons.share,
+                                  size: 22,
+                                  color: colorGrey,
+                                )),
+                            const Spacer(),
+                            StreamBuilder<Object>(
+                                stream: kHomeController.bookmarkButton.stream,
+                                builder: (context, snapshot) {
+                                  return IconButton(
+                                      splashColor: deepPurpleColor,
+                                      splashRadius: 20.0,
+                                      onPressed: () {
+                                        kHomeController.bookmarkButton.value =
+                                            !kHomeController
+                                                .bookmarkButton.value;
+                                      },
+                                      icon: Icon(
+                                        kHomeController.bookmarkButton.value ==
+                                                true
+                                            ? Icons.bookmark
+                                            : Icons.bookmark_border,
+                                        size: 23,
+                                        color: kHomeController
+                                                    .bookmarkButton.value ==
+                                                true
+                                            ? deepPurpleColor
+                                            : colorGrey,
+                                      ));
+                                })
                           ],
                         )
                       ],
                     ),
                   );
-                })
+                }),
           ],
         ));
   }
-  void _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Alert!!"),
-          content: const Text("You are awesome!"),
-          actions: [
-            MaterialButton(
-              child: const Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
+
+  PopupMenuItem _buildPopupMenuItem(
+      String title, IconData iconData, int position) {
+    return PopupMenuItem(
+      value: position,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(
+            iconData,
+            color: Colors.black,
+          ),
+          Text(title),
+        ],
+      ),
     );
   }
 
+  void actionPopUpItemSelected(String value, String? name) {
+    scaffoldkey.currentState?.hideCurrentSnackBar();
+    String message;
+    if (value == 'edit') {
+      message = 'You selected edit for $name';
+    } else if (value == 'delete') {
+      message = 'You selected delete for $name';
+    } else {
+      message = 'Not implemented';
+    }
+    final snackBar = SnackBar(content: Text(message));
+    scaffoldkey.currentState?.showSnackBar(snackBar);
+  }
 }

@@ -22,6 +22,7 @@ Widget commonStructure({
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             color: Colors.transparent,
             child: child,
           ),
