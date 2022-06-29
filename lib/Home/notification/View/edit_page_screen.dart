@@ -235,6 +235,7 @@ class _EditPageScreenState extends State<EditPageScreen> {
                   );
                 },
               ),
+              20.heightBox,
               // commonButtonView(
               //     title: 'title',
               //     tapOnButton: () {

@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:fans/Home/home/explore_posts_screen.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/constant.dart';
