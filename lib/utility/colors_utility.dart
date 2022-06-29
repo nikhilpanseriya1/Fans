@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// const Color colorPrimary = Color(0xFF6C6AEB);
 const Color colorPrimary = Color(0xFF6C6AEB);
 const Color colorPrimaryDark = Color(0xFF5344AD);
 const Color colorDarkBlue = Color(0xFF0D0F42);
@@ -20,12 +21,9 @@ const Color lightPurpleColor = Color(0xFF6f42c1);
 const Color textColor = Color(0xFF1A202C);
 const Color textFieldColor = Color(0xFFFFFFFF);
 
-
 // const Color deepPurpleColor = Color(0xFF3D0089);
 const Color blueColor = Color(0xFF528CE1);
 const Color skyBlueColor = Color(0xFF4285F4);
-
-
 
 const Color colorGreyOpacity30 = Color(0x4D5D5F5E);
 // const Color colorShadow = Color(0xB3000000);

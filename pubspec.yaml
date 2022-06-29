@@ -38,7 +38,6 @@ dependencies:
   get: ^4.6.5
   responsive_framework: ^0.2.0
   velocity_x: ^3.5.1
-  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
