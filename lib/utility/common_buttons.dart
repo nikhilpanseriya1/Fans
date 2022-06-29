@@ -91,7 +91,7 @@ Widget commonButtonView(
     Image? prefixImage,
     Color? color,
     Color? fontColor,
-    double? height = 60.0,
+    double? height = 50,
     double? width}) {
   return Builder(
     builder: (BuildContext context) {
@@ -110,22 +110,14 @@ Widget commonButtonView(
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    suffixImage == null
-                        ? Expanded(
-                            child: Center(
-                              child: commonText(
-                                text: title,
-                                style: FontStyleUtility.blackInter16W600,
-                              ),
-                            ),
-                          )
-                        : commonText(
-                            text: title,
-                            style: FontStyleUtility.blackInter16W600,
-                          ),
-                    suffixImage ?? const SizedBox()
+                    suffixImage ?? const SizedBox(),
+                    commonText(
+                      text: title,
+                      textAlign: TextAlign.center,
+                      style: FontStyleUtility.blackInter16W600,
+                    ),
                   ],
                 ),
               ),
@@ -135,24 +127,18 @@ Widget commonButtonView(
   );
 }
 
-Widget commonRoundedCornerButton(
-    {required Function() onTap, required String title, Widget? icon}) {
+Widget commonRoundedCornerButton({required Function() onTap, required String title, Widget? icon}) {
   return InkWell(
     onTap: onTap,
     highlightColor: colorWhite,
     child: Container(
-      decoration: BoxDecoration(
-          color: colorDarkBlue.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(25)),
+      decoration: BoxDecoration(color: colorDarkBlue.withOpacity(0.5), borderRadius: BorderRadius.circular(25)),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          commonText(
-              text: title,
-              style: FontStyleUtility.blackInter16W600
-                  .copyWith(color: colorWhite, fontSize: 18)),
+          commonText(text: title, style: FontStyleUtility.blackInter16W600.copyWith(color: colorWhite, fontSize: 18)),
           widthBox(10),
           SizedBox(child: icon ?? const SizedBox()),
         ],
@@ -172,8 +158,7 @@ Widget materialButton(
     height: height ?? 50,
     child: ElevatedButton(
       style: ButtonStyle(
-        backgroundColor:
-            background ?? MaterialStateProperty.all(deepPurpleColor),
+        backgroundColor: background ?? MaterialStateProperty.all(deepPurpleColor),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),

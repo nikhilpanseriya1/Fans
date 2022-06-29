@@ -1,14 +1,18 @@
 import 'dart:ui';
 
 import 'package:fans/utility/colors_utility.dart';
-import 'package:fans/utility/common_buttons.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_widgets.dart';
+import 'package:fans/utility/constants.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import 'View/edit_page_screen.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -47,42 +51,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     10.widthBox,
                     IconButton(
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Receive notification when:', style: FontStyleUtility.greyInter16W600),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: <Widget>[
-                                      Text('msg', style: FontStyleUtility.blackInter16W500.copyWith(height: 1.5)),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text('No', style: FontStyleUtility.blackInter16W600),
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: Text('Yes', style: FontStyleUtility.blackInter16W600),
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          showNotificationDialog(context);
                         },
                         icon: const Icon(
                           Icons.settings,
                           color: colorPrimary,
                         )),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showAlertDialog(
+                              title: 'Are you sure?',
+                              child: Lottie.asset(
+                                'assets/json/cancel.json',
+                                width: 100,
+                                height: 100,
+                                repeat: false,
+                                fit: BoxFit.fill,
+                              ),
+                              textAlign: TextAlign.center,
+                              msg: 'Are you sure you want to delete all notifications?',
+                              context: context,
+                              callback: () {
+                                print('Delete notification callback');
+                              });
+                        },
                         icon: const Icon(
                           CupertinoIcons.delete,
                           color: colorPrimary,
@@ -121,8 +113,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(
-                                  Icons.menu,
+                                Icon(
+                                  isExpansionTileOpen.value ? Icons.cancel : Icons.menu,
                                   color: colorWhite,
                                 ),
                                 10.widthBox,
@@ -133,172 +125,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               ],
                             )),
                         children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15, top: 15),
-                                  child: Text(
-                                    'ACCOUNT',
-                                    style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                                ListTile(
-                                  onTap: () {},
-                                  leading: const Icon(Icons.speed),
-                                  title: const Text('Dashboard'),
-                                  trailing: const Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 18,
-                                    color: colorGrey,
-                                  ),
-                                ),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.person_outline),
-                                    title: const Text('My page')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.mode_edit_outline_outlined),
-                                    title: const Text('Edit my page')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.account_balance_wallet_outlined),
-                                    title: const Text('Wallet')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.verified_outlined),
-                                    title: const Text('Verified account!')),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15, top: 15),
-                                  child: Text(
-                                    'SUBSCRIPTION',
-                                    style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.subscriptions_outlined),
-                                    title: const Text('Subscription price')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.group_outlined),
-                                    title: const Text('My subscribers')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(CupertinoIcons.person_crop_circle_badge_checkmark),
-                                    title: const Text('My subscriptions')),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15, top: 15),
-                                  child: Text(
-                                    'PRIVACY AND SECURITY',
-                                    style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.privacy_tip_outlined),
-                                    title: const Text('Privacy and security')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.key),
-                                    title: const Text('Password')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(CupertinoIcons.eye_slash),
-                                    title: const Text('Block countries')),
-                                ListTile(
-                                    onTap: () {},
-                                    trailing: const Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      size: 18,
-                                      color: colorGrey,
-                                    ),
-                                    leading: const Icon(Icons.block_flipped),
-                                    title: const Text('Restricted user')),
-                              ],
-                            ),
-                          ),
+                          commonAccountView(),
+                          commonSubscriptionView(),
+                          commonPrivacyView(),
                         ],
                       ),
                     );
@@ -315,16 +144,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       child: ListTile(
                         title: RichText(
                           text: TextSpan(children: [
                             TextSpan(
                                 text: 'Your video has been processed successfully (Post) ',
-                                style: FontStyleUtility.blackInter20W600.copyWith(color: colorGrey, height: 1.2)),
+                                style: FontStyleUtility.blackInter16W600.copyWith(color: colorGrey, height: 1.2)),
                             TextSpan(
                                 text: 'Testing 1',
-                                style: FontStyleUtility.blackInter20W600.copyWith(color: colorPrimary, height: 1.2)),
+                                style: FontStyleUtility.blackInter16W600.copyWith(color: colorPrimary, height: 1.2)),
                           ]),
                         ),
                         subtitle: Text(
@@ -334,7 +163,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         leading: const Icon(
                           Icons.play_circle_outline,
                           color: colorPrimary,
-                          size: 50,
+                          size: 40,
                         ),
                       ),
                     ),
@@ -345,4 +174,276 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ));
   }
+
+  Future<dynamic> showNotificationDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            insetPadding: const EdgeInsets.symmetric(horizontal: 15),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            content: SizedBox(
+              height: getScreenHeight(context) * 0.70, // Change as per your requirement
+              width: getScreenWidth(context), // Cha
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Receive notification when:',
+                          style: FontStyleUtility.blackInter18W600.copyWith(color: colorGrey)),
+                      IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: const Icon(Icons.close))
+                    ],
+                  ),
+                  20.heightBox,
+                  ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: kNotificationController.notificationList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              child: Obx(
+                                () => Switch(
+                                    // inactiveThumbColor: Colors.grey,
+                                    dragStartBehavior: DragStartBehavior.start,
+                                    value: kNotificationController.notificationList[index].isChecked.value,
+                                    onChanged: (bool val) {
+                                      kNotificationController.notificationList[index].isChecked.value = val;
+                                    }),
+                              ),
+                            ),
+                            Expanded(child: Text(kNotificationController.notificationList[index].title)),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  20.heightBox,
+                  Text('Email notification', style: FontStyleUtility.blackInter18W600.copyWith(color: colorGrey)),
+                  20.heightBox,
+                  ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: kNotificationController.emailNotificationList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 30,
+                              child: Obx(
+                                () => Switch(
+                                    dragStartBehavior: DragStartBehavior.start,
+                                    value: kNotificationController.emailNotificationList[index].isChecked.value,
+                                    onChanged: (bool val) {
+                                      kNotificationController.emailNotificationList[index].isChecked.value = val;
+                                    }),
+                              ),
+                            ),
+                            Expanded(child: Text(kNotificationController.emailNotificationList[index].title)),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}
+
+Widget commonAccountView() {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 10),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 15, top: 15),
+          child: Text(
+            'ACCOUNT',
+            style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+          ),
+        ),
+        ListTile(
+          onTap: () {},
+          leading: const Icon(Icons.speed),
+          title: const Text('Dashboard'),
+          trailing: const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 18,
+            color: colorGrey,
+          ),
+        ),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.person_outline),
+            title: const Text('My page')),
+        ListTile(
+            onTap: () {
+              Get.to(() => const EditPageScreen());
+            },
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.mode_edit_outline_outlined),
+            title: const Text('Edit my page')),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.account_balance_wallet_outlined),
+            title: const Text('Wallet')),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.verified_outlined),
+            title: const Text('Verified account!')),
+      ],
+    ),
+  );
+}
+
+Widget commonSubscriptionView() {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 10),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 15, top: 15),
+          child: Text(
+            'SUBSCRIPTION',
+            style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+          ),
+        ),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.subscriptions_outlined),
+            title: const Text('Subscription price')),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.group_outlined),
+            title: const Text('My subscribers')),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(CupertinoIcons.person_crop_circle_badge_checkmark),
+            title: const Text('My subscriptions')),
+      ],
+    ),
+  );
+}
+
+Widget commonPrivacyView() {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 10),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 15, top: 15),
+          child: Text(
+            'PRIVACY AND SECURITY',
+            style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+          ),
+        ),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: const Text('Privacy and security')),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.key),
+            title: const Text('Password')),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(CupertinoIcons.eye_slash),
+            title: const Text('Block countries')),
+        ListTile(
+            onTap: () {},
+            trailing: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: colorGrey,
+            ),
+            leading: const Icon(Icons.block_flipped),
+            title: const Text('Restricted user')),
+      ],
+    ),
+  );
 }

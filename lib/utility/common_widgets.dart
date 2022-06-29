@@ -5,9 +5,7 @@ import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 RxInt selectedIndex = 0.obs;
-
 
 Widget commonText({required String text, required TextStyle style, TextAlign? textAlign}) {
   return Expanded(child: Text(text, style: style, textAlign: textAlign ?? TextAlign.start));
@@ -20,7 +18,12 @@ disableFocusScopeNode(BuildContext context) {
   }
 }
 
-Widget commonRow({required String title, required Widget suffix, TextStyle? titleTextStyle, TextStyle? textStyle, double? borderOpacity}) {
+Widget commonRow(
+    {required String title,
+    required Widget suffix,
+    TextStyle? titleTextStyle,
+    TextStyle? textStyle,
+    double? borderOpacity}) {
   return Column(
     children: [
       Row(
@@ -38,7 +41,12 @@ Widget commonRow({required String title, required Widget suffix, TextStyle? titl
   );
 }
 
-Widget searchCommonRow({required String title, required Widget suffix, TextStyle? titleTextStyle, TextStyle? textStyle, double? borderOpacity}) {
+Widget searchCommonRow(
+    {required String title,
+    required Widget suffix,
+    TextStyle? titleTextStyle,
+    TextStyle? textStyle,
+    double? borderOpacity}) {
   return Column(
     children: [
       Row(
@@ -80,7 +88,7 @@ Widget commonInboxCard({required String text, required String timeText, Widget? 
                     Container(
                       child: commonText(text: text, style: FontStyleUtility.blackInter16W500.copyWith(height: 1.4)),
                     ),
-                    heightBox( 15),
+                    heightBox(15),
                     commonText(text: timeText, style: FontStyleUtility.greyInter16W500),
                   ],
                 ),
@@ -107,7 +115,9 @@ Widget introScreenCommonRow({required String text, bool? isSelected}) {
     child: Padding(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: commonText(
-          text: text, style: FontStyleUtility.greyInter14W500.copyWith(fontWeight: isSelected ?? false ? FontWeight.w600 : FontWeight.w500)),
+          text: text,
+          style: FontStyleUtility.greyInter14W500
+              .copyWith(fontWeight: isSelected ?? false ? FontWeight.w600 : FontWeight.w500)),
     ),
   );
 }
@@ -120,7 +130,8 @@ getScreenHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-Widget loginFlowCommonBottomBar({required Function() onTap, required String textSpanMessage, required String textSpanClick}) {
+Widget loginFlowCommonBottomBar(
+    {required Function() onTap, required String textSpanMessage, required String textSpanClick}) {
   return SizedBox(
     height: 40,
     child: Padding(
@@ -187,7 +198,8 @@ Widget simpleDropDownButton(
   return Container(
     width: getScreenWidth(context),
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10), border: Border.all(color: isBorder ? colorBlack.withOpacity(0.1) : colorBlack.withOpacity(0))),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: isBorder ? colorBlack.withOpacity(0.1) : colorBlack.withOpacity(0))),
     child: Obx(
       () => DropdownButtonHideUnderline(
         child: ButtonTheme(
@@ -225,95 +237,33 @@ OutlineInputBorder countryBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(5.0),
 );
 
-commonCountryCodePicker({
-  required Function onChanged,
-  required String initialSelection,
-  required TextEditingController textController,
-  FocusNode? focusNode,
-  bool? hideMainText,
-  Color? borderColor,
-  double? height,
-  double? width,
-  bool? alignLeft = false,
-  bool isShowDropIcon = true,
-}) {
-  return Builder(builder: (context) {
-    return Container(
-      width: width ?? MediaQuery.of(context).size.width,
-      height: height ?? 60,
-      decoration:
-          BoxDecoration(border: Border.all(color: borderColor ?? colorBlack.withOpacity(0.1), width: 1), borderRadius: BorderRadius.circular(5.0)),
-      child: Stack(
-        children: [
-          isShowDropIcon
-              ? const Positioned(
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  child: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.black,
-                    size: 25,
-                  ),
-                )
-              : const SizedBox(),
-          // CountryCodePicker(
-          //   onInit: (code) {},
-          //   flagWidth: 30,
-          //   // hideMainText: true,
-          //   padding: const EdgeInsets.all(0),
-          //   onChanged: (cCode) {
-          //     onChanged(cCode);
-          //   },
-          //   initialSelection: initialSelection,
-          //   showCountryOnly: true,
-          //   showOnlyCountryWhenClosed: true,
-          //   searchStyle: FontStyleUtility.blackInter16W500,
-          //   dialogTextStyle: FontStyleUtility.blackInter18W500,
-          //   showFlagDialog: true,
-          //   alignLeft: alignLeft ?? true,
-          //   closeIcon: const Icon(
-          //     Icons.close_sharp,
-          //     size: 30,
-          //     color: colorBlack,
-          //   ),
-          //   hideMainText: hideMainText ?? false,
-          //   dialogBackgroundColor: Colors.black,
-          //   showFlag: true,
-          //   boxDecoration: BoxDecoration(color: colorWhite, borderRadius: BorderRadius.circular(20.0)),
-          //   searchDecoration: InputDecoration(
-          //     filled: true,
-          //     // prefixIcon: const Icon(
-          //     //   Icons.search,
-          //     //   color: colorBlack,
-          //     // ),
-          //     fillColor: textFieldColor,
-          //     contentPadding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-          //     focusedBorder: countryBorder,
-          //     disabledBorder: countryBorder,
-          //     enabledBorder: countryBorder,
-          //     errorBorder: countryBorder,
-          //   ),
-          //   textStyle: FontStyleUtility.blackInter16W500,
-          //   dialogSize: Size(Get.width, Get.height - 60),
-          // ),
-        ],
-      ),
-    );
-  });
-}
 
-Future<void> showAlertDialog({required String title, required String msg, required BuildContext context, required Function() callback}) async {
+
+Future<void> showAlertDialog(
+    {required String title,
+    required String msg,
+    required BuildContext context,
+    Widget? child,
+    TextAlign? textAlign,
+    required Function() callback}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(title, style: FontStyleUtility.blackInter20W600),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text(msg, style: FontStyleUtility.blackInter16W500.copyWith(height: 1.5)),
+              Column(
+                children: [
+                  child ?? const SizedBox.shrink(),
+                ],
+              ),
+              Text(msg,
+                  style: FontStyleUtility.blackInter16W500.copyWith(height: 1.5, color: colorBlack.withOpacity(0.8)),
+                  textAlign: textAlign ?? TextAlign.start),
             ],
           ),
         ),

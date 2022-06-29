@@ -56,7 +56,7 @@ Widget commonTextField({String? fieldTitleText,
           const SizedBox(
             height: 10.0,
           ),
-        labelText == null || labelText.isEmpty ? const SizedBox() : Text(labelText, style: FontStyleUtility.blackInter16W500),
+        labelText == null || labelText.isEmpty ? const SizedBox() : Text(labelText, style: FontStyleUtility.greyInter14W500),
         const SizedBox(
           height: 10.0,
         ),
@@ -118,7 +118,7 @@ Widget commonTextField({String? fieldTitleText,
             errorMaxLines: errorMaxLines ?? 1,
             filled: true,
             fillColor: filledColor,
-            contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(13.0, 20.0, 10.0, 20.0),
+            contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(13.0, 11.0, 10.0, 11.0),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: colorSemiDarkBlack, width: 1),
               borderRadius: BorderRadius.circular(5.0),
