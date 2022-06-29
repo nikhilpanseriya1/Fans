@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 Color? borderColor;
 
 OutlineInputBorder textFieldBorderStyle = OutlineInputBorder(
-  borderSide: BorderSide(color: borderColor ?? colorBlack.withOpacity(0.1), width: 1),
+  borderSide: BorderSide(color: borderColor ?? colorBlack.withOpacity(0.5), width: 1),
   borderRadius: BorderRadius.circular(5.0),
 );
 
@@ -45,7 +45,6 @@ Widget commonTextField({String? fieldTitleText,
   TextStyle? hintStyle}) {
   bool passwordVisible = isPassword;
   return StatefulBuilder(builder: (context, newSetState) {
-    borderColor = colorBlack.withOpacity(borderOpacity ?? 0.1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -70,6 +69,7 @@ Widget commonTextField({String? fieldTitleText,
           showCursor: !isReadOnly,
 
           onTap: () {
+            borderColor = colorBlack.withOpacity(borderOpacity ?? 0.5);
             if (onTapFunction != null) {
               onTapFunction();
             }

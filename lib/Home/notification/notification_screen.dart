@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_widgets.dart';
@@ -46,7 +44,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     10.widthBox,
                     Text(
                       'Notifications',
-                      style: FontStyleUtility.greyInter18W500.copyWith(fontSize: 30, fontWeight: FontWeight.w700),
+                      style: FontStyleUtility.greyInter18W500
+                          .copyWith(fontSize: 30, fontWeight: FontWeight.w700),
                     ),
                     10.widthBox,
                     IconButton(
@@ -85,14 +84,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
               5.heightBox,
               Text(
                 'New subscribers, likes and comments',
-                style: FontStyleUtility.greyInter18W500.copyWith(color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
+                style: FontStyleUtility.greyInter18W500.copyWith(
+                    color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
               ),
               30.heightBox,
               StreamBuilder<Object>(
                   stream: isExpansionTileOpen.stream,
                   builder: (context, snapshot) {
                     return Theme(
-                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      data: ThemeData()
+                          .copyWith(dividerColor: Colors.transparent),
                       child: ExpansionTile(
                         tilePadding: EdgeInsets.zero,
                         initiallyExpanded: isExpansionTileOpen.value,
@@ -109,7 +110,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         title: Container(
                             width: getScreenWidth(context) - 20,
                             height: 50,
-                            decoration: BoxDecoration(color: deepPurpleColor, borderRadius: BorderRadius.circular(50)),
+                            decoration: BoxDecoration(
+                                color: deepPurpleColor,
+                                borderRadius: BorderRadius.circular(50)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -120,7 +123,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 10.widthBox,
                                 Text(
                                   'Menu',
-                                  style: FontStyleUtility.blackDMSerifDisplay18W400.copyWith(color: colorWhite),
+                                  style: FontStyleUtility
+                                      .blackDMSerifDisplay18W400
+                                      .copyWith(color: colorWhite),
                                 ),
                               ],
                             )),

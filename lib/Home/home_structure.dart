@@ -13,6 +13,7 @@ class HomeStructureView extends StatefulWidget {
   const HomeStructureView({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeStructureViewState createState() => _HomeStructureViewState();
 }
 
