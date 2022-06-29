@@ -1,5 +1,4 @@
 import 'package:fans/Home/notification/notification_screen.dart';
-import 'package:fans/utility/common_buttons.dart';
 import 'package:fans/utility/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import '../../../utility/country_code_picker.dart';
 import '../../../utility/utility_export.dart';
 
 class EditPageScreen extends StatefulWidget {
