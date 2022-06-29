@@ -17,6 +17,7 @@ class NotificationController extends GetxController {
   ].obs;
 
   RxList<NotificationSettingsModel> emailNotificationList = [
+
     NotificationSettingsModel(title: 'Someone has subscribed to my content', isChecked: true.obs),
     NotificationSettingsModel(title: 'Someone send me tip', isChecked: true.obs),
     NotificationSettingsModel(title: 'Someone has bought my contact(Post, Message)', isChecked: true.obs),
