@@ -14,6 +14,7 @@ import 'package:lottie/lottie.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'View/edit_page_screen.dart';
+import 'View/mysubscribers_screen.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -416,7 +417,9 @@ Widget commonSubscriptionView() {
             leading: const Icon(Icons.subscriptions_outlined),
             title: const Text('Subscription price')),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const MySubscribersScreen());
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,
