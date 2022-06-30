@@ -1,10 +1,13 @@
 import 'package:fans/Home/home/explore_posts_screen.dart';
+import 'package:fans/Home/home/goto_post_screen.dart';
 import 'package:fans/utility/common_structure.dart';
+import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/constant.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
@@ -23,36 +26,170 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return commonStructure(context: context, child: homeViewData());
   }
-
-  PopupMenuItem _buildPopupMenuItem(String title, IconData iconData, int position) {
-    return PopupMenuItem(
-      value: position,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(
-            iconData,
-            color: Colors.black,
-          ),
-          Text(title),
-        ],
-      ),
-    );
-  }
 }
 
-void actionPopUpItemSelected(String value, String? name) {
+void actionPopUpItemSelected(String value, String? name, BuildContext context) {
   kHomeController.scaffoldkey.currentState?.hideCurrentSnackBar();
   String message;
-  if (value == 'edit') {
-    message = 'You selected edit for $name';
-  } else if (value == 'delete') {
+  if (value == 'GoToPost') {
+    Get.to(() => const GoToPostScreen());
+  } else if (value == 'PinYourProfile') {
     message = 'You selected delete for $name';
+  } else if (value == 'CopyLink') {
+    message = 'You selected delete for $name';
+  } else if (value == 'EditPost') {
+    editPost(context);
+  } else if (value == 'DeletePost') {
+    deletePost(context);
   } else {
     message = 'Not implemented';
   }
-  final snackBar = SnackBar(content: Text(message));
-  kHomeController.scaffoldkey.currentState?.showSnackBar(snackBar);
+}
+
+Future<void> editPost(BuildContext context) {
+  return showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        insetPadding: const EdgeInsets.symmetric(horizontal: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        content: SizedBox(
+          // Change as per your requirement
+          width: getScreenWidth(context),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('EditPost', style: FontStyleUtility.blackInter20W600),
+                  IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.close))
+                ],
+              ),
+              30.heightBox,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipOval(
+                    child: SizedBox.fromSize(
+                      size: const Size.fromRadius(35), // Image radius
+                      child: Image.asset(
+                        'assets/images/profile.jpeg',
+                        scale: 3.5,
+                        height: 55.0,
+                        width: 55.0,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                  20.0.widthBox,
+                  Expanded(
+                    child: TextFormField(
+                      minLines: 4,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                        hintText: 'Write something...',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              20.heightBox,
+              Row(
+                children: [
+                  const Icon(
+                    Icons.lock_outline,
+                    color: deepPurpleColor,
+                    size: 30,
+                  ),
+                  20.widthBox,
+                  const Icon(
+                    Icons.emoji_emotions_outlined,
+                    color: deepPurpleColor,
+                    size: 30,
+                  ),
+                  const Spacer(),
+                  materialButton(
+                      background: MaterialStateProperty.all(deepPurpleColor),
+                      text: 'Save',
+                      height: 45.0,
+                      textStyle: FontStyleUtility.blackInter16W500
+                          .copyWith(color: colorWhite)),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+Future deletePost(BuildContext context) {
+  return showDialog(
+    builder: (BuildContext context) {
+      return AlertDialog(
+        insetPadding: const EdgeInsets.symmetric(horizontal: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        content: SizedBox(
+          width: getScreenWidth(context),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset(
+                'assets/json/cancel.json',
+                width: 100,
+                height: 100,
+                repeat: false,
+                fit: BoxFit.fill,
+              ),
+              Text(
+                'Are You Sure?',
+                style: FontStyleUtility.greyInter22W800,
+              ),
+              20.heightBox,
+              Text(
+                'Sure you want to delete post?',
+                style: FontStyleUtility.greyInter14W600,
+              ),
+              20.heightBox,
+              SizedBox(
+                width: 160,
+                child: materialButton(
+                    background:
+                        MaterialStateProperty.all(colorRed.withOpacity(0.10)),
+                    text: 'No cancel!',
+                    onTap: () {
+                      Get.back();
+                    }),
+              ),
+              20.heightBox,
+              SizedBox(
+                width: 160,
+                child: materialButton(
+                    background:
+                        MaterialStateProperty.all(colorRed.withOpacity(0.5)),
+                    text: 'Yes, delete it!',
+                    onTap: () {
+                      Get.back();
+                    }),
+              )
+            ],
+          ),
+        ),
+      );
+    },
+    context: context,
+  );
 }
 
 Widget homeViewData() {
@@ -66,9 +203,11 @@ Widget homeViewData() {
               Get.to(() => const ExplorePostsScreen());
             },
             text: 'Explore Posts',
-            textStyle: FontStyleUtility.blackInter14W500.copyWith(color: colorWhite),
+            textStyle:
+                FontStyleUtility.blackInter14W500.copyWith(color: colorWhite),
             icon: const Icon(
-              CupertinoIcons.compass, size: 18,
+              CupertinoIcons.compass,
+              size: 18,
               color: colorWhite,
             )),
       ),
@@ -106,12 +245,43 @@ Widget homeViewData() {
             ],
           ),
           20.heightBox,
+          StreamBuilder<Object>(
+            stream: kHomeController.imageShowing.stream,
+            builder: (context, snapshot) {
+              return kHomeController.imageShowing.value==true?SizedBox(
+                height: 100,
+                child: ListView.builder(
+                    itemCount: 3+1,
+                    physics: const ClampingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return index!=3? Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        color: colorRed,
+                        height: 80,
+                        width: 100,
+                      ):Container(
+                        height: 80,
+                        width: 100,
+                        color: colorBlack,
+                      );
+
+                    }),
+              ):const SizedBox();
+            }
+          ),
           Row(
             children: [
-              const Icon(
-                Icons.image_outlined,
-                color: deepPurpleColor,
-                size: 30,
+              IconButton(
+                onPressed: () {
+                  kHomeController.imageShowing.value = !kHomeController.imageShowing.value;
+                },
+                icon: const Icon(
+                  Icons.image_outlined,
+                  color: deepPurpleColor,
+                  size: 30,
+                ),
               ),
               20.widthBox,
               const Icon(
@@ -138,7 +308,8 @@ Widget homeViewData() {
               background: MaterialStateProperty.all(lightPurpleColor),
               text: 'Publish',
               height: 45.0,
-              textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite)),
+              textStyle: FontStyleUtility.blackInter16W500
+                  .copyWith(color: colorWhite)),
           10.heightBox,
           Align(
               alignment: Alignment.centerRight,
@@ -155,6 +326,7 @@ Widget homeViewData() {
           itemCount: 3,
           itemBuilder: (context, index) {
             return Container(
+              color: colorWhite,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -184,7 +356,9 @@ Widget homeViewData() {
                               Text(
                                 'Admin',
                                 style: FontStyleUtility.blackInter22W500
-                                    .copyWith(color: deepPurpleColor, fontWeight: FontWeight.w900),
+                                    .copyWith(
+                                        color: deepPurpleColor,
+                                        fontWeight: FontWeight.w900),
                               ),
                               5.widthBox,
                               const Icon(
@@ -223,7 +397,7 @@ Widget homeViewData() {
                         itemBuilder: (context) {
                           return [
                             PopupMenuItem(
-                              value: 'edit',
+                              value: 'GoToPost',
                               child: Row(
                                 children: [
                                   const Icon(Icons.ios_share_outlined),
@@ -233,7 +407,7 @@ Widget homeViewData() {
                               ),
                             ),
                             PopupMenuItem(
-                              value: 'delete',
+                              value: 'PinYourProfile',
                               child: Row(
                                 children: [
                                   const Icon(CupertinoIcons.pin),
@@ -243,7 +417,7 @@ Widget homeViewData() {
                               ),
                             ),
                             PopupMenuItem(
-                              value: 'delete',
+                              value: 'CopyLink',
                               child: Row(
                                 children: [
                                   const Icon(CupertinoIcons.link),
@@ -253,7 +427,7 @@ Widget homeViewData() {
                               ),
                             ),
                             PopupMenuItem(
-                              value: 'delete',
+                              value: 'EditPost',
                               child: Row(
                                 children: [
                                   const Icon(Icons.edit_outlined),
@@ -263,7 +437,7 @@ Widget homeViewData() {
                               ),
                             ),
                             PopupMenuItem(
-                              value: 'delete',
+                              value: 'DeletePost',
                               child: Row(
                                 children: [
                                   const Icon(Icons.delete_outline),
@@ -274,7 +448,8 @@ Widget homeViewData() {
                             ),
                           ];
                         },
-                        onSelected: (String value) => actionPopUpItemSelected(value, 'name'),
+                        onSelected: (String value) =>
+                            actionPopUpItemSelected(value, 'name', context),
                       ),
                     ],
                   ),
@@ -298,14 +473,18 @@ Widget homeViewData() {
                                 splashColor: colorRed,
                                 splashRadius: 20.0,
                                 onPressed: () {
-                                  kHomeController.likeButton.value = !kHomeController.likeButton.value;
+                                  kHomeController.likeButton.value =
+                                      !kHomeController.likeButton.value;
                                 },
                                 icon: Icon(
                                   kHomeController.likeButton.value == true
                                       ? CupertinoIcons.heart_fill
                                       : CupertinoIcons.suit_heart,
                                   size: 25,
-                                  color: kHomeController.likeButton.value == true ? colorRed : colorGrey,
+                                  color:
+                                      kHomeController.likeButton.value == true
+                                          ? colorRed
+                                          : colorGrey,
                                 ));
                           }),
                       Text(
@@ -342,16 +521,23 @@ Widget homeViewData() {
                                 splashColor: deepPurpleColor,
                                 splashRadius: 20.0,
                                 onPressed: () {
-                                  kHomeController.bookmarkButton.value = !kHomeController.bookmarkButton.value;
+                                  kHomeController.bookmarkButton.value =
+                                      !kHomeController.bookmarkButton.value;
                                 },
                                 icon: Icon(
-                                  kHomeController.bookmarkButton.value == true ? Icons.bookmark : Icons.bookmark_border,
+                                  kHomeController.bookmarkButton.value == true
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_border,
                                   size: 23,
-                                  color: kHomeController.bookmarkButton.value == true ? deepPurpleColor : colorGrey,
+                                  color: kHomeController.bookmarkButton.value ==
+                                          true
+                                      ? deepPurpleColor
+                                      : colorGrey,
                                 ));
                           })
                     ],
-                  )
+                  ),
+                  20.heightBox
                 ],
               ),
             );

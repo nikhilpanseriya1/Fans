@@ -7,4 +7,5 @@ class HomeController extends GetxController{
 
   RxBool likeButton = false.obs;
   RxBool bookmarkButton = false.obs;
+  RxBool imageShowing = false.obs;
 }

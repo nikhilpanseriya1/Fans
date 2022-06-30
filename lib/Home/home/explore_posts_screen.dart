@@ -1,3 +1,4 @@
+import 'package:fans/Home/home/home_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_textfield.dart';
@@ -53,10 +54,13 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                             Icon(Icons.arrow_drop_down_rounded)
                           ],
                         ))),
+
                 trailing: null,
                 children: const [
                   Text('Latest'),
                   Text('Old'),
+                  Text('Unlockable'),
+                  Text('Free'),
                 ],
               ),
               30.heightBox,
@@ -194,8 +198,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                     ),
                                   ];
                                 },
-                                onSelected: (String value) =>
-                                    actionPopUpItemSelected(value, 'name'),
+                                onSelected: (String value) => actionPopUpItemSelected(value, 'name',context),
                               ),
                             ],
                           ),
@@ -205,10 +208,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                             style: FontStyleUtility.greyInter18W500,
                           ),
                           20.heightBox,
-                          Container(
-                            // color: colorBlack,
-                            child: Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover,),
-                          ),
+                          Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover,),
                           10.heightBox,
                           Row(
                             children: [
@@ -301,17 +301,4 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
         ));
   }
 
-  void actionPopUpItemSelected(String value, String? name) {
-    scaffoldkey.currentState?.hideCurrentSnackBar();
-    String message;
-    if (value == 'edit') {
-      message = 'You selected edit for $name';
-    } else if (value == 'delete') {
-      message = 'You selected delete for $name';
-    } else {
-      message = 'Not implemented';
-    }
-    final snackBar = SnackBar(content: Text(message));
-    scaffoldkey.currentState?.showSnackBar(snackBar);
-  }
 }

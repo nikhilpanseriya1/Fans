@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
           background: Container(color: colorWhite)),
-      home: const MyPageScreen(),
+      home: const SplashScreen(),
     );
   }
 }

@@ -240,8 +240,8 @@ OutlineInputBorder countryBorder = OutlineInputBorder(
 
 
 Future<void> showAlertDialog(
-    {required String title,
-    required String msg,
+    {String? title,
+     String? msg,
     required BuildContext context,
     Widget? child,
     TextAlign? textAlign,
@@ -252,7 +252,7 @@ Future<void> showAlertDialog(
     builder: (BuildContext context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(title, style: FontStyleUtility.blackInter20W600),
+        title: Text(title??'', style: FontStyleUtility.blackInter20W600),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
@@ -261,7 +261,7 @@ Future<void> showAlertDialog(
                   child ?? const SizedBox.shrink(),
                 ],
               ),
-              Text(msg,
+              Text(msg??'',
                   style: FontStyleUtility.blackInter16W500.copyWith(height: 1.5, color: colorBlack.withOpacity(0.8)),
                   textAlign: textAlign ?? TextAlign.start),
             ],
