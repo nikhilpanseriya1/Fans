@@ -1,16 +1,15 @@
 import 'package:fans/utility/utility_export.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+class MySubscribersScreen extends StatefulWidget {
+  const MySubscribersScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<MySubscribersScreen> createState() => _MySubscribersScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _MySubscribersScreenState extends State<MySubscribersScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
@@ -24,13 +23,13 @@ class _ChatScreenState extends State<ChatScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(
-                    CupertinoIcons.chat_bubble_2_fill,
+                    Icons.group_outlined,
                     size: 30,
                     color: colorGrey,
                   ),
                   10.widthBox,
                   Text(
-                    'Chats',
+                    'My Subscribers',
                     style: FontStyleUtility.greyInter18W500
                         .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
                   ),
@@ -39,12 +38,32 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             5.heightBox,
             Text(
-              'You don\'t have any chat',
+              'Users who have subscribed to your content',
               style: FontStyleUtility.greyInter18W500.copyWith(
                   color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
               textAlign: TextAlign.center,
             ),
             30.heightBox,
+            Center(
+              child: Column(
+                children: [
+                  Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: colorGrey.withOpacity(0.5)),
+                          borderRadius: BorderRadius.circular(100)),
+                      child: const Icon(
+                        Icons.group_rounded,
+                        size: 50,
+                      )),
+                  20.heightBox,
+                  Text(
+                    'You don\'t have any subscribers',
+                    style: FontStyleUtility.greyInter18W500,
+                  )
+                ],
+              ),
+            )
           ],
         ));
   }
