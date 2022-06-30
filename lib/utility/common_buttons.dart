@@ -15,12 +15,12 @@ Widget commonFillButtonView(
     Color? color,
     Color? fontColor,
     Widget? child,
-    double? height = 50.0,
+    double? height = 40.0,
     double? width}) {
   return Builder(
     builder: (BuildContext context) {
       return Container(
-        width: width ?? getScreenWidth(context) - 20,
+        width: width ?? getScreenWidth(context) * 0.5,
         height: height,
         decoration: BoxDecoration(color: color ?? deepPurpleColor, borderRadius: BorderRadius.circular(50)),
         child: TextButton(
@@ -28,7 +28,7 @@ Widget commonFillButtonView(
             child: child ??
                 Text(
                   title,
-                  style: FontStyleUtility.blackInter16W600.copyWith(color: fontColor ?? colorWhite),
+                  style: FontStyleUtility.blackInter14W500.copyWith(color: fontColor ?? colorWhite),
                 )),
       );
     },
@@ -127,23 +127,29 @@ Widget commonButtonView(
   );
 }
 
-Widget commonRoundedCornerButton({required Function() onTap, required String title, Widget? icon}) {
+Widget commonRoundedCornerButton({required Function() onTap, required String title, Widget? child, Widget? icon}) {
   return InkWell(
     onTap: onTap,
     highlightColor: colorWhite,
-    child: Container(
-      decoration: BoxDecoration(color: colorDarkBlue.withOpacity(0.5), borderRadius: BorderRadius.circular(25)),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          commonText(text: title, style: FontStyleUtility.blackInter16W600.copyWith(color: colorWhite, fontSize: 18)),
-          widthBox(10),
-          SizedBox(child: icon ?? const SizedBox()),
-        ],
-      ),
-    ),
+    child: Builder(builder: (context) {
+      return Container(
+        height: 40,
+        width: getScreenWidth(context) * 0.5,
+        decoration: BoxDecoration(
+            color: colorWhite,
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: colorGrey.withOpacity(0.5))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            icon ?? const SizedBox(),
+            widthBox(10),
+            child ?? commonText(text: title, style: FontStyleUtility.blackInter16W500),
+          ],
+        ),
+      );
+    }),
   );
 }
 
@@ -154,29 +160,32 @@ Widget materialButton(
     TextStyle? textStyle,
     MaterialStateProperty<Color?>? background,
     Widget? icon}) {
-  return SizedBox(
-    height: height ?? 50,
-    child: ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: background ?? MaterialStateProperty.all(deepPurpleColor),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.0),
+  return Builder(builder: (context) {
+    return SizedBox(
+      height: height ?? 40,
+      width: getScreenWidth(context) * 0.5,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: background ?? MaterialStateProperty.all(deepPurpleColor),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.0),
+            ),
           ),
         ),
+        onPressed: onTap,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            icon ?? const SizedBox(),
+            10.widthBox,
+            Text(
+              text ?? '',
+              style: textStyle,
+            ),
+          ],
+        ),
       ),
-      onPressed: onTap,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          icon ?? const SizedBox(),
-          10.widthBox,
-          Text(
-            text ?? '',
-            style: textStyle,
-          ),
-        ],
-      ),
-    ),
-  );
+    );
+  });
 }

@@ -11,8 +11,6 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../utility/colors_utility.dart';
 import '../../utility/common_buttons.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -62,17 +60,18 @@ Widget homeViewData() {
     physics: const ClampingScrollPhysics(),
     children: [
       50.heightBox,
-      materialButton(
-          onTap: () {
-            Get.to(() => const ExplorePostsScreen());
-          },
-          height: 50.0,
-          text: 'Explore Posts',
-          textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite),
-          icon: const Icon(
-            CupertinoIcons.compass,
-            color: colorWhite,
-          )),
+      Center(
+        child: materialButton(
+            onTap: () {
+              Get.to(() => const ExplorePostsScreen());
+            },
+            text: 'Explore Posts',
+            textStyle: FontStyleUtility.blackInter14W500.copyWith(color: colorWhite),
+            icon: const Icon(
+              CupertinoIcons.compass, size: 18,
+              color: colorWhite,
+            )),
+      ),
       30.heightBox,
       Column(
         children: [
