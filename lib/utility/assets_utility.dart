@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+/// Image
 /// Icons
+ExactAssetImage profilePlaceholder = const ExactAssetImage('assets/images/profile_placeholder.png', scale: 4);
 
+
+
+/// Icons
 ExactAssetImage facebook = const ExactAssetImage('assets/appIcons/facebook.png', scale: 4);
 ExactAssetImage twitter = const ExactAssetImage('assets/appIcons/twitter.png', scale: 4);
 ExactAssetImage instagram = const ExactAssetImage('assets/appIcons/instagram.png', scale: 4);
