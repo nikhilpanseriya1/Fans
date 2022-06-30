@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fans/Home/home/explore_posts_screen.dart';
 import 'package:fans/Home/home/goto_post_screen.dart';
 import 'package:fans/utility/common_structure.dart';
@@ -7,6 +9,7 @@ import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:velocity_x/velocity_x.dart';
@@ -246,36 +249,91 @@ Widget homeViewData() {
           ),
           20.heightBox,
           StreamBuilder<Object>(
-            stream: kHomeController.imageShowing.stream,
-            builder: (context, snapshot) {
-              return kHomeController.imageShowing.value==true?SizedBox(
-                height: 100,
-                child: ListView.builder(
-                    itemCount: 3+1,
-                    physics: const ClampingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return index!=3? Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        color: colorRed,
-                        height: 80,
-                        width: 100,
-                      ):Container(
-                        height: 80,
-                        width: 100,
-                        color: colorBlack,
-                      );
+              stream: kHomeController.imageShowing.stream,
+              builder: (context, snapshot) {
+                return kHomeController.imageShowing.value == true
+                    ? SizedBox(
+                        height: 130,
+                        child: StreamBuilder<Object>(
+                            stream: kHomeController.imageFileList.stream,
+                            builder: (context, snapshot) {
+                              return Align(
+                                alignment: Alignment.centerLeft,
+                                child: ListView.builder(
+                                    itemCount: (kHomeController.imageFileList.length) + 1,
+                                    physics: const ClampingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      return index != kHomeController.imageFileList.length
+                                          ? Stack(
+                                              children: [
+                                                Container(
+                                                    margin: const EdgeInsets.only(
+                                                        right: 12, top: 5),
+                                                    child: Center(
+                                                      child: Image.file(
+                                                        File(kHomeController
+                                                            .imageFileList[index]
+                                                            .path),
+                                                        fit: BoxFit.cover,
+                                                        width: 130,
+                                                      ),
+                                                    )),
+                                                Positioned(
+                                                  top: 5,
+                                                  right: 5,
+                                                  child: IconButton(
+                                                    visualDensity : const VisualDensity(vertical: VisualDensity.minimumDensity),
+                                                    padding: EdgeInsets.zero,
+                                                    onPressed: () {
+                                                      kHomeController
+                                                          .imageFileList
+                                                          .removeAt(index);
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.remove_circle,
+                                                      color: colorRed,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          : InkWell(
+                                              onTap: () async {
+                                                final List<XFile>?
+                                                    selectedImages =
+                                                    await kHomeController
+                                                        .imagePicker
+                                                        .pickMultiImage();
+                                                if (selectedImages!.isNotEmpty) {
+                                                  kHomeController.imageFileList
+                                                      .addAll(selectedImages);
+                                                }
+                                              },
+                                              child: Container(
 
-                    }),
-              ):const SizedBox();
-            }
-          ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(20.0),border: Border.all(color: colorBlack.withOpacity(0.5))
+                                                ),
+                                                margin: const EdgeInsets.only(right: 12),
+                                                width: 130,
+                                                child:  Center(child: Icon(Icons.add,color: colorBlack.withOpacity(0.5),)),
+
+                                              ),
+                                            );
+                                    }),
+                              );
+                            }),
+                      )
+                    : const SizedBox();
+              }),
           Row(
             children: [
               IconButton(
                 onPressed: () {
-                  kHomeController.imageShowing.value = !kHomeController.imageShowing.value;
+                  kHomeController.imageShowing.value =
+                      !kHomeController.imageShowing.value;
                 },
                 icon: const Icon(
                   Icons.image_outlined,
@@ -459,10 +517,11 @@ Widget homeViewData() {
                     style: FontStyleUtility.greyInter18W500,
                   ),
                   20.heightBox,
-                  Container(
+                  /*Container(
                     height: 200,
                     color: colorBlack,
-                  ),
+                  ),*/
+                  Image.asset('assets/images/post1.jpeg',fit: BoxFit.cover,),
                   10.heightBox,
                   Row(
                     children: [

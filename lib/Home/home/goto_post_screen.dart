@@ -159,7 +159,7 @@ class _GoToPostScreenState extends State<GoToPostScreen> {
                     ),
                   ),
 
-                  Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover,),
+                  Image.asset('assets/images/post1.jpeg',fit: BoxFit.cover,),
                   10.heightBox,
                   Row(
                     children: [

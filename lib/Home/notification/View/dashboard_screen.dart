@@ -190,7 +190,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               SfCartesianChart(
                   primaryXAxis: CategoryAxis(),
                   // Chart title
-                  title: ChartTitle(text: 'Half yearly sales analysis'),
+                  title: ChartTitle(text: 'Half yearly sales analysis',alignment: ChartAlignment.near),
                   // Enable legend
                   legend: Legend(isVisible: true),
                   // Enable tooltip
@@ -202,27 +202,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         yValueMapper: (_SalesData sales, _) => sales.sales,
                         name: 'Sales',
                         // Enable data label
-                        dataLabelSettings: DataLabelSettings(isVisible: true))
+                        dataLabelSettings: const DataLabelSettings(isVisible: true))
                   ]),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  //Initialize the spark charts widget
-                  child: SfSparkLineChart.custom(
-                    //Enable the trackball
-                    trackball: const SparkChartTrackball(
-                        activationMode: SparkChartActivationMode.tap),
-                    //Enable marker
-                    marker: const SparkChartMarker(
-                        displayMode: SparkChartMarkerDisplayMode.all),
-                    //Enable data label
-                    labelDisplayMode: SparkChartLabelDisplayMode.all,
-                    xValueMapper: (int index) => data[index].year,
-                    yValueMapper: (int index) => data[index].sales,
-                    dataCount: 5,
-                  ),
-                ),
-              )
+              30.heightBox,
+              // Expanded(
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     //Initialize the spark charts widget
+              //     child: SfSparkLineChart.custom(
+              //       //Enable the trackball
+              //       trackball: const SparkChartTrackball(
+              //           activationMode: SparkChartActivationMode.tap),
+              //       //Enable marker
+              //       marker: const SparkChartMarker(
+              //           displayMode: SparkChartMarkerDisplayMode.all),
+              //       //Enable data label
+              //       labelDisplayMode: SparkChartLabelDisplayMode.all,
+              //       xValueMapper: (int index) => data[index].year,
+              //       yValueMapper: (int index) => data[index].sales,
+              //       dataCount: 5,
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ));

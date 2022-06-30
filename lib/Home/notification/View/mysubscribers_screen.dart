@@ -44,17 +44,19 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
               textAlign: TextAlign.center,
             ),
             30.heightBox,
-            Center(
+            Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                           border: Border.all(color: colorGrey.withOpacity(0.5)),
                           borderRadius: BorderRadius.circular(100)),
-                      child: const Icon(
+                      child: Icon(
                         Icons.group_rounded,
                         size: 50,
+                        color: colorGrey.withOpacity(0.8),
                       )),
                   20.heightBox,
                   Text(

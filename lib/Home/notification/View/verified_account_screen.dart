@@ -43,19 +43,22 @@ class _VerifiedAccountViewState extends State<VerifiedAccountView> {
                   color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
               textAlign: TextAlign.center,
             ),
-            30.heightBox,
+            100.heightBox,
             Center(
               child: Container(
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: colorGreen,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
                       Icons.done_outline,
                       color: colorWhite,
                     ),
+                    15.widthBox,
                     Text(
                       'Your account is verified',
                       style: FontStyleUtility.blackInter16W500
