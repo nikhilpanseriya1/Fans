@@ -1,5 +1,6 @@
 import 'package:fans/Home/notification/View/dashboard_screen.dart';
 import 'package:fans/Home/notification/View/may_page_screen.dart';
+import 'package:fans/Home/notification/View/verified_account_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_widgets.dart';
@@ -372,7 +373,9 @@ Widget commonAccountView() {
             leading: const Icon(Icons.account_balance_wallet_outlined),
             title: const Text('Wallet')),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const VerifiedAccountView());
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,

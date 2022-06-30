@@ -45,6 +45,7 @@ dependencies:
   permission_handler: ^9.2.0
   image_picker: ^0.8.4+10
   fluttertoast: ^8.0.8
+  syncfusion_flutter_charts: ^20.1.61
 
 dev_dependencies:
   flutter_test:
