@@ -4,6 +4,7 @@ import 'package:fans/main.dart';
 import 'package:fans/utility/string_utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 // emailValidationFunction(String val) {
@@ -78,7 +79,6 @@ getLoginUserData() {
 }
 */
 
-
 creditCardValidationFunction(String val) {
   if (val.isNotEmpty) {
     // return CreditCardNumberInputFormatter();
@@ -146,6 +146,17 @@ setIsLogin({required bool isLogin}) {
   // return getPreference.write(ApiConfig.isLoginPref, isLogin);
 }
 
+void showToast({required String message, Color? bgColor, Toast? toastLength}) {
+  Fluttertoast.showToast(
+      msg: message,
+      toastLength: toastLength ?? Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: bgColor ?? Colors.grey,
+      textColor: Colors.black,
+      fontSize: 16.0);
+}
+
 /*bool getIsLogin() {
   return (getPreference.read(ApiConfig.isLoginPref) ?? false);
 }*/
@@ -190,17 +201,17 @@ emptyFieldValidation(value, String msg) {
   return value.toString().isEmpty ? msg : null;
 }
 
-
 alertPriceFieldValidation(value, String msg) {
-   if(value.toString().isEmpty){
-     return msg;
-   }else if(value.isNotEmpty){
+  if (value.toString().isEmpty) {
+    return msg;
+  } else if (value.isNotEmpty) {
     // String pattern = '^\d{0,8}(\.\d{1,4})?\$';
-    RegExp regExp = RegExp(r'\d{0,8}(\.\d{1,4})?+$');;
-    if(value.isEmpty || regExp.hasMatch(value)){
+    RegExp regExp = RegExp(r'\d{0,8}(\.\d{1,4})?+$');
+    ;
+    if (value.isEmpty || regExp.hasMatch(value)) {
       return 'Enter a valid price';
     }
-   }
+  }
 }
 
 profileLinkValidation(String value) {
