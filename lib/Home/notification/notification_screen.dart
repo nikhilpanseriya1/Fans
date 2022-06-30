@@ -38,14 +38,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   children: [
                     const Icon(
                       Icons.notifications_none,
-                      size: 50,
+                      size: 30,
                       color: colorGrey,
                     ),
                     10.widthBox,
                     Text(
                       'Notifications',
                       style: FontStyleUtility.greyInter18W500
-                          .copyWith(fontSize: 30, fontWeight: FontWeight.w700),
+                          .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
                     ),
                     10.widthBox,
                     IconButton(
