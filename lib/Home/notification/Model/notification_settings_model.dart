@@ -15,3 +15,21 @@ class SocialProfileModel {
 
   SocialProfileModel({required this.icon, required this.hint, required this.controller});
 }
+
+
+class DashboardModel {
+  IconData icon;
+  String name;
+  String subTitle;
+
+  DashboardModel({required this.icon, required this.name, required this.subTitle});
+}
+
+
+class DashboardRevenueModel {
+  String revenuePer;
+  String title;
+  String subTitle;
+
+  DashboardRevenueModel({required this.revenuePer, required this.title, required this.subTitle});
+}

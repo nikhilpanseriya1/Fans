@@ -1,3 +1,5 @@
+import 'package:fans/Home/notification/View/dashboard_screen.dart';
+import 'package:fans/Home/notification/View/may_page_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_widgets.dart';
@@ -38,14 +40,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   children: [
                     const Icon(
                       Icons.notifications_none,
-                      size: 50,
+                      size: 30,
                       color: colorGrey,
                     ),
                     10.widthBox,
                     Text(
                       'Notifications',
                       style: FontStyleUtility.greyInter18W500
-                          .copyWith(fontSize: 30, fontWeight: FontWeight.w700),
+                          .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
                     ),
                     10.widthBox,
                     IconButton(
@@ -68,7 +70,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 fit: BoxFit.fill,
                               ),
                               textAlign: TextAlign.center,
-                              msg: 'Are you sure you want to delete all notifications?',
+                              msg:
+                                  'Are you sure you want to delete all notifications?',
                               context: context,
                               callback: () {
                                 print('Delete notification callback');
@@ -117,7 +120,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  isExpansionTileOpen.value ? Icons.cancel : Icons.menu,
+                                  isExpansionTileOpen.value
+                                      ? Icons.cancel
+                                      : Icons.menu,
                                   color: colorWhite,
                                 ),
                                 10.widthBox,
@@ -146,7 +151,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+                      border: Border.all(
+                          color: colorGrey.withOpacity(0.2), width: 1),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -154,16 +160,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         title: RichText(
                           text: TextSpan(children: [
                             TextSpan(
-                                text: 'Your video has been processed successfully (Post) ',
-                                style: FontStyleUtility.blackInter16W600.copyWith(color: colorGrey, height: 1.2)),
+                                text:
+                                    'Your video has been processed successfully (Post) ',
+                                style: FontStyleUtility.blackInter16W600
+                                    .copyWith(color: colorGrey, height: 1.2)),
                             TextSpan(
                                 text: 'Testing 1',
-                                style: FontStyleUtility.blackInter16W600.copyWith(color: colorPrimary, height: 1.2)),
+                                style: FontStyleUtility.blackInter16W600
+                                    .copyWith(
+                                        color: colorPrimary, height: 1.2)),
                           ]),
                         ),
                         subtitle: Text(
                           '5 days ago',
-                          style: FontStyleUtility.greyInter14W400.copyWith(height: 2),
+                          style: FontStyleUtility.greyInter14W400
+                              .copyWith(height: 2),
                         ),
                         leading: const Icon(
                           Icons.play_circle_outline,
@@ -186,10 +197,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
         builder: (BuildContext context) {
           return AlertDialog(
             insetPadding: const EdgeInsets.symmetric(horizontal: 15),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: SizedBox(
-              height: getScreenHeight(context) * 0.70, // Change as per your requirement
-              width: getScreenWidth(context), // Cha
+              height: getScreenHeight(context) * 0.70,
+              // Change as per your requirement
+              width: getScreenWidth(context),
+              // Cha
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,7 +213,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Receive notification when:',
-                          style: FontStyleUtility.blackInter18W600.copyWith(color: colorGrey)),
+                          style: FontStyleUtility.blackInter18W600
+                              .copyWith(color: colorGrey)),
                       IconButton(
                           onPressed: () {
                             Get.back();
@@ -225,26 +240,37 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 () => Switch(
                                     // inactiveThumbColor: Colors.grey,
                                     dragStartBehavior: DragStartBehavior.start,
-                                    value: kNotificationController.notificationList[index].isChecked.value,
+                                    value: kNotificationController
+                                        .notificationList[index]
+                                        .isChecked
+                                        .value,
                                     onChanged: (bool val) {
-                                      kNotificationController.notificationList[index].isChecked.value = val;
+                                      kNotificationController
+                                          .notificationList[index]
+                                          .isChecked
+                                          .value = val;
                                     }),
                               ),
                             ),
-                            Expanded(child: Text(kNotificationController.notificationList[index].title)),
+                            Expanded(
+                                child: Text(kNotificationController
+                                    .notificationList[index].title)),
                           ],
                         ),
                       );
                     },
                   ),
                   20.heightBox,
-                  Text('Email notification', style: FontStyleUtility.blackInter18W600.copyWith(color: colorGrey)),
+                  Text('Email notification',
+                      style: FontStyleUtility.blackInter18W600
+                          .copyWith(color: colorGrey)),
                   20.heightBox,
                   ListView.builder(
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: kNotificationController.emailNotificationList.length,
+                    itemCount:
+                        kNotificationController.emailNotificationList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2),
@@ -256,13 +282,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               child: Obx(
                                 () => Switch(
                                     dragStartBehavior: DragStartBehavior.start,
-                                    value: kNotificationController.emailNotificationList[index].isChecked.value,
+                                    value: kNotificationController
+                                        .emailNotificationList[index]
+                                        .isChecked
+                                        .value,
                                     onChanged: (bool val) {
-                                      kNotificationController.emailNotificationList[index].isChecked.value = val;
+                                      kNotificationController
+                                          .emailNotificationList[index]
+                                          .isChecked
+                                          .value = val;
                                     }),
                               ),
                             ),
-                            Expanded(child: Text(kNotificationController.emailNotificationList[index].title)),
+                            Expanded(
+                                child: Text(kNotificationController
+                                    .emailNotificationList[index].title)),
                           ],
                         ),
                       );
@@ -290,11 +324,14 @@ Widget commonAccountView() {
           padding: const EdgeInsets.only(left: 15, top: 15),
           child: Text(
             'ACCOUNT',
-            style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+            style: FontStyleUtility.greyInter18W500
+                .copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Get.to(() => const DashboardScreen());
+          },
           leading: const Icon(Icons.speed),
           title: const Text('Dashboard'),
           trailing: const Icon(
@@ -304,7 +341,9 @@ Widget commonAccountView() {
           ),
         ),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const MyPageScreen());
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,
@@ -360,7 +399,8 @@ Widget commonSubscriptionView() {
           padding: const EdgeInsets.only(left: 15, top: 15),
           child: Text(
             'SUBSCRIPTION',
-            style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+            style: FontStyleUtility.greyInter18W500
+                .copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         ListTile(
@@ -388,7 +428,8 @@ Widget commonSubscriptionView() {
               size: 18,
               color: colorGrey,
             ),
-            leading: const Icon(CupertinoIcons.person_crop_circle_badge_checkmark),
+            leading:
+                const Icon(CupertinoIcons.person_crop_circle_badge_checkmark),
             title: const Text('My subscriptions')),
       ],
     ),
@@ -409,7 +450,8 @@ Widget commonPrivacyView() {
           padding: const EdgeInsets.only(left: 15, top: 15),
           child: Text(
             'PRIVACY AND SECURITY',
-            style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+            style: FontStyleUtility.greyInter18W500
+                .copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         ListTile(

@@ -40,13 +40,13 @@ class _EditPageScreenState extends State<EditPageScreen> {
                   children: [
                     const Icon(
                       Icons.mode_edit_outline_outlined,
-                      size: 40,
+                      size: 30,
                       color: colorGrey,
                     ),
                     10.widthBox,
                     Text(
                       'Edit my page',
-                      style: FontStyleUtility.greyInter18W500.copyWith(fontSize: 30, fontWeight: FontWeight.w700),
+                      style: FontStyleUtility.greyInter18W500.copyWith(fontSize: 25, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),

@@ -20,7 +20,8 @@ class MyPageScreen extends StatefulWidget {
   State<MyPageScreen> createState() => _MyPageScreenState();
 }
 
-class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMixin {
+class _MyPageScreenState extends State<MyPageScreen>
+    with TickerProviderStateMixin {
   RxString bgImage = ''.obs;
   RxString profileImage = ''.obs;
   TabController? tabController;
@@ -60,7 +61,9 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                         height: getScreenHeight(context) * 0.23,
                         width: getScreenWidth(context),
                         fit: BoxFit.cover,
-                        image: bgImage.value.isNotEmpty ? FileImage(File(bgImage.value)) as ImageProvider : bgPlaceholder,
+                        image: bgImage.value.isNotEmpty
+                            ? FileImage(File(bgImage.value)) as ImageProvider
+                            : bgPlaceholder,
                       ),
                       Positioned(
                         left: 15,
@@ -73,8 +76,9 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                           child: Container(
                             height: 35,
                             width: 70,
-                            decoration:
-                                BoxDecoration(color: colorBlack.withOpacity(0.3), borderRadius: BorderRadius.circular(25)),
+                            decoration: BoxDecoration(
+                                color: colorBlack.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(25)),
                             child: const Icon(
                               CupertinoIcons.camera_fill,
                               color: colorWhite,
@@ -90,7 +94,12 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                             width: 125,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                boxShadow: const [BoxShadow(color: colorGrey, offset: Offset(0.0, 3.0), blurRadius: 10)]),
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: colorGrey,
+                                      offset: Offset(0.0, 3.0),
+                                      blurRadius: 10)
+                                ]),
                             child: Stack(
                               children: [
                                 /*kNotificationController.getUserProfileModel.value.data != null && selectedImage.value.isEmpty
@@ -114,7 +123,8 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                                     :*/
                                 Container(
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: colorWhite, width: 3),
+                                      border: Border.all(
+                                          color: colorWhite, width: 3),
                                       borderRadius: BorderRadius.circular(100)),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
@@ -125,7 +135,9 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                                           width: 125,
                                           fit: BoxFit.cover,
                                           image: profileImage.value.isNotEmpty
-                                              ? FileImage(File(profileImage.value)) as ImageProvider
+                                              ? FileImage(
+                                                      File(profileImage.value))
+                                                  as ImageProvider
                                               : profilePlaceholder,
                                         ),
                                         Align(
@@ -134,13 +146,19 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                                             highlightColor: colorWhite,
                                             splashColor: colorWhite,
                                             onTap: () async {
-                                              picImageFromGallery(isProfile: true);
+                                              picImageFromGallery(
+                                                  isProfile: true);
                                             },
                                             child: Container(
                                               width: 125,
                                               height: 40,
-                                              decoration: BoxDecoration(color: colorBlack.withOpacity(0.3)),
-                                              child: const Icon(CupertinoIcons.camera_fill, size: 20, color: colorWhite),
+                                              decoration: BoxDecoration(
+                                                  color: colorBlack
+                                                      .withOpacity(0.3)),
+                                              child: const Icon(
+                                                  CupertinoIcons.camera_fill,
+                                                  size: 20,
+                                                  color: colorWhite),
                                             ),
                                           ),
                                         ),
@@ -160,7 +178,9 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Admin', style: FontStyleUtility.greyInter22W800.copyWith(fontSize: 20)),
+                  Text('Admin',
+                      style: FontStyleUtility.greyInter22W800
+                          .copyWith(fontSize: 20)),
                   10.widthBox,
                   const Icon(
                     Icons.verified_sharp,
@@ -187,7 +207,9 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                       size: 18,
                     ),
                     10.widthBox,
-                    Text('Edit page', style: FontStyleUtility.blackInter14W500.copyWith(color: colorWhite))
+                    Text('Edit page',
+                        style: FontStyleUtility.blackInter14W500
+                            .copyWith(color: colorWhite))
                   ],
                 ),
                 tapOnButton: () {
@@ -206,7 +228,9 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                       size: 20,
                     ),
                     10.widthBox,
-                    Text('Share', style: FontStyleUtility.blackInter16W500.copyWith(color: colorGrey))
+                    Text('Share',
+                        style: FontStyleUtility.blackInter16W500
+                            .copyWith(color: colorGrey))
                   ],
                 ),
                 onTap: () {
@@ -245,7 +269,8 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                   stream: isExpansionTileOpen.stream,
                   builder: (context, snapshot) {
                     return Theme(
-                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      data: ThemeData()
+                          .copyWith(dividerColor: Colors.transparent),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: ExpansionTile(
@@ -266,13 +291,17 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                                 margin: const EdgeInsets.only(top: 5),
                                 width: getScreenWidth(context) * 0.5,
                                 height: 40,
-                                decoration: BoxDecoration(color: deepPurpleColor, borderRadius: BorderRadius.circular(50)),
+                                decoration: BoxDecoration(
+                                    color: deepPurpleColor,
+                                    borderRadius: BorderRadius.circular(50)),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       'About me',
-                                      style: FontStyleUtility.blackDMSerifDisplay14W500.copyWith(color: colorWhite),
+                                      style: FontStyleUtility
+                                          .blackDMSerifDisplay14W500
+                                          .copyWith(color: colorWhite),
                                     ),
                                     10.widthBox,
                                     Icon(
@@ -289,24 +318,42 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                               margin: const EdgeInsets.only(top: 10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+                                border: Border.all(
+                                    color: colorGrey.withOpacity(0.2),
+                                    width: 1),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 12),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 3, top: 15),
+                                      padding: const EdgeInsets.only(
+                                          left: 3, top: 15),
                                       child: Text(
                                         'About me',
-                                        style: FontStyleUtility.greyInter18W500.copyWith(fontWeight: FontWeight.w700),
+                                        style: FontStyleUtility.greyInter18W500
+                                            .copyWith(
+                                                fontWeight: FontWeight.w700),
                                       ),
                                     ),
                                     10.heightBox,
-                                    commonAboutMeRow(icon: CupertinoIcons.heart, title: 'Likes'),
-                                    commonAboutMeRow(icon: Icons.pin_drop_outlined, title: 'United States'),
-                                    commonAboutMeRow(icon: Icons.person_outline, title: 'Member since mar 13, 2021'),
+                                    commonAboutMeRow(
+                                        icon: CupertinoIcons.heart,
+                                        title: 'Likes'),
+                                    commonAboutMeRow(
+                                        icon: Icons.pin_drop_outlined,
+                                        title: 'United States'),
+                                    commonAboutMeRow(
+                                        icon: Icons.person_outline,
+                                        title: 'Member since mar 13, 2021'),
+                                    10.heightBox,
+                                    Text(
+                                      'Welcome to my page. If you like my content, please consider support. And donation will be well received. Thank you for your support!',
+                                      style: FontStyleUtility.greyInter14W400,
+                                    ),
+                                    10.heightBox,
                                   ],
                                 ),
                               ),
@@ -342,7 +389,8 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
     if (await Permission.storage.isGranted) {
       // Pick an image
       try {
-        final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+        final image =
+            await ImagePicker().pickImage(source: ImageSource.gallery);
         if (image != null) {
           final imageTemporary = File(image.path);
           if (isProfile) {
