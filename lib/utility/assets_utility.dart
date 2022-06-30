@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// Image
-/// Icons
 ExactAssetImage profilePlaceholder = const ExactAssetImage('assets/images/profile_placeholder.png', scale: 4);
+ExactAssetImage bgPlaceholder = const ExactAssetImage('assets/images/bg_placeholder.png', scale: 4);
+ExactAssetImage badge = const ExactAssetImage('assets/images/badge.png', scale: 4);
 
 
 
