@@ -15,24 +15,20 @@ import 'package:get/get.dart';
 //   }
 // }
 
-/*showSnackBar({String title = appName, required String message, MaterialColor? color, int? duration}) {
+showSnackBar(
+    {String title = appName,
+    required String message,
+    Color? color,
+    Color? textColor,
+    int? duration}) {
   return Get.snackbar(
     title, // title
     message, // message
-    backgroundColor: color ??
-        (title.isEmpty || title == ApiConfig.warning
-            ? const Color(0xffFFCC00)
-            : title == ApiConfig.success || title == appName
-                ? Colors.green
-                : Colors.red),
-    colorText: title.isEmpty || title == ApiConfig.warning ? Colors.black : Colors.white,
+    backgroundColor: color ?? Colors.green,
+    colorText: textColor ?? Colors.white,
     icon: Icon(
-      title.isEmpty || title == ApiConfig.warning
-          ? Icons.warning_amber_outlined
-          : title == ApiConfig.success
-              ? Icons.check_circle
-              : Icons.error,
-      color: title.isEmpty || title == ApiConfig.warning ? Colors.black : Colors.white,
+      Icons.error,
+      color: textColor ?? Colors.white,
     ),
     onTap: (_) {},
     shouldIconPulse: true,
@@ -40,16 +36,19 @@ import 'package:get/get.dart';
     isDismissible: true,
     duration: Duration(seconds: duration ?? 2),
   );
-}*/
+}
 
 void showInSnackBar({String? text, required BuildContext context}) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text ?? ""), duration: const Duration(seconds: 2)));
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(text ?? ""), duration: const Duration(seconds: 2)));
 }
 
 /// Authentication Function
 
 getObject(String key) {
-  return getPreference.read(key) != null ? json.decode(getPreference.read(key)) : null;
+  return getPreference.read(key) != null
+      ? json.decode(getPreference.read(key))
+      : null;
 }
 
 setObject(String key, value) {
@@ -119,7 +118,8 @@ setFcmToken(String value) {
 
 // Api Functions
 
-RegExp passwordRegExpValid = RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#^()*?-_&])[A-Za-z\d@$!%*-_?&#^()]{8,}$");
+RegExp passwordRegExpValid = RegExp(
+    r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#^()*?-_&])[A-Za-z\d@$!%*-_?&#^()]{8,}$");
 
 isNotEmptyString(String? data) {
   return data != null && data.isNotEmpty;
@@ -152,8 +152,8 @@ void showToast({required String message, Color? bgColor, Toast? toastLength}) {
       toastLength: toastLength ?? Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: bgColor ?? Colors.grey,
-      textColor: Colors.black,
+      backgroundColor: bgColor ?? Colors.black.withOpacity(0.5),
+      textColor: Colors.white,
       fontSize: 16.0);
 }
 
@@ -249,7 +249,8 @@ DateTime? currentBackPressTime;
 
 Future<bool> onWillPop() {
   DateTime now = DateTime.now();
-  if (currentBackPressTime == null || now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+  if (currentBackPressTime == null ||
+      now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
     currentBackPressTime = now;
     // Fluttertoast.showToast(msg: 'press again to Exit!');
     return Future.value(false);
@@ -260,9 +261,9 @@ Future<bool> onWillPop() {
 passwordValidation(String value) {
   return value.toString().isEmpty
       ? notEmptyFieldMessage
-      : value.length < 6
-          ? 'Enter At least 6 character'
-          : null;
+      : passwordRegExpValid.hasMatch(value)
+          ? null
+          : 'Password must be contain capital letter, small letter, special character and 8 characters';
 }
 
 // launchURL(String url, {bool forceWeb = false}) async {

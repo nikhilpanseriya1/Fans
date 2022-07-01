@@ -1,4 +1,4 @@
-const String appName = "LT Stock";
+const String appName = "Fans";
 
 ///Error message
 const String loginEmailError = "Please enter valid email";

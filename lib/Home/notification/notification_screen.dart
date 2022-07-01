@@ -1,5 +1,7 @@
 import 'package:fans/Home/notification/View/dashboard_screen.dart';
 import 'package:fans/Home/notification/View/may_page_screen.dart';
+import 'package:fans/Home/notification/View/mysubscriptions_screen.dart';
+import 'package:fans/Home/notification/View/password_screen.dart';
 import 'package:fans/Home/notification/View/verified_account_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
@@ -13,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'View/block_countries_screen.dart';
 import 'View/edit_page_screen.dart';
 import 'View/mysubscribers_screen.dart';
 
@@ -428,7 +431,9 @@ Widget commonSubscriptionView() {
             leading: const Icon(Icons.group_outlined),
             title: const Text('My subscribers')),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const MySubscriptionsScreen());
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,
@@ -470,7 +475,9 @@ Widget commonPrivacyView() {
             leading: const Icon(Icons.privacy_tip_outlined),
             title: const Text('Privacy and security')),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const PasswordScreen());
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,
@@ -479,7 +486,9 @@ Widget commonPrivacyView() {
             leading: const Icon(Icons.key),
             title: const Text('Password')),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const BlockCountriesScreen());
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,
@@ -498,5 +507,41 @@ Widget commonPrivacyView() {
             title: const Text('Restricted user')),
       ],
     ),
+  );
+}
+
+Widget commonScreenView(
+    {required IconData icon, required String title, required String subTitle}) {
+  return Column(
+    children: [
+      30.heightBox,
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 30,
+              color: colorGrey,
+            ),
+            10.widthBox,
+            Text(
+              title,
+              style: FontStyleUtility.greyInter18W500
+                  .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
+      ),
+      5.heightBox,
+      Text(
+        subTitle,
+        style: FontStyleUtility.greyInter18W500
+            .copyWith(color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
+        textAlign: TextAlign.center,
+      ),
+      30.heightBox,
+    ],
   );
 }

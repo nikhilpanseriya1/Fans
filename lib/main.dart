@@ -11,7 +11,7 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'Home/notification/View/edit_page_screen.dart';
-import 'Home/notification/View/may_page_screen.dart';
+import 'Home/notification/View/may_page_screen.dart';      
 
 final getPreference = GetStorage();
 
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
           background: Container(color: colorWhite)),
-      home: const SplashScreen(),
+      home: const HomeStructureView(),
     );
   }
 }

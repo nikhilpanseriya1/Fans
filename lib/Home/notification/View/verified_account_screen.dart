@@ -1,3 +1,4 @@
+import 'package:fans/Home/notification/notification_screen.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -16,34 +17,11 @@ class _VerifiedAccountViewState extends State<VerifiedAccountView> {
         context: context,
         child: Column(
           children: [
-            30.heightBox,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.verified_outlined,
-                    size: 30,
-                    color: colorGrey,
-                  ),
-                  10.widthBox,
-                  Text(
-                    'Verify Account',
-                    style: FontStyleUtility.greyInter18W500
-                        .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
-            ),
-            5.heightBox,
-            Text(
-              'Verified account!',
-              style: FontStyleUtility.greyInter18W500.copyWith(
-                  color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
-              textAlign: TextAlign.center,
-            ),
-            100.heightBox,
+            commonScreenView(
+                icon: Icons.verified_outlined,
+                title: 'Verify Account',
+                subTitle: 'Verified account!'),
+            70.heightBox,
             Center(
               child: Container(
                 padding: const EdgeInsets.all(15),

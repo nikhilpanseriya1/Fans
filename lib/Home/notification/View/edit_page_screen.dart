@@ -32,37 +32,17 @@ class _EditPageScreenState extends State<EditPageScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              30.heightBox,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.mode_edit_outline_outlined,
-                      size: 30,
-                      color: colorGrey,
-                    ),
-                    10.widthBox,
-                    Text(
-                      'Edit my page',
-                      style: FontStyleUtility.greyInter18W500.copyWith(fontSize: 25, fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                ),
-              ),
-              5.heightBox,
-              Text(
-                'Tell us something about you.',
-                style: FontStyleUtility.greyInter18W500.copyWith(color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
-                textAlign: TextAlign.center,
-              ),
-              30.heightBox,
+              commonScreenView(
+                  icon: Icons.mode_edit_outline_outlined,
+                  title: 'Edit my page',
+                  subTitle: 'Tell us something about you.'),
+
               StreamBuilder<Object>(
                   stream: isExpansionTileOpen.stream,
                   builder: (context, snapshot) {
                     return Theme(
-                      data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                      data: ThemeData()
+                          .copyWith(dividerColor: Colors.transparent),
                       child: ExpansionTile(
                         tilePadding: EdgeInsets.zero,
                         initiallyExpanded: isExpansionTileOpen.value,
@@ -73,18 +53,24 @@ class _EditPageScreenState extends State<EditPageScreen> {
                         title: Container(
                             width: getScreenWidth(context) - 20,
                             height: 50,
-                            decoration: BoxDecoration(color: deepPurpleColor, borderRadius: BorderRadius.circular(50)),
+                            decoration: BoxDecoration(
+                                color: deepPurpleColor,
+                                borderRadius: BorderRadius.circular(50)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
-                                  isExpansionTileOpen.value ? Icons.cancel : Icons.menu,
+                                  isExpansionTileOpen.value
+                                      ? Icons.cancel
+                                      : Icons.menu,
                                   color: colorWhite,
                                 ),
                                 10.widthBox,
                                 Text(
                                   'Menu',
-                                  style: FontStyleUtility.blackDMSerifDisplay18W400.copyWith(color: colorWhite),
+                                  style: FontStyleUtility
+                                      .blackDMSerifDisplay18W400
+                                      .copyWith(color: colorWhite),
                                 ),
                               ],
                             )),
@@ -160,8 +146,12 @@ class _EditPageScreenState extends State<EditPageScreen> {
               5.heightBox,
               RichText(
                   text: TextSpan(children: [
-                TextSpan(text: 'Valid formats  ', style: FontStyleUtility.greyInter14W400),
-                TextSpan(text: '09-29-2004 - (Can be edited only once)', style: FontStyleUtility.greyInter14W600),
+                TextSpan(
+                    text: 'Valid formats  ',
+                    style: FontStyleUtility.greyInter14W400),
+                TextSpan(
+                    text: '09-29-2004 - (Can be edited only once)',
+                    style: FontStyleUtility.greyInter14W600),
               ])),
               10.heightBox,
               commonTextField(
@@ -226,9 +216,12 @@ class _EditPageScreenState extends State<EditPageScreen> {
                         padding: const EdgeInsets.all(15),
                         width: 20,
                         height: 20,
-                        child: kNotificationController.socialProfileList[index].icon),
-                    hintText: kNotificationController.socialProfileList[index].hint,
-                    textEditingController: kNotificationController.socialProfileList[index].controller,
+                        child: kNotificationController
+                            .socialProfileList[index].icon),
+                    hintText:
+                        kNotificationController.socialProfileList[index].hint,
+                    textEditingController: kNotificationController
+                        .socialProfileList[index].controller,
                     // validationFunction: (val) {
                     //   return emailValidation(val);
                     // },

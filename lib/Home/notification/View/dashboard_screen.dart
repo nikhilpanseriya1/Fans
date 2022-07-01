@@ -1,7 +1,7 @@
+import 'package:fans/Home/notification/notification_screen.dart';
 import 'package:fans/utility/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../utility/utility_export.dart';
@@ -14,7 +14,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
   List<_SalesData> data = [
     _SalesData('Jan', 35),
     _SalesData('Feb', 28),
@@ -31,34 +30,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
-              30.heightBox,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.speed,
-                      size: 30,
-                      color: colorGrey,
-                    ),
-                    10.widthBox,
-                    Text(
-                      'Dashboard',
-                      style: FontStyleUtility.greyInter18W500
-                          .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
-                    ),
-                  ],
-                ),
-              ),
-              5.heightBox,
-              Text(
-                'Statistics and balance of your account',
-                style: FontStyleUtility.greyInter18W500.copyWith(
-                    color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
-                textAlign: TextAlign.center,
-              ),
-              30.heightBox,
+              commonScreenView(
+                  icon: Icons.speed,
+                  title: 'Dashboard',
+                  subTitle: 'Statistics and balance of your account'),
+
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: kNotificationController.dashboardList.length,
@@ -182,7 +158,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           .copyWith(color: colorGrey),
                     ),
                     10.heightBox,
-
                   ],
                 ),
               ),
@@ -190,7 +165,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               SfCartesianChart(
                   primaryXAxis: CategoryAxis(),
                   // Chart title
-                  title: ChartTitle(text: 'Half yearly sales analysis',alignment: ChartAlignment.near),
+                  title: ChartTitle(
+                      text: 'Half yearly sales analysis',
+                      alignment: ChartAlignment.near),
                   // Enable legend
                   legend: Legend(isVisible: true),
                   // Enable tooltip
@@ -202,7 +179,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         yValueMapper: (_SalesData sales, _) => sales.sales,
                         name: 'Sales',
                         // Enable data label
-                        dataLabelSettings: const DataLabelSettings(isVisible: true))
+                        dataLabelSettings:
+                            const DataLabelSettings(isVisible: true))
                   ]),
               30.heightBox,
               // Expanded(
