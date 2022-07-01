@@ -57,6 +57,8 @@ class CountryCodePickerScreen extends StatefulWidget {
   /// because longer country names are displayed in one line
   final bool alignLeft;
 
+  final bool showFlagOnPicker;
+
   /// shows the flag
   final bool showFlag;
 
@@ -99,6 +101,7 @@ class CountryCodePickerScreen extends StatefulWidget {
     this.emptySearchBuilder,
     this.showOnlyCountryWhenClosed = false,
     this.alignLeft = false,
+    this.showFlagOnPicker = true,
     this.showFlag = true,
     this.showFlagDialog,
     this.hideMainText = false,

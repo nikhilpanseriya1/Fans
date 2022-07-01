@@ -69,7 +69,8 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
                     initialSelection: 'IN',
                     showOnlyCountryWhenClosed: true,
                     // hideMainText: true,
-showFlag: false,
+                    // showFlag: true,
+                    showFlagMain: false,
                     textStyle: FontStyleUtility.blackInter16W500
                         .copyWith(color: colorWhite.withOpacity(0)),
                     onChanged: (val) {
