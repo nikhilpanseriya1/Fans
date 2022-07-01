@@ -199,7 +199,7 @@ Widget homeViewData() {
   return ListView(
     physics: const ClampingScrollPhysics(),
     children: [
-      50.heightBox,
+      20.heightBox,
       Center(
         child: materialButton(
             onTap: () {
@@ -235,7 +235,7 @@ Widget homeViewData() {
               20.0.widthBox,
               Expanded(
                 child: TextFormField(
-                  minLines: 4,
+                  minLines: 3,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
@@ -252,7 +252,8 @@ Widget homeViewData() {
               stream: kHomeController.imageShowing.stream,
               builder: (context, snapshot) {
                 return kHomeController.imageShowing.value == true
-                    ? SizedBox(
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 10.0),
                         height: 130,
                         child: StreamBuilder<Object>(
                             stream: kHomeController.imageFileList.stream,
@@ -260,21 +261,27 @@ Widget homeViewData() {
                               return Align(
                                 alignment: Alignment.centerLeft,
                                 child: ListView.builder(
-                                    itemCount: (kHomeController.imageFileList.length) + 1,
+                                    itemCount:
+                                        (kHomeController.imageFileList.length) +
+                                            1,
                                     physics: const ClampingScrollPhysics(),
                                     scrollDirection: Axis.horizontal,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                                      return index != kHomeController.imageFileList.length
+                                      return index !=
+                                              kHomeController
+                                                  .imageFileList.length
                                           ? Stack(
                                               children: [
                                                 Container(
-                                                    margin: const EdgeInsets.only(
-                                                        right: 12, top: 5),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            right: 12, top: 5),
                                                     child: Center(
                                                       child: Image.file(
                                                         File(kHomeController
-                                                            .imageFileList[index]
+                                                            .imageFileList[
+                                                                index]
                                                             .path),
                                                         fit: BoxFit.cover,
                                                         width: 130,
@@ -284,7 +291,10 @@ Widget homeViewData() {
                                                   top: 5,
                                                   right: 5,
                                                   child: IconButton(
-                                                    visualDensity : const VisualDensity(vertical: VisualDensity.minimumDensity),
+                                                    visualDensity:
+                                                        const VisualDensity(
+                                                            vertical: VisualDensity
+                                                                .minimumDensity),
                                                     padding: EdgeInsets.zero,
                                                     onPressed: () {
                                                       kHomeController
@@ -306,20 +316,29 @@ Widget homeViewData() {
                                                     await kHomeController
                                                         .imagePicker
                                                         .pickMultiImage();
-                                                if (selectedImages!.isNotEmpty) {
+                                                if (selectedImages!
+                                                    .isNotEmpty) {
                                                   kHomeController.imageFileList
                                                       .addAll(selectedImages);
                                                 }
                                               },
                                               child: Container(
-
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(20.0),border: Border.all(color: colorBlack.withOpacity(0.5))
-                                                ),
-                                                margin: const EdgeInsets.only(right: 12),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                    border: Border.all(
+                                                        color: colorBlack
+                                                            .withOpacity(0.5))),
+                                                margin: const EdgeInsets.only(
+                                                    right: 12),
                                                 width: 130,
-                                                child:  Center(child: Icon(Icons.add,color: colorBlack.withOpacity(0.5),)),
-
+                                                child: Center(
+                                                    child: Icon(
+                                                  Icons.add,
+                                                  color: colorBlack
+                                                      .withOpacity(0.5),
+                                                )),
                                               ),
                                             );
                                     }),
@@ -365,7 +384,7 @@ Widget homeViewData() {
           materialButton(
               background: MaterialStateProperty.all(lightPurpleColor),
               text: 'Publish',
-              height: 45.0,
+              height: 40.0,
               textStyle: FontStyleUtility.blackInter16W500
                   .copyWith(color: colorWhite)),
           10.heightBox,
@@ -521,7 +540,10 @@ Widget homeViewData() {
                     height: 200,
                     color: colorBlack,
                   ),*/
-                  Image.asset('assets/images/post1.jpeg',fit: BoxFit.cover,),
+                  Image.asset(
+                    'assets/images/post1.jpeg',
+                    fit: BoxFit.cover,
+                  ),
                   10.heightBox,
                   Row(
                     children: [
