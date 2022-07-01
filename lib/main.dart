@@ -11,7 +11,7 @@ import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'Home/notification/View/edit_page_screen.dart';
-import 'Home/notification/View/may_page_screen.dart';
+import 'Home/notification/View/may_page_screen.dart';      
 
 final getPreference = GetStorage();
 
