@@ -26,6 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
+        appBar: commonAppBar(title: 'Dashboard', elevation: 0.5),
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
           child: Column(

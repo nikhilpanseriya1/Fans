@@ -24,6 +24,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
+        appBar: commonAppBar(title: 'Change Password', elevation: 0.5),
         child: Form(
           key: formKey,
           child: SingleChildScrollView(

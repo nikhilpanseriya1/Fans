@@ -15,6 +15,23 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
+        appBar: commonAppBar(
+            leadingIcon: const SizedBox(),
+            titleWidget: Text(
+              'Chats',
+              style: FontStyleUtility.blackInter20W600,
+            ),
+            elevation: 0.5,
+            actionWidgets: [
+              IconButton(
+                  onPressed: () {
+                    print('edit click');
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    color: colorBlack,
+                  ))
+            ]),
         child: Column(
           children: [
             30.heightBox,
