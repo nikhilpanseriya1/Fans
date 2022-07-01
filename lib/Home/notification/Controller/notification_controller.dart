@@ -5,6 +5,8 @@ import '../../../utility/utility_export.dart';
 import '../Model/notification_settings_model.dart';
 
 class NotificationController extends GetxController {
+  RxList<String> blockedCountriesList = <String>[].obs;
+
   RxList<NotificationSettingsModel> notificationList = [
     NotificationSettingsModel(
         title: 'Someone has subscribed to my content', isChecked: true.obs),

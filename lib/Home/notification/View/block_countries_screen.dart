@@ -2,6 +2,7 @@ import 'package:fans/Home/notification/notification_screen.dart';
 import 'package:fans/utility/common_buttons.dart';
 import 'package:fans/utility/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../utility/utility_export.dart';
@@ -32,25 +33,108 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
             70.heightBox,
             Container(
               width: getScreenWidth(context),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: borderColor ?? colorBlack.withOpacity(0.5),
-                      width: 1),
-                  borderRadius: BorderRadius.circular(5)),
-              child: CountryCodePickerScreen(
-                alignLeft: true,
-                initialSelection: 'IN',
-                showOnlyCountryWhenClosed: true,
-                onChanged: (val) {
-                  print('==--??? ${val.code}  ${val.name}  ${val.dialCode}');
-                },
+              // decoration: BoxDecoration(
+              //     border: Border.all(
+              //         color: borderColor ?? colorBlack.withOpacity(0.5),
+              //         width: 1),
+              //     borderRadius: BorderRadius.circular(5)),
+              child: Stack(
+                children: [
+                  Container(
+                    width: getScreenWidth(context),
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        color: colorWhite,
+                        border: Border.all(
+                            color: borderColor ?? colorBlack.withOpacity(0.5),
+                            width: 1),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.language,
+                          color: colorGrey,
+                        ),
+                        10.widthBox,
+                        Text(
+                          'Block countries',
+                          style: FontStyleUtility.greyInter16W400,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  CountryCodePickerScreen(
+                    alignLeft: true,
+                    initialSelection: 'IN',
+                    showOnlyCountryWhenClosed: true,
+                    // hideMainText: true,
+showFlag: false,
+                    textStyle: FontStyleUtility.blackInter16W500
+                        .copyWith(color: colorWhite.withOpacity(0)),
+                    onChanged: (val) {
+                      print(
+                          '==--??? ${val.code}  ${val.name}  ${val.dialCode}');
+                    },
+                  ),
+
+                  // Container(
+                  //   width: getScreenWidth(context),
+                  //   padding: const EdgeInsets.all(15),
+                  //   decoration: BoxDecoration(
+                  //       color: colorWhite,
+                  //       border: Border.all(
+                  //           color: borderColor ?? colorBlack.withOpacity(0.5),
+                  //           width: 1),
+                  //       borderRadius: BorderRadius.circular(5)),
+                  //   child: Row(
+                  //     children: [
+                  //       const Icon(
+                  //         Icons.language,
+                  //         color: colorGrey,
+                  //       ),
+                  //       10.widthBox,
+                  //       Text(
+                  //         'Block countries',
+                  //         style: FontStyleUtility.greyInter16W400,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // )
+                ],
               ),
             ),
-            10.heightBox,
-            Text(
-              'Block countries',
-              style: FontStyleUtility.greyInter16W400,
-            ),
+            // 10.heightBox,
+            // InkWell(
+            //   onTap: () {
+            //
+            //     // showCountryCodePickerDialog();
+            //   },
+            //   highlightColor: colorWhite,
+            //   splashColor: colorWhite,
+            //   child: Container(
+            //     width: getScreenWidth(context),
+            //     padding: const EdgeInsets.all(15),
+            //     decoration: BoxDecoration(
+            //         border: Border.all(
+            //             color: borderColor ?? colorBlack.withOpacity(0.5),
+            //             width: 1),
+            //         borderRadius: BorderRadius.circular(5)),
+            //     child: Row(
+            //       children: [
+            //         const Icon(
+            //           Icons.language,
+            //           color: colorGrey,
+            //         ),
+            //         10.widthBox,
+            //         Text(
+            //           'Block countries',
+            //           style: FontStyleUtility.greyInter16W400,
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             30.heightBox,
             Center(
               child: commonFillButtonView(

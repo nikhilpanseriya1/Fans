@@ -32,7 +32,8 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             heightBox(50.0),
             Text('Join now and Start making money\nwith your content!',
-                textAlign: TextAlign.center, style: FontStyleUtility.greyInter16W500),
+                textAlign: TextAlign.center,
+                style: FontStyleUtility.greyInter16W500),
             heightBox(50.0),
             Row(
               children: [
@@ -94,7 +95,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 24,
                     width: 24,
                     child: Theme(
-                      data: ThemeData(unselectedWidgetColor: colorSemiDarkBlack.withOpacity(0.3)),
+                      data: ThemeData(
+                          unselectedWidgetColor:
+                              colorSemiDarkBlack.withOpacity(0.3)),
                       child: Checkbox(
                           activeColor: colorDarkBlack,
                           value: isRemember.value,
@@ -105,7 +108,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
                 widthBox(10),
-                commonText(text: 'Remember me', style: FontStyleUtility.greyInter16W500),
+                commonText(
+                    text: 'Remember me',
+                    style: FontStyleUtility.greyInter16W500),
               ],
             ),
             heightBox(30.0),
@@ -123,7 +128,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 onPressed: () {},
                 child: Text(
                   "Login",
-                  style: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite),
+                  style: FontStyleUtility.blackInter16W500
+                      .copyWith(color: colorWhite),
                 ),
               ),
             ),
@@ -134,8 +140,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 Get.to(() => const SignUpScreen());
               },
               child: Text(
-                'Dont have an account?',
-                style: FontStyleUtility.blackInter20W500.copyWith(color: deepPurpleColor),
+                'Don\'t have an account?',
+                style: FontStyleUtility.blackInter20W500
+                    .copyWith(color: deepPurpleColor),
               ),
             )),
           ],

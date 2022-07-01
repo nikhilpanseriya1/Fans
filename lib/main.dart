@@ -1,6 +1,4 @@
-import 'package:fans/Home/home/home_screen.dart';
-import 'package:fans/Home/home_structure.dart';
-import 'package:fans/Home/notification/View/dashboard_screen.dart';
+import 'package:fans/Home/notification/View/block_countries_screen.dart';
 import 'package:fans/moduls/SplashScreen/splash_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/string_utility.dart';
@@ -10,8 +8,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
-import 'Home/notification/View/edit_page_screen.dart';
-import 'Home/notification/View/may_page_screen.dart';      
 
 final getPreference = GetStorage();
 
@@ -51,7 +47,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
           background: Container(color: colorWhite)),
-      home: const SplashScreen(),
+      home: const BlockCountriesScreen(),
     );
   }
 }
