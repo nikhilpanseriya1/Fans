@@ -48,17 +48,18 @@ PreferredSize commonAppBar({
                   Get.back();
                 },
                 child: const Icon(
-                  Icons.keyboard_backspace_sharp,
+                  Icons.arrow_back_ios,
                   color: colorBlack,
                   size: 25,
                 ),
               ),
             ),
-        title: Text(
-          title ?? "",
-          textAlign: TextAlign.center,
-          style: FontStyleUtility.blackDMSerifDisplay20W400,
-        ),
+        title: titleWidget ??
+            Text(
+              title ?? "",
+              textAlign: TextAlign.center,
+              style: FontStyleUtility.blackDMSerifDisplay20W400,
+            ),
         actions: actionWidgets,
         // actions: actions != null ? actions : null,
       ));

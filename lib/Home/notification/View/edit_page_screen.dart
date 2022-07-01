@@ -25,6 +25,7 @@ class _EditPageScreenState extends State<EditPageScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
       context: context,
+      appBar: commonAppBar(title: 'Edit Page', elevation: 0.5),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: Form(
@@ -37,49 +38,50 @@ class _EditPageScreenState extends State<EditPageScreen> {
                   title: 'Edit my page',
                   subTitle: 'Tell us something about you.'),
 
-              StreamBuilder<Object>(
-                  stream: isExpansionTileOpen.stream,
-                  builder: (context, snapshot) {
-                    return Theme(
-                      data: ThemeData()
-                          .copyWith(dividerColor: Colors.transparent),
-                      child: ExpansionTile(
-                        tilePadding: EdgeInsets.zero,
-                        initiallyExpanded: isExpansionTileOpen.value,
-                        trailing: null,
-                        onExpansionChanged: (val) {
-                          isExpansionTileOpen.value = val;
-                        },
-                        title: Container(
-                            width: getScreenWidth(context) - 20,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: deepPurpleColor,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  isExpansionTileOpen.value
-                                      ? Icons.cancel
-                                      : Icons.menu,
-                                  color: colorWhite,
-                                ),
-                                10.widthBox,
-                                Text(
-                                  'Menu',
-                                  style: FontStyleUtility
-                                      .blackDMSerifDisplay18W400
-                                      .copyWith(color: colorWhite),
-                                ),
-                              ],
-                            )),
-                        children: <Widget>[
-                          commonAccountView(),
-                        ],
-                      ),
-                    );
-                  }),
+              // StreamBuilder<Object>(
+              //     stream: isExpansionTileOpen.stream,
+              //     builder: (context, snapshot) {
+              //       return Theme(
+              //         data: ThemeData()
+              //             .copyWith(dividerColor: Colors.transparent),
+              //         child: ExpansionTile(
+              //           tilePadding: EdgeInsets.zero,
+              //           initiallyExpanded: isExpansionTileOpen.value,
+              //           trailing: null,
+              //           onExpansionChanged: (val) {
+              //             isExpansionTileOpen.value = val;
+              //           },
+              //           title: Container(
+              //               width: getScreenWidth(context) - 20,
+              //               height: 50,
+              //               decoration: BoxDecoration(
+              //                   color: deepPurpleColor,
+              //                   borderRadius: BorderRadius.circular(50)),
+              //               child: Row(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 children: [
+              //                   Icon(
+              //                     isExpansionTileOpen.value
+              //                         ? Icons.cancel
+              //                         : Icons.menu,
+              //                     color: colorWhite,
+              //                   ),
+              //                   10.widthBox,
+              //                   Text(
+              //                     'Menu',
+              //                     style: FontStyleUtility
+              //                         .blackDMSerifDisplay18W400
+              //                         .copyWith(color: colorWhite),
+              //                   ),
+              //                 ],
+              //               )),
+              //           children: <Widget>[
+              //             commonAccountView(),
+              //           ],
+              //         ),
+              //       );
+              //     }),
+
               20.heightBox,
               commonTextField(
                 preFixWidget: const Icon(Icons.person_outline),

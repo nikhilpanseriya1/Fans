@@ -19,11 +19,12 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
+        appBar: commonAppBar(title: 'My Subscriptions', elevation: 0.5),
         child: Column(
           children: [
             commonScreenView(
                 icon: CupertinoIcons.person_crop_circle_badge_checkmark,
-                title: 'My Subscribers',
+                title: 'My Subscriptions',
                 subTitle: 'Users you have subscribed to your content'),
             Expanded(
               child: Column(

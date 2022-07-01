@@ -2,6 +2,7 @@ import 'package:fans/Home/notification/View/dashboard_screen.dart';
 import 'package:fans/Home/notification/View/may_page_screen.dart';
 import 'package:fans/Home/notification/View/mysubscriptions_screen.dart';
 import 'package:fans/Home/notification/View/password_screen.dart';
+import 'package:fans/Home/notification/View/restricted_users_screen.dart';
 import 'package:fans/Home/notification/View/verified_account_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
@@ -209,105 +210,111 @@ class _NotificationScreenState extends State<NotificationScreen> {
               // Change as per your requirement
               width: getScreenWidth(context),
               // Cha
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Receive notification when:',
-                          style: FontStyleUtility.blackInter18W600
-                              .copyWith(color: colorGrey)),
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: const Icon(Icons.close))
-                    ],
-                  ),
-                  20.heightBox,
-                  ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: kNotificationController.notificationList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              child: Obx(
-                                () => Switch(
-                                    // inactiveThumbColor: Colors.grey,
-                                    dragStartBehavior: DragStartBehavior.start,
-                                    value: kNotificationController
-                                        .notificationList[index]
-                                        .isChecked
-                                        .value,
-                                    onChanged: (bool val) {
-                                      kNotificationController
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Receive notification when:',
+                            style: FontStyleUtility.blackInter18W600
+                                .copyWith(color: colorGrey)),
+                        IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: const Icon(Icons.close))
+                      ],
+                    ),
+                    20.heightBox,
+                    ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount:
+                          kNotificationController.notificationList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 30,
+                                child: Obx(
+                                  () => Switch(
+                                      // inactiveThumbColor: Colors.grey,
+                                      dragStartBehavior:
+                                          DragStartBehavior.start,
+                                      value: kNotificationController
                                           .notificationList[index]
                                           .isChecked
-                                          .value = val;
-                                    }),
+                                          .value,
+                                      onChanged: (bool val) {
+                                        kNotificationController
+                                            .notificationList[index]
+                                            .isChecked
+                                            .value = val;
+                                      }),
+                                ),
                               ),
-                            ),
-                            Expanded(
-                                child: Text(kNotificationController
-                                    .notificationList[index].title)),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                  20.heightBox,
-                  Text('Email notification',
-                      style: FontStyleUtility.blackInter18W600
-                          .copyWith(color: colorGrey)),
-                  20.heightBox,
-                  ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount:
-                        kNotificationController.emailNotificationList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              child: Obx(
-                                () => Switch(
-                                    dragStartBehavior: DragStartBehavior.start,
-                                    value: kNotificationController
-                                        .emailNotificationList[index]
-                                        .isChecked
-                                        .value,
-                                    onChanged: (bool val) {
-                                      kNotificationController
+                              Expanded(
+                                  child: Text(kNotificationController
+                                      .notificationList[index].title)),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    20.heightBox,
+                    Text('Email notification',
+                        style: FontStyleUtility.blackInter18W600
+                            .copyWith(color: colorGrey)),
+                    20.heightBox,
+                    ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount:
+                          kNotificationController.emailNotificationList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 30,
+                                child: Obx(
+                                  () => Switch(
+                                      dragStartBehavior:
+                                          DragStartBehavior.start,
+                                      value: kNotificationController
                                           .emailNotificationList[index]
                                           .isChecked
-                                          .value = val;
-                                    }),
+                                          .value,
+                                      onChanged: (bool val) {
+                                        kNotificationController
+                                            .emailNotificationList[index]
+                                            .isChecked
+                                            .value = val;
+                                      }),
+                                ),
                               ),
-                            ),
-                            Expanded(
-                                child: Text(kNotificationController
-                                    .emailNotificationList[index].title)),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                              Expanded(
+                                  child: Text(kNotificationController
+                                      .emailNotificationList[index].title)),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -497,7 +504,9 @@ Widget commonPrivacyView() {
             leading: const Icon(CupertinoIcons.eye_slash),
             title: const Text('Block countries')),
         ListTile(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const RestrictedUsersScreen());
+            },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,

@@ -20,6 +20,7 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
+        appBar: commonAppBar(title: 'Block Countries', elevation: 0.5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

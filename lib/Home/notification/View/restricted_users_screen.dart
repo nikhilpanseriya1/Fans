@@ -1,27 +1,28 @@
-import 'package:fans/Home/notification/notification_screen.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class MySubscribersScreen extends StatefulWidget {
-  const MySubscribersScreen({Key? key}) : super(key: key);
+import '../notification_screen.dart';
+
+class RestrictedUsersScreen extends StatefulWidget {
+  const RestrictedUsersScreen({Key? key}) : super(key: key);
 
   @override
-  State<MySubscribersScreen> createState() => _MySubscribersScreenState();
+  State<RestrictedUsersScreen> createState() => _RestrictedUsersScreenState();
 }
 
-class _MySubscribersScreenState extends State<MySubscribersScreen> {
+class _RestrictedUsersScreenState extends State<RestrictedUsersScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
-        appBar: commonAppBar(title: 'My Subscribers', elevation: 0.5),
+        appBar: commonAppBar(title: 'Restricted User', elevation: 0.5),
         child: Column(
           children: [
             commonScreenView(
-                icon: Icons.group_outlined,
-                title: 'My Subscribers',
-                subTitle: 'Users who have subscribed to your content'),
+                icon: Icons.block_flipped,
+                title: 'Restricted user',
+                subTitle: 'Users you have restricted'),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -32,18 +33,19 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                           border: Border.all(color: colorGrey.withOpacity(0.5)),
                           borderRadius: BorderRadius.circular(100)),
                       child: Icon(
-                        Icons.group_rounded,
+                        Icons.block_flipped,
                         size: 75,
                         color: colorGrey.withOpacity(0.8),
                       )),
                   20.heightBox,
                   Text(
-                    'You don\'t have any subscribers',
+                    'No results have been found',
                     style: FontStyleUtility.greyInter18W500,
-                  )
+                  ),
+                  5.heightBox,
                 ],
               ),
-            )
+            ),
           ],
         ));
   }
