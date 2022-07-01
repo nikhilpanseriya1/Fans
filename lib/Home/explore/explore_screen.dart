@@ -1,12 +1,10 @@
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/font_style_utility.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-import '../../utility/common_widgets.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -15,19 +13,83 @@ class ExploreScreen extends StatefulWidget {
   State<ExploreScreen> createState() => _ExploreScreenState();
 }
 
-class _ExploreScreenState extends State<ExploreScreen> {
+
+
+class _ExploreScreenState extends State<ExploreScreen>
+    with TickerProviderStateMixin {
   RxBool isExpansionTileOpen = false.obs;
+  TabController? tabController;
+
+  final List<StaggeredGridTile>  _cardTile = <StaggeredGridTile> [
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:3,child: SizedBox(),),
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:3,child: SizedBox(),),
+   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabController = TabController(vsync: this, length: 7);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    tabController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              40.heightBox,
-              Text(
+              Container(
+                decoration: const BoxDecoration(color: colorWhite),
+                child: TabBar(
+                  controller: tabController,
+                  isScrollable: true,
+                  unselectedLabelColor: colorGrey,
+                  indicatorColor: colorPrimary,
+                  labelColor: colorPrimary,
+                  unselectedLabelStyle: FontStyleUtility.blackInter15W500,
+                  tabs: const [
+                    Tab(
+                      text: 'Music',
+                    ),
+                    Tab(
+                      text: 'Photography',
+                    ),
+                    Tab(
+                      text: 'Yoga',
+                    ),
+                    Tab(
+                      text: 'Developer',
+                    ),
+                    Tab(
+                      text: 'Church',
+                    ),
+                    Tab(
+                      text: 'Products',
+                    ),
+                    Tab(
+                      text: 'Artist',
+                    ),
+                  ],
+                ),
+              ),
+              20.heightBox,
+             /* Text(
                 'Explore our Craters',
                 style: FontStyleUtility.blackInter22W700.copyWith(fontSize: 35),
               ),
@@ -85,12 +147,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                       const EdgeInsets.only(left: 15, top: 15),
                                   child: Row(
                                     children: [
-                                      const Icon(Icons.filter_list,color: colorGrey,),
+                                      const Icon(
+                                        Icons.filter_list,
+                                        color: colorGrey,
+                                      ),
                                       10.widthBox,
                                       Text(
                                         'Filter by',
                                         style: FontStyleUtility.greyInter18W500
-                                            .copyWith(fontWeight: FontWeight.w700),
+                                            .copyWith(
+                                                fontWeight: FontWeight.w700),
                                       ),
                                     ],
                                   ),
@@ -179,12 +245,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                       const EdgeInsets.only(left: 15, top: 15),
                                   child: Row(
                                     children: [
-                                      const Icon(Icons.menu,color: colorGrey,),
-
-                                      10.widthBox,Text(
+                                      const Icon(
+                                        Icons.menu,
+                                        color: colorGrey,
+                                      ),
+                                      10.widthBox,
+                                      Text(
                                         'Categories',
                                         style: FontStyleUtility.greyInter18W500
-                                            .copyWith(fontWeight: FontWeight.w700),
+                                            .copyWith(
+                                                fontWeight: FontWeight.w700),
                                       ),
                                     ],
                                   ),
@@ -206,7 +276,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 ),
                                 ListTile(
                                   onTap: () {},
-                                  leading: const Icon(Icons.mode_edit_outline_outlined),
+                                  leading: const Icon(
+                                      Icons.mode_edit_outline_outlined),
                                   title: const Text('Designer'),
                                   visualDensity: const VisualDensity(
                                       horizontal: VisualDensity.minimumDensity),
@@ -275,7 +346,48 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         style: FontStyleUtility.greyInter18W500),
                   ],
                 ),
+              ),*/
+
+              SingleChildScrollView(
+                child: StaggeredGrid.count(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
+                  children:  [
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover),
+                    ),StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 3,
+                      child: Image.asset('assets/images/profile2.jpg',fit: BoxFit.cover),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 3,
+                      child:  Image.asset('assets/images/profile3.jpg',fit: BoxFit.cover),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child:     Image.asset('assets/images/profile4.png',fit: BoxFit.cover),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 3,
+                      child:  Image.asset('assets/images/post1.jpeg',fit: BoxFit.cover),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child:  Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover),
+                    ),
+
+                  ],
+                ),
               ),
+              20.heightBox
             ],
           ),
         ));
