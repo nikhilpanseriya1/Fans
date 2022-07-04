@@ -14,6 +14,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
+
         context: context,
         appBar: commonAppBar(title: 'My Subscribers', elevation: 0.5),
         child: Column(

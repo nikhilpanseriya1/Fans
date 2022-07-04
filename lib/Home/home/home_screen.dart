@@ -71,7 +71,7 @@ Future<void> editPost(BuildContext context) {
                       onPressed: () {
                         Get.back();
                       },
-                      icon: Icon(Icons.close))
+                      icon: const Icon(Icons.close))
                 ],
               ),
               30.heightBox,
@@ -196,10 +196,11 @@ Future deletePost(BuildContext context) {
 }
 
 Widget homeViewData() {
+  RxBool isExpansionTileOpen = false.obs;
   return ListView(
     physics: const ClampingScrollPhysics(),
     children: [
-      50.heightBox,
+      20.heightBox,
       Center(
         child: materialButton(
             onTap: () {
@@ -214,6 +215,61 @@ Widget homeViewData() {
               color: colorWhite,
             )),
       ),
+      5.heightBox,
+      StreamBuilder<Object>(
+          stream: isExpansionTileOpen.stream,
+          builder: (context, snapshot) {
+            return Theme(
+              data: ThemeData().copyWith(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                tilePadding: EdgeInsets.zero,
+                initiallyExpanded: isExpansionTileOpen.value,
+                childrenPadding: EdgeInsets.zero,
+                trailing: null,
+                // trailing: Container(
+                //     height: 50,
+                //     width: 50,
+                //     decoration:
+                //         BoxDecoration(color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
+                //     child: const Icon(Icons.keyboard_arrow_down_rounded)),
+                onExpansionChanged: (val) {
+                  isExpansionTileOpen.value = val;
+                },
+                title: Center(
+                  child: Container(
+                      width: getScreenWidth(context) * 0.5,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: deepPurpleColor,
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            size: 18,
+                            isExpansionTileOpen.value
+                                ? Icons.cancel
+                                : CupertinoIcons.compass,
+                            color: colorWhite,
+                          ),
+                          10.widthBox,
+                          Text(
+                            'Explore Creators',
+                            style: FontStyleUtility.blackInter14W500
+                                .copyWith(color: colorWhite),
+                          ),
+                        ],
+                      )),
+                ),
+
+                children: <Widget>[
+                  10.heightBox,
+                  exploreCreatorData(),
+                ],
+              ),
+            );
+          }),
       30.heightBox,
       Column(
         children: [
@@ -235,7 +291,7 @@ Widget homeViewData() {
               20.0.widthBox,
               Expanded(
                 child: TextFormField(
-                  minLines: 4,
+                  minLines: 3,
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
@@ -252,7 +308,8 @@ Widget homeViewData() {
               stream: kHomeController.imageShowing.stream,
               builder: (context, snapshot) {
                 return kHomeController.imageShowing.value == true
-                    ? SizedBox(
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 10.0),
                         height: 130,
                         child: StreamBuilder<Object>(
                             stream: kHomeController.imageFileList.stream,
@@ -260,21 +317,27 @@ Widget homeViewData() {
                               return Align(
                                 alignment: Alignment.centerLeft,
                                 child: ListView.builder(
-                                    itemCount: (kHomeController.imageFileList.length) + 1,
+                                    itemCount:
+                                        (kHomeController.imageFileList.length) +
+                                            1,
                                     physics: const ClampingScrollPhysics(),
                                     scrollDirection: Axis.horizontal,
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
-                                      return index != kHomeController.imageFileList.length
+                                      return index !=
+                                              kHomeController
+                                                  .imageFileList.length
                                           ? Stack(
                                               children: [
                                                 Container(
-                                                    margin: const EdgeInsets.only(
-                                                        right: 12, top: 5),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            right: 12, top: 5),
                                                     child: Center(
                                                       child: Image.file(
                                                         File(kHomeController
-                                                            .imageFileList[index]
+                                                            .imageFileList[
+                                                                index]
                                                             .path),
                                                         fit: BoxFit.cover,
                                                         width: 130,
@@ -284,7 +347,10 @@ Widget homeViewData() {
                                                   top: 5,
                                                   right: 5,
                                                   child: IconButton(
-                                                    visualDensity : const VisualDensity(vertical: VisualDensity.minimumDensity),
+                                                    visualDensity:
+                                                        const VisualDensity(
+                                                            vertical: VisualDensity
+                                                                .minimumDensity),
                                                     padding: EdgeInsets.zero,
                                                     onPressed: () {
                                                       kHomeController
@@ -306,20 +372,29 @@ Widget homeViewData() {
                                                     await kHomeController
                                                         .imagePicker
                                                         .pickMultiImage();
-                                                if (selectedImages!.isNotEmpty) {
+                                                if (selectedImages!
+                                                    .isNotEmpty) {
                                                   kHomeController.imageFileList
                                                       .addAll(selectedImages);
                                                 }
                                               },
                                               child: Container(
-
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(20.0),border: Border.all(color: colorBlack.withOpacity(0.5))
-                                                ),
-                                                margin: const EdgeInsets.only(right: 12),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
+                                                    border: Border.all(
+                                                        color: colorBlack
+                                                            .withOpacity(0.5))),
+                                                margin: const EdgeInsets.only(
+                                                    right: 12),
                                                 width: 130,
-                                                child:  Center(child: Icon(Icons.add,color: colorBlack.withOpacity(0.5),)),
-
+                                                child: Center(
+                                                    child: Icon(
+                                                  Icons.add,
+                                                  color: colorBlack
+                                                      .withOpacity(0.5),
+                                                )),
                                               ),
                                             );
                                     }),
@@ -365,7 +440,7 @@ Widget homeViewData() {
           materialButton(
               background: MaterialStateProperty.all(lightPurpleColor),
               text: 'Publish',
-              height: 45.0,
+              height: 40.0,
               textStyle: FontStyleUtility.blackInter16W500
                   .copyWith(color: colorWhite)),
           10.heightBox,
@@ -521,7 +596,10 @@ Widget homeViewData() {
                     height: 200,
                     color: colorBlack,
                   ),*/
-                  Image.asset('assets/images/post1.jpeg',fit: BoxFit.cover,),
+                  Image.asset(
+                    'assets/images/post1.jpeg',
+                    fit: BoxFit.cover,
+                  ),
                   10.heightBox,
                   Row(
                     children: [
@@ -603,4 +681,136 @@ Widget homeViewData() {
           }),
     ],
   );
+}
+
+Widget exploreCreatorData() {
+  return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 2,
+      itemBuilder: (context, index) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: SizedBox(
+            height: 160,
+            child: Stack(
+              children: [
+                Image.asset(
+                  'assets/images/post1.jpeg',
+                  fit: BoxFit.fitWidth,
+                  width: double.infinity,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: colorBlack.withOpacity(0.3),
+                    height: 100.0,
+                  ),
+                ),
+                Positioned(
+                  left: 15.0,
+                  top: 20,
+                  bottom: 0,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image:
+                                  ExactAssetImage('assets/images/profile.jpeg',),
+                            ),
+                            color: const Color(0xff7c94b6),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(50.0)),
+                            border: Border.all(
+                              color: colorWhite,
+                              width: 2.0,
+                            ),
+                          ),
+                        ),
+                        20.widthBox,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            23.heightBox,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                Text('Gym Guy',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w900,
+                                        color: colorWhite)),
+                                Icon(
+                                  Icons.verified_outlined,
+                                  color: colorWhite,
+                                  size: 15,
+                                ),
+                              ],
+                            ),
+                            3.heightBox,
+                            Text(
+                              '@gymguy',
+                              style: FontStyleUtility.whiteInter14W500,
+                            ),
+                            10.heightBox,
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.post_add_sharp,
+                                  size: 15,
+                                  color: colorWhite,
+                                ),
+                                Text(
+                                  '1',
+                                  style: FontStyleUtility.whiteInter12W500,
+                                ),
+                                8.widthBox,
+                                const Icon(
+                                  Icons.image_outlined,
+                                  size: 15,
+                                  color: colorWhite,
+                                ),
+                                Text(
+                                  '1',
+                                  style: FontStyleUtility.whiteInter12W500,
+                                ),
+                                8.widthBox,
+                                const Icon(
+                                  Icons.videocam_outlined,
+                                  size: 15,
+                                  color: colorWhite,
+                                ),
+                                Text(
+                                  '0',
+                                  style: FontStyleUtility.whiteInter12W500,
+                                ),
+                                8.widthBox,
+                                const Icon(
+                                  Icons.mic_none,
+                                  size: 15,
+                                  color: colorWhite,
+                                ),
+                                Text(
+                                  '0',
+                                  style: FontStyleUtility.whiteInter12W500,
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ).paddingOnly(bottom: 10.0);
+      });
 }

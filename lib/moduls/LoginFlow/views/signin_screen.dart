@@ -23,31 +23,41 @@ class _SignInScreenState extends State<SignInScreen> {
         context: context,
         child: ListView(
           physics: const ClampingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          /*padding: const EdgeInsets.symmetric(horizontal: 16.0),*/
           children: [
-            heightBox(20.0),
-            const Icon(
-              Icons.flutter_dash,
-              size: 100,
-            ),
-            heightBox(50.0),
-            Text('Join now and Start making money\nwith your content!',
-                textAlign: TextAlign.center,
-                style: FontStyleUtility.greyInter16W500),
-            heightBox(50.0),
-            Row(
-              children: [
-                widthBox(50.0),
-                Image.asset(
-                  'assets/appIcons/icon_google.png',
-                  scale: 3.5,
-                ),
-                widthBox(60.0),
-                Text(
-                  'Login with Google',
-                  style: FontStyleUtility.blackInter16W500,
-                )
-              ],
+            SizedBox(
+              height: getScreenHeight(context) * 0.4,
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  heightBox(20.0),
+                  Image.asset(
+                    'assets/logo/fans_logo1.png',
+                    scale: 3.4,
+                    height: 80.0,
+                    width: 80.0,
+                  ),
+                  heightBox(50.0),
+                  Text('Join now and Start making money\nwith your content!',
+                      textAlign: TextAlign.center,
+                      style: FontStyleUtility.greyInter16W500),
+                  heightBox(50.0),
+                  Row(
+                    children: [
+                      widthBox(50.0),
+                      Image.asset(
+                        'assets/appIcons/icon_google.png',
+                        scale: 3.5,
+                      ),
+                      widthBox(60.0),
+                      Text(
+                        'Login with Google',
+                        style: FontStyleUtility.blackInter16W500,
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
             heightBox(30.0),
             Row(children: <Widget>[

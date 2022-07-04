@@ -1,9 +1,12 @@
+import 'package:fans/Home/notification/View/dashboard_screen.dart';
+import 'package:fans/Home/notification/View/edit_page_screen.dart';
+import 'package:fans/Home/notification/View/may_page_screen.dart';
+import 'package:fans/utility/common_buttons.dart';
+import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../Utility/common_function.dart';
-import '../utility/colors_utility.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'chat/chat_screen.dart';
 import 'explore/explore_screen.dart';
 import 'home/home_screen.dart';
@@ -18,6 +21,7 @@ class HomeStructureView extends StatefulWidget {
 }
 
 RxInt tabSelectedIndex = 0.obs;
+final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _HomeStructureViewState extends State<HomeStructureView> {
   static const List<Widget> _widgetOptions = <Widget>[
@@ -43,38 +47,183 @@ class _HomeStructureViewState extends State<HomeStructureView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: WillPopScope(
-        onWillPop: onWillPop,
-        child: Center(
-          child: _widgetOptions.elementAt(tabSelectedIndex.value),
+    return SafeArea(
+      child: Scaffold(
+        key: _key,
+        appBar: commonAppBar(
+          leadingIcon: IconButton(
+            icon: const Icon(
+              Icons.menu,
+              color: colorBlack,
+            ),
+            onPressed: () {
+              _key.currentState?.openDrawer();
+            },
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: colorWhite,
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                    onPressed: () {
+                      _key.currentState?.closeDrawer();
+                    },
+                    icon: const Icon(Icons.close)),
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.account_circle),
+                title: Text(
+                  'My Page',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {
+                  Get.to(()=>const MyPageScreen());
+                },
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.speed),
+                title: Text(
+                  'Dashboard',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {
+                  Get.to(()=> const DashboardScreen());
+                },
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.post_add),
+                title: Text(
+                  'My Post',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.bookmark_border),
+                title: Text(
+                  'Bookmarks',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.money),
+                title: Text(
+                  'Balance: TZS12,432.0',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.account_balance_wallet_outlined),
+                title: Text(
+                  'Wallet',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.supervised_user_circle_outlined),
+                title: Text(
+                  'My Subscriber',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.done_outline_outlined),
+                title: Text(
+                  'Subscription',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity),
+                leading: const Icon(Icons.logout),
+                title: Text(
+                  'Log Out',
+                  style: FontStyleUtility.blackInter16W400,
+                ),
+                onTap: () {},
+              ),
+              20.heightBox,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: materialButton(
+                  onTap: (){
+                    Get.to(()=>const EditPageScreen());
+                  },
+                  text: 'Edit Profile',
+                  textStyle: FontStyleUtility.blackInter16W400
+                      .copyWith(color: colorWhite),
+                ),
+              )
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.compass),
-            label: 'Explore',
+        ),
+        body: WillPopScope(
+          onWillPop: onWillPop,
+          child: Center(
+            child: _widgetOptions.elementAt(tabSelectedIndex.value),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.send),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none),
-            label: 'Notification',
-          ),
-        ],
-        currentIndex: tabSelectedIndex.value,
-        selectedItemColor: colorPrimary,
-        unselectedItemColor: colorGrey,
-        onTap: onItemTapped,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: colorWhite,
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.compass),
+              label: 'Explore',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.send),
+              label: 'Chat',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications_none),
+              label: 'Notification',
+            ),
+          ],
+          currentIndex: tabSelectedIndex.value,
+          selectedItemColor: colorPrimary,
+          unselectedItemColor: colorGrey,
+          onTap: onItemTapped,
+        ),
       ),
     );
   }
