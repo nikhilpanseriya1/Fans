@@ -15,7 +15,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
-        appBar: commonAppBar(
+        /*appBar: commonAppBar(
             leadingIcon: const SizedBox(),
             titleWidget: Text(
               'Chats',
@@ -31,7 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     Icons.edit,
                     color: colorBlack,
                   ))
-            ]),
+            ]),*/
         child: Column(
           children: [
             30.heightBox,

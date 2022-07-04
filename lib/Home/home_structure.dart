@@ -1,6 +1,8 @@
+import 'package:fans/Home/home/my_posts_screen.dart';
 import 'package:fans/Home/notification/View/dashboard_screen.dart';
 import 'package:fans/Home/notification/View/edit_page_screen.dart';
 import 'package:fans/Home/notification/View/may_page_screen.dart';
+import 'package:fans/Home/notification/View/mysubscribers_screen.dart';
 import 'package:fans/utility/common_buttons.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'chat/chat_screen.dart';
 import 'explore/explore_screen.dart';
+import 'home/bookmark_screen.dart';
 import 'home/home_screen.dart';
 import 'notification/notification_screen.dart';
 
@@ -65,6 +68,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
           child: ListView(
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
+            physics: const ClampingScrollPhysics(),
             children: [
               Align(
                 alignment: Alignment.topRight,
@@ -84,7 +88,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   style: FontStyleUtility.blackInter16W400,
                 ),
                 onTap: () {
-                  Get.to(()=>const MyPageScreen());
+                  Get.to(() => const MyPageScreen());
                 },
               ),
               ListTile(
@@ -97,7 +101,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   style: FontStyleUtility.blackInter16W400,
                 ),
                 onTap: () {
-                  Get.to(()=> const DashboardScreen());
+                  Get.to(() => const DashboardScreen());
                 },
               ),
               ListTile(
@@ -109,7 +113,9 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   'My Post',
                   style: FontStyleUtility.blackInter16W400,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => const MyPostsScreen());
+                },
               ),
               ListTile(
                 visualDensity: const VisualDensity(
@@ -120,7 +126,9 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   'Bookmarks',
                   style: FontStyleUtility.blackInter16W400,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => const BookMarkScreen());
+                },
               ),
               ListTile(
                 visualDensity: const VisualDensity(
@@ -153,7 +161,9 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   'My Subscriber',
                   style: FontStyleUtility.blackInter16W400,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => const MySubscribersScreen());
+                },
               ),
               ListTile(
                 visualDensity: const VisualDensity(
@@ -181,8 +191,8 @@ class _HomeStructureViewState extends State<HomeStructureView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: materialButton(
-                  onTap: (){
-                    Get.to(()=>const EditPageScreen());
+                  onTap: () {
+                    Get.to(() => const EditPageScreen());
                   },
                   text: 'Edit Profile',
                   textStyle: FontStyleUtility.blackInter16W400
