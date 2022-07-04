@@ -31,8 +31,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Image.asset(
               'assets/logo/fans_logo1.png',
               scale: 3.4,
-              height: 80.0,
-              width: 80.0,
+              height: 130.0,
+              width: 130.0,
             ),
             heightBox(50.0),
             Text('Join now and Start making money\nwith your content!',

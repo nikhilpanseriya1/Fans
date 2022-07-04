@@ -520,7 +520,7 @@ Widget commonPrivacyView() {
 }
 
 Widget commonScreenView(
-    {required IconData icon, required String title, required String subTitle}) {
+    {required IconData icon, required String title,  required String subTitle}) {
   return Column(
     children: [
       30.heightBox,

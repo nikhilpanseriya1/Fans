@@ -1,4 +1,5 @@
 import 'package:fans/Home/home/home_screen.dart';
+import 'package:fans/Home/home/my_posts_screen.dart';
 import 'package:fans/Home/home_structure.dart';
 import 'package:fans/Home/notification/View/dashboard_screen.dart';
 import 'package:fans/moduls/SplashScreen/splash_screen.dart';
