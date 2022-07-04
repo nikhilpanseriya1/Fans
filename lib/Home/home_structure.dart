@@ -147,7 +147,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                     vertical: VisualDensity.minimumDensity),
                 leading: const Icon(Icons.account_balance_wallet_outlined),
                 title: Text(
-                  'Wallet',
+                  'Wallet: TZS12,432.0',
                   style: FontStyleUtility.blackInter16W400,
                 ),
                 onTap: () {},
