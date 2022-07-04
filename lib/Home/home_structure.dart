@@ -1,3 +1,6 @@
+import 'package:fans/Home/notification/View/dashboard_screen.dart';
+import 'package:fans/Home/notification/View/edit_page_screen.dart';
+import 'package:fans/Home/notification/View/may_page_screen.dart';
 import 'package:fans/utility/common_buttons.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,38 +50,29 @@ class _HomeStructureViewState extends State<HomeStructureView> {
     return SafeArea(
       child: Scaffold(
         key: _key,
-        appBar: commonAppBar(leadingIcon: const SizedBox(), actionWidgets: [
-          IconButton(
+        appBar: commonAppBar(
+          leadingIcon: IconButton(
             icon: const Icon(
               Icons.menu,
               color: colorBlack,
             ),
             onPressed: () {
-              _key.currentState?.openEndDrawer();
+              _key.currentState?.openDrawer();
             },
-          )
-        ]),
-        endDrawer: Drawer(
+          ),
+        ),
+        drawer: Drawer(
           child: ListView(
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
               Align(
                 alignment: Alignment.topRight,
-                child: IconButton(onPressed: () {
-                  _key.currentState?.closeEndDrawer();
-                }, icon: const Icon(Icons.close)),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.speed),
-                title: Text(
-                  'Panel Admin',
-                  style: FontStyleUtility.blackInter16W400,
-                ),
-                onTap: () {},
+                child: IconButton(
+                    onPressed: () {
+                      _key.currentState?.closeDrawer();
+                    },
+                    icon: const Icon(Icons.close)),
               ),
               ListTile(
                 visualDensity: const VisualDensity(
@@ -89,7 +83,9 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   'My Page',
                   style: FontStyleUtility.blackInter16W400,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(()=>const MyPageScreen());
+                },
               ),
               ListTile(
                 visualDensity: const VisualDensity(
@@ -100,7 +96,9 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   'Dashboard',
                   style: FontStyleUtility.blackInter16W400,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(()=> const DashboardScreen());
+                },
               ),
               ListTile(
                 visualDensity: const VisualDensity(
@@ -183,6 +181,9 @@ class _HomeStructureViewState extends State<HomeStructureView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: materialButton(
+                  onTap: (){
+                    Get.to(()=>const EditPageScreen());
+                  },
                   text: 'Edit Profile',
                   textStyle: FontStyleUtility.blackInter16W400
                       .copyWith(color: colorWhite),

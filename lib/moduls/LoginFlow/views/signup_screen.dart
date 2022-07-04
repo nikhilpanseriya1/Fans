@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20)),
-                  color: colorRed.withOpacity(0.2),
+                  color: deepPurpleColor.withOpacity(0.2),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

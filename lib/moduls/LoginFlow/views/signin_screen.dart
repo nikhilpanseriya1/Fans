@@ -70,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20)),
-                  color: colorRed.withOpacity(0.2),
+                  color: deepPurpleColor.withOpacity(0.2),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -156,11 +156,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             .copyWith(color: deepPurpleColor),
                       ),
                     )),
-                    Spacer(),
-                    SizedBox()
-                    /*SizedBox(
-                      height: getScreenHeight(context),
-                    )*/
                   ],
                 ),
               ),

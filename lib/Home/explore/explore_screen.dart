@@ -13,22 +13,52 @@ class ExploreScreen extends StatefulWidget {
   State<ExploreScreen> createState() => _ExploreScreenState();
 }
 
-
-
 class _ExploreScreenState extends State<ExploreScreen>
     with TickerProviderStateMixin {
   RxBool isExpansionTileOpen = false.obs;
   TabController? tabController;
 
-  final List<StaggeredGridTile>  _cardTile = <StaggeredGridTile> [
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:3,child: SizedBox(),),
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:3,child: SizedBox(),),
-   const StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount:2,child: SizedBox(),),
+  final List<StaggeredGridTile> _cardTile = <StaggeredGridTile>[
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 3,
+      child: SizedBox(),
+    ),
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: SizedBox(),
+    ),
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: SizedBox(),
+    ),
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: SizedBox(),
+    ),
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: SizedBox(),
+    ),
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: SizedBox(),
+    ),
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 3,
+      child: SizedBox(),
+    ),
+    const StaggeredGridTile.count(
+      crossAxisCellCount: 2,
+      mainAxisCellCount: 2,
+      child: SizedBox(),
+    ),
   ];
 
   @override
@@ -57,6 +87,11 @@ class _ExploreScreenState extends State<ExploreScreen>
               Container(
                 decoration: const BoxDecoration(color: colorWhite),
                 child: TabBar(
+
+                /*  indicator: BoxDecoration(
+                    color: deepPurpleColor,
+                    borderRadius: BorderRadius.circular(15.0)
+                  ),*/
                   controller: tabController,
                   isScrollable: true,
                   unselectedLabelColor: colorGrey,
@@ -89,7 +124,7 @@ class _ExploreScreenState extends State<ExploreScreen>
                 ),
               ),
               20.heightBox,
-             /* Text(
+              /* Text(
                 'Explore our Craters',
                 style: FontStyleUtility.blackInter22W700.copyWith(fontSize: 35),
               ),
@@ -351,39 +386,55 @@ class _ExploreScreenState extends State<ExploreScreen>
               SingleChildScrollView(
                 child: StaggeredGrid.count(
                   crossAxisCount: 4,
-                  mainAxisSpacing: 4,
-                  crossAxisSpacing: 4,
-                  children:  [
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  children: [
                     StaggeredGridTile.count(
                       crossAxisCellCount: 2,
                       mainAxisCellCount: 2,
-                      child: Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover),
-                    ),StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 3,
-                      child: Image.asset('assets/images/profile2.jpg',fit: BoxFit.cover),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 3,
-                      child:  Image.asset('assets/images/profile3.jpg',fit: BoxFit.cover),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child:     Image.asset('assets/images/profile4.png',fit: BoxFit.cover),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(18.0),
+                          child: Image.asset('assets/images/profile.jpeg',
+                              fit: BoxFit.cover)),
                     ),
                     StaggeredGridTile.count(
                       crossAxisCellCount: 2,
                       mainAxisCellCount: 3,
-                      child:  Image.asset('assets/images/post1.jpeg',fit: BoxFit.cover),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(18.0),
+                          child: Image.asset('assets/images/profile2.jpg',
+                              fit: BoxFit.cover)),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 3,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(18.0),
+                          child: Image.asset('assets/images/profile3.jpg',
+                              fit: BoxFit.cover)),
                     ),
                     StaggeredGridTile.count(
                       crossAxisCellCount: 2,
                       mainAxisCellCount: 2,
-                      child:  Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover),
+                      child: Image.asset('assets/images/profile4.png',
+                          fit: BoxFit.cover),
                     ),
-
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 3,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(18.0),
+                          child: Image.asset('assets/images/post1.jpeg',
+                              fit: BoxFit.cover)),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(18.0),
+                          child: Image.asset('assets/images/profile.jpeg',
+                              fit: BoxFit.cover)),
+                    ),
                   ],
                 ),
               ),

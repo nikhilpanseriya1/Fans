@@ -43,6 +43,19 @@ class FontStyleUtility{
   static TextStyle greyInter14W400 = const TextStyle(color: colorGrey, fontSize: 14, fontFamily: 'Inter', fontWeight: FontWeight.w400);
   static TextStyle greyInter22W800 = const TextStyle(color: colorGrey, fontSize: 22, fontFamily: 'Inter', fontWeight: FontWeight.w800);
 
+  ///grey text
+  static TextStyle whiteInter16W500 = const TextStyle(color: colorWhite, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500);
+  static TextStyle whiteInter18W500 = const TextStyle(color: colorWhite, fontSize: 18, fontFamily: 'Inter', fontWeight: FontWeight.w500);
+  static TextStyle whiteInter16W400 = const TextStyle(color: colorWhite, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w400);
+  static TextStyle whiteInter18W400 = const TextStyle(color: colorWhite, fontSize: 18, fontFamily: 'Inter', fontWeight: FontWeight.w400);
+  static TextStyle whiteInter14W500 = const TextStyle(color: colorWhite, fontSize: 14, fontFamily: 'Inter', fontWeight: FontWeight.w500);
+  static TextStyle whiteInter14W600 = const TextStyle(color: colorWhite, fontSize: 14, fontFamily: 'Inter', fontWeight: FontWeight.w600);
+  static TextStyle whiteInter16W600 = const TextStyle(color: colorWhite, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w600);
+  static TextStyle whiteInter12W600 = const TextStyle(color: colorWhite, fontSize: 12, fontFamily: 'Inter', fontWeight: FontWeight.w600);
+  static TextStyle whiteInter12W500 = const TextStyle(color: colorWhite, fontSize: 12, fontFamily: 'Inter', fontWeight: FontWeight.w500);
+  static TextStyle whiteInter14W400 = const TextStyle(color: colorWhite, fontSize: 14, fontFamily: 'Inter', fontWeight: FontWeight.w400);
+  static TextStyle whiteInter22W800 = const TextStyle(color: colorWhite, fontSize: 22, fontFamily: 'Inter', fontWeight: FontWeight.w800);
+
 
 
   ///===================================   DMSans   ===============================

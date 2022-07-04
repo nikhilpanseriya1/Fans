@@ -29,7 +29,6 @@ class _MyPageScreenState extends State<MyPageScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(vsync: this, length: 4);
   }
