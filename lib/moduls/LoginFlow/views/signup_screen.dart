@@ -7,7 +7,7 @@ import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Home/home_structure.dart';
+import '../../../moduls/Home/home_structure.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
