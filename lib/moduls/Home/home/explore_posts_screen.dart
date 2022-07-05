@@ -20,10 +20,10 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
+        appBar: commonAppBar(),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              50.heightBox,
               commonTextField(
                   hintText: 'Search',
                   textEditingController: null,
@@ -34,7 +34,6 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                 tilePadding: EdgeInsets.zero,
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 expandedAlignment: Alignment.centerLeft,
-
                 title: Container(
                     height: 50.0,
                     padding: const EdgeInsets.only(left: 12.0),
@@ -51,13 +50,28 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                             Icon(Icons.arrow_drop_down_rounded)
                           ],
                         ))),
-
                 trailing: null,
-                children: const [
-                  Text('Latest'),
-                  Text('Old'),
-                  Text('Unlockable'),
-                  Text('Free'),
+                children: [
+                  ListTile(
+                      title: Text(
+                    'Latest',
+                    style: FontStyleUtility.blackInter14W500,
+                  )),
+                  ListTile(
+                      title: Text(
+                    'Old',
+                    style: FontStyleUtility.blackInter14W500,
+                  )),
+                  ListTile(
+                      title: Text(
+                    'Un lockable',
+                    style: FontStyleUtility.blackInter14W500,
+                  )),
+                  ListTile(
+                      title: Text(
+                    'Free',
+                    style: FontStyleUtility.blackInter14W500,
+                  )),
                 ],
               ),
               30.heightBox,
@@ -96,8 +110,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                     children: [
                                       Text(
                                         'Admin',
-                                        style: FontStyleUtility
-                                            .blackInter22W500
+                                        style: FontStyleUtility.blackInter22W500
                                             .copyWith(
                                                 color: deepPurpleColor,
                                                 fontWeight: FontWeight.w900),
@@ -110,8 +123,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                       5.widthBox,
                                       Text(
                                         '@Admin',
-                                        style:
-                                            FontStyleUtility.greyInter14W500,
+                                        style: FontStyleUtility.greyInter14W500,
                                       )
                                     ],
                                   ),
@@ -119,8 +131,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                     children: [
                                       Text(
                                         '5 day to ago',
-                                        style:
-                                            FontStyleUtility.greyInter16W500,
+                                        style: FontStyleUtility.greyInter16W500,
                                       ),
                                       const Icon(
                                         Icons.lock_outline,
@@ -138,15 +149,14 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                   size: 35,
                                   color: colorGrey,
                                 ),
-                                padding:EdgeInsets.zero,
+                                padding: EdgeInsets.zero,
                                 itemBuilder: (context) {
                                   return [
                                     PopupMenuItem(
                                       value: 'edit',
                                       child: Row(
                                         children: [
-                                          const Icon(
-                                              Icons.ios_share_outlined),
+                                          const Icon(Icons.ios_share_outlined),
                                           10.widthBox,
                                           const Text('Go to post'),
                                         ],
@@ -183,7 +193,6 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                       ),
                                     ),
                                     PopupMenuItem(
-
                                       value: 'delete',
                                       child: Row(
                                         children: [
@@ -195,7 +204,9 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                     ),
                                   ];
                                 },
-                                onSelected: (String value) => actionPopUpItemSelected(value, 'name',context),
+                                onSelected: (String value) =>
+                                    actionPopUpItemSelected(
+                                        value, 'name', context),
                               ),
                             ],
                           ),
@@ -205,7 +216,10 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                             style: FontStyleUtility.greyInter18W500,
                           ),
                           20.heightBox,
-                          Image.asset('assets/images/profile.jpeg',fit: BoxFit.cover,),
+                          Image.asset(
+                            'assets/images/profile.jpeg',
+                            fit: BoxFit.cover,
+                          ),
                           10.heightBox,
                           Row(
                             children: [
@@ -217,8 +231,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                         splashRadius: 20.0,
                                         onPressed: () {
                                           kHomeController.likeButton.value =
-                                              !kHomeController
-                                                  .likeButton.value;
+                                              !kHomeController.likeButton.value;
                                         },
                                         icon: Icon(
                                           kHomeController.likeButton.value ==
@@ -261,15 +274,13 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                   )),
                               const Spacer(),
                               StreamBuilder<Object>(
-                                  stream:
-                                      kHomeController.bookmarkButton.stream,
+                                  stream: kHomeController.bookmarkButton.stream,
                                   builder: (context, snapshot) {
                                     return IconButton(
                                         splashColor: deepPurpleColor,
                                         splashRadius: 20.0,
                                         onPressed: () {
-                                          kHomeController
-                                                  .bookmarkButton.value =
+                                          kHomeController.bookmarkButton.value =
                                               !kHomeController
                                                   .bookmarkButton.value;
                                         },
@@ -297,5 +308,4 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
           ),
         ));
   }
-
 }
