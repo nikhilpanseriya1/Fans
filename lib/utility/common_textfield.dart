@@ -9,40 +9,41 @@ Color? borderColor;
 
 OutlineInputBorder textFieldBorderStyle = OutlineInputBorder(
   borderSide: BorderSide(color: borderColor ?? colorBlack.withOpacity(0.5), width: 1),
-  borderRadius: BorderRadius.circular(5.0),
+  borderRadius: BorderRadius.circular(25.0),
 );
 
-Widget commonTextField({String? fieldTitleText,
-  required String hintText,
-  String? labelText,
-  bool isPassword = false,
-  required TextEditingController? textEditingController,
-  Function? validationFunction,
-  Function? onSavedFunction,
-  double? borderOpacity,
-  Function? onFieldSubmit,
-  TextInputType? keyboardType,
-  Function? onEditingComplete,
-  Function? onTapFunction,
-  Function? onChangedFunction,
-  TextAlign? align,
-  TextInputAction? inputAction,
-  List<TextInputFormatter>? inputFormatter,
-  bool? isEnabled,
-  int? errorMaxLines,
-  int? maxLine,
-  FocusNode? textFocusNode,
-  GlobalKey<FormFieldState>? key,
-  bool isReadOnly = false,
-  Widget? suffixIcon,
-  ExactAssetImage? preFixIcon,
-  Widget? preFixWidget,
-  Color? filledColor = textFieldColor,
-  RxBool? showPassword,
-  int? maxLength,
-  EdgeInsetsGeometry? contentPadding,
-  ScrollController? scrollController,
-  TextStyle? hintStyle}) {
+Widget commonTextField(
+    {String? fieldTitleText,
+    required String hintText,
+    String? labelText,
+    bool isPassword = false,
+    required TextEditingController? textEditingController,
+    Function? validationFunction,
+    Function? onSavedFunction,
+    double? borderOpacity,
+    Function? onFieldSubmit,
+    TextInputType? keyboardType,
+    Function? onEditingComplete,
+    Function? onTapFunction,
+    Function? onChangedFunction,
+    TextAlign? align,
+    TextInputAction? inputAction,
+    List<TextInputFormatter>? inputFormatter,
+    bool? isEnabled,
+    int? errorMaxLines,
+    int? maxLine,
+    FocusNode? textFocusNode,
+    GlobalKey<FormFieldState>? key,
+    bool isReadOnly = false,
+    Widget? suffixIcon,
+    ExactAssetImage? preFixIcon,
+    Widget? preFixWidget,
+    Color? filledColor = textFieldColor,
+    RxBool? showPassword,
+    int? maxLength,
+    EdgeInsetsGeometry? contentPadding,
+    ScrollController? scrollController,
+    TextStyle? hintStyle}) {
   bool passwordVisible = isPassword;
   return StatefulBuilder(builder: (context, newSetState) {
     return Column(
@@ -55,7 +56,9 @@ Widget commonTextField({String? fieldTitleText,
           const SizedBox(
             height: 10.0,
           ),
-        labelText == null || labelText.isEmpty ? const SizedBox() : Text(labelText, style: FontStyleUtility.greyInter14W500),
+        labelText == null || labelText.isEmpty
+            ? const SizedBox()
+            : Text(labelText, style: FontStyleUtility.greyInter14W500),
         const SizedBox(
           height: 10.0,
         ),
@@ -87,7 +90,9 @@ Widget commonTextField({String? fieldTitleText,
             }
           },
           validator: (value) {
-            return validationFunction != null ? validationFunction(value) : null;
+            return validationFunction != null
+                ? validationFunction(value)
+                : null;
           },
           // onSaved: onSavedFunction != null ? onSavedFunction : (value) {},
           onSaved: (value) {
@@ -105,7 +110,7 @@ Widget commonTextField({String? fieldTitleText,
           cursorColor: colorPrimary,
           obscureText: passwordVisible,
           textInputAction: inputAction ?? TextInputAction.next,
-        
+
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
@@ -118,46 +123,51 @@ Widget commonTextField({String? fieldTitleText,
             errorMaxLines: errorMaxLines ?? 1,
             filled: true,
             fillColor: filledColor,
-            contentPadding: contentPadding ?? const EdgeInsets.fromLTRB(13.0, 11.0, 10.0, 11.0),
+            contentPadding: contentPadding ??
+                const EdgeInsets.fromLTRB(13.0, 11.0, 10.0, 11.0),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: colorSemiDarkBlack, width: 1),
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(25.0),
             ),
             disabledBorder: textFieldBorderStyle,
             enabledBorder: textFieldBorderStyle,
             errorBorder: textFieldBorderStyle,
             focusedErrorBorder: textFieldBorderStyle,
+            border: textFieldBorderStyle,
             hintText: hintText,
             prefixIcon: preFixIcon != null
                 ? Image(
-              image: preFixIcon,
-              height: 15,
-              // color: color_8D8D8D,
-            )
+                    image: preFixIcon,
+                    height: 15,
+                    // color: color_8D8D8D,
+                  )
                 : preFixWidget,
             suffixIcon: isPassword
                 ? InkWell(
-                onTap: () {
-                  newSetState(() {
-                    passwordVisible = !passwordVisible;
-                  });
-                },
-                child: passwordVisible
-                    ? const Icon(
-                  CupertinoIcons.eye,
-                  color: textColor,
-                )
-                    : const Icon(
-                  CupertinoIcons.eye_slash,
-                  color: textColor,
-                ))
+                    onTap: () {
+                      newSetState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                    child: passwordVisible
+                        ? const Icon(
+                            CupertinoIcons.eye,
+                            color: textColor,
+                          )
+                        : const Icon(
+                            CupertinoIcons.eye_slash,
+                            color: textColor,
+                          ))
                 : suffixIcon ??
-                const SizedBox(
-                  height: 0,
-                  width: 0,
-                ),
+                    const SizedBox(
+                      height: 0,
+                      width: 0,
+                    ),
             hintStyle: hintStyle ??
-                FontStyleUtility.greyInter16W500.copyWith(color: colorGrey.withOpacity(0.8), fontSize: 16, fontWeight: FontWeight.normal),
+                FontStyleUtility.greyInter16W500.copyWith(
+                    color: colorGrey.withOpacity(0.8),
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal),
           ),
         ),
       ],

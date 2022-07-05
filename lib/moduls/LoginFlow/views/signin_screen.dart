@@ -81,6 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       preFixWidget: const Icon(Icons.mail_outline),
                       hintText: 'Enter Your Email',
                       textEditingController: null,
+
                     ),
                     heightBox(10.0),
                     commonTextField(
