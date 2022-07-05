@@ -20,3 +20,7 @@ ExactAssetImage telegram = const ExactAssetImage('assets/appIcons/telegram.png',
 ExactAssetImage twitch = const ExactAssetImage('assets/appIcons/twitch.png', scale: 4);
 ExactAssetImage discord = const ExactAssetImage('assets/appIcons/discord.png', scale: 4);
 ExactAssetImage vkSocial = const ExactAssetImage('assets/appIcons/vk-social.png', scale: 4);
+ExactAssetImage whatsApp = const ExactAssetImage('assets/appIcons/whatsapp.png', scale: 4);
+ExactAssetImage message = const ExactAssetImage('assets/appIcons/message.png', scale: 4);
+ExactAssetImage copyLink = const ExactAssetImage('assets/appIcons/link.png', scale: 4);
+ExactAssetImage email = const ExactAssetImage('assets/appIcons/email.png', scale: 4);

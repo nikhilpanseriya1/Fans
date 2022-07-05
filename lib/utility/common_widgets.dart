@@ -291,6 +291,8 @@ Future<void> showAlertDialog(
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
+        titlePadding:
+            title == null ? EdgeInsets.zero : const EdgeInsets.all(10),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         contentPadding: const EdgeInsets.only(top: 10),
         title: Text(title ?? '', style: FontStyleUtility.blackInter20W600),
@@ -299,7 +301,7 @@ Future<void> showAlertDialog(
             children: <Widget>[
               child ?? const SizedBox.shrink(),
               msg != null
-                  ? Text(msg ?? '',
+                  ? Text(msg,
                       style: FontStyleUtility.blackInter16W500.copyWith(
                           height: 1.5, color: colorBlack.withOpacity(0.8)),
                       textAlign: textAlign ?? TextAlign.start)

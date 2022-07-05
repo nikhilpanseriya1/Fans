@@ -270,7 +270,6 @@ class _MyPageScreenState extends State<MyPageScreen>
                                 },
                               )
                             ],
-                            title: 'Share',
                             child: SizedBox(
                               height: getScreenHeight(context) * 0.4,
                               width: getScreenWidth(context) * 0.9,
@@ -282,12 +281,36 @@ class _MyPageScreenState extends State<MyPageScreen>
                                         crossAxisCount: 2,
                                         childAspectRatio: 1.5),
                                 children: [
-                                  Image(image: profilePlaceholder),
-                                  Image(image: profilePlaceholder),
-                                  Image(image: profilePlaceholder),
-                                  Image(image: profilePlaceholder),
-                                  Image(image: profilePlaceholder),
-                                  Image(image: profilePlaceholder),
+                                  commonDialogItems(
+                                    image: facebook,
+                                    title: 'Facebook',
+                                    callBack: () {},
+                                  ),
+                                  commonDialogItems(
+                                    image: twitter,
+                                    title: 'Twitter',
+                                    callBack: () {},
+                                  ),
+                                  commonDialogItems(
+                                    image: whatsApp,
+                                    title: 'WhatsApp',
+                                    callBack: () {},
+                                  ),
+                                  commonDialogItems(
+                                    image: email,
+                                    title: 'Email',
+                                    callBack: () {},
+                                  ),
+                                  commonDialogItems(
+                                    image: message,
+                                    title: 'Text message',
+                                    callBack: () {},
+                                  ),
+                                  commonDialogItems(
+                                    image: copyLink,
+                                    title: 'Copy link',
+                                    callBack: () {},
+                                  ),
                                 ],
                               ),
                             ),
@@ -577,4 +600,40 @@ class _MyPageScreenState extends State<MyPageScreen>
 //     ),
 //   );
 // }
+
+  Widget commonDialogItems(
+      {required ExactAssetImage image,
+      required String title,
+      required Function() callBack}) {
+    return InkWell(
+      onTap: () {
+        Get.back();
+        callBack();
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: colorPrimary.withOpacity(0.2)),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Image(
+                image: image,
+                height: 30,
+                width: 30,
+                color: colorPrimary,
+              ),
+            ),
+          ),
+          20.heightBox,
+          Text(
+            title,
+            style: FontStyleUtility.blackInter14W500,
+          )
+        ],
+      ),
+    );
+  }
 }
