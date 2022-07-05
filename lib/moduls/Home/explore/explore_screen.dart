@@ -78,6 +78,7 @@ class _ExploreScreenState extends State<ExploreScreen>
   @override
   Widget build(BuildContext context) {
     return commonStructure(
+      padding: 0.0,
         context: context,
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),
@@ -87,16 +88,16 @@ class _ExploreScreenState extends State<ExploreScreen>
               Container(
                 decoration: const BoxDecoration(color: colorWhite),
                 child: TabBar(
-
-                /*  indicator: BoxDecoration(
+                padding: EdgeInsets.only(left: 12.0),
+                  indicator: BoxDecoration(
                     color: deepPurpleColor,
-                    borderRadius: BorderRadius.circular(15.0)
-                  ),*/
+                    borderRadius: BorderRadius.circular(25.0)
+                  ),
                   controller: tabController,
                   isScrollable: true,
                   unselectedLabelColor: colorGrey,
                   indicatorColor: colorPrimary,
-                  labelColor: colorPrimary,
+                  labelColor: colorWhite,
                   unselectedLabelStyle: FontStyleUtility.blackInter15W500,
                   tabs: const [
                     Tab(
@@ -383,59 +384,62 @@ class _ExploreScreenState extends State<ExploreScreen>
                 ),
               ),*/
 
-              SingleChildScrollView(
-                child: StaggeredGrid.count(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  children: [
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(18.0),
-                          child: Image.asset('assets/images/profile.jpeg',
-                              fit: BoxFit.cover)),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 3,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(18.0),
-                          child: Image.asset('assets/images/profile2.jpg',
-                              fit: BoxFit.cover)),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 3,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(18.0),
-                          child: Image.asset('assets/images/profile3.jpg',
-                              fit: BoxFit.cover)),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: Image.asset('assets/images/profile4.png',
-                          fit: BoxFit.cover),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 3,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(18.0),
-                          child: Image.asset('assets/images/post1.jpeg',
-                              fit: BoxFit.cover)),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(18.0),
-                          child: Image.asset('assets/images/profile.jpeg',
-                              fit: BoxFit.cover)),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                child: SingleChildScrollView(
+                  child: StaggeredGrid.count(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    children: [
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(18.0),
+                            child: Image.asset('assets/images/profile.jpeg',
+                                fit: BoxFit.cover)),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 3,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(18.0),
+                            child: Image.asset('assets/images/profile2.jpg',
+                                fit: BoxFit.cover)),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 3,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(18.0),
+                            child: Image.asset('assets/images/profile3.jpg',
+                                fit: BoxFit.cover)),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: Image.asset('assets/images/profile4.png',
+                            fit: BoxFit.cover),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 3,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(18.0),
+                            child: Image.asset('assets/images/post1.jpeg',
+                                fit: BoxFit.cover)),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(18.0),
+                            child: Image.asset('assets/images/profile.jpeg',
+                                fit: BoxFit.cover)),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               20.heightBox

@@ -356,6 +356,7 @@ class _MyPageScreenState extends State<MyPageScreen>
                   ],
                 ),
               ),
+              10.heightBox,
               StreamBuilder<Object>(
                   stream: isExpansionTileOpen.stream,
                   builder: (context, snapshot) {
@@ -461,10 +462,10 @@ class _MyPageScreenState extends State<MyPageScreen>
                   child: TabBarView(
                     controller: tabController,
                     children: <Widget>[
-                      homeViewData(),
-                      homeViewData(),
-                      homeViewData(),
-                      homeViewData(),
+                      homeViewData(false),
+                      homeViewData(false),
+                      homeViewData(false),
+                      homeViewData(false),
                     ],
                   ),
                 ),

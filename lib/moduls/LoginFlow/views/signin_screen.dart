@@ -6,6 +6,7 @@ import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  heightBox(20.0),
+                  heightBox(50.0),
                   Image.asset(
                     'assets/logo/fans_logo1.png',
                     scale: 3.4,
@@ -41,22 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   heightBox(50.0),
                   Text('Join now and Start making money\nwith your content!',
                       textAlign: TextAlign.center,
-                      style: FontStyleUtility.greyInter16W500),
-                  heightBox(50.0),
-                  Row(
-                    children: [
-                      widthBox(50.0),
-                      Image.asset(
-                        'assets/appIcons/icon_google.png',
-                        scale: 3.5,
-                      ),
-                      widthBox(60.0),
-                      Text(
-                        'Login with Google',
-                        style: FontStyleUtility.blackInter16W500,
-                      )
-                    ],
-                  ),
+                      style: FontStyleUtility.greyInter22W500),
                 ],
               ),
             ),
@@ -66,7 +52,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 height: getScreenHeight(context) * 0.6,
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 15.0),
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20)),
@@ -81,7 +67,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       preFixWidget: const Icon(Icons.mail_outline),
                       hintText: 'Enter Your Email',
                       textEditingController: null,
-
                     ),
                     heightBox(10.0),
                     commonTextField(
@@ -108,7 +93,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   unselectedWidgetColor:
                                       colorSemiDarkBlack.withOpacity(0.3)),
                               child: Checkbox(
-                                  activeColor: colorDarkBlack,
+                                  activeColor: deepPurpleColor,
                                   value: isRemember.value,
                                   onChanged: (bool? value) {
                                     isRemember.value = value ?? false;
@@ -157,6 +142,22 @@ class _SignInScreenState extends State<SignInScreen> {
                             .copyWith(color: deepPurpleColor),
                       ),
                     )),
+                    50.heightBox,
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/appIcons/icon_google.png',
+                          scale: 3.5,
+                        ),
+                        widthBox(30.0),
+                        Text(
+                          'Login with Google',
+                          style: FontStyleUtility.blackInter16W500,
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
