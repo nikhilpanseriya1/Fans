@@ -15,7 +15,7 @@ class _VerifiedAccountViewState extends State<VerifiedAccountView> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
-        appBar: commonAppBar(title: 'Verify Account', elevation: 0.5),
+        appBar: commonAppBar(),
         child: Column(
           children: [
             commonScreenView(

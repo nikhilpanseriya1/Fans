@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_localizations.dart';
 import 'package:fans/moduls/Home/home/home_screen.dart';
 import 'package:fans/moduls/Home/home/my_posts_screen.dart';
 import 'package:fans/moduls/Home/home_structure.dart';
@@ -14,7 +15,6 @@ import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'moduls/Home/notification/View/edit_page_screen.dart';
 import 'moduls/Home/notification/View/may_page_screen.dart';
 
-
 final getPreference = GetStorage();
 
 void main() {
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [CountryLocalizations.delegate],
       title: appName,
       // initialBinding: AppBinding(),
       theme: ThemeData(
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
           hoverColor: Colors.transparent
           // primarySwatch: Colors.blue,
           ),
-      builder: (context, widget) => ResponsiveWrapper.builder(BouncingScrollWrapper.builder(context, widget!),
+      builder: (context, widget) => ResponsiveWrapper.builder(
+          BouncingScrollWrapper.builder(context, widget!),
           maxWidth: MediaQuery.of(context).size.width,
           minWidth: 420,
           defaultScale: true,
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
           background: Container(color: colorWhite)),
-      home: const MyPageScreen(),
+      home: const HomeStructureView(),
     );
   }
 }

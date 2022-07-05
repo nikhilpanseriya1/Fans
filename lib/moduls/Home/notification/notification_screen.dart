@@ -97,57 +97,200 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
               ),
               30.heightBox,
-              StreamBuilder<Object>(
-                  stream: isExpansionTileOpen.stream,
-                  builder: (context, snapshot) {
-                    return Theme(
-                      data: ThemeData()
-                          .copyWith(dividerColor: Colors.transparent),
-                      child: ExpansionTile(
-                        tilePadding: EdgeInsets.zero,
-                        initiallyExpanded: isExpansionTileOpen.value,
-                        trailing: null,
-                        // trailing: Container(
-                        //     height: 50,
-                        //     width: 50,
-                        //     decoration:
-                        //         BoxDecoration(color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
-                        //     child: const Icon(Icons.keyboard_arrow_down_rounded)),
-                        onExpansionChanged: (val) {
-                          isExpansionTileOpen.value = val;
-                        },
-                        title: Container(
-                            width: getScreenWidth(context) - 20,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: deepPurpleColor,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  isExpansionTileOpen.value
-                                      ? Icons.cancel
-                                      : Icons.menu,
-                                  color: colorWhite,
-                                ),
-                                10.widthBox,
-                                Text(
-                                  'Menu',
-                                  style: FontStyleUtility
-                                      .blackDMSerifDisplay18W400
-                                      .copyWith(color: colorWhite),
-                                ),
-                              ],
-                            )),
-                        children: <Widget>[
-                          commonAccountView(),
-                          commonSubscriptionView(),
-                          commonPrivacyView(),
-                        ],
-                      ),
-                    );
-                  }),
+
+              InkWell(
+                highlightColor: colorWhite,
+                splashColor: colorWhite,
+                onTap: () {
+                  showModalBottomSheet(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20))),
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  topLeft: Radius.circular(20))),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              // Align(
+                              //     alignment: Alignment.topRight,
+                              //     child: Padding(
+                              //       padding: const EdgeInsets.only(
+                              //           right: 15, top: 5),
+                              //       child: IconButton(
+                              //           onPressed: () {
+                              //             Get.back();
+                              //           },
+                              //           icon: const Icon(Icons.close)),
+                              //     )),
+
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                height: 5,
+                                width: 125,
+                                decoration: BoxDecoration(
+                                    color: colorGrey,
+                                    borderRadius: BorderRadius.circular(100)),
+                              ),
+
+                              ListTile(
+                                  onTap: () {
+                                    Get.back();
+                                    Get.to(() => const VerifiedAccountView());
+                                  },
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 18,
+                                    color: colorGrey,
+                                  ),
+                                  leading: const Icon(Icons.verified_outlined),
+                                  title: const Text('Verified account!')),
+                              ListTile(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 18,
+                                    color: colorGrey,
+                                  ),
+                                  leading:
+                                      const Icon(Icons.subscriptions_outlined),
+                                  title: const Text('Subscription price')),
+                              ListTile(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 18,
+                                    color: colorGrey,
+                                  ),
+                                  leading:
+                                      const Icon(Icons.privacy_tip_outlined),
+                                  title: const Text('Privacy and security')),
+                              ListTile(
+                                  onTap: () {
+                                    Get.back();
+                                    Get.to(() => const PasswordScreen());
+                                  },
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 18,
+                                    color: colorGrey,
+                                  ),
+                                  leading: const Icon(Icons.key),
+                                  title: const Text('Password')),
+                              ListTile(
+                                  onTap: () {
+                                    Get.back();
+                                    Get.to(() => const BlockCountriesScreen());
+                                  },
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 18,
+                                    color: colorGrey,
+                                  ),
+                                  leading: const Icon(CupertinoIcons.eye_slash),
+                                  title: const Text('Block countries')),
+                              ListTile(
+                                  onTap: () {
+                                    Get.back();
+                                    Get.to(() => const RestrictedUsersScreen());
+                                  },
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 18,
+                                    color: colorGrey,
+                                  ),
+                                  leading: const Icon(Icons.block_flipped),
+                                  title: const Text('Restricted user')),
+                            ],
+                          ),
+                        );
+                      });
+                },
+                child: Container(
+                    width: getScreenWidth(context) - 20,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: deepPurpleColor,
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          /*isExpansionTileOpen.value ? Icons.cancel :*/
+                          Icons.menu,
+                          color: colorWhite,
+                        ),
+                        10.widthBox,
+                        Text(
+                          'Menu',
+                          style: FontStyleUtility.blackDMSerifDisplay18W400
+                              .copyWith(color: colorWhite),
+                        ),
+                      ],
+                    )),
+              ),
+
+              // StreamBuilder<Object>(
+              //     stream: isExpansionTileOpen.stream,
+              //     builder: (context, snapshot) {
+              //       return Theme(
+              //         data: ThemeData()
+              //             .copyWith(dividerColor: Colors.transparent),
+              //         child: ExpansionTile(
+              //           tilePadding: EdgeInsets.zero,
+              //           initiallyExpanded: isExpansionTileOpen.value,
+              //           trailing: null,
+              //           // trailing: Container(
+              //           //     height: 50,
+              //           //     width: 50,
+              //           //     decoration:
+              //           //         BoxDecoration(color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
+              //           //     child: const Icon(Icons.keyboard_arrow_down_rounded)),
+              //           onExpansionChanged: (val) {
+              //             isExpansionTileOpen.value = val;
+              //           },
+              //           title: Container(
+              //               width: getScreenWidth(context) - 20,
+              //               height: 50,
+              //               decoration: BoxDecoration(
+              //                   color: deepPurpleColor,
+              //                   borderRadius: BorderRadius.circular(50)),
+              //               child: Row(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 children: [
+              //                   Icon(
+              //                     isExpansionTileOpen.value
+              //                         ? Icons.cancel
+              //                         : Icons.menu,
+              //                     color: colorWhite,
+              //                   ),
+              //                   10.widthBox,
+              //                   Text(
+              //                     'Menu',
+              //                     style: FontStyleUtility
+              //                         .blackDMSerifDisplay18W400
+              //                         .copyWith(color: colorWhite),
+              //                   ),
+              //                 ],
+              //               )),
+              //           children: <Widget>[
+              //             commonAccountView(),
+              //             commonSubscriptionView(),
+              //             commonPrivacyView(),
+              //           ],
+              //         ),
+              //       );
+              //     }),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: 5,
@@ -520,7 +663,7 @@ Widget commonPrivacyView() {
 }
 
 Widget commonScreenView(
-    {required IconData icon, required String title,  required String subTitle}) {
+    {required IconData icon, required String title, required String subTitle}) {
   return Column(
     children: [
       30.heightBox,

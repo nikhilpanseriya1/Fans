@@ -3,8 +3,8 @@ import 'package:fans/utility/country_code_picker.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 
 class BlockCountriesScreen extends StatefulWidget {
   const BlockCountriesScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
-        appBar: commonAppBar(title: 'Block Countries', elevation: 0.5),
+        appBar: commonAppBar(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -30,80 +30,122 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
                 subTitle:
                     'Select the countries in which you do not want your profile to be displayed, they will not be able to see your profile in any section of the site.'),
             70.heightBox,
-            Container(
+            SizedBox(
               width: getScreenWidth(context),
               // decoration: BoxDecoration(
               //     border: Border.all(
               //         color: borderColor ?? colorBlack.withOpacity(0.5),
               //         width: 1),
               //     borderRadius: BorderRadius.circular(5)),
-              child: Stack(
+              child: Column(
                 children: [
-                  Container(
-                    width: getScreenWidth(context),
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                        color: colorWhite,
-                        border: Border.all(
-                            color: borderColor ?? colorBlack.withOpacity(0.5),
-                            width: 1),
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.language,
-                          color: colorGrey,
-                        ),
-                        10.widthBox,
-                        Text(
-                          'Block countries',
-                          style: FontStyleUtility.greyInter16W400,
-                        ),
-                      ],
-                    ),
-                  ),
+                  Stack(
+                    children: [
+                      Container(
+                        width: getScreenWidth(context),
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            color: colorWhite,
+                            border: Border.all(
+                                color:
+                                    borderColor ?? colorBlack.withOpacity(0.5),
+                                width: 1),
+                            borderRadius: BorderRadius.circular(100)),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.language,
+                              color: colorGrey,
+                            ),
+                            10.widthBox,
 
-                  CountryCodePickerScreen(
-                    alignLeft: true,
-                    initialSelection: 'IN',
-                    showOnlyCountryWhenClosed: true,
-                    // hideMainText: true,
-                    // showFlag: true,
-                    showFlagMain: false,
-                    textStyle: FontStyleUtility.blackInter16W500
-                        .copyWith(color: colorWhite.withOpacity(0)),
-                    onChanged: (val) {
-                      print(
-                          '==--??? ${val.code}  ${val.name}  ${val.dialCode}');
-                    },
+                            // Wrap(
+                            //   children: [
+                            //     ListView.builder(
+                            //       itemCount: kNotificationController
+                            //           .blockedCountriesList.length,
+                            //       itemBuilder: (context, index) {
+                            //         return Container(
+                            //           decoration: BoxDecoration(
+                            //             borderRadius: BorderRadius.circular(15),
+                            //             color: colorPrimary,
+                            //           ),
+                            //           child: Row(
+                            //             children: [
+                            //               Text(
+                            //                 kNotificationController
+                            //                     .blockedCountriesList[index],
+                            //                 style: FontStyleUtility
+                            //                     .blackInter14W500
+                            //                     .copyWith(color: colorWhite),
+                            //               )
+                            //             ],
+                            //           ),
+                            //         );
+                            //       },
+                            //     )
+                            //   ],
+                            // ),
+                            Text(
+                              'Add Country',
+                              style: FontStyleUtility.blackInter14W500,
+                            )
+                          ],
+                        ),
+                      ),
+                      CountryCodePickerScreen(
+                        alignLeft: true,
+                        showOnlyCountryWhenClosed: true,
+                        // hideMainText: true,
+                        // showFlag: true,
+                        showFlagMain: false,
+                        textStyle: FontStyleUtility.blackInter16W500
+                            .copyWith(color: colorWhite.withOpacity(0)),
+                        onChanged: (val) {
+                          if (!kNotificationController.blockedCountriesList
+                              .contains(val.name)) {
+                            kNotificationController.blockedCountriesList
+                                .add(val.name!);
+                          }
+                          print(val.name!);
+                          print(kNotificationController
+                              .blockedCountriesList.length);
+                        },
+                      ),
+                    ],
                   ),
-
-                  // Container(
-                  //   width: getScreenWidth(context),
-                  //   padding: const EdgeInsets.all(15),
-                  //   decoration: BoxDecoration(
-                  //       color: colorWhite,
-                  //       border: Border.all(
-                  //           color: borderColor ?? colorBlack.withOpacity(0.5),
-                  //           width: 1),
-                  //       borderRadius: BorderRadius.circular(5)),
-                  //   child: Row(
+                  // Obx(
+                  //   () => Wrap(
                   //     children: [
-                  //       const Icon(
-                  //         Icons.language,
-                  //         color: colorGrey,
-                  //       ),
-                  //       10.widthBox,
-                  //       Text(
-                  //         'Block countries',
-                  //         style: FontStyleUtility.greyInter16W400,
+                  //       SizedBox(
+                  //         height: 300,
+                  //         child: ListView.builder(
+                  //           shrinkWrap: true,
+                  //           scrollDirection: Axis.horizontal,
+                  //           itemCount: kNotificationController
+                  //               .blockedCountriesList.length,
+                  //           itemBuilder: (context, index) {
+                  //             return Container(
+                  //               height: 40,
+                  //               padding: const EdgeInsets.symmetric(
+                  //                   horizontal: 10, vertical: 5),
+                  //               color: colorGrey,
+                  //               child: Text(
+                  //                 kNotificationController
+                  //                     .blockedCountriesList[index],
+                  //                 style: FontStyleUtility.blackInter14W500,
+                  //               ),
+                  //             );
+                  //           },
+                  //         ),
                   //       ),
                   //     ],
                   //   ),
-                  // )
+                  // ),
                 ],
               ),
             ),
+
             // 10.heightBox,
             // InkWell(
             //   onTap: () {

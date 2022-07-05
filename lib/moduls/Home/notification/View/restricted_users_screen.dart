@@ -16,7 +16,7 @@ class _RestrictedUsersScreenState extends State<RestrictedUsersScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
-        appBar: commonAppBar(title: 'Restricted User', elevation: 0.5),
+        appBar: commonAppBar(),
         child: Column(
           children: [
             commonScreenView(
