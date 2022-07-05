@@ -68,12 +68,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         onPressed: () {
                           showAlertDialog(
                               title: 'Are you sure?',
-                              child: Lottie.asset(
-                                'assets/json/cancel.json',
-                                width: 100,
-                                height: 100,
-                                repeat: false,
-                                fit: BoxFit.fill,
+                              child: Center(
+                                child: Lottie.asset(
+                                  'assets/json/cancel.json',
+                                  width: 100,
+                                  height: 100,
+                                  repeat: false,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                               textAlign: TextAlign.center,
                               msg:
