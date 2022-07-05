@@ -27,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: ListView(
           physics: const ClampingScrollPhysics(),
           children: [
-            heightBox(20.0),
+            heightBox(50.0),
             Image.asset(
               'assets/logo/fans_logo1.png',
               scale: 3.4,
@@ -37,22 +37,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             heightBox(50.0),
             Text('Join now and Start making money\nwith your content!',
                 textAlign: TextAlign.center,
-                style: FontStyleUtility.greyInter16W500),
+                style: FontStyleUtility.greyInter22W500),
             heightBox(50.0),
-            Row(
-              children: [
-                widthBox(50.0),
-                Image.asset(
-                  'assets/appIcons/icon_google.png',
-                  scale: 3.5,
-                ),
-                widthBox(60.0),
-                Text(
-                  'Login with Google',
-                  style: FontStyleUtility.blackInter16W500,
-                )
-              ],
-            ),
+
             heightBox(30.0),
             Align(
               alignment: Alignment.bottomCenter,
@@ -102,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   unselectedWidgetColor:
                                       colorSemiDarkBlack.withOpacity(0.3)),
                               child: Checkbox(
-                                  activeColor: colorDarkBlack,
+                                  activeColor: deepPurpleColor,
                                   value: isRemember.value,
                                   onChanged: (bool? value) {
                                     isRemember.value = value ?? false;
@@ -155,7 +142,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontWeight: FontWeight.w800),
                       ),
                     )),
-                    heightBox(30.0)
+                    heightBox(50.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/appIcons/icon_google.png',
+                          scale: 3.5,
+                        ),
+                        widthBox(30.0),
+                        Text(
+                          'Login with Google',
+                          style: FontStyleUtility.blackInter16W500,
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),

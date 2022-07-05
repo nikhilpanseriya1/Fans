@@ -30,6 +30,11 @@ class FontStyleUtility{
 
 
 
+
+
+  static TextStyle blackSansSerif18W500 = const TextStyle(color: colorSemiDarkBlack, fontSize: 16, fontFamily: 'sans-serif', fontWeight: FontWeight.w400);
+
+
   ///grey text
   static TextStyle greyInter16W500 = const TextStyle(color: colorGrey, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500);
   static TextStyle greyInter18W500 = const TextStyle(color: colorGrey, fontSize: 18, fontFamily: 'Inter', fontWeight: FontWeight.w500);
@@ -42,7 +47,7 @@ class FontStyleUtility{
   static TextStyle greyInter12W500 = const TextStyle(color: colorGrey, fontSize: 12, fontFamily: 'Inter', fontWeight: FontWeight.w500);
   static TextStyle greyInter14W400 = const TextStyle(color: colorGrey, fontSize: 14, fontFamily: 'Inter', fontWeight: FontWeight.w400);
   static TextStyle greyInter22W800 = const TextStyle(color: colorGrey, fontSize: 22, fontFamily: 'Inter', fontWeight: FontWeight.w800);
-
+  static TextStyle greyInter22W500 = const TextStyle(color: colorGrey, fontSize: 20, fontFamily: 'Inter', fontWeight: FontWeight.w500);
   ///grey text
   static TextStyle whiteInter16W500 = const TextStyle(color: colorWhite, fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500);
   static TextStyle whiteInter18W500 = const TextStyle(color: colorWhite, fontSize: 18, fontFamily: 'Inter', fontWeight: FontWeight.w500);
@@ -55,6 +60,7 @@ class FontStyleUtility{
   static TextStyle whiteInter12W500 = const TextStyle(color: colorWhite, fontSize: 12, fontFamily: 'Inter', fontWeight: FontWeight.w500);
   static TextStyle whiteInter14W400 = const TextStyle(color: colorWhite, fontSize: 14, fontFamily: 'Inter', fontWeight: FontWeight.w400);
   static TextStyle whiteInter22W800 = const TextStyle(color: colorWhite, fontSize: 22, fontFamily: 'Inter', fontWeight: FontWeight.w800);
+
 
 
 

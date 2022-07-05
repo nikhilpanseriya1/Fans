@@ -32,6 +32,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
     ExploreScreen(),
     ChatScreen(),
     NotificationScreen(),
+    MyPageScreen()
   ];
 
   @override
@@ -79,23 +80,24 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                     icon: const Icon(Icons.close)),
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.account_circle),
+                leading:
+                    Image.asset('assets/appIcons/myprofile.png', scale: 4.5),
                 title: Text(
                   'My Page',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackSansSerif18W500,
                 ),
                 onTap: () {
-                  Get.to(() => const MyPageScreen());
+                  Get.back();
+                  setState((){
+                  tabSelectedIndex.value = 4;
+                  tabSelectedIndex.refresh();
+                  });
+
                 },
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.speed),
+                leading:
+                    Image.asset('assets/appIcons/dashboard.png', scale: 4.8),
                 title: Text(
                   'Dashboard',
                   style: FontStyleUtility.blackInter16W400,
@@ -105,10 +107,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.post_add),
+                leading: Image.asset('assets/appIcons/mypost.png', scale: 4.5),
                 title: Text(
                   'My Post',
                   style: FontStyleUtility.blackInter16W400,
@@ -118,10 +117,8 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.bookmark_border),
+                leading:
+                    Image.asset('assets/appIcons/bookmark.png', scale: 4.8),
                 title: Text(
                   'Bookmarks',
                   style: FontStyleUtility.blackInter16W400,
@@ -131,10 +128,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.money),
+                leading: Image.asset('assets/appIcons/balance.png', scale: 4.5),
                 title: Text(
                   'Balance: TZS12,432.0',
                   style: FontStyleUtility.blackInter16W400,
@@ -142,10 +136,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 onTap: () {},
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.account_balance_wallet_outlined),
+                leading: Image.asset('assets/appIcons/wallet.png', scale: 4.7),
                 title: Text(
                   'Wallet: TZS12,432.0',
                   style: FontStyleUtility.blackInter16W400,
@@ -153,10 +144,8 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 onTap: () {},
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.supervised_user_circle_outlined),
+                leading:
+                    Image.asset('assets/appIcons/subscriber.png', scale: 4.8),
                 title: Text(
                   'My Subscriber',
                   style: FontStyleUtility.blackInter16W400,
@@ -166,10 +155,8 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.done_outline_outlined),
+                leading:
+                    Image.asset('assets/appIcons/subscription.png', scale: 4.8),
                 title: Text(
                   'Subscription',
                   style: FontStyleUtility.blackInter16W400,
@@ -177,10 +164,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 onTap: () {},
               ),
               ListTile(
-                visualDensity: const VisualDensity(
-                    horizontal: VisualDensity.minimumDensity,
-                    vertical: VisualDensity.minimumDensity),
-                leading: const Icon(Icons.logout),
+                leading: Image.asset('assets/appIcons/logout.png', scale: 5.0),
                 title: Text(
                   'Log Out',
                   style: FontStyleUtility.blackInter16W400,
@@ -213,20 +197,24 @@ class _HomeStructureViewState extends State<HomeStructureView> {
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon: Icon(Icons.home_filled,size: 30,),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.compass),
+              icon: Icon(CupertinoIcons.compass_fill,size: 30,),
               label: 'Explore',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.send),
+              icon: Icon(Icons.send,size: 30,),
               label: 'Chat',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications_none),
+              icon: Icon(Icons.notifications,size: 30,),
               label: 'Notification',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle,size: 30,),
+              label: 'Profile',
             ),
           ],
           currentIndex: tabSelectedIndex.value,

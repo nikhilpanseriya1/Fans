@@ -15,7 +15,6 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../../../utility/utility_export.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -26,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return commonStructure(context: context, child: homeViewData());
+    return commonStructure(context: context, child: homeViewData(true));
   }
 }
 
@@ -194,27 +193,36 @@ Future deletePost(BuildContext context) {
   );
 }
 
-Widget homeViewData() {
+Widget homeViewData(bool? visible) {
   RxBool isExpansionTileOpen = false.obs;
   return ListView(
-    physics: const ClampingScrollPhysics(),
+    physics: visible == false
+        ? const NeverScrollableScrollPhysics()
+        : const ClampingScrollPhysics(),
     children: [
-      20.heightBox,
-      Center(
-        child: materialButton(
-            onTap: () {
-              Get.to(() => const ExplorePostsScreen());
-            },
-            text: 'Explore Posts',
-            textStyle:
-                FontStyleUtility.blackInter14W500.copyWith(color: colorWhite),
-            icon: const Icon(
-              CupertinoIcons.compass,
-              size: 18,
-              color: colorWhite,
-            )),
-      ),
-      5.heightBox,
+      visible == false
+          ? const SizedBox()
+          : Column(
+              children: [
+                20.heightBox,
+                Center(
+                  child: materialButton(
+                      onTap: () {
+                        Get.to(() => const ExplorePostsScreen());
+                      },
+                      text: 'Explore Posts',
+                      textStyle: FontStyleUtility.blackInter14W500
+                          .copyWith(color: colorWhite),
+                      icon: const Icon(
+                        CupertinoIcons.compass,
+                        size: 18,
+                        color: colorWhite,
+                      )),
+                ),
+              ],
+            ),
+
+      /*5.heightBox,
       StreamBuilder<Object>(
           stream: isExpansionTileOpen.stream,
           builder: (context, snapshot) {
@@ -268,7 +276,7 @@ Widget homeViewData() {
                 ],
               ),
             );
-          }),
+          }),*/
       30.heightBox,
       Column(
         children: [
@@ -371,9 +379,7 @@ Widget homeViewData() {
                                                     await kHomeController
                                                         .imagePicker
                                                         .pickMultiImage();
-                                                if (
-
-                                                selectedImages!
+                                                if (selectedImages!
                                                     .isNotEmpty) {
                                                   kHomeController.imageFileList
                                                       .addAll(selectedImages);
