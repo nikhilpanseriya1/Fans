@@ -20,6 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
+        padding: 0.0,
         context: context,
         child: ListView(
           physics: const ClampingScrollPhysics(),
@@ -59,102 +60,107 @@ class _SignInScreenState extends State<SignInScreen> {
                 ],
               ),
             ),
-            heightBox(30.0),
-            Row(children: <Widget>[
-              Expanded(
-                child: Container(
-                    margin: const EdgeInsets.only(left: 10.0, right: 15.0),
-                    child: const Divider(
-                      color: Colors.black,
-                      height: 50,
-                    )),
-              ),
-              const Text("OR"),
-              Expanded(
-                child: Container(
-                    margin: const EdgeInsets.only(left: 15.0, right: 10.0),
-                    child: const Divider(
-                      color: Colors.black,
-                      height: 50,
-                    )),
-              ),
-            ]),
-            heightBox(30.0),
-            commonTextField(
-              preFixWidget: const Icon(Icons.mail_outline),
-              hintText: 'Enter Your Email',
-              textEditingController: null,
-            ),
-            heightBox(10.0),
-            commonTextField(
-              preFixWidget: const Icon(Icons.vpn_key_outlined),
-              hintText: 'PassWord',
-              textEditingController: null,
-              isEnabled: true,
-            ),
-            heightBox(10.0),
-            Text(
-              'Forget PassWord?',
-              style: FontStyleUtility.blackInter15W500,
-            ),
-            heightBox(20.0),
-            Row(
-              children: [
-                Obx(
-                  () => SizedBox(
-                    height: 24,
-                    width: 24,
-                    child: Theme(
-                      data: ThemeData(
-                          unselectedWidgetColor:
-                              colorSemiDarkBlack.withOpacity(0.3)),
-                      child: Checkbox(
-                          activeColor: colorDarkBlack,
-                          value: isRemember.value,
-                          onChanged: (bool? value) {
-                            isRemember.value = value ?? false;
-                          }),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: getScreenHeight(context) * 0.6,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 15.0),
+                decoration:  BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20)),
+                  color: deepPurpleColor.withOpacity(0.2),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // mainAxisSize: MainAxisSize.max,
+                  children: [
+                    commonTextField(
+                      preFixWidget: const Icon(Icons.mail_outline),
+                      hintText: 'Enter Your Email',
+                      textEditingController: null,
+
                     ),
-                  ),
-                ),
-                widthBox(10),
-                commonText(
-                    text: 'Remember me',
-                    style: FontStyleUtility.greyInter16W500),
-              ],
-            ),
-            heightBox(30.0),
-            SizedBox(
-              height: 50,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(deepPurpleColor),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
+                    heightBox(10.0),
+                    commonTextField(
+                      preFixWidget: const Icon(Icons.vpn_key_outlined),
+                      hintText: 'PassWord',
+                      textEditingController: null,
+                      isEnabled: true,
                     ),
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  "Login",
-                  style: FontStyleUtility.blackInter16W500
-                      .copyWith(color: colorWhite),
+                    heightBox(10.0),
+                    Text(
+                      'Forget PassWord?',
+                      style: FontStyleUtility.blackInter15W500,
+                    ),
+                    heightBox(20.0),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Obx(
+                          () => SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: Theme(
+                              data: ThemeData(
+                                  unselectedWidgetColor:
+                                      colorSemiDarkBlack.withOpacity(0.3)),
+                              child: Checkbox(
+                                  activeColor: colorDarkBlack,
+                                  value: isRemember.value,
+                                  onChanged: (bool? value) {
+                                    isRemember.value = value ?? false;
+                                  }),
+                            ),
+                          ),
+                        ),
+                        widthBox(10),
+                        commonText(
+                            text: 'Remember me',
+                            style: FontStyleUtility.greyInter16W500),
+                      ],
+                    ),
+                    heightBox(30.0),
+                    SizedBox(
+                      height: 50,
+                      width: getScreenWidth(context),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(deepPurpleColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          "Login",
+                          style: FontStyleUtility.blackInter16W500
+                              .copyWith(color: colorWhite),
+                        ),
+                      ),
+                    ),
+                    heightBox(20.0),
+                    Center(
+                        child: InkWell(
+                      onTap: () {
+                        Get.to(() => const SignUpScreen());
+                      },
+                      child: Text(
+                        'Dont have an account?',
+                        style: FontStyleUtility.blackInter20W500
+                            .copyWith(color: deepPurpleColor),
+                      ),
+                    )),
+                  ],
                 ),
               ),
             ),
-            heightBox(20.0),
-            Center(
-                child: InkWell(
-              onTap: () {
-                Get.to(() => const SignUpScreen());
-              },
-              child: Text(
-                'Don\'t have an account?',
-                style: FontStyleUtility.blackInter20W500
-                    .copyWith(color: deepPurpleColor),
-              ),
-            )),
           ],
         ));
   }

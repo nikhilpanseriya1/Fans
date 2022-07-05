@@ -22,7 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
-      padding: 0,
+        padding: 0,
         context: context,
         child: ListView(
           physics: const ClampingScrollPhysics(),
@@ -54,7 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ],
             ),
             heightBox(30.0),
-
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -72,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     commonTextField(
-                      preFixWidget: const Icon(Icons.supervised_user_circle_rounded),
+                      preFixWidget: const Icon(Icons.account_circle_outlined),
                       hintText: 'Full Name',
                       textEditingController: null,
                     ),
