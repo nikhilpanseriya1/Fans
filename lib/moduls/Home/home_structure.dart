@@ -89,42 +89,53 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                                 showModalBottomSheet(
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                                            topRight: Radius.circular(20),
+                                            topLeft: Radius.circular(20))),
                                     context: context,
                                     builder: (context) {
                                       return Container(
                                         decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                                                topRight: Radius.circular(20),
+                                                topLeft: Radius.circular(20))),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: <Widget>[
                                             Container(
-                                              margin: const EdgeInsets.symmetric(vertical: 20),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 20),
                                               height: 5,
                                               width: 100,
                                               decoration: BoxDecoration(
-                                                  color: colorGrey, borderRadius: BorderRadius.circular(100)),
+                                                  color: colorGrey,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100)),
                                             ),
                                             ListTile(
                                                 title: Text(
                                               'Latest',
-                                              style: FontStyleUtility.blackInter16W500,
+                                              style: FontStyleUtility
+                                                  .blackInter16W500,
                                             )),
                                             ListTile(
                                                 title: Text(
                                               'Old',
-                                              style: FontStyleUtility.blackInter16W500,
+                                              style: FontStyleUtility
+                                                  .blackInter16W500,
                                             )),
                                             ListTile(
                                                 title: Text(
                                               'Unlockable',
-                                              style: FontStyleUtility.blackInter16W500,
+                                              style: FontStyleUtility
+                                                  .blackInter16W500,
                                             )),
                                             ListTile(
                                                 title: Text(
                                               'Free',
-                                              style: FontStyleUtility.blackInter16W500,
+                                              style: FontStyleUtility
+                                                  .blackInter16W500,
                                             )),
                                           ],
                                         ),
@@ -176,10 +187,13 @@ class _HomeStructureViewState extends State<HomeStructureView> {
               //   },
               // ),
               ListTile(
-                leading: const Icon(Icons.dashboard),
+                leading: const Icon(
+                  Icons.dashboard,
+                  size: 30,
+                ),
                 title: Text(
                   'Dashboard',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -187,10 +201,13 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.grid_on),
+                leading: const Icon(
+                  Icons.grid_on,
+                  size: 30,
+                ),
                 title: Text(
                   'My Post',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -198,10 +215,13 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.bookmark),
+                leading: const Icon(
+                  Icons.bookmark,
+                  size: 30,
+                ),
                 title: Text(
                   'Bookmarks',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -209,26 +229,35 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.savings),
+                leading: const Icon(
+                  Icons.savings,
+                  size: 30,
+                ),
                 title: Text(
                   'Balance: TZS12,432.0',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {},
               ),
               ListTile(
-                leading: const Icon(Icons.account_balance_wallet),
+                leading: const Icon(
+                  Icons.account_balance_wallet,
+                  size: 30,
+                ),
                 title: Text(
                   'Wallet: TZS12,432.0',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {},
               ),
               ListTile(
-                leading: const Icon(Icons.group),
+                leading: const Icon(
+                  Icons.group,
+                  size: 30,
+                ),
                 title: Text(
                   'My Subscriber',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -236,18 +265,24 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.workspace_premium),
+                leading: const Icon(
+                  Icons.workspace_premium,
+                  size: 30,
+                ),
                 title: Text(
-                  'My Subscription',
-                  style: FontStyleUtility.blackInter16W400,
+                  'My Subscriptions',
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {},
               ),
               ListTile(
-                leading: const Icon(Icons.interests),
+                leading: const Icon(
+                  Icons.interests,
+                  size: 30,
+                ),
                 title: Text(
                   'Social Profiles',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -255,10 +290,13 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.monetization_on),
+                leading: const Icon(
+                  Icons.monetization_on,
+                  size: 30,
+                ),
                 title: Text(
                   'Billing',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -266,10 +304,13 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.logout),
+                leading: const Icon(
+                  Icons.logout,
+                  size: 30,
+                ),
                 title: Text(
                   'Log Out',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {},
               ),
@@ -282,7 +323,8 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                     Get.to(() => const EditPageScreen());
                   },
                   text: 'Edit Page',
-                  textStyle: FontStyleUtility.blackInter16W400.copyWith(color: colorWhite),
+                  textStyle: FontStyleUtility.blackInter16W500
+                      .copyWith(color: colorWhite),
                 ),
               )
             ],

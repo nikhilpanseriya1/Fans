@@ -1,10 +1,5 @@
 import 'dart:io';
-
-import 'package:fans/moduls/Home/home/explore_posts_screen.dart';
 import 'package:fans/moduls/Home/home/goto_post_screen.dart';
-import 'package:fans/utility/common_structure.dart';
-import 'package:fans/utility/common_widgets.dart';
-import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
