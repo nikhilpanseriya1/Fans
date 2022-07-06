@@ -421,13 +421,13 @@ Widget homeViewData(bool? visible, BuildContext context) {
                 ),
               ],
             ),
-            10.heightBox,
+            20.heightBox,
             materialButton(
                 background: MaterialStateProperty.all(lightPurpleColor),
                 text: 'Publish',
                 height: 40.0,
                 textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite)),
-            5.heightBox,
+            20.heightBox,
             Align(
                 alignment: Alignment.centerRight,
                 child: Text(
