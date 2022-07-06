@@ -17,6 +17,7 @@ class _SocialProfileScreenState extends State<SocialProfileScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
       context: context,
+      appBar: commonAppBar(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
