@@ -64,6 +64,83 @@ class _HomeStructureViewState extends State<HomeStructureView> {
               _key.currentState?.openDrawer();
             },
           ),
+          titleWidget: Row(
+            children: [
+              Expanded(
+                flex: 5,
+                child: commonTextField(
+                    hintText: 'Search',
+                    textEditingController: null,
+                    isBorder: false,
+                    preFixWidget: const Icon(Icons.search)),
+              ),
+              Expanded(
+                flex: 1,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    topLeft: Radius.circular(20))),
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20),
+                                        topLeft: Radius.circular(20))),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 20),
+                                      height: 5,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          color: colorGrey,
+                                          borderRadius:
+                                              BorderRadius.circular(100)),
+                                    ),
+                                    ListTile(
+                                        title: Text(
+                                      'Latest',
+                                      style: FontStyleUtility.blackInter16W500,
+                                    )),
+                                    ListTile(
+                                        title: Text(
+                                      'Old',
+                                      style: FontStyleUtility.blackInter16W500,
+                                    )),
+                                    ListTile(
+                                        title: Text(
+                                      'Unlockable',
+                                      style: FontStyleUtility.blackInter16W500,
+                                    )),
+                                    ListTile(
+                                        title: Text(
+                                      'Free',
+                                      style: FontStyleUtility.blackInter16W500,
+                                    )),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
+                      icon: Image.asset(
+                        'assets/appIcons/filter.png',
+                        color: colorGrey,
+                        height: 25,
+                        width: 25,
+                        scale: 3.5,
+                      )),
+                ),
+              ),
+            ],
+          ),
         ),
         drawer: Drawer(
           child: ListView(
@@ -88,11 +165,10 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 onTap: () {
                   Get.back();
-                  setState((){
-                  tabSelectedIndex.value = 4;
-                  tabSelectedIndex.refresh();
+                  setState(() {
+                    tabSelectedIndex.value = 4;
+                    tabSelectedIndex.refresh();
                   });
-
                 },
               ),
               ListTile(
@@ -197,23 +273,38 @@ class _HomeStructureViewState extends State<HomeStructureView> {
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled,size: 30,),
+              icon: Icon(
+                Icons.home_filled,
+                size: 30,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.compass_fill,size: 30,),
+              icon: Icon(
+                CupertinoIcons.compass_fill,
+                size: 30,
+              ),
               label: 'Explore',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.send,size: 30,),
+              icon: Icon(
+                Icons.send,
+                size: 30,
+              ),
               label: 'Chat',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications,size: 30,),
+              icon: Icon(
+                Icons.notifications,
+                size: 30,
+              ),
               label: 'Notification',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle,size: 30,),
+              icon: Icon(
+                Icons.account_circle,
+                size: 30,
+              ),
               label: 'Profile',
             ),
           ],

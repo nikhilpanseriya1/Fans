@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 Color? borderColor;
 
 OutlineInputBorder textFieldBorderStyle = OutlineInputBorder(
-  borderSide: BorderSide(color: borderColor ?? colorBlack.withOpacity(0.5), width: 1),
+  borderSide:
+      BorderSide(color: borderColor ?? colorBlack.withOpacity(0.5), width: 1),
   borderRadius: BorderRadius.circular(25.0),
 );
 
@@ -35,6 +36,7 @@ Widget commonTextField(
     FocusNode? textFocusNode,
     GlobalKey<FormFieldState>? key,
     bool isReadOnly = false,
+    bool isBorder = true,
     Widget? suffixIcon,
     ExactAssetImage? preFixIcon,
     Widget? preFixWidget,
@@ -125,15 +127,12 @@ Widget commonTextField(
             fillColor: filledColor,
             contentPadding: contentPadding ??
                 const EdgeInsets.fromLTRB(13.0, 11.0, 10.0, 11.0),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: colorSemiDarkBlack, width: 1),
-              borderRadius: BorderRadius.circular(25.0),
-            ),
-            disabledBorder: textFieldBorderStyle,
-            enabledBorder: textFieldBorderStyle,
-            errorBorder: textFieldBorderStyle,
-            focusedErrorBorder: textFieldBorderStyle,
-            border: textFieldBorderStyle,
+            focusedBorder: isBorder ? textFieldBorderStyle : null,
+            disabledBorder: isBorder ? textFieldBorderStyle : null,
+            enabledBorder: isBorder ? textFieldBorderStyle : null,
+            errorBorder: isBorder ? textFieldBorderStyle : null,
+            focusedErrorBorder: isBorder ? textFieldBorderStyle : null,
+            border: isBorder ? textFieldBorderStyle : null,
             hintText: hintText,
             prefixIcon: preFixIcon != null
                 ? Image(

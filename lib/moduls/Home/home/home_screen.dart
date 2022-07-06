@@ -25,7 +25,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return commonStructure(context: context, child: homeViewData(true));
+    return commonStructure(
+        context: context, child: homeViewData(true, context));
   }
 }
 
@@ -193,281 +194,289 @@ Future deletePost(BuildContext context) {
   );
 }
 
-Widget homeViewData(bool? visible) {
+Widget homeViewData(bool? visible, BuildContext context) {
   RxBool isExpansionTileOpen = false.obs;
-  return ListView(
-    physics: visible == false
-        ? const NeverScrollableScrollPhysics()
-        : const ClampingScrollPhysics(),
-    children: [
-      visible == false
-          ? const SizedBox()
-          : Column(
-              children: [
-                20.heightBox,
-                Center(
-                  child: materialButton(
-                      onTap: () {
-                        Get.to(() => const ExplorePostsScreen());
-                      },
-                      text: 'Explore Posts',
-                      textStyle: FontStyleUtility.blackInter14W500
-                          .copyWith(color: colorWhite),
-                      icon: const Icon(
-                        CupertinoIcons.compass,
-                        size: 18,
-                        color: colorWhite,
-                      )),
+  return RawScrollbar(
+    thickness: 5.0,
+    thumbColor: colorSplash.withOpacity(0.5),
+    child: ListView(
+      physics: visible == false
+          ? const NeverScrollableScrollPhysics()
+          : const ClampingScrollPhysics(),
+      children: [
+        /* visible == false
+            ? const SizedBox()
+            : Column(
+                children: [
+                  20.heightBox,
+                  Center(
+                    child: materialButton(
+                        onTap: () {
+                          Get.to(() => const ExplorePostsScreen());
+                        },
+                        text: 'Explore Posts',
+                        textStyle: FontStyleUtility.blackInter14W500
+                            .copyWith(color: colorWhite),
+                        icon: const Icon(
+                          CupertinoIcons.compass,
+                          size: 18,
+                          color: colorWhite,
+                        )),
+                  ),
+                ],
+              ),*/
+
+        /*5.heightBox,
+        StreamBuilder<Object>(
+            stream: isExpansionTileOpen.stream,
+            builder: (context, snapshot) {
+              return Theme(
+                data: ThemeData().copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  initiallyExpanded: isExpansionTileOpen.value,
+                  childrenPadding: EdgeInsets.zero,
+                  trailing: null,
+                  // trailing: Container(
+                  //     height: 50,
+                  //     width: 50,
+                  //     decoration:
+                  //         BoxDecoration(color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
+                  //     child: const Icon(Icons.keyboard_arrow_down_rounded)),
+                  onExpansionChanged: (val) {
+                    isExpansionTileOpen.value = val;
+                  },
+                  title: Center(
+                    child: Container(
+                        width: getScreenWidth(context) * 0.5,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: deepPurpleColor,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              size: 18,
+                              isExpansionTileOpen.value
+                                  ? Icons.cancel
+                                  : CupertinoIcons.compass,
+                              color: colorWhite,
+                            ),
+                            10.widthBox,
+                            Text(
+                              'Explore Creators',
+                              style: FontStyleUtility.blackInter14W500
+                                  .copyWith(color: colorWhite),
+                            ),
+                          ],
+                        )),
+                  ),
+
+                  children: <Widget>[
+                    10.heightBox,
+                    exploreCreatorData(),
+                  ],
                 ),
+              );
+            }),*/
+        30.heightBox,
+        Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size.fromRadius(35), // Image radius
+                    child: Image.asset(
+                      'assets/images/profile.jpeg',
+                      scale: 3.5,
+                      height: 55.0,
+                      width: 55.0,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                20.0.widthBox,
+                Expanded(
+                  child: TextFormField(
+                    minLines: 3,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: const InputDecoration(
+                      hintText: 'Write something...',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                )
               ],
             ),
-
-      /*5.heightBox,
-      StreamBuilder<Object>(
-          stream: isExpansionTileOpen.stream,
-          builder: (context, snapshot) {
-            return Theme(
-              data: ThemeData().copyWith(dividerColor: Colors.transparent),
-              child: ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                initiallyExpanded: isExpansionTileOpen.value,
-                childrenPadding: EdgeInsets.zero,
-                trailing: null,
-                // trailing: Container(
-                //     height: 50,
-                //     width: 50,
-                //     decoration:
-                //         BoxDecoration(color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
-                //     child: const Icon(Icons.keyboard_arrow_down_rounded)),
-                onExpansionChanged: (val) {
-                  isExpansionTileOpen.value = val;
-                },
-                title: Center(
-                  child: Container(
-                      width: getScreenWidth(context) * 0.5,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: deepPurpleColor,
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            size: 18,
-                            isExpansionTileOpen.value
-                                ? Icons.cancel
-                                : CupertinoIcons.compass,
-                            color: colorWhite,
-                          ),
-                          10.widthBox,
-                          Text(
-                            'Explore Creators',
-                            style: FontStyleUtility.blackInter14W500
-                                .copyWith(color: colorWhite),
-                          ),
-                        ],
-                      )),
-                ),
-
-                children: <Widget>[
-                  10.heightBox,
-                  exploreCreatorData(),
-                ],
-              ),
-            );
-          }),*/
-      30.heightBox,
-      Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipOval(
-                child: SizedBox.fromSize(
-                  size: const Size.fromRadius(35), // Image radius
-                  child: Image.asset(
-                    'assets/images/profile.jpeg',
-                    scale: 3.5,
-                    height: 55.0,
-                    width: 55.0,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              20.0.widthBox,
-              Expanded(
-                child: TextFormField(
-                  minLines: 3,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
-                    hintText: 'Write something...',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none,
-                  ),
-                ),
-              )
-            ],
-          ),
-          20.heightBox,
-          StreamBuilder<Object>(
-              stream: kHomeController.imageShowing.stream,
-              builder: (context, snapshot) {
-                return kHomeController.imageShowing.value == true
-                    ? Container(
-                        margin: const EdgeInsets.only(bottom: 10.0),
-                        height: 130,
-                        child: StreamBuilder<Object>(
-                            stream: kHomeController.imageFileList.stream,
-                            builder: (context, snapshot) {
-                              return Align(
-                                alignment: Alignment.centerLeft,
-                                child: ListView.builder(
-                                    itemCount:
-                                        (kHomeController.imageFileList.length) +
-                                            1,
-                                    physics: const ClampingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) {
-                                      return index !=
-                                              kHomeController
-                                                  .imageFileList.length
-                                          ? Stack(
-                                              children: [
-                                                Container(
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            right: 12, top: 5),
-                                                    child: Center(
-                                                      child: Image.file(
-                                                        File(kHomeController
-                                                            .imageFileList[
-                                                                index]
-                                                            .path),
-                                                        fit: BoxFit.cover,
-                                                        width: 130,
+            20.heightBox,
+            StreamBuilder<Object>(
+                stream: kHomeController.imageShowing.stream,
+                builder: (context, snapshot) {
+                  return kHomeController.imageShowing.value == true
+                      ? Container(
+                          margin: const EdgeInsets.only(bottom: 10.0),
+                          height: 130,
+                          child: StreamBuilder<Object>(
+                              stream: kHomeController.imageFileList.stream,
+                              builder: (context, snapshot) {
+                                return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: ListView.builder(
+                                      itemCount: (kHomeController
+                                              .imageFileList.length) +
+                                          1,
+                                      physics: const ClampingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index) {
+                                        return index !=
+                                                kHomeController
+                                                    .imageFileList.length
+                                            ? Stack(
+                                                children: [
+                                                  Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              right: 12,
+                                                              top: 5),
+                                                      child: Center(
+                                                        child: Image.file(
+                                                          File(kHomeController
+                                                              .imageFileList[
+                                                                  index]
+                                                              .path),
+                                                          fit: BoxFit.cover,
+                                                          width: 130,
+                                                        ),
+                                                      )),
+                                                  Positioned(
+                                                    top: 5,
+                                                    right: 5,
+                                                    child: IconButton(
+                                                      visualDensity:
+                                                          const VisualDensity(
+                                                              vertical:
+                                                                  VisualDensity
+                                                                      .minimumDensity),
+                                                      padding: EdgeInsets.zero,
+                                                      onPressed: () {
+                                                        kHomeController
+                                                            .imageFileList
+                                                            .removeAt(index);
+                                                      },
+                                                      icon: const Icon(
+                                                        Icons.remove_circle,
+                                                        color: colorRed,
                                                       ),
-                                                    )),
-                                                Positioned(
-                                                  top: 5,
-                                                  right: 5,
-                                                  child: IconButton(
-                                                    visualDensity:
-                                                        const VisualDensity(
-                                                            vertical: VisualDensity
-                                                                .minimumDensity),
-                                                    padding: EdgeInsets.zero,
-                                                    onPressed: () {
-                                                      kHomeController
-                                                          .imageFileList
-                                                          .removeAt(index);
-                                                    },
-                                                    icon: const Icon(
-                                                      Icons.remove_circle,
-                                                      color: colorRed,
                                                     ),
-                                                  ),
-                                                )
-                                              ],
-                                            )
-                                          : InkWell(
-                                              onTap: () async {
-                                                final List<XFile>?
-                                                    selectedImages =
-                                                    await kHomeController
-                                                        .imagePicker
-                                                        .pickMultiImage();
-                                                if (selectedImages!
-                                                    .isNotEmpty) {
-                                                  kHomeController.imageFileList
-                                                      .addAll(selectedImages);
-                                                }
-                                              },
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
-                                                    border: Border.all(
-                                                        color: colorBlack
-                                                            .withOpacity(0.5))),
-                                                margin: const EdgeInsets.only(
-                                                    right: 12),
-                                                width: 130,
-                                                child: Center(
-                                                    child: Icon(
-                                                  Icons.add,
-                                                  color: colorBlack
-                                                      .withOpacity(0.5),
-                                                )),
-                                              ),
-                                            );
-                                    }),
-                              );
-                            }),
-                      )
-                    : const SizedBox();
-              }),
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  kHomeController.imageShowing.value =
-                      !kHomeController.imageShowing.value;
-                },
-                icon: const Icon(
-                  Icons.image_outlined,
+                                                  )
+                                                ],
+                                              )
+                                            : InkWell(
+                                                onTap: () async {
+                                                  final List<XFile>?
+                                                      selectedImages =
+                                                      await kHomeController
+                                                          .imagePicker
+                                                          .pickMultiImage();
+                                                  if (selectedImages!
+                                                      .isNotEmpty) {
+                                                    kHomeController
+                                                        .imageFileList
+                                                        .addAll(selectedImages);
+                                                  }
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      border: Border.all(
+                                                          color: colorBlack
+                                                              .withOpacity(
+                                                                  0.5))),
+                                                  margin: const EdgeInsets.only(
+                                                      right: 12),
+                                                  width: 130,
+                                                  child: Center(
+                                                      child: Icon(
+                                                    Icons.add,
+                                                    color: colorBlack
+                                                        .withOpacity(0.5),
+                                                  )),
+                                                ),
+                                              );
+                                      }),
+                                );
+                              }),
+                        )
+                      : const SizedBox();
+                }),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    kHomeController.imageShowing.value =
+                        !kHomeController.imageShowing.value;
+                  },
+                  icon: const Icon(
+                    Icons.image_outlined,
+                    color: deepPurpleColor,
+                    size: 30,
+                  ),
+                ),
+                20.widthBox,
+                const Icon(
+                  Icons.folder_zip_outlined,
                   color: deepPurpleColor,
                   size: 30,
                 ),
-              ),
-              20.widthBox,
-              const Icon(
-                Icons.folder_zip_outlined,
-                color: deepPurpleColor,
-                size: 30,
-              ),
-              20.widthBox,
-              const Icon(
-                Icons.lock_outline,
-                color: deepPurpleColor,
-                size: 30,
-              ),
-              20.widthBox,
-              const Icon(
-                Icons.emoji_emotions_outlined,
-                color: deepPurpleColor,
-                size: 30,
-              ),
-            ],
-          ),
-          20.heightBox,
-          materialButton(
-              background: MaterialStateProperty.all(lightPurpleColor),
-              text: 'Publish',
-              height: 40.0,
-              textStyle: FontStyleUtility.blackInter16W500
-                  .copyWith(color: colorWhite)),
-          10.heightBox,
-          Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                '123456',
-                style: FontStyleUtility.greyInter14W500,
-              ))
-        ],
-      ),
-      30.heightBox,
-      ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return commonPost(context);
-          }),
-    ],
+                20.widthBox,
+                const Icon(
+                  Icons.lock_outline,
+                  color: deepPurpleColor,
+                  size: 30,
+                ),
+                20.widthBox,
+                const Icon(
+                  Icons.emoji_emotions_outlined,
+                  color: deepPurpleColor,
+                  size: 30,
+                ),
+              ],
+            ),
+            20.heightBox,
+            materialButton(
+                background: MaterialStateProperty.all(lightPurpleColor),
+                text: 'Publish',
+                height: 40.0,
+                textStyle: FontStyleUtility.blackInter16W500
+                    .copyWith(color: colorWhite)),
+            10.heightBox,
+            Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  '123456',
+                  style: FontStyleUtility.greyInter14W500,
+                ))
+          ],
+        ),
+        30.heightBox,
+        ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return commonPost(context);
+            }),
+      ],
+    ),
   );
 }
 
