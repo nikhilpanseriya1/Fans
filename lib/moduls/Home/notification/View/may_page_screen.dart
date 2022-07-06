@@ -433,10 +433,10 @@ class _MyPageScreenState extends State<MyPageScreen> with TickerProviderStateMix
                     child: TabBarView(
                       controller: tabController,
                       children: <Widget>[
-                        homeViewData(false),
-                        homeViewData(false),
-                        homeViewData(false),
-                        homeViewData(false),
+                        homeViewData(false, context),
+                        homeViewData(false, context),
+                        homeViewData(false, context),
+                        homeViewData(false, context),
                       ],
                     ),
                   ),
