@@ -30,49 +30,53 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                   borderOpacity: 0.2,
                   preFixWidget: const Icon(Icons.search)),
               8.heightBox,
-              ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                expandedAlignment: Alignment.centerLeft,
-                title: Container(
-                    height: 50.0,
-                    padding: const EdgeInsets.only(left: 12.0),
-                    decoration: BoxDecoration(
-                        color: colorWhite,
-                        border: Border.all(color: colorBlack.withOpacity(0.5)),
-                        borderRadius: BorderRadius.circular(5.0)),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text('Latest'),
-                            Icon(Icons.arrow_drop_down_rounded)
-                          ],
-                        ))),
-                trailing: null,
-                children: [
-                  ListTile(
-                      title: Text(
-                    'Latest',
-                    style: FontStyleUtility.blackInter14W500,
-                  )),
-                  ListTile(
-                      title: Text(
-                    'Old',
-                    style: FontStyleUtility.blackInter14W500,
-                  )),
-                  ListTile(
-                      title: Text(
-                    'Un lockable',
-                    style: FontStyleUtility.blackInter14W500,
-                  )),
-                  ListTile(
-                      title: Text(
-                    'Free',
-                    style: FontStyleUtility.blackInter14W500,
-                  )),
-                ],
+              Theme(
+                data: ThemeData(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  tilePadding: EdgeInsets.zero,
+                  expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                  expandedAlignment: Alignment.centerLeft,
+                  title: Container(
+                      height: 50.0,
+                      padding: const EdgeInsets.only(left: 12.0),
+                      decoration: BoxDecoration(
+                          color: colorWhite,
+                          border:
+                              Border.all(color: colorBlack.withOpacity(0.5)),
+                          borderRadius: BorderRadius.circular(5.0)),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text('Latest'),
+                              Icon(Icons.arrow_drop_down_rounded)
+                            ],
+                          ))),
+                  trailing: null,
+                  children: [
+                    ListTile(
+                        title: Text(
+                      'Latest',
+                      style: FontStyleUtility.blackInter14W500,
+                    )),
+                    ListTile(
+                        title: Text(
+                      'Old',
+                      style: FontStyleUtility.blackInter14W500,
+                    )),
+                    ListTile(
+                        title: Text(
+                      'Un lockable',
+                      style: FontStyleUtility.blackInter14W500,
+                    )),
+                    ListTile(
+                        title: Text(
+                      'Free',
+                      style: FontStyleUtility.blackInter14W500,
+                    )),
+                  ],
+                ),
               ),
               30.heightBox,
               ListView.builder(
@@ -97,7 +101,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                     scale: 3.5,
                                     height: 55.0,
                                     width: 55.0,
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
@@ -127,12 +131,14 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                       )
                                     ],
                                   ),
+                                  5.heightBox,
                                   Row(
                                     children: [
                                       Text(
                                         '5 day to ago',
                                         style: FontStyleUtility.greyInter16W500,
                                       ),
+                                      10.widthBox,
                                       const Icon(
                                         Icons.lock_outline,
                                         color: colorGrey,
@@ -210,17 +216,20 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                               ),
                             ],
                           ),
-                          30.heightBox,
+                          15.heightBox,
                           Text(
                             'Testing',
                             style: FontStyleUtility.greyInter18W500,
                           ),
-                          20.heightBox,
-                          Image.asset(
-                            'assets/images/profile.jpeg',
-                            fit: BoxFit.cover,
-                          ),
                           10.heightBox,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/images/profile.jpeg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          5.heightBox,
                           Row(
                             children: [
                               StreamBuilder<Object>(

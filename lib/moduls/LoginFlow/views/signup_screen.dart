@@ -120,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(() => const HomeStructureView());
+                          Get.offAll(() => const HomeStructureView());
                         },
                         child: Text(
                           "Sign up",

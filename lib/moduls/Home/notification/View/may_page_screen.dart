@@ -329,6 +329,99 @@ class _MyPageScreenState extends State<MyPageScreen>
                 ],
               ),
               10.heightBox,
+              // StreamBuilder<Object>(
+              //     stream: isExpansionTileOpen.stream,
+              //     builder: (context, snapshot) {
+              //       return Theme(
+              //         data: ThemeData()
+              //             .copyWith(dividerColor: Colors.transparent),
+              //         child: Padding(
+              //           padding: const EdgeInsets.symmetric(horizontal: 12),
+              //           child: ExpansionTile(
+              //             tilePadding: EdgeInsets.zero,
+              //             initiallyExpanded: isExpansionTileOpen.value,
+              //             trailing: null,
+              //             // trailing: Container(
+              //             //     height: 50,
+              //             //     width: 50,
+              //             //     decoration:
+              //             //         BoxDecoration(color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
+              //             //     child: const Icon(Icons.keyboard_arrow_down_rounded)),
+              //             onExpansionChanged: (val) {
+              //               isExpansionTileOpen.value = val;
+              //             },
+              //             title: Center(
+              //               child: Container(
+              //                   margin: const EdgeInsets.only(top: 5),
+              //                   width: getScreenWidth(context) * 0.5,
+              //                   height: 40,
+              //                   decoration: BoxDecoration(
+              //                       color: deepPurpleColor,
+              //                       borderRadius: BorderRadius.circular(50)),
+              //                   child: Row(
+              //                     mainAxisAlignment: MainAxisAlignment.center,
+              //                     children: [
+              //                       Text(
+              //                         'About me',
+              //                         style: FontStyleUtility
+              //                             .blackDMSerifDisplay14W500
+              //                             .copyWith(color: colorWhite),
+              //                       ),
+              //                       10.widthBox,
+              //                       Icon(
+              //                         isExpansionTileOpen.value
+              //                             ? Icons.keyboard_arrow_up_sharp
+              //                             : Icons.keyboard_arrow_down_sharp,
+              //                         color: colorWhite,
+              //                       ),
+              //                     ],
+              //                   )),
+              //             ),
+              //             children: <Widget>[
+              Container(
+                margin: const EdgeInsets.only(top: 10, left: 12, right: 12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border:
+                      Border.all(color: colorGrey.withOpacity(0.2), width: 1),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 3, top: 15),
+                        child: Text(
+                          'About me',
+                          style: FontStyleUtility.greyInter18W500
+                              .copyWith(fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      10.heightBox,
+                      commonAboutMeRow(
+                          icon: CupertinoIcons.heart, title: 'Likes'),
+                      commonAboutMeRow(
+                          icon: Icons.pin_drop_outlined, title: 'Tanzania'),
+                      commonAboutMeRow(
+                          icon: Icons.person_outline,
+                          title: 'Member since mar 13, 2021'),
+                      10.heightBox,
+                      Text(
+                        'Welcome to my page. If you like my content, please consider support. And donation will be well received. Thank you for your support!',
+                        style: FontStyleUtility.greyInter14W400,
+                      ),
+                      10.heightBox,
+                    ],
+                  ),
+                ),
+              ),
+              //         ],
+              //       ),
+              //     ),
+              //   );
+              // }),
+              // 10.heightBox,
               Container(
                 decoration: const BoxDecoration(color: colorWhite),
                 child: TabBar(
@@ -357,104 +450,6 @@ class _MyPageScreenState extends State<MyPageScreen>
                 ),
               ),
               10.heightBox,
-              StreamBuilder<Object>(
-                  stream: isExpansionTileOpen.stream,
-                  builder: (context, snapshot) {
-                    return Theme(
-                      data: ThemeData()
-                          .copyWith(dividerColor: Colors.transparent),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: ExpansionTile(
-                          tilePadding: EdgeInsets.zero,
-                          initiallyExpanded: isExpansionTileOpen.value,
-                          trailing: null,
-                          // trailing: Container(
-                          //     height: 50,
-                          //     width: 50,
-                          //     decoration:
-                          //         BoxDecoration(color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(100)),
-                          //     child: const Icon(Icons.keyboard_arrow_down_rounded)),
-                          onExpansionChanged: (val) {
-                            isExpansionTileOpen.value = val;
-                          },
-                          title: Center(
-                            child: Container(
-                                margin: const EdgeInsets.only(top: 5),
-                                width: getScreenWidth(context) * 0.5,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                    color: deepPurpleColor,
-                                    borderRadius: BorderRadius.circular(50)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'About me',
-                                      style: FontStyleUtility
-                                          .blackDMSerifDisplay14W500
-                                          .copyWith(color: colorWhite),
-                                    ),
-                                    10.widthBox,
-                                    Icon(
-                                      isExpansionTileOpen.value
-                                          ? Icons.keyboard_arrow_up_sharp
-                                          : Icons.keyboard_arrow_down_sharp,
-                                      color: colorWhite,
-                                    ),
-                                  ],
-                                )),
-                          ),
-                          children: <Widget>[
-                            Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                    color: colorGrey.withOpacity(0.2),
-                                    width: 1),
-                              ),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 3, top: 15),
-                                      child: Text(
-                                        'About me',
-                                        style: FontStyleUtility.greyInter18W500
-                                            .copyWith(
-                                                fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                    10.heightBox,
-                                    commonAboutMeRow(
-                                        icon: CupertinoIcons.heart,
-                                        title: 'Likes'),
-                                    commonAboutMeRow(
-                                        icon: Icons.pin_drop_outlined,
-                                        title: 'United States'),
-                                    commonAboutMeRow(
-                                        icon: Icons.person_outline,
-                                        title: 'Member since mar 13, 2021'),
-                                    10.heightBox,
-                                    Text(
-                                      'Welcome to my page. If you like my content, please consider support. And donation will be well received. Thank you for your support!',
-                                      style: FontStyleUtility.greyInter14W400,
-                                    ),
-                                    10.heightBox,
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
               SizedBox(
                 height: getScreenHeight(context) * 0.78,
                 child: Padding(

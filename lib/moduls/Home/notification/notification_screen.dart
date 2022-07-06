@@ -229,12 +229,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       children: [
                         const Icon(
                           /*isExpansionTileOpen.value ? Icons.cancel :*/
-                          Icons.menu,
+                          Icons.settings,
                           color: colorWhite,
                         ),
                         10.widthBox,
                         Text(
-                          'Menu',
+                          'Settings',
                           style: FontStyleUtility.blackDMSerifDisplay18W400
                               .copyWith(color: colorWhite),
                         ),

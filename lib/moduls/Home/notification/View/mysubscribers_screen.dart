@@ -18,6 +18,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
         context: context,
         appBar: commonAppBar(),
         child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
               commonScreenView(
@@ -71,62 +72,70 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
               ),
               30.heightBox,
               ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Icon(
-                              Icons.supervised_user_circle_sharp,
-                              size: 50,
-                            ),
-                            SizedBox(
-                              width: 80,
-                              child: Text(
-                                'Gym Guy',
-                                style: FontStyleUtility.greyInter16W500,
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
+                    return Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: colorPrimary, width: 1),
+                          color: colorPrimary.withOpacity(0.2)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Icon(
+                                Icons.supervised_user_circle_sharp,
+                                size: 50,
                               ),
+                              SizedBox(
+                                width: 80,
+                                child: Text(
+                                  'Gym Guy',
+                                  style: FontStyleUtility.greyInter16W500,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 50,
+                            child: Text(
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                              'Jun 11, 2022',
+                              style: FontStyleUtility.greyInter16W500,
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 50,
-                          child: Text(
-                            maxLines: 3,
-                            textAlign: TextAlign.center,
-                            'Jun 11, 2022',
-                            style: FontStyleUtility.greyInter16W500,
                           ),
-                        ),
-                        SizedBox(
-                          width: 60,
-                          child: Text(
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            'Weekly',
-                            style: FontStyleUtility.greyInter16W500,
+                          SizedBox(
+                            width: 60,
+                            child: Text(
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              'Weekly',
+                              style: FontStyleUtility.greyInter16W500,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 50,
-                          child: Text(
-                            maxLines: 3,
-                            textAlign: TextAlign.center,
-                            'Jun 01, 2025',
-                            style: FontStyleUtility.greyInter16W500,
+                          SizedBox(
+                            width: 50,
+                            child: Text(
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                              'Jun 01, 2025',
+                              style: FontStyleUtility.greyInter16W500,
+                            ),
                           ),
-                        ),
-                      ],
-                    ).marginOnly(bottom: 30.0);
+                        ],
+                      ),
+                    );
                   })
             ],
           ),

@@ -310,7 +310,6 @@ Widget homeViewData(bool? visible) {
               )
             ],
           ),
-          20.heightBox,
           StreamBuilder<Object>(
               stream: kHomeController.imageShowing.stream,
               builder: (context, snapshot) {
@@ -420,30 +419,30 @@ Widget homeViewData(bool? visible) {
                 icon: const Icon(
                   Icons.image_outlined,
                   color: deepPurpleColor,
-                  size: 30,
+                  size: 25,
                 ),
               ),
               20.widthBox,
               const Icon(
                 Icons.folder_zip_outlined,
                 color: deepPurpleColor,
-                size: 30,
+                size: 25,
               ),
               20.widthBox,
               const Icon(
                 Icons.lock_outline,
                 color: deepPurpleColor,
-                size: 30,
+                size: 25,
               ),
               20.widthBox,
               const Icon(
                 Icons.emoji_emotions_outlined,
                 color: deepPurpleColor,
-                size: 30,
+                size: 25,
               ),
             ],
           ),
-          20.heightBox,
+          10.heightBox,
           materialButton(
               background: MaterialStateProperty.all(lightPurpleColor),
               text: 'Publish',
@@ -459,7 +458,7 @@ Widget homeViewData(bool? visible) {
               ))
         ],
       ),
-      30.heightBox,
+      15.heightBox,
       ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -650,12 +649,14 @@ Widget commonPost(BuildContext context) {
                     )
                   ],
                 ),
+                5.heightBox,
                 Row(
                   children: [
                     Text(
                       '5 day to ago',
                       style: FontStyleUtility.greyInter16W500,
                     ),
+                    10.widthBox,
                     const Icon(
                       Icons.lock_outline,
                       color: colorGrey,
@@ -731,21 +732,24 @@ Widget commonPost(BuildContext context) {
             ),
           ],
         ),
-        30.heightBox,
+        15.heightBox,
         Text(
           'Testing',
           style: FontStyleUtility.greyInter18W500,
         ),
-        20.heightBox,
+        10.heightBox,
         /*Container(
                     height: 200,
                     color: colorBlack,
                   ),*/
-        Image.asset(
-          'assets/images/post1.jpeg',
-          fit: BoxFit.cover,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.asset(
+            'assets/images/post1.jpeg',
+            fit: BoxFit.cover,
+          ),
         ),
-        10.heightBox,
+        5.heightBox,
         Row(
           children: [
             StreamBuilder<Object>(
