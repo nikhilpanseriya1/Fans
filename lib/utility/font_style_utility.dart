@@ -85,5 +85,7 @@ class FontStyleUtility{
   static TextStyle greyDMSerifDisplay14W500 = const TextStyle(color: colorGrey, fontSize: 14, fontFamily: 'DMSerifDisplay', fontWeight: FontWeight.w500);
   static TextStyle greyDMSerifDisplay14W600 = const TextStyle(color: colorGrey, fontSize: 14, fontFamily: 'DMSerifDisplay', fontWeight: FontWeight.w600);
 
+  ///white text
+
 
 }
