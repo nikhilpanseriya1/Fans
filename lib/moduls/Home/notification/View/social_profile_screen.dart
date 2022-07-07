@@ -39,17 +39,23 @@ class _SocialProfileScreenState extends State<SocialProfileScreen> {
                 shrinkWrap: true,
                 itemCount: kNotificationController.socialProfileList.length,
                 itemBuilder: (context, index) {
-                  return commonTextField(
-                    preFixWidget: Container(
-                        padding: const EdgeInsets.all(15),
-                        width: 20,
-                        height: 20,
-                        child: kNotificationController.socialProfileList[index].icon),
-                    hintText: kNotificationController.socialProfileList[index].hint,
-                    textEditingController: kNotificationController.socialProfileList[index].controller,
-                    // validationFunction: (val) {
-                    //   return emailValidation(val);
-                    // },
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 15.0),
+                    child: commonTextField(
+                      preFixWidget: Container(
+                          padding: const EdgeInsets.all(15),
+                          width: 20,
+                          height: 20,
+                          child: kNotificationController
+                              .socialProfileList[index].icon),
+                      hintText:
+                          kNotificationController.socialProfileList[index].hint,
+                      textEditingController: kNotificationController
+                          .socialProfileList[index].controller,
+                      // validationFunction: (val) {
+                      //   return emailValidation(val);
+                      // },
+                    ),
                   );
                 },
               ),

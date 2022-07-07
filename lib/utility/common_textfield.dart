@@ -41,6 +41,8 @@ Widget commonTextField(
     ExactAssetImage? preFixIcon,
     Widget? preFixWidget,
     Color? filledColor = textFieldColor,
+    TextStyle? textStyle,
+    Color? borderRadiusColor,
     RxBool? showPassword,
     int? maxLength,
     EdgeInsetsGeometry? contentPadding,
@@ -61,9 +63,7 @@ Widget commonTextField(
         labelText == null || labelText.isEmpty
             ? const SizedBox()
             : Text(labelText, style: FontStyleUtility.greyInter14W500),
-        const SizedBox(
-          height: 10.0,
-        ),
+
         TextFormField(
           maxLength: maxLength ?? 10000,
           scrollController: scrollController,
@@ -72,7 +72,6 @@ Widget commonTextField(
           enabled: isEnabled != null && !isEnabled ? false : true,
           textAlign: align ?? TextAlign.start,
           showCursor: !isReadOnly,
-
           onTap: () {
             borderColor = colorBlack.withOpacity(borderOpacity ?? 0.5);
             if (onTapFunction != null) {
@@ -113,12 +112,13 @@ Widget commonTextField(
           obscureText: passwordVisible,
           textInputAction: inputAction ?? TextInputAction.next,
 
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Poppins',
-            color: textColor,
-          ),
+          style: textStyle ??
+              const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Poppins',
+                color: textColor,
+              ),
           inputFormatters: inputFormatter,
           decoration: InputDecoration(
             counterText: '',
@@ -129,7 +129,14 @@ Widget commonTextField(
                 const EdgeInsets.fromLTRB(13.0, 11.0, 10.0, 11.0),
             focusedBorder: isBorder ? textFieldBorderStyle : null,
             disabledBorder: isBorder ? textFieldBorderStyle : null,
-            enabledBorder: isBorder ? textFieldBorderStyle : null,
+            enabledBorder: isBorder
+                ? textFieldBorderStyle.copyWith(
+                    borderSide: BorderSide(
+                        color: borderRadiusColor ??
+                            borderColor ??
+                            colorBlack.withOpacity(0.5)),
+                  )
+                : null,
             errorBorder: isBorder ? textFieldBorderStyle : null,
             focusedErrorBorder: isBorder ? textFieldBorderStyle : null,
             border: isBorder ? textFieldBorderStyle : null,

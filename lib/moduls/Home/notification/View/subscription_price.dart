@@ -35,7 +35,10 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                     icon: Icons.subscriptions_outlined,
                     title: 'Subscription price',
                     subTitle: 'Set up your subscription'),
-                commonPriceRow(price: '1000.00', title: 'Subscription price(Weekly)', isSwitchOn: weeklyBool),
+                commonPriceRow(
+                    price: '1000.00',
+                    title: 'Subscription price(Weekly)',
+                    isSwitchOn: weeklyBool),
                 commonPriceRow(
                     price: '1000.00',
                     title: 'Subscription price(Month)*',
@@ -43,11 +46,17 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                     isSwitchOn: false.obs),
                 10.heightBox,
                 commonPriceRow(
-                    price: '1000.00', title: 'Subscription price(3 Months)', isSwitchOn: threeMonthsBool),
+                    price: '1000.00',
+                    title: 'Subscription price(3 Months)',
+                    isSwitchOn: threeMonthsBool),
                 commonPriceRow(
-                    price: '1000.00', title: 'Subscription price(6 Months)', isSwitchOn: sixMonthsBool),
+                    price: '1000.00',
+                    title: 'Subscription price(6 Months)',
+                    isSwitchOn: sixMonthsBool),
                 commonPriceRow(
-                    price: '1000.00', title: 'Subscription price(12 Months)', isSwitchOn: oneYearBool),
+                    price: '1000.00',
+                    title: 'Subscription price(12 Months)',
+                    isSwitchOn: oneYearBool),
                 20.heightBox,
                 Row(
                   children: [
@@ -70,7 +79,7 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                 Center(
                   child: commonFillButtonView(
                       title: 'Save changes',
-                      color: colorGreen,
+                      color: colorDarkGreen,
                       width: getScreenWidth(context) * 0.7,
                       tapOnButton: () {
                         Get.back();
@@ -84,7 +93,10 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
   }
 
   Widget commonPriceRow(
-      {required String title, required String price, bool? isToggleShow, required RxBool isSwitchOn}) {
+      {required String title,
+      required String price,
+      bool? isToggleShow,
+      required RxBool isSwitchOn}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -98,14 +110,14 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           width: getScreenWidth(context),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(100),
               border: Border.all(color: colorBlack.withOpacity(0.5), width: 1)),
           child: RichText(
               text: TextSpan(children: [
             TextSpan(
               text: 'TZS: ',
-              style:
-                  FontStyleUtility.blackInter18W500.copyWith(color: colorGrey, fontWeight: FontWeight.w400),
+              style: FontStyleUtility.blackInter18W500
+                  .copyWith(color: colorGrey, fontWeight: FontWeight.w400),
             ),
             TextSpan(
               text: price,

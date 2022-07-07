@@ -25,10 +25,11 @@ class _VerifiedAccountViewState extends State<VerifiedAccountView> {
             70.heightBox,
             Center(
               child: Container(
+                width: getScreenWidth(context) * 0.8,
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: colorGreen,
-                  borderRadius: BorderRadius.circular(10),
+                  color: colorDarkGreen,
+                  borderRadius: BorderRadius.circular(25),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

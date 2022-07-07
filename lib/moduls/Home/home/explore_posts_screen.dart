@@ -239,8 +239,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                         splashColor: colorRed,
                                         splashRadius: 20.0,
                                         onPressed: () {
-                                          kHomeController.likeButton.value =
-                                              !kHomeController.likeButton.value;
+                                          kHomeController.likeButton.value = !kHomeController.likeButton.value;
                                         },
                                         icon: Icon(
                                           kHomeController.likeButton.value ==

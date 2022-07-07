@@ -6,7 +6,7 @@ const Color colorPrimaryDark = Color(0xFF5344AD);
 const Color colorDarkBlue = Color(0xFF0D0F42);
 const Color colorPink = Color(0xFFFF4A7A);
 const Color colorGreen = Color(0xFF08E453);
-const Color colorDarkGreen = Color(0xFF21832D);
+const Color colorDarkGreen = Color(0xFF2A9436);
 const Color colorDarkBlack = Color(0xFF1A202C);
 const Color colorSemiDarkBlack = Color(0xFF202125);
 const Color colorGrey = Color(0xFF5D5F5E);
@@ -18,6 +18,7 @@ const Color colorFacebook = Color(0xFF4267B2);
 const Color deepPurpleColor = Color(0xFF450ea7);
 const Color lightPurpleColor = Color(0xFF6f42c1);
 const Color colorSplash = Color(0xFF6856A5);
+const Color appBarColor = Color(0xFFA490E7);
 const Color colorYellow = Colors.amber;
 
 const Color textColor = Color(0xFF1A202C);
