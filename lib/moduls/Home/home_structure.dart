@@ -261,6 +261,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   style: FontStyleUtility.blackInter16W500,
                 ),
                 onTap: () {
+                  Get.back();
                   Get.to(() => const MySubscriptionsScreen());
                 },
               ),
