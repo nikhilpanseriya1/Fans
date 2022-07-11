@@ -28,7 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: colorSplash,
         body: Stack(
           children: [
-
             Align(
                 alignment: Alignment.topCenter,
                 child: Column(

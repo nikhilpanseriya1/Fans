@@ -26,16 +26,17 @@ class _VerifiedAccountViewState extends State<VerifiedAccountView> {
             Center(
               child: Container(
                 width: getScreenWidth(context) * 0.8,
+                height: 50,
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: colorDarkGreen,
+                  color: deepPurpleColor,
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                      Icons.done_outline,
+                      Icons.verified_outlined,
                       color: colorWhite,
                     ),
                     15.widthBox,

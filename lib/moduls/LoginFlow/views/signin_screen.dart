@@ -1,3 +1,4 @@
+import 'package:fans/moduls/LoginFlow/views/forget_password_screen.dart';
 import 'package:fans/moduls/LoginFlow/views/signup_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
@@ -50,13 +51,14 @@ class _SignInScreenState extends State<SignInScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 height: getScreenHeight(context) * 0.6,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20)),
-                  color: deepPurpleColor.withOpacity(0.2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0)
+                        .copyWith(top: 25),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(28),
+                      topLeft: Radius.circular(28)),
+                  color: deepPurpleColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -75,37 +77,53 @@ class _SignInScreenState extends State<SignInScreen> {
                       textEditingController: null,
                       isEnabled: true,
                     ),
-                    heightBox(10.0),
-                    Text(
-                      'Forget PassWord?',
-                      style: FontStyleUtility.blackInter15W500,
+                    heightBox(13.0),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const ForgetPasswordScreen());
+                      },
+                      child: Text(
+                        'Forget PassWord?',
+                        style: FontStyleUtility.whiteInter16W500,
+                      ),
                     ),
                     heightBox(20.0),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Obx(
-                          () => SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: Theme(
-                              data: ThemeData(
-                                  unselectedWidgetColor:
-                                      colorSemiDarkBlack.withOpacity(0.3)),
-                              child: Checkbox(
-                                  activeColor: deepPurpleColor,
-                                  value: isRemember.value,
-                                  onChanged: (bool? value) {
-                                    isRemember.value = value ?? false;
-                                  }),
+                    InkWell(
+                      onTap: () {
+                        isRemember.value = !isRemember.value;
+                      },
+                      child: SizedBox(
+                        width: getScreenWidth(context) * 0.4,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Obx(
+                              () => SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: Theme(
+                                  data: ThemeData(
+                                      unselectedWidgetColor: colorWhite),
+                                  child: Checkbox(
+                                      side: MaterialStateBorderSide.resolveWith(
+                                        (states) => const BorderSide(
+                                            width: 1.0, color: Colors.white),
+                                      ),
+                                      activeColor: deepPurpleColor,
+                                      value: isRemember.value,
+                                      onChanged: (bool? value) {
+                                        isRemember.value = value ?? false;
+                                      }),
+                                ),
+                              ),
                             ),
-                          ),
+                            widthBox(10),
+                            commonText(
+                                text: 'Remember me',
+                                style: FontStyleUtility.whiteInter16W500),
+                          ],
                         ),
-                        widthBox(10),
-                        commonText(
-                            text: 'Remember me',
-                            style: FontStyleUtility.greyInter16W500),
-                      ],
+                      ),
                     ),
                     heightBox(30.0),
                     SizedBox(
@@ -114,7 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(deepPurpleColor),
+                              MaterialStateProperty.all(lightPurpleColor),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -137,13 +155,11 @@ class _SignInScreenState extends State<SignInScreen> {
                         Get.to(() => const SignUpScreen());
                       },
                       child: Text(
-                        'Dont have an account?',
-                        style: FontStyleUtility.blackInter20W500
-                            .copyWith(color: deepPurpleColor),
+                        'Don\'t have an account?',
+                        style: FontStyleUtility.whiteInter20W500
                       ),
                     )),
                     50.heightBox,
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -154,7 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         widthBox(30.0),
                         Text(
                           'Login with Google',
-                          style: FontStyleUtility.blackInter16W500,
+                          style: FontStyleUtility.whiteInter16W500,
                         )
                       ],
                     ),

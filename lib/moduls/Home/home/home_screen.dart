@@ -197,6 +197,7 @@ Widget homeViewData(bool? visible, BuildContext context) {
     thickness: 5.0,
     thumbColor: colorSplash.withOpacity(0.5),
     child: ListView(
+      shrinkWrap: true,
       physics: visible == false ? const NeverScrollableScrollPhysics() : const ClampingScrollPhysics(),
       children: [
         /* visible == false
@@ -276,7 +277,7 @@ Widget homeViewData(bool? visible, BuildContext context) {
                 ),
               );
             }),*/
-        30.heightBox,
+        10.heightBox,
         Column(
           children: [
             Row(

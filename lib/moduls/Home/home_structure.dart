@@ -6,11 +6,13 @@ import 'package:fans/moduls/Home/notification/View/may_page_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscribers_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscriptions_screen.dart';
 import 'package:fans/moduls/Home/notification/View/social_profile_screen.dart';
+import 'package:fans/moduls/Home/notification/View/wallet_screen.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../LoginFlow/views/verify_account_screen.dart';
 import 'chat/chat_screen.dart';
 import 'explore/explore_screen.dart';
 import 'home/bookmark_screen.dart';
@@ -26,6 +28,7 @@ class HomeStructureView extends StatefulWidget {
 }
 
 RxInt tabSelectedIndex = 0.obs;
+
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _HomeStructureViewState extends State<HomeStructureView> {
@@ -53,100 +56,116 @@ class _HomeStructureViewState extends State<HomeStructureView> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         key: _key,
         appBar: commonAppBar(
-            height: 65.0,
-            leadingIcon: IconButton(
-              icon: const Center(
-                child: Icon(
-                  Icons.menu,
-                  color: colorBlack,
+            height: 70.0,
+            leadingIcon: Container(
+              margin: const EdgeInsets.only(top: 15.0),
+              child: IconButton(
+                icon: const Center(
+                  child: Icon(
+                    Icons.menu,
+                    color: colorBlack,
+                  ),
                 ),
+                onPressed: () {
+                  _key.currentState?.openDrawer();
+                  disableFocusScopeNode(context);
+                },
               ),
-              onPressed: () {
-                _key.currentState?.openDrawer();
-                disableFocusScopeNode(context);
-              },
             ),
             titleWidget: tabSelectedIndex.value == 0
-                ? Center(
+                ? Container(
+                    padding: const EdgeInsets.only(
+                      top: 12,
+                    ),
                     child: commonTextField(
                         filledColor: appBarColor,
                         hintText: 'Search',
                         textEditingController: null,
                         borderOpacity: 0.0,
+                        contentPadding: EdgeInsets.zero,
                         borderRadiusColor: deepPurpleColor.withOpacity(0.0),
                         hintStyle: FontStyleUtility.whiteInter16W500,
                         isBorder: true,
                         textStyle: FontStyleUtility.whiteInter16W500,
-                        preFixWidget: const Icon(Icons.search,color: colorWhite,)),
+                        preFixWidget: const Icon(
+                          Icons.search,
+                          color: colorWhite,
+                        )),
                   )
                 : const SizedBox(),
             actionWidgets: [
               tabSelectedIndex.value == 0
-                  ? IconButton(
-                      padding: const EdgeInsets.only(right: 4.0, left: 4.0),
-                      onPressed: () {
-                        showModalBottomSheet(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                    topLeft: Radius.circular(20))),
-                            context: context,
-                            builder: (context) {
-                              return Container(
-                                decoration: const BoxDecoration(
+                  ? Container(
+                      margin: const EdgeInsets.only(top: 15.0),
+                      child: IconButton(
+                          padding: const EdgeInsets.only(right: 4.0, left: 4.0),
+                          onPressed: () {
+                            showModalBottomSheet(
+                                shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(20),
                                         topLeft: Radius.circular(20))),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 20),
-                                      height: 5,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                          color: colorGrey,
-                                          borderRadius:
-                                              BorderRadius.circular(100)),
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            topLeft: Radius.circular(20))),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 20),
+                                          height: 5,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                              color: colorGrey,
+                                              borderRadius:
+                                                  BorderRadius.circular(100)),
+                                        ),
+                                        ListTile(
+                                            title: Text(
+                                          'Latest',
+                                          style:
+                                              FontStyleUtility.blackInter18W500,
+                                        )),
+                                        ListTile(
+                                            title: Text(
+                                          'Old',
+                                          style:
+                                              FontStyleUtility.blackInter18W500,
+                                        )),
+                                        ListTile(
+                                            title: Text(
+                                          'Unlockable',
+                                          style:
+                                              FontStyleUtility.blackInter18W500,
+                                        )),
+                                        ListTile(
+                                            title: Text(
+                                          'Free',
+                                          style:
+                                              FontStyleUtility.blackInter18W500,
+                                        )),
+                                      ],
                                     ),
-                                    ListTile(
-                                        title: Text(
-                                      'Latest',
-                                      style: FontStyleUtility.blackInter16W500,
-                                    )),
-                                    ListTile(
-                                        title: Text(
-                                      'Old',
-                                      style: FontStyleUtility.blackInter16W500,
-                                    )),
-                                    ListTile(
-                                        title: Text(
-                                      'Unlockable',
-                                      style: FontStyleUtility.blackInter16W500,
-                                    )),
-                                    ListTile(
-                                        title: Text(
-                                      'Free',
-                                      style: FontStyleUtility.blackInter16W500,
-                                    )),
-                                  ],
-                                ),
-                              );
-                            });
-                      },
-                      icon: Image.asset(
-                        'assets/appIcons/filter.png',
-                        color: colorGrey,
-                        height: 25,
-                        width: 25,
-                        scale: 3.5,
-                      ))
+                                  );
+                                });
+                          },
+                          icon: Image.asset(
+                            'assets/appIcons/filter.png',
+                            color: colorGrey,
+                            height: 25,
+                            width: 25,
+                            scale: 3.5,
+                          )),
+                    )
                   : const SizedBox(),
             ]),
         drawer: Drawer(
@@ -241,7 +260,9 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   'Wallet: TZS12,432.0',
                   style: FontStyleUtility.blackInter16W500,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => const WalletScreen());
+                },
               ),
               ListTile(
                 leading: const Icon(
@@ -268,6 +289,19 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 onTap: () {
                   Get.to(() => const MySubscriptionsScreen());
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.star_rounded,
+                  size: 30,
+                ),
+                title: Text(
+                  'Be a Creator!',
+                  style: FontStyleUtility.blackInter16W500,
+                ),
+                onTap: () {
+                  Get.to(() => const VerifyAccountScreen());
                 },
               ),
               ListTile(

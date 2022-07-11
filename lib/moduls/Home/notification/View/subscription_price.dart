@@ -22,6 +22,7 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
+      padding: 0.0,
         context: context,
         child: RawScrollbar(
           thickness: 5.0,
@@ -39,7 +40,9 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                     price: '1000.00',
                     title: 'Subscription price(Weekly)',
                     isSwitchOn: weeklyBool),
+                10.heightBox,
                 commonPriceRow(
+                    padding: 10.0,
                     price: '1000.00',
                     title: 'Subscription price(Month)*',
                     isToggleShow: false,
@@ -49,10 +52,12 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                     price: '1000.00',
                     title: 'Subscription price(3 Months)',
                     isSwitchOn: threeMonthsBool),
+                10.heightBox,
                 commonPriceRow(
                     price: '1000.00',
                     title: 'Subscription price(6 Months)',
                     isSwitchOn: sixMonthsBool),
+                10.heightBox,
                 commonPriceRow(
                     price: '1000.00',
                     title: 'Subscription price(12 Months)',
@@ -67,7 +72,7 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                           trackColor: colorGrey.withOpacity(0.4),
                           onChanged: (val) {
                             freeSubscriptionBool.value = val;
-                          }),
+                          }).paddingOnly(left: 10.0),
                     ),
                     Text(
                       'Free Subscription',
@@ -79,7 +84,7 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                 Center(
                   child: commonFillButtonView(
                       title: 'Save changes',
-                      color: colorDarkGreen,
+                      color: deepPurpleColor,
                       width: getScreenWidth(context) * 0.7,
                       tapOnButton: () {
                         Get.back();
@@ -96,54 +101,72 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
       {required String title,
       required String price,
       bool? isToggleShow,
+      double? padding,
       required RxBool isSwitchOn}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        20.heightBox,
-        Text(
-          title,
-          style: FontStyleUtility.greyInter22W800.copyWith(fontSize: 18),
-        ),
-        15.heightBox,
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          width: getScreenWidth(context),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: colorBlack.withOpacity(0.5), width: 1)),
-          child: RichText(
-              text: TextSpan(children: [
-            TextSpan(
-              text: 'TZS: ',
-              style: FontStyleUtility.blackInter18W500
-                  .copyWith(color: colorGrey, fontWeight: FontWeight.w400),
-            ),
-            TextSpan(
-              text: price,
-              style: FontStyleUtility.blackInter18W500,
-            )
-          ])),
-        ),
-        5.heightBox,
-        isToggleShow ?? true
-            ? Row(
-                children: [
-                  Obx(
-                    () => Switch(
-                        value: isSwitchOn.value,
-                        onChanged: (val) {
-                          isSwitchOn.value = val;
-                        }),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Card(
+        elevation: 8,
+        shadowColor: colorBlack,
+        shape: const RoundedRectangleBorder(
+            side: BorderSide(color: colorPrimary),
+            borderRadius: BorderRadius.all(Radius.circular(15))),
+        color: appBarColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16)
+              .copyWith(bottom: padding ?? 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              13.heightBox,
+              Text(
+                title,
+                style: FontStyleUtility.greyInter22W800.copyWith(fontSize: 18),
+              ),
+              15.heightBox,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                width: getScreenWidth(context),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    border:
+                        Border.all(color: colorBlack.withOpacity(0.5), width: 1)),
+                child: RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                    text: 'TZS: ',
+                    style: FontStyleUtility.blackInter18W500
+                        .copyWith(color: colorGrey, fontWeight: FontWeight.w400),
                   ),
-                  Text(
-                    'Status',
-                    style: FontStyleUtility.greyInter14W400,
+                  TextSpan(
+                    text: price,
+                    style: FontStyleUtility.blackInter18W500,
                   )
-                ],
-              )
-            : const SizedBox.shrink()
-      ],
+                ])),
+              ),
+              5.heightBox,
+              isToggleShow ?? true
+                  ? Row(
+                      children: [
+                        Obx(
+                          () => Switch(
+                            activeColor: deepPurpleColor,
+                              value: isSwitchOn.value,
+                              onChanged: (val) {
+                                isSwitchOn.value = val;
+                              }),
+                        ),
+                        Text(
+                          'Status',
+                          style: FontStyleUtility.greyInter14W400,
+                        )
+                      ],
+                    )
+                  : const SizedBox.shrink()
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -39,30 +39,12 @@ class _WalletScreenState extends State<WalletScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'TZS10,121.00',
-                        style: TextStyle(
-                            color: colorWhite,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w900),
-                      ),
-                      10.widthBox,
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          20.heightBox,
-                          Text(
-                            'TZS',
-                            style: FontStyleUtility.whiteInter22W800
-                                .copyWith(fontWeight: FontWeight.w500),
-                            textAlign: TextAlign.end,
-                          ),
-                        ],
-                      ),
-                    ],
+                  const Text(
+                    'TZS10,121.00',
+                    style: TextStyle(
+                        color: colorWhite,
+                        fontSize: 40,
+                        fontWeight: FontWeight.w900),
                   ),
                   20.heightBox,
                   Text(

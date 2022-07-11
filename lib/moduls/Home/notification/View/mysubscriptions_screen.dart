@@ -17,8 +17,9 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
+      padding: 0.0,
         context: context,
-        appBar: commonAppBar(title: 'My Subscriptions', elevation: 0.5),
+        appBar: commonAppBar(),
         child: RawScrollbar(
           thickness: 5.0,
           thumbColor: colorSplash.withOpacity(0.5),
@@ -66,12 +67,21 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            margin: const EdgeInsets.symmetric(vertical: 7,horizontal: 12),
                             padding: const EdgeInsets.symmetric(vertical: 15),
                             decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: colorPrimary, width: 1),
-                                color: colorPrimary.withOpacity(0.2)),
+                                color: colorWhite),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,6 +148,7 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                             ),
                           );
                         }),
+                    20.heightBox,
                   ],
                 )
                 // Expanded(

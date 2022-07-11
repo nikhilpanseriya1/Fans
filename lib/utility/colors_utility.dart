@@ -19,6 +19,7 @@ const Color deepPurpleColor = Color(0xFF450ea7);
 const Color lightPurpleColor = Color(0xFF6f42c1);
 const Color colorSplash = Color(0xFF6856A5);
 const Color appBarColor = Color(0xFFA490E7);
+const Color cardColor = Color(0xFFD3C3FF);
 const Color colorYellow = Colors.amber;
 
 const Color textColor = Color(0xFF1A202C);

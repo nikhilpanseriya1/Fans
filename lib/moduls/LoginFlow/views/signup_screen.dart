@@ -39,19 +39,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textAlign: TextAlign.center,
                 style: FontStyleUtility.greyInter22W500),
             heightBox(50.0),
-
             heightBox(30.0),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 height: getScreenHeight(context) * 0.6,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 15.0),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20)),
-                  color: deepPurpleColor.withOpacity(0.2),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0)
+                        .copyWith(top: 25),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(28),
+                      topLeft: Radius.circular(28)),
+                  color: deepPurpleColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -85,10 +85,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 24,
                             width: 24,
                             child: Theme(
-                              data: ThemeData(
-                                  unselectedWidgetColor:
-                                      colorSemiDarkBlack.withOpacity(0.3)),
+                              data:
+                                  ThemeData(unselectedWidgetColor: colorWhite),
                               child: Checkbox(
+                                  side: MaterialStateBorderSide.resolveWith(
+                                    (states) => const BorderSide(
+                                        width: 1.0, color: Colors.white),
+                                  ),
                                   activeColor: deepPurpleColor,
                                   value: isRemember.value,
                                   onChanged: (bool? value) {
@@ -101,7 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         commonText(
                             text:
                                 'I agree with the processing of personal data privacy policy',
-                            style: FontStyleUtility.greyInter16W500),
+                            style: FontStyleUtility.whiteInter16W500),
                       ],
                     ),
                     heightBox(30.0),
@@ -111,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(deepPurpleColor),
+                              MaterialStateProperty.all(lightPurpleColor),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -129,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    heightBox(20.0),
+                    heightBox(25.0),
                     Center(
                         child: InkWell(
                       onTap: () {
@@ -137,12 +140,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                       child: Text(
                         ' Already have account?',
-                        style: FontStyleUtility.blackInter20W500.copyWith(
-                            color: deepPurpleColor,
-                            fontWeight: FontWeight.w800),
+                        style: FontStyleUtility.whiteInter20W500
                       ),
                     )),
-                    heightBox(50.0),
+                    heightBox(40.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -153,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         widthBox(30.0),
                         Text(
                           'Login with Google',
-                          style: FontStyleUtility.blackInter16W500,
+                          style: FontStyleUtility.whiteInter16W500,
                         )
                       ],
                     ),

@@ -153,21 +153,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                         ListTile(
                                             onTap: () {
                                               Get.back();
-                                              Get.to(
-                                                  () => const WalletScreen());
-                                            },
-                                            trailing: const Icon(
-                                              Icons.arrow_forward_ios_rounded,
-                                              size: 18,
-                                              color: colorGrey,
-                                            ),
-                                            leading: const Icon(Icons
-                                                .account_balance_wallet_outlined),
-                                            title: const Text('Wallet')),
-
-                                        ListTile(
-                                            onTap: () {
-                                              Get.back();
                                               Get.to(() =>
                                                   const SubscriptionPrice());
                                             },

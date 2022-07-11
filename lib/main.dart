@@ -14,7 +14,9 @@ import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'moduls/Home/notification/View/edit_page_screen.dart';
 import 'moduls/Home/notification/View/may_page_screen.dart';
+import 'moduls/Home/notification/View/subscription_price.dart';
 import 'moduls/Home/notification/View/wallet_screen.dart';
+import 'moduls/LoginFlow/views/forget_password_screen.dart';
 
 final getPreference = GetStorage();
 

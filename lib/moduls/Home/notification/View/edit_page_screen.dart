@@ -25,7 +25,7 @@ class _EditPageScreenState extends State<EditPageScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
       context: context,
-      appBar: commonAppBar(title: 'Edit Page', elevation: 0.5),
+      appBar: commonAppBar(),
       child: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: Form(

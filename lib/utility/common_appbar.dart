@@ -25,6 +25,7 @@ PreferredSize commonAppBar({
       preferredSize: Size.fromHeight(height ?? 50.0),
       child: AppBar(
         bottom: bottom,
+        toolbarHeight: height ?? 50.0,
         elevation: elevation ?? 0.0,
         backgroundColor: appbarBgColor ?? colorWhite,
         automaticallyImplyLeading: false,

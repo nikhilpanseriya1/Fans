@@ -15,6 +15,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
+      padding: 0.0,
         context: context,
         appBar: commonAppBar(),
         child: RawScrollbar(
@@ -86,12 +87,22 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            margin: const EdgeInsets.symmetric(vertical: 7,horizontal: 12),
                             padding: const EdgeInsets.symmetric(vertical: 15),
                             decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: colorPrimary, width: 1),
-                                color: colorPrimary.withOpacity(0.2)),
+                                border:
+                                    Border.all(color: colorPrimary, width: 1),
+                                color: colorWhite),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,13 +155,16 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-                                      color: colorRed, borderRadius: BorderRadius.circular(100)),
-                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                      color: colorRed,
+                                      borderRadius: BorderRadius.circular(100)),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
                                   child: Center(
                                     child: Text(
                                       textAlign: TextAlign.center,
                                       'Cancelled',
-                                      style: FontStyleUtility.greyInter16W500.copyWith(color: colorWhite),
+                                      style: FontStyleUtility.greyInter16W500
+                                          .copyWith(color: colorWhite),
                                     ),
                                   ),
                                 ),
@@ -158,6 +172,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                             ),
                           );
                         }),
+                    20.heightBox,
                   ],
                 )
               ],
