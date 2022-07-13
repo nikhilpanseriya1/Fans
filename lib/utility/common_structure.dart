@@ -14,7 +14,7 @@ Widget commonStructure({
     child: Stack(
       children: [
         Scaffold(
-          backgroundColor: bgColor ?? colorWhite,
+          /*backgroundColor: bgColor ?? colorWhite,*/
           resizeToAvoidBottomInset: true,
           appBar: appBar,
           bottomNavigationBar: bottomNavigation,

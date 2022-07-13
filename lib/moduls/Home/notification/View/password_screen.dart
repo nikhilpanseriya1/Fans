@@ -1,4 +1,5 @@
 import 'package:fans/moduls/Home/notification/notification_screen.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -12,6 +13,7 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
+
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -35,6 +37,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 70.heightBox,
                 commonTextField(
                     hintText: 'Old password',
+                    filledColor:
+                        isDarkOn.value == true ? colorLightBlack : colorWhite,
+                    hintStyle: blackInter16W500.copyWith(
+                        color: isDarkOn.value == true
+                            ? colorLightWhite
+                            : colorGrey),
                     errorMaxLines: 2,
                     textEditingController: oldPasswordController,
                     isPassword: true,
@@ -47,6 +55,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     textEditingController: newPasswordController,
                     isPassword: true,
                     errorMaxLines: 2,
+                    filledColor:
+                        isDarkOn.value == true ? colorLightBlack : colorWhite,
+                    hintStyle: blackInter16W500.copyWith(
+                        color: isDarkOn.value == true
+                            ? colorLightWhite
+                            : colorGrey),
                     validationFunction: (value) {
                       return passwordValidation(value);
                     }),
@@ -56,6 +70,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     textEditingController: confirmPasswordController,
                     isPassword: true,
                     errorMaxLines: 2,
+                    filledColor:
+                        isDarkOn.value == true ? colorLightBlack : colorWhite,
+                    hintStyle: blackInter16W500.copyWith(
+                        color: isDarkOn.value == true
+                            ? colorLightWhite
+                            : colorGrey),
                     validationFunction: (value) {
                       return passwordValidation(value);
                     }),

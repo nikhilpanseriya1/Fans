@@ -2,6 +2,7 @@ import 'package:fans/utility/assets_utility.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_textfield.dart';
 import 'package:fans/utility/font_style_utility.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -295,15 +296,18 @@ Future<void> showAlertDialog(
             title == null ? EdgeInsets.zero : const EdgeInsets.all(10),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         contentPadding: const EdgeInsets.only(top: 10),
-        title: Text(title ?? '', style: FontStyleUtility.blackInter20W600),
+        title: Text(title ?? '', style: blackInter20W600),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
               child ?? const SizedBox.shrink(),
               msg != null
                   ? Text(msg,
-                      style: FontStyleUtility.blackInter16W500.copyWith(
-                          height: 1.5, color: colorBlack.withOpacity(0.8)),
+                      style: blackInter16W500.copyWith(
+                          height: 1.5,
+                          color: isDarkOn.value == true
+                              ? colorWhite.withOpacity(0.8)
+                              : colorBlack.withOpacity(0.8)),
                       textAlign: textAlign ?? TextAlign.start)
                   : const SizedBox.shrink(),
             ],
@@ -314,7 +318,7 @@ Future<void> showAlertDialog(
               showNegativeButton ?? true
                   ? TextButton(
                       child: Text(negativeTitle ?? 'No',
-                          style: FontStyleUtility.blackInter16W600),
+                          style: blackInter16W600),
                       onPressed: () {
                         Get.back();
                       },
@@ -323,7 +327,7 @@ Future<void> showAlertDialog(
               showPositiveButton ?? true
                   ? TextButton(
                       child: Text(positiveTitle ?? 'Yes',
-                          style: FontStyleUtility.blackInter16W600),
+                          style: blackInter16W600),
                       onPressed: () {
                         callback();
                         Get.back();

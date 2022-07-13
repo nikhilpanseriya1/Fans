@@ -1,12 +1,12 @@
 import 'package:fans/moduls/Home/home/my_posts_screen.dart';
 import 'package:fans/moduls/Home/notification/View/billing_screen.dart';
 import 'package:fans/moduls/Home/notification/View/dashboard_screen.dart';
-import 'package:fans/moduls/Home/notification/View/edit_page_screen.dart';
 import 'package:fans/moduls/Home/notification/View/may_page_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscribers_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscriptions_screen.dart';
 import 'package:fans/moduls/Home/notification/View/social_profile_screen.dart';
 import 'package:fans/moduls/Home/notification/View/wallet_screen.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,14 +60,17 @@ class _HomeStructureViewState extends State<HomeStructureView> {
       child: Scaffold(
         key: _key,
         appBar: commonAppBar(
-            height: 70.0,
+            height: tabSelectedIndex.value == 0 || tabSelectedIndex.value == 1
+                ? 80.0
+                : 70.0,
+            // appbarBgColor: isDarkOn.value == true ? colorBlack : colorWhite,
             leadingIcon: Container(
               margin: const EdgeInsets.only(top: 15.0),
               child: IconButton(
-                icon: const Center(
+                icon: Center(
                   child: Icon(
-                    Icons.menu,
-                    color: colorBlack,
+                    Icons.menu_outlined,
+                    color: isDarkOn.value == true ? colorWhite : colorBlack,
                   ),
                 ),
                 onPressed: () {
@@ -76,27 +79,28 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 },
               ),
             ),
-            titleWidget: tabSelectedIndex.value == 0
-                ? Container(
-                    padding: const EdgeInsets.only(
-                      top: 12,
-                    ),
-                    child: commonTextField(
-                        filledColor: appBarColor,
-                        hintText: 'Search',
-                        textEditingController: null,
-                        borderOpacity: 0.0,
-                        contentPadding: EdgeInsets.zero,
-                        borderRadiusColor: deepPurpleColor.withOpacity(0.0),
-                        hintStyle: FontStyleUtility.whiteInter16W500,
-                        isBorder: true,
-                        textStyle: FontStyleUtility.whiteInter16W500,
-                        preFixWidget: const Icon(
-                          Icons.search,
-                          color: colorWhite,
-                        )),
-                  )
-                : const SizedBox(),
+            titleWidget:
+                tabSelectedIndex.value == 0 || tabSelectedIndex.value == 1
+                    ? Container(
+                        padding: const EdgeInsets.only(
+                          top: 10,
+                        ),
+                        child: commonTextField(
+                            filledColor: appBarColor,
+                            hintText: 'Search',
+                            textEditingController: null,
+                            borderOpacity: 0.0,
+                            contentPadding: EdgeInsets.zero,
+                            borderRadiusColor: deepPurpleColor.withOpacity(0.0),
+                            hintStyle: FontStyleUtility.whiteInter16W500,
+                            isBorder: true,
+                            textStyle: FontStyleUtility.whiteInter16W500,
+                            preFixWidget: const Icon(
+                              Icons.search,
+                              color: colorWhite,
+                            )),
+                      )
+                    : const SizedBox(),
             actionWidgets: [
               tabSelectedIndex.value == 0
                   ? Container(
@@ -132,26 +136,22 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                                         ListTile(
                                             title: Text(
                                           'Latest',
-                                          style:
-                                              FontStyleUtility.blackInter18W500,
+                                          style: blackInter18W500,
                                         )),
                                         ListTile(
                                             title: Text(
                                           'Old',
-                                          style:
-                                              FontStyleUtility.blackInter18W500,
+                                          style: blackInter18W500,
                                         )),
                                         ListTile(
                                             title: Text(
                                           'Unlockable',
-                                          style:
-                                              FontStyleUtility.blackInter18W500,
+                                          style: blackInter18W500,
                                         )),
                                         ListTile(
                                             title: Text(
                                           'Free',
-                                          style:
-                                              FontStyleUtility.blackInter18W500,
+                                          style: blackInter18W500,
                                         )),
                                       ],
                                     ),
@@ -160,13 +160,17 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                           },
                           icon: Image.asset(
                             'assets/appIcons/filter.png',
-                            color: colorGrey,
+                            color: isDarkOn.value == true
+                                ? colorWhite
+                                : colorBlack,
                             height: 25,
                             width: 25,
                             scale: 3.5,
                           )),
                     )
-                  : const SizedBox(),
+                  : const SizedBox(
+                      width: 10.0,
+                    ),
             ]),
         drawer: Drawer(
           child: ListView(
@@ -205,7 +209,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'Dashboard',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -219,7 +223,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'My Post',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -233,7 +237,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'Bookmarks',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -247,7 +251,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'Balance: TZS12,432.0',
-                  style: FontStyleUtility.blackInter16W400,
+                  style: blackInter16W500,
                 ),
                 onTap: () {},
               ),
@@ -258,7 +262,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'Wallet: TZS12,432.0',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.to(() => const WalletScreen());
@@ -271,7 +275,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'My Subscriber',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -285,23 +289,10 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'My Subscriptions',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.to(() => const MySubscriptionsScreen());
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.star_rounded,
-                  size: 30,
-                ),
-                title: Text(
-                  'Be a Creator!',
-                  style: FontStyleUtility.blackInter16W500,
-                ),
-                onTap: () {
-                  Get.to(() => const VerifyAccountScreen());
                 },
               ),
               ListTile(
@@ -311,7 +302,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'Social Profiles',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
@@ -325,13 +316,27 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'Billing',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {
                   Get.back();
                   Get.to(() => const BillingScreen());
                 },
               ),
+              StreamBuilder<Object>(
+                  stream: isDarkOn.stream,
+                  builder: (context, snapshot) {
+                    return ListTile(
+                      leading: Icon(isDarkOn.value == true
+                          ? Icons.sunny
+                          : Icons.nights_stay_rounded),
+                      title: Text(
+                        isDarkOn.value == true ? 'Light Mode' : 'Dark Mode',
+                        style: blackInter16W500,
+                      ),
+                      trailing: const ChangeThemeButtonWidget(),
+                    );
+                  }),
               ListTile(
                 leading: const Icon(
                   Icons.logout,
@@ -339,7 +344,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 ),
                 title: Text(
                   'Log Out',
-                  style: FontStyleUtility.blackInter16W500,
+                  style: blackInter16W500,
                 ),
                 onTap: () {},
               ),
@@ -349,24 +354,21 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                 child: materialButton(
                   onTap: () {
                     Get.back();
-                    Get.to(() => const EditPageScreen());
+                    Get.to(() => const VerifyAccountScreen());
                   },
-                  text: 'Edit Page',
-                  textStyle: FontStyleUtility.blackInter16W500
-                      .copyWith(color: colorWhite),
+                  text: 'Be a Creator!',
+                  textStyle: blackInter16W500.copyWith(color: colorWhite),
                 ),
               )
             ],
           ),
         ),
-        body: WillPopScope(
-          onWillPop: onWillPop,
-          child: Center(
-            child: _widgetOptions.elementAt(tabSelectedIndex.value),
-          ),
+        body: Center(
+          child: _widgetOptions.elementAt(tabSelectedIndex.value),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: colorWhite,
+          /*backgroundColor: colorWhite,*/
+          unselectedItemColor: isDarkOn.value == true ? colorWhite : colorGrey,
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -407,7 +409,6 @@ class _HomeStructureViewState extends State<HomeStructureView> {
           ],
           currentIndex: tabSelectedIndex.value,
           selectedItemColor: colorPrimary,
-          unselectedItemColor: colorGrey,
           onTap: onItemTapped,
         ),
       ),

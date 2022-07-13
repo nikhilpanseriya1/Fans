@@ -1,3 +1,4 @@
+import 'package:fans/utility/theme_data.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,29 +30,39 @@ class _BillingScreenState extends State<BillingScreen> {
               subTitle: 'Add your billing information.'),
           Text(
             'Billing Information',
-            style: FontStyleUtility.greyInter22W800,
+            style: greyInter22W800,
           ),
           10.heightBox,
           commonTextField(
-            preFixWidget: const Icon(CupertinoIcons.building_2_fill),
-            hintText: 'Company',
-            textEditingController: null,
-          ),
+              preFixWidget: Icon(
+                CupertinoIcons.building_2_fill,
+                color: isDarkOn.value == true ? colorWhite : colorGrey,
+              ),
+              hintText: 'Company',
+              textEditingController: null,
+              filledColor:
+                  isDarkOn.value == true ? colorLightBlack : colorWhite,
+              hintStyle: blackInter16W500.copyWith(
+                  color: isDarkOn.value == true ? colorLightWhite : colorGrey)),
           10.heightBox,
           Container(
-            margin: const EdgeInsets.only(top: 10),
             width: getScreenWidth(context),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                border: Border.all(color: colorBlack.withOpacity(0.5), width: 1)),
+                border:
+                    Border.all(color: colorBlack.withOpacity(0.5), width: 1),
+                color: isDarkOn.value == true ? colorLightBlack : colorWhite),
             child: CountryCodePickerScreen(
               showOnlyCountryWhenClosed: true,
               initialSelection: 'TZ',
+              dialogBackgroundColor: isDarkOn.value == true?colorBlack:colorWhite,
               showFlag: true,
               alignLeft: true,
+              backgroundColor: colorBlack,
               padding: EdgeInsets.zero,
               onChanged: (val) {
-                if (!kNotificationController.blockedCountriesList.contains(val.name)) {
+                if (!kNotificationController.blockedCountriesList
+                    .contains(val.name)) {
                   kNotificationController.blockedCountriesList.add(val.name!);
                 }
                 print(val.name!);
@@ -67,22 +78,31 @@ class _BillingScreenState extends State<BillingScreen> {
           // ),
           10.heightBox,
           commonTextField(
-            preFixWidget: const Icon(CupertinoIcons.map_pin_ellipse),
-            hintText: 'City',
-            textEditingController: null,
-          ),
+              preFixWidget: const Icon(CupertinoIcons.map_pin_ellipse),
+              hintText: 'City',
+              textEditingController: null,
+              filledColor:
+                  isDarkOn.value == true ? colorLightBlack : colorWhite,
+              hintStyle: blackInter16W500.copyWith(
+                  color: isDarkOn.value == true ? colorLightWhite : colorGrey)),
           10.heightBox,
           commonTextField(
-            preFixWidget: const Icon(CupertinoIcons.map),
-            hintText: 'Address',
-            textEditingController: null,
-          ),
+              preFixWidget: const Icon(CupertinoIcons.map),
+              hintText: 'Address',
+              textEditingController: null,
+              filledColor:
+                  isDarkOn.value == true ? colorLightBlack : colorWhite,
+              hintStyle: blackInter16W500.copyWith(
+                  color: isDarkOn.value == true ? colorLightWhite : colorGrey)),
           10.heightBox,
           commonTextField(
-            preFixWidget: const Icon(CupertinoIcons.location_solid),
-            hintText: 'Postal/ZIP',
-            textEditingController: null,
-          ),
+              preFixWidget: const Icon(CupertinoIcons.location_solid),
+              hintText: 'Postal/ZIP',
+              textEditingController: null,
+              filledColor:
+                  isDarkOn.value == true ? colorLightBlack : colorWhite,
+              hintStyle: blackInter16W500.copyWith(
+                  color: isDarkOn.value == true ? colorLightWhite : colorGrey)),
         ],
       ),
       bottomNavigation: Padding(

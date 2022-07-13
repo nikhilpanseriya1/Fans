@@ -26,12 +26,12 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                 itemBuilder: (context, index) {
               return commonPost(context);
             }),
-            Column(
+            /*Column(
               children:  [
                 const Icon(Icons.bookmark_border,size: 80.0,color: colorGrey,),
                 Text('No Book Mark Yet',style: FontStyleUtility.greyInter16W500.copyWith(fontSize: 20),)
               ],
-            )
+            )*/
           ],
         ));
   }

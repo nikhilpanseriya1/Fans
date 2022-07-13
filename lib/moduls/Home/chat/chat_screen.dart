@@ -2,6 +2,8 @@ import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../utility/theme_data.dart';
+
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
@@ -42,13 +44,12 @@ class _ChatScreenState extends State<ChatScreen> {
                   const Icon(
                     CupertinoIcons.chat_bubble_2_fill,
                     size: 30,
-                    color: colorGrey,
                   ),
                   10.widthBox,
                   Text(
                     'Chats',
-                    style: FontStyleUtility.greyInter18W500
-                        .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
+                    style: greyInter18W500.copyWith(
+                        fontSize: 25, fontWeight: FontWeight.w700),
                   ),
                 ],
               ),
@@ -56,8 +57,11 @@ class _ChatScreenState extends State<ChatScreen> {
             5.heightBox,
             Text(
               'You don\'t have any chat',
-              style: FontStyleUtility.greyInter18W500.copyWith(
-                  color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
+              style: greyInter18W500.copyWith(
+                  color: isDarkOn.value == true
+                      ? colorWhite.withOpacity(0.7)
+                      : colorDarkBlue.withOpacity(0.7),
+                  letterSpacing: 1),
               textAlign: TextAlign.center,
             ),
             30.heightBox,

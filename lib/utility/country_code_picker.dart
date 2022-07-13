@@ -87,7 +87,7 @@ class CountryCodePickerScreen extends StatefulWidget {
   /// with customized codes.
   final List<Map<String, String>> countryList;
 
-  CountryCodePickerScreen({
+  const CountryCodePickerScreen({
     this.onChanged,
     this.onInit,
     this.initialSelection,
@@ -129,16 +129,21 @@ class CountryCodePickerScreen extends StatefulWidget {
   State<StatefulWidget> createState() {
     List<Map<String, String>> jsonList = countryList;
 
-    List<CountryCode> elements = jsonList.map((json) => CountryCode.fromJson(json)).toList();
+    List<CountryCode> elements =
+        jsonList.map((json) => CountryCode.fromJson(json)).toList();
 
     if (comparator != null) {
       elements.sort(comparator);
     }
 
     if (countryFilter != null && countryFilter!.isNotEmpty) {
-      final uppercaseCustomList = countryFilter!.map((c) => c.toUpperCase()).toList();
+      final uppercaseCustomList =
+          countryFilter!.map((c) => c.toUpperCase()).toList();
       elements = elements
-          .where((c) => uppercaseCustomList.contains(c.code) || uppercaseCustomList.contains(c.name) || uppercaseCustomList.contains(c.dialCode))
+          .where((c) =>
+              uppercaseCustomList.contains(c.code) ||
+              uppercaseCustomList.contains(c.name) ||
+              uppercaseCustomList.contains(c.dialCode))
           .toList();
     }
 
@@ -168,14 +173,20 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
             direction: Axis.horizontal,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              if (widget.showFlagMain != null ? widget.showFlagMain! : widget.showFlag)
+              if (widget.showFlagMain != null
+                  ? widget.showFlagMain!
+                  : widget.showFlag)
                 Flexible(
                   flex: widget.alignLeft ? 0 : 1,
                   fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
                   child: Container(
-                    clipBehavior: widget.flagDecoration == null ? Clip.none : Clip.hardEdge,
+                    clipBehavior: widget.flagDecoration == null
+                        ? Clip.none
+                        : Clip.hardEdge,
                     decoration: widget.flagDecoration,
-                    margin: widget.alignLeft ? const EdgeInsets.only(right: 16.0, left: 8.0) : const EdgeInsets.only(right: 16.0),
+                    margin: widget.alignLeft
+                        ? const EdgeInsets.only(right: 16.0, left: 8.0)
+                        : const EdgeInsets.only(right: 16.0),
                     child: Image.asset(
                       selectedItem!.flagUri!,
                       package: 'country_code_picker',
@@ -187,8 +198,11 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
                 Flexible(
                   fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
                   child: Text(
-                    widget.showOnlyCountryWhenClosed ? selectedItem!.toCountryStringOnly() : selectedItem.toString(),
-                    style: widget.textStyle ?? Theme.of(context).textTheme.button,
+                    widget.showOnlyCountryWhenClosed
+                        ? selectedItem!.toCountryStringOnly()
+                        : selectedItem.toString(),
+                    style:
+                        widget.textStyle ?? Theme.of(context).textTheme.button,
                     overflow: widget.textOverflow,
                   ),
                 ),
@@ -197,7 +211,9 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
                   flex: widget.alignLeft ? 0 : 1,
                   fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
                   child: Padding(
-                      padding: widget.alignLeft ? const EdgeInsets.only(right: 16.0, left: 8.0) : const EdgeInsets.only(right: 16.0),
+                      padding: widget.alignLeft
+                          ? const EdgeInsets.only(right: 16.0, left: 8.0)
+                          : const EdgeInsets.only(right: 16.0),
                       child: Icon(
                         Icons.arrow_drop_down,
                         color: Colors.grey,
@@ -228,9 +244,11 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
       if (widget.initialSelection != null) {
         selectedItem = elements.firstWhere(
             (e) =>
-                (e.code!.toUpperCase() == widget.initialSelection!.toUpperCase()) ||
+                (e.code!.toUpperCase() ==
+                    widget.initialSelection!.toUpperCase()) ||
                 (e.dialCode == widget.initialSelection) ||
-                (e.name!.toUpperCase() == widget.initialSelection!.toUpperCase()),
+                (e.name!.toUpperCase() ==
+                    widget.initialSelection!.toUpperCase()),
             orElse: () => elements[0]);
       } else {
         selectedItem = elements[0];
@@ -246,7 +264,8 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
     if (widget.initialSelection != null) {
       selectedItem = elements.firstWhere(
           (e) =>
-              (e.code!.toUpperCase() == widget.initialSelection!.toUpperCase()) ||
+              (e.code!.toUpperCase() ==
+                  widget.initialSelection!.toUpperCase()) ||
               (e.dialCode == widget.initialSelection) ||
               (e.name!.toUpperCase() == widget.initialSelection!.toUpperCase()),
           orElse: () => elements[0]);
@@ -256,7 +275,10 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
 
     favoriteElements = elements
         .where((e) =>
-            widget.favorite.firstWhereOrNull((f) => e.code!.toUpperCase() == f.toUpperCase() || e.dialCode == f || e.name!.toUpperCase() == f.toUpperCase()) !=
+            widget.favorite.firstWhereOrNull((f) =>
+                e.code!.toUpperCase() == f.toUpperCase() ||
+                e.dialCode == f ||
+                e.name!.toUpperCase() == f.toUpperCase()) !=
             null)
         .toList();
   }
@@ -280,9 +302,12 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
                 searchStyle: widget.searchStyle,
                 textStyle: widget.dialogTextStyle,
                 boxDecoration: widget.boxDecoration,
-                showFlag: widget.showFlagDialog != null ? widget.showFlagDialog : widget.showFlag,
+                showFlag: widget.showFlagDialog != null
+                    ? widget.showFlagDialog
+                    : widget.showFlag,
                 flagWidth: widget.flagWidth,
-                size: Size(getScreenWidth(context) - 40, getScreenHeight(context) * 0.70)/*widget.dialogSize*/,
+                size: Size(getScreenWidth(context) - 40,
+                    getScreenHeight(context) * 0.70) /*widget.dialogSize*/,
                 backgroundColor: widget.dialogBackgroundColor,
                 barrierColor: widget.barrierColor,
                 hideSearch: widget.hideSearch,
@@ -316,10 +341,13 @@ class CountryCodePickerScreenState extends State<CountryCodePickerScreen> {
             searchStyle: widget.searchStyle,
             textStyle: widget.dialogTextStyle,
             boxDecoration: widget.boxDecoration,
-            showFlag: widget.showFlagDialog != null ? widget.showFlagDialog : widget.showFlag,
+            showFlag: widget.showFlagDialog != null
+                ? widget.showFlagDialog
+                : widget.showFlag,
             flagWidth: widget.flagWidth,
             flagDecoration: widget.flagDecoration,
-            size: Size(getScreenWidth(context) - 40, getScreenHeight(context) * 0.70)/*widget.dialogSize*/,
+            size: Size(getScreenWidth(context) - 40,
+                getScreenHeight(context) * 0.70) /*widget.dialogSize*/,
             backgroundColor: widget.dialogBackgroundColor,
             barrierColor: widget.barrierColor,
             hideSearch: widget.hideSearch,

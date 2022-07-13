@@ -1,3 +1,4 @@
+import 'package:fans/utility/theme_data.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,8 @@ class _SocialProfileScreenState extends State<SocialProfileScreen> {
               subTitle: 'Add your social media profiles here.'),
           Text(
             'Social Profiles',
-            style: FontStyleUtility.greyInter22W800,
+            style: greyInter22W800.copyWith(
+                color: isDarkOn.value == true ? colorWhite : colorGrey),
           ),
           10.heightBox,
           Expanded(
@@ -42,14 +44,21 @@ class _SocialProfileScreenState extends State<SocialProfileScreen> {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 15.0),
                     child: commonTextField(
+                      filledColor:
+                          isDarkOn.value == true ? colorBlack : colorWhite,
+                      textStyle: blackInter16W500.copyWith(
+                          color:
+                              isDarkOn.value == true ? colorWhite : colorGrey),
+                      hintStyle: blackInter16W500.copyWith(
+                          color: isDarkOn.value == true
+                              ? colorLightWhite
+                              : colorGrey),
                       preFixWidget: Container(
                           padding: const EdgeInsets.all(15),
                           width: 20,
                           height: 20,
-                          child: kNotificationController
-                              .socialProfileList[index].icon),
-                      hintText:
-                          kNotificationController.socialProfileList[index].hint,
+                          child: kNotificationController.socialProfileList[index].icon),
+                      hintText: kNotificationController.socialProfileList[index].hint,
                       textEditingController: kNotificationController
                           .socialProfileList[index].controller,
                       // validationFunction: (val) {

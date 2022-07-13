@@ -10,6 +10,7 @@ import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/constants.dart';
 import 'package:fans/utility/font_style_utility.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -52,12 +53,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       const Icon(
                         Icons.notifications_none,
                         size: 30,
-                        color: colorGrey,
                       ),
                       10.widthBox,
                       Text(
                         'Notifications',
-                        style: FontStyleUtility.greyInter18W500.copyWith(
+                        style: greyInter18W500.copyWith(
                             fontSize: 25, fontWeight: FontWeight.w700),
                       ),
                       10.widthBox,
@@ -236,8 +236,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 5.heightBox,
                 Text(
                   'New subscribers, likes and comments',
-                  style: FontStyleUtility.greyInter18W500.copyWith(
-                      color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
+                  style: greyInter18W500.copyWith(
+                      color: isDarkOn.value == true
+                          ? colorWhite.withOpacity(0.7)
+                          : colorDarkBlue.withOpacity(0.7),
+                      letterSpacing: 1),
                 ),
                 30.heightBox,
 
@@ -312,13 +315,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               TextSpan(
                                   text:
                                       'Your video has been processed successfully (Post) ',
-                                  style: FontStyleUtility.blackInter16W600
-                                      .copyWith(color: colorGrey, height: 1.2)),
+                                  style: blackInter16W600.copyWith(
+                                      color: isDarkOn.value == true
+                                          ? colorWhite
+                                          : colorGrey,
+                                      height: 1.2)),
                               TextSpan(
                                   text: 'Testing 1',
-                                  style: FontStyleUtility.blackInter16W600
-                                      .copyWith(
-                                          color: colorPrimary, height: 1.2)),
+                                  style: blackInter16W600.copyWith(
+                                      color: colorPrimary, height: 1.2)),
                             ]),
                           ),
                           subtitle: Text(
@@ -366,8 +371,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Receive notification when:',
-                            style: FontStyleUtility.blackInter18W600
-                                .copyWith(color: colorGrey)),
+                            style: blackInter18W600.copyWith(
+                                color: isDarkOn.value == true
+                                    ? colorWhite
+                                    : colorGrey)),
                         IconButton(
                             onPressed: () {
                               Get.back();
@@ -395,6 +402,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       // inactiveThumbColor: Colors.grey,
                                       dragStartBehavior:
                                           DragStartBehavior.start,
+                                      activeColor: colorPrimary,
                                       value: kNotificationController
                                           .notificationList[index]
                                           .isChecked
@@ -417,8 +425,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     20.heightBox,
                     Text('Email notification',
-                        style: FontStyleUtility.blackInter18W600
-                            .copyWith(color: colorGrey)),
+                        style: blackInter18W600.copyWith(
+                            color: isDarkOn.value == true
+                                ? colorWhite
+                                : colorGrey)),
                     20.heightBox,
                     ListView.builder(
                       shrinkWrap: true,
@@ -436,6 +446,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 height: 30,
                                 child: Obx(
                                   () => Switch(
+                                      activeColor: colorPrimary,
                                       dragStartBehavior:
                                           DragStartBehavior.start,
                                       value: kNotificationController
@@ -677,13 +688,13 @@ Widget commonScreenView(
             Icon(
               icon,
               size: 30,
-              color: colorGrey,
+             /* color: colorGrey,*/
             ),
             10.widthBox,
             Text(
               title,
-              style: FontStyleUtility.greyInter18W500
-                  .copyWith(fontSize: 25, fontWeight: FontWeight.w700),
+              style: greyInter18W500.copyWith(
+                  fontSize: 25, fontWeight: FontWeight.w700),
             ),
           ],
         ),
@@ -691,8 +702,11 @@ Widget commonScreenView(
       5.heightBox,
       Text(
         subTitle,
-        style: FontStyleUtility.greyInter18W500
-            .copyWith(color: colorDarkBlue.withOpacity(0.7), letterSpacing: 1),
+        style: greyInter18W500.copyWith(
+            color: isDarkOn.value == true
+                ? colorWhite.withOpacity(0.7)
+                : colorDarkBlue.withOpacity(0.7),
+            letterSpacing: 1),
         textAlign: TextAlign.center,
       ),
       30.heightBox,

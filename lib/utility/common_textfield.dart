@@ -158,11 +158,11 @@ Widget commonTextField(
                     child: passwordVisible
                         ? const Icon(
                             CupertinoIcons.eye,
-                            color: textColor,
+                            /*color: textColor,*/
                           )
                         : const Icon(
                             CupertinoIcons.eye_slash,
-                            color: textColor,
+                           /* color: textColor,*/
                           ))
                 : suffixIcon ??
                     const SizedBox(

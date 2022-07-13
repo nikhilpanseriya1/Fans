@@ -1,5 +1,7 @@
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'colors_utility.dart';
 import 'font_style_utility.dart';
@@ -27,7 +29,7 @@ PreferredSize commonAppBar({
         bottom: bottom,
         toolbarHeight: height ?? 50.0,
         elevation: elevation ?? 0.0,
-        backgroundColor: appbarBgColor ?? colorWhite,
+        backgroundColor: isDarkOn.value != true ? colorWhite : appbarBgColor,
         automaticallyImplyLeading: false,
         titleSpacing: 0,
         centerTitle: true,
@@ -50,7 +52,7 @@ PreferredSize commonAppBar({
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,
-                  color: colorBlack,
+                  /*color: colorBlack,*/
                   size: 25,
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:fans/moduls/Home/home/goto_post_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:lottie/lottie.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../utility/theme_data.dart';
 import '../../../utility/utility_export.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +19,14 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return commonStructure(
@@ -124,7 +133,8 @@ Future<void> editPost(BuildContext context) {
                       background: MaterialStateProperty.all(deepPurpleColor),
                       text: 'Save',
                       height: 45.0,
-                      textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite)),
+                      textStyle: FontStyleUtility.blackInter16W500
+                          .copyWith(color: colorWhite)),
                 ],
               ),
             ],
@@ -166,7 +176,8 @@ Future deletePost(BuildContext context) {
               SizedBox(
                 width: 160,
                 child: materialButton(
-                    background: MaterialStateProperty.all(colorRed.withOpacity(0.10)),
+                    background:
+                        MaterialStateProperty.all(colorRed.withOpacity(0.10)),
                     text: 'No cancel!',
                     onTap: () {
                       Get.back();
@@ -176,7 +187,8 @@ Future deletePost(BuildContext context) {
               SizedBox(
                 width: 160,
                 child: materialButton(
-                    background: MaterialStateProperty.all(colorRed.withOpacity(0.5)),
+                    background:
+                        MaterialStateProperty.all(colorRed.withOpacity(0.5)),
                     text: 'Yes, delete it!',
                     onTap: () {
                       Get.back();
@@ -198,7 +210,9 @@ Widget homeViewData(bool? visible, BuildContext context) {
     thumbColor: colorSplash.withOpacity(0.5),
     child: ListView(
       shrinkWrap: true,
-      physics: visible == false ? const NeverScrollableScrollPhysics() : const ClampingScrollPhysics(),
+      physics: visible == false
+          ? const NeverScrollableScrollPhysics()
+          : const ClampingScrollPhysics(),
       children: [
         /* visible == false
             ? const SizedBox()
@@ -323,19 +337,29 @@ Widget homeViewData(bool? visible, BuildContext context) {
                                 return Align(
                                   alignment: Alignment.centerLeft,
                                   child: ListView.builder(
-                                      itemCount: (kHomeController.imageFileList.length) + 1,
+                                      itemCount: (kHomeController
+                                              .imageFileList.length) +
+                                          1,
                                       physics: const ClampingScrollPhysics(),
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) {
-                                        return index != kHomeController.imageFileList.length
+                                        return index !=
+                                                kHomeController
+                                                    .imageFileList.length
                                             ? Stack(
                                                 children: [
                                                   Container(
-                                                      margin: const EdgeInsets.only(right: 12, top: 5),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              right: 12,
+                                                              top: 5),
                                                       child: Center(
                                                         child: Image.file(
-                                                          File(kHomeController.imageFileList[index].path),
+                                                          File(kHomeController
+                                                              .imageFileList[
+                                                                  index]
+                                                              .path),
                                                           fit: BoxFit.cover,
                                                           width: 130,
                                                         ),
@@ -344,11 +368,16 @@ Widget homeViewData(bool? visible, BuildContext context) {
                                                     top: 5,
                                                     right: 5,
                                                     child: IconButton(
-                                                      visualDensity: const VisualDensity(
-                                                          vertical: VisualDensity.minimumDensity),
+                                                      visualDensity:
+                                                          const VisualDensity(
+                                                              vertical:
+                                                                  VisualDensity
+                                                                      .minimumDensity),
                                                       padding: EdgeInsets.zero,
                                                       onPressed: () {
-                                                        kHomeController.imageFileList.removeAt(index);
+                                                        kHomeController
+                                                            .imageFileList
+                                                            .removeAt(index);
                                                       },
                                                       icon: const Icon(
                                                         Icons.remove_circle,
@@ -360,23 +389,43 @@ Widget homeViewData(bool? visible, BuildContext context) {
                                               )
                                             : InkWell(
                                                 onTap: () async {
-                                                  final List<XFile>? selectedImages =
-                                                      await kHomeController.imagePicker.pickMultiImage();
-                                                  if (selectedImages!.isNotEmpty) {
-                                                    kHomeController.imageFileList.addAll(selectedImages);
+                                                  final List<XFile>?
+                                                      selectedImages =
+                                                      await kHomeController
+                                                          .imagePicker
+                                                          .pickMultiImage();
+                                                  if (selectedImages!
+                                                      .isNotEmpty) {
+                                                    kHomeController
+                                                        .imageFileList
+                                                        .addAll(selectedImages);
                                                   }
                                                 },
                                                 child: Container(
                                                   decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(20.0),
-                                                      border: Border.all(color: colorBlack.withOpacity(0.5))),
-                                                  margin: const EdgeInsets.only(right: 12),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      border: Border.all(
+                                                          color: isDarkOn
+                                                                      .value ==
+                                                                  true
+                                                              ? colorLightWhite
+                                                              : colorBlack
+                                                                  .withOpacity(
+                                                                      0.5))),
+                                                  margin: const EdgeInsets.only(
+                                                      right: 12),
                                                   width: 130,
                                                   child: Center(
-                                                      child: Icon(
-                                                    Icons.add,
-                                                    color: colorBlack.withOpacity(0.5),
-                                                  )),
+                                                      child: Icon(Icons.add,
+                                                          color: isDarkOn
+                                                                      .value ==
+                                                                  true
+                                                              ? colorLightWhite
+                                                              : colorBlack
+                                                                  .withOpacity(
+                                                                      0.5))),
                                                 ),
                                               );
                                       }),
@@ -385,44 +434,58 @@ Widget homeViewData(bool? visible, BuildContext context) {
                         )
                       : const SizedBox();
                 }),
-            Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    kHomeController.imageShowing.value = !kHomeController.imageShowing.value;
-                  },
-                  icon: const Icon(
-                    Icons.image_outlined,
-                    color: deepPurpleColor,
+            Obx(()=>
+               Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      kHomeController.imageShowing.value =
+                          !kHomeController.imageShowing.value;
+                    },
+                    icon: Icon(
+                      Icons.image_outlined,
+                      color:
+                          isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                      size: 25,
+                    ),
+                  ),
+                  20.widthBox,
+                  Icon(
+                    Icons.folder_zip_outlined,
+                    color: isDarkOn.value == true ? colorWhite : deepPurpleColor,
                     size: 25,
                   ),
-                ),
-                20.widthBox,
-                const Icon(
-                  Icons.folder_zip_outlined,
-                  color: deepPurpleColor,
-                  size: 25,
-                ),
-                20.widthBox,
-                const Icon(
-                  Icons.lock_outline,
-                  color: deepPurpleColor,
-                  size: 25,
-                ),
-                20.widthBox,
-                const Icon(
-                  Icons.emoji_emotions_outlined,
-                  color: deepPurpleColor,
-                  size: 25,
-                ),
-              ],
+                  20.widthBox,
+                  Icon(
+                    Icons.lock_outline,
+                    color: isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                    size: 25,
+                  ),
+                  20.widthBox,
+                  Icon(
+                    Icons.emoji_emotions_outlined,
+                    color: isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                    size: 25,
+                  ),
+                ],
+              ),
             ),
             20.heightBox,
             materialButton(
                 background: MaterialStateProperty.all(lightPurpleColor),
                 text: 'Publish',
+                onTap: () async {
+                  await analytics.logEvent(
+                    name: "select_content",
+                    parameters: {
+                      "content_type": "button",
+                      "item_id": 1,
+                    },
+                  );
+                },
                 height: 40.0,
-                textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite)),
+                textStyle: FontStyleUtility.blackInter16W500
+                    .copyWith(color: colorWhite)),
             20.heightBox,
             Align(
                 alignment: Alignment.centerRight,
@@ -487,7 +550,8 @@ Widget exploreCreatorData() {
                               ),
                             ),
                             color: const Color(0xff7c94b6),
-                            borderRadius: const BorderRadius.all(Radius.circular(50.0)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(50.0)),
                             border: Border.all(
                               color: colorWhite,
                               width: 2.0,
@@ -505,7 +569,9 @@ Widget exploreCreatorData() {
                               children: const [
                                 Text('Gym Guy',
                                     style: TextStyle(
-                                        fontSize: 18, fontWeight: FontWeight.w900, color: colorWhite)),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w900,
+                                        color: colorWhite)),
                                 Icon(
                                   Icons.verified_outlined,
                                   color: colorWhite,
@@ -576,216 +642,225 @@ Widget exploreCreatorData() {
 }
 
 Widget commonPost(BuildContext context) {
-  return Container(
-    color: colorWhite,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ClipOval(
-              child: SizedBox.fromSize(
-                size: const Size.fromRadius(35), // Image radius
-                child: Image.asset(
-                  'assets/images/profile.jpeg',
-                  scale: 3.5,
-                  height: 55.0,
-                  width: 55.0,
-                  fit: BoxFit.fill,
-                ),
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ClipOval(
+            child: SizedBox.fromSize(
+              size: const Size.fromRadius(35), // Image radius
+              child: Image.asset(
+                'assets/images/profile.jpeg',
+                scale: 3.5,
+                height: 55.0,
+                width: 55.0,
+                fit: BoxFit.fill,
               ),
             ),
-            20.widthBox,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Admin',
-                      style: FontStyleUtility.blackInter22W500
-                          .copyWith(color: deepPurpleColor, fontWeight: FontWeight.w900),
-                    ),
-                    5.widthBox,
-                    const Icon(
-                      Icons.verified,
-                      color: blueColor,
-                    ),
-                    5.widthBox,
-                    Text(
-                      '@Admin',
-                      style: FontStyleUtility.greyInter14W500,
-                    )
-                  ],
-                ),
-                5.heightBox,
-                Row(
-                  children: [
-                    Text(
-                      '5 day to ago',
-                      style: FontStyleUtility.greyInter16W500,
-                    ),
-                    10.widthBox,
-                    const Icon(
-                      Icons.lock_outline,
-                      color: colorGrey,
-                      size: 20.0,
-                    )
-                  ],
-                ),
-              ],
-            ),
-            const Spacer(),
-            PopupMenuButton(
-              icon: const Icon(
-                Icons.more_horiz,
-                size: 35,
-                color: colorGrey,
-              ),
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem(
-                    value: 'GoToPost',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.ios_share_outlined),
-                        10.widthBox,
-                        const Text('Go to post'),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'PinYourProfile',
-                    child: Row(
-                      children: [
-                        const Icon(CupertinoIcons.pin),
-                        10.widthBox,
-                        const Text('Pin your Profile'),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'CopyLink',
-                    child: Row(
-                      children: [
-                        const Icon(CupertinoIcons.link),
-                        10.widthBox,
-                        const Text('Copy link'),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'EditPost',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.edit_outlined),
-                        10.widthBox,
-                        const Text('Edit post'),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    value: 'DeletePost',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.delete_outline),
-                        10.widthBox,
-                        const Text('Delete post'),
-                      ],
-                    ),
-                  ),
-                ];
-              },
-              onSelected: (String value) => actionPopUpItemSelected(value, 'name', context),
-            ),
-          ],
-        ),
-        15.heightBox,
-        Text(
-          'Testing',
-          style: FontStyleUtility.greyInter18W500,
-        ),
-        10.heightBox,
-        /*Container(
-                    height: 200,
-                    color: colorBlack,
-                  ),*/
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            'assets/images/post1.jpeg',
-            fit: BoxFit.cover,
           ),
-        ),
-        5.heightBox,
-        Row(
-          children: [
-            StreamBuilder<Object>(
-                stream: kHomeController.likeButton.stream,
-                builder: (context, snapshot) {
-                  return IconButton(
-                      splashColor: colorRed,
-                      splashRadius: 20.0,
-                      onPressed: () {
-                        kHomeController.likeButton.value = !kHomeController.likeButton.value;
-                      },
-                      icon: Icon(
-                        kHomeController.likeButton.value == true
-                            ? CupertinoIcons.heart_fill
-                            : CupertinoIcons.suit_heart,
-                        size: 25,
-                        color: kHomeController.likeButton.value == true ? colorRed : colorGrey,
-                      ));
-                }),
-            Text(
-              '1',
-              overflow: TextOverflow.ellipsis,
-              style: FontStyleUtility.greyInter18W500,
+          20.widthBox,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'Admin',
+                    style: FontStyleUtility.blackInter22W500.copyWith(
+                        color: isDarkOn.value == true
+                            ? colorWhite
+                            : deepPurpleColor,
+                        fontWeight: FontWeight.w900),
+                  ),
+                  5.widthBox,
+                  const Icon(
+                    Icons.verified,
+                    color: blueColor,
+                  ),
+                  5.widthBox,
+                  Text(
+                    '@Admin',
+                    style: greyInter14W500,
+                  )
+                ],
+              ),
+              5.heightBox,
+              Row(
+                children: [
+                  Text(
+                    '5 day to ago',
+                    style: FontStyleUtility.greyInter16W500,
+                  ),
+                  10.widthBox,
+                  const Icon(
+                    Icons.lock_outline,
+                    color: colorGrey,
+                    size: 20.0,
+                  )
+                ],
+              ),
+            ],
+          ),
+          const Spacer(),
+          PopupMenuButton(
+            icon: const Icon(
+              Icons.more_horiz,
+              size: 35,
+              color: colorGrey,
             ),
-            2.widthBox,
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  CupertinoIcons.chat_bubble,
-                  size: 22,
-                  color: colorGrey,
-                )),
-            Text(
-              '1',
-              overflow: TextOverflow.ellipsis,
-              style: FontStyleUtility.greyInter18W500,
-            ),
-            2.widthBox,
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  CupertinoIcons.share,
-                  size: 22,
-                  color: colorGrey,
-                )),
-            const Spacer(),
-            StreamBuilder<Object>(
-                stream: kHomeController.bookmarkButton.stream,
-                builder: (context, snapshot) {
-                  return IconButton(
-                      splashColor: deepPurpleColor,
-                      splashRadius: 20.0,
-                      onPressed: () {
-                        kHomeController.bookmarkButton.value = !kHomeController.bookmarkButton.value;
-                      },
-                      icon: Icon(
-                        kHomeController.bookmarkButton.value == true ? Icons.bookmark : Icons.bookmark_border,
-                        size: 23,
-                        color: kHomeController.bookmarkButton.value == true ? deepPurpleColor : colorGrey,
-                      ));
-                })
-          ],
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  value: 'GoToPost',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.ios_share_outlined),
+                      10.widthBox,
+                      const Text('Go to post'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'PinYourProfile',
+                  child: Row(
+                    children: [
+                      const Icon(CupertinoIcons.pin),
+                      10.widthBox,
+                      const Text('Pin your Profile'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'CopyLink',
+                  child: Row(
+                    children: [
+                      const Icon(CupertinoIcons.link),
+                      10.widthBox,
+                      const Text('Copy link'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'EditPost',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.edit_outlined),
+                      10.widthBox,
+                      const Text('Edit post'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'DeletePost',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.delete_outline),
+                      10.widthBox,
+                      const Text('Delete post'),
+                    ],
+                  ),
+                ),
+              ];
+            },
+            onSelected: (String value) =>
+                actionPopUpItemSelected(value, 'name', context),
+          ),
+        ],
+      ),
+      15.heightBox,
+      Text(
+        'Testing',
+        style: greyInter18W500,
+      ),
+      10.heightBox,
+      /*Container(
+                  height: 200,
+                  color: colorBlack,
+                ),*/
+      ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.asset(
+          'assets/images/post1.jpeg',
+          fit: BoxFit.cover,
         ),
-        20.heightBox
-      ],
-    ),
+      ),
+      5.heightBox,
+      Row(
+        children: [
+          StreamBuilder<Object>(
+              stream: kHomeController.likeButton.stream,
+              builder: (context, snapshot) {
+                return IconButton(
+                    splashColor: colorRed,
+                    splashRadius: 20.0,
+                    onPressed: () {
+                      kHomeController.likeButton.value =
+                          !kHomeController.likeButton.value;
+                    },
+                    icon: Icon(
+                      kHomeController.likeButton.value == true
+                          ? CupertinoIcons.heart_fill
+                          : CupertinoIcons.suit_heart,
+                      size: 25,
+                      color: kHomeController.likeButton.value == true
+                          ? colorRed
+                          : colorGrey,
+                    ));
+              }),
+          Text(
+            '1',
+            overflow: TextOverflow.ellipsis,
+            style: FontStyleUtility.greyInter18W500,
+          ),
+          2.widthBox,
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                CupertinoIcons.chat_bubble,
+                size: 22,
+                color: colorGrey,
+              )),
+          Text(
+            '1',
+            overflow: TextOverflow.ellipsis,
+            style: FontStyleUtility.greyInter18W500,
+          ),
+          2.widthBox,
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                CupertinoIcons.share,
+                size: 22,
+                color: colorGrey,
+              )),
+          const Spacer(),
+          StreamBuilder<Object>(
+              stream: kHomeController.bookmarkButton.stream,
+              builder: (context, snapshot) {
+                return IconButton(
+                    splashColor: deepPurpleColor,
+                    splashRadius: 20.0,
+                    onPressed: () {
+                      kHomeController.bookmarkButton.value =
+                          !kHomeController.bookmarkButton.value;
+                    },
+                    icon: Icon(
+                      kHomeController.bookmarkButton.value == true
+                          ? Icons.bookmark
+                          : Icons.bookmark_border,
+                      size: 23,
+                      color: kHomeController.bookmarkButton.value == true
+                          ? deepPurpleColor
+                          : colorGrey,
+                    ));
+              })
+        ],
+      ),
+      20.heightBox
+    ],
   );
 }

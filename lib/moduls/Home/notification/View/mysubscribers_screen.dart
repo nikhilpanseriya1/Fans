@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../../utility/theme_data.dart';
+
 class MySubscribersScreen extends StatefulWidget {
   const MySubscribersScreen({Key? key}) : super(key: key);
 
@@ -60,23 +62,23 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                       children: [
                         Text(
                           'Subscriber',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Date',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Interval',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Endsat',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Status',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                       ],
                     ),
@@ -92,7 +94,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
+                                    color: Colors.black.withOpacity(0.3),
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                     offset: const Offset(
@@ -102,7 +104,9 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 border:
                                     Border.all(color: colorPrimary, width: 1),
-                                color: colorWhite),
+                                color: isDarkOn.value == true
+                                    ? colorLightBlack
+                                    : colorWhite),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,14 +116,14 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     const Icon(
-                                      Icons.supervised_user_circle_sharp,
+                                      Icons.supervised_user_circle,
                                       size: 50,
                                     ),
                                     SizedBox(
                                       width: 80,
                                       child: Text(
                                         'Gym Guy',
-                                        style: FontStyleUtility.greyInter16W500,
+                                        style: greyInter16W500,
                                         maxLines: 1,
                                         textAlign: TextAlign.center,
                                       ),
@@ -132,7 +136,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                     'Jun 11, 2022',
-                                    style: FontStyleUtility.greyInter16W500,
+                                    style: greyInter16W500,
                                   ),
                                 ),
                                 SizedBox(
@@ -141,7 +145,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                     maxLines: 2,
                                     textAlign: TextAlign.center,
                                     'Weekly',
-                                    style: FontStyleUtility.greyInter16W500,
+                                    style: greyInter16W500,
                                   ),
                                 ),
                                 SizedBox(
@@ -150,7 +154,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                     'Jun 01, 2025',
-                                    style: FontStyleUtility.greyInter16W500,
+                                    style: greyInter16W500,
                                   ),
                                 ),
                                 Container(
@@ -163,7 +167,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                     child: Text(
                                       textAlign: TextAlign.center,
                                       'Cancelled',
-                                      style: FontStyleUtility.greyInter16W500
+                                      style: greyInter16W500
                                           .copyWith(color: colorWhite),
                                     ),
                                   ),

@@ -6,8 +6,10 @@ import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../moduls/Home/home_structure.dart';
+import '../../../utility/theme_data.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -36,8 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             heightBox(50.0),
             Text('Join now and Start making money\nwith your content!',
-                textAlign: TextAlign.center,
-                style: FontStyleUtility.greyInter22W500),
+                textAlign: TextAlign.center, style: greyInter22W500),
             heightBox(50.0),
             heightBox(30.0),
             Align(
@@ -58,20 +59,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     commonTextField(
-                      preFixWidget: const Icon(Icons.account_circle_outlined),
+                      preFixWidget: const Icon(
+                        Icons.account_circle_outlined,
+                        color: colorPrimary,
+                      ),
                       hintText: 'Full Name',
                       textEditingController: null,
                     ),
                     heightBox(10.0),
                     commonTextField(
-                      preFixWidget: const Icon(Icons.email_outlined),
+                      preFixWidget: const Icon(
+                        Icons.email_outlined,
+                        color: colorPrimary,
+                      ),
                       hintText: 'Email',
                       textEditingController: null,
                       isEnabled: true,
                     ),
                     heightBox(10.0),
                     commonTextField(
-                      preFixWidget: const Icon(Icons.vpn_key_outlined),
+                      preFixWidget: const Icon(
+                        Icons.vpn_key_outlined,
+                        color: colorPrimary,
+                      ),
                       hintText: 'PassWord',
                       textEditingController: null,
                       isEnabled: true,
@@ -123,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Get.offAll(() => const HomeStructureView());
+                          Get.to(() => const HomeStructureView());
                         },
                         child: Text(
                           "Sign up",
@@ -138,10 +148,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onTap: () {
                         Get.off(() => const SignInScreen());
                       },
-                      child: Text(
-                        ' Already have account?',
-                        style: FontStyleUtility.whiteInter20W500
-                      ),
+                      child: Text(' Already have account?',
+                          style: FontStyleUtility.whiteInter20W500),
                     )),
                     heightBox(40.0),
                     Row(

@@ -1,4 +1,5 @@
 import 'package:fans/moduls/Home/notification/notification_screen.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
-      padding: 0.0,
+        padding: 0.0,
         context: context,
         appBar: commonAppBar(),
         child: RawScrollbar(
@@ -40,23 +41,23 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                       children: [
                         Text(
                           'Subscriber',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Date',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Interval',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Endsat',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                         Text(
                           'Status',
-                          style: FontStyleUtility.greyInter16W500,
+                          style: greyInter16W500,
                         ),
                       ],
                     ),
@@ -67,12 +68,13 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 7,horizontal: 12),
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 7, horizontal: 12),
                             padding: const EdgeInsets.symmetric(vertical: 15),
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
+                                    color: Colors.black.withOpacity(0.3),
                                     spreadRadius: 1,
                                     blurRadius: 5,
                                     offset: const Offset(
@@ -80,8 +82,11 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: colorPrimary, width: 1),
-                                color: colorWhite),
+                                border:
+                                    Border.all(color: colorPrimary, width: 1),
+                                color: isDarkOn.value == true
+                                    ? colorLightBlack
+                                    : colorWhite),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,14 +96,14 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     const Icon(
-                                      Icons.supervised_user_circle_sharp,
+                                      Icons.supervised_user_circle,
                                       size: 50,
                                     ),
                                     SizedBox(
                                       width: 80,
                                       child: Text(
                                         'Gym Guy',
-                                        style: FontStyleUtility.greyInter16W500,
+                                        style: greyInter16W500,
                                         maxLines: 1,
                                         textAlign: TextAlign.center,
                                       ),
@@ -111,7 +116,7 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                     'Jun 11, 2022',
-                                    style: FontStyleUtility.greyInter16W500,
+                                    style: greyInter16W500,
                                   ),
                                 ),
                                 SizedBox(
@@ -120,7 +125,7 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                                     maxLines: 2,
                                     textAlign: TextAlign.center,
                                     'Weekly',
-                                    style: FontStyleUtility.greyInter16W500,
+                                    style: greyInter16W500,
                                   ),
                                 ),
                                 SizedBox(
@@ -129,18 +134,21 @@ class _MySubscriptionsScreenState extends State<MySubscriptionsScreen> {
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                     'Jun 01, 2025',
-                                    style: FontStyleUtility.greyInter16W500,
+                                    style: greyInter16W500,
                                   ),
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-                                      color: colorGreen, borderRadius: BorderRadius.circular(100)),
-                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                      color: colorGreen,
+                                      borderRadius: BorderRadius.circular(100)),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
                                   child: Center(
                                     child: Text(
                                       textAlign: TextAlign.center,
                                       'Active',
-                                      style: FontStyleUtility.greyInter16W500.copyWith(color: colorWhite),
+                                      style: greyInter16W500.copyWith(
+                                          color: colorWhite),
                                     ),
                                   ),
                                 ),

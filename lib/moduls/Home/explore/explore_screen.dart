@@ -83,44 +83,42 @@ class _ExploreScreenState extends State<ExploreScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              decoration: const BoxDecoration(color: colorWhite),
-              child: TabBar(
-                physics: const ClampingScrollPhysics(),
-                padding: const EdgeInsets.only(left: 12.0),
-                indicator: BoxDecoration(
-                    color: deepPurpleColor,
-                    borderRadius: BorderRadius.circular(25.0)),
-                controller: tabController,
-                isScrollable: true,
-                unselectedLabelColor: colorGrey,
-                indicatorColor: colorPrimary,
-                labelColor: colorWhite,
-                unselectedLabelStyle: FontStyleUtility.blackInter15W500,
-                tabs: const [
-                  Tab(
-                    text: 'Music',
-                  ),
-                  Tab(
-                    text: 'Photography',
-                  ),
-                  Tab(
-                    text: 'Yoga',
-                  ),
-                  Tab(
-                    text: 'Developer',
-                  ),
-                  Tab(
-                    text: 'Church',
-                  ),
-                  Tab(
-                    text: 'Products',
-                  ),
-                  Tab(
-                    text: 'Artist',
-                  ),
-                ],
-              ),
+            18.heightBox,
+            TabBar(
+              physics: const ClampingScrollPhysics(),
+              padding: const EdgeInsets.only(left: 12.0,right: 5.0),
+              indicator: BoxDecoration(
+                  color: deepPurpleColor,
+                  borderRadius: BorderRadius.circular(25.0)),
+              controller: tabController,
+              isScrollable: true,
+              unselectedLabelColor: colorGrey,
+              indicatorColor: colorPrimary,
+              labelColor: colorWhite,
+              unselectedLabelStyle: FontStyleUtility.blackInter15W500,
+              tabs: const [
+                Tab(
+                  text: 'Music',
+                ),
+                Tab(
+                  text: 'Photography',
+                ),
+                Tab(
+                  text: 'Yoga',
+                ),
+                Tab(
+                  text: 'Developer',
+                ),
+                Tab(
+                  text: 'Church',
+                ),
+                Tab(
+                  text: 'Products',
+                ),
+                Tab(
+                  text: 'Artist',
+                ),
+              ],
             ),
             20.heightBox,
             /* Text(

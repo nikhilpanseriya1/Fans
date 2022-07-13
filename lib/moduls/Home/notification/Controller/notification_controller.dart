@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
+import '../../../../utility/theme_data.dart';
 import '../../../../utility/utility_export.dart';
 import '../Model/notification_settings_model.dart';
 
@@ -64,51 +64,75 @@ class NotificationController extends GetxController {
 
   RxList<SocialProfileModel> socialProfileList = [
     SocialProfileModel(
-        icon: Image(image: facebook, color: colorGrey),
+        icon: Image(
+            image: facebook,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://facebook.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: twitter, color: colorGrey),
+        icon: Image(
+            image: twitter,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://twitter.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: instagram, color: colorGrey),
+        icon: Image(
+            image: instagram,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://instagram.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: youtube, color: colorGrey),
+        icon: Image(
+            image: youtube,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://youtube.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: pinterest, color: colorGrey),
+        icon: Image(
+            image: pinterest,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://pinterest.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: github, color: colorGrey),
+        icon: Image(
+            image: github,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://github.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: snapchat, color: colorGrey),
+        icon: Image(
+            image: snapchat,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://www.snapchat.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: tiktok, color: colorGrey),
+        icon: Image(
+            image: tiktok,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://www.tiktok.com/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: telegram, color: colorGrey),
+        icon: Image(
+            image: telegram,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://t.me/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: twitch, color: colorGrey),
+        icon: Image(
+            image: twitch,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://www.twitch.tv/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: discord, color: colorGrey),
+        icon: Image(
+            image: discord,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://discord.gg/username',
         controller: TextEditingController()),
     SocialProfileModel(
-        icon: Image(image: vkSocial, color: colorGrey),
+        icon: Image(
+            image: vkSocial,
+            color: isDarkOn.value == true ? colorLightWhite : colorGrey),
         hint: 'https://vk.com/username',
         controller: TextEditingController()),
   ].obs;

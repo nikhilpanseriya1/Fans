@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:fans/moduls/LoginFlow/views/signin_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/font_style_utility.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,6 +26,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    if (Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark) {
+      isDarkOn.value = true;
+      print('klklklklklklkl${isDarkOn.value}');
+    }
+
     return Scaffold(
         backgroundColor: colorSplash,
         body: Stack(

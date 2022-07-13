@@ -7,7 +7,10 @@ import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../../utility/theme_data.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -34,16 +37,23 @@ class _SignInScreenState extends State<SignInScreen> {
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   heightBox(50.0),
-                  Image.asset(
-                    'assets/logo/fans_logo1.png',
-                    scale: 3.4,
-                    height: 130.0,
-                    width: 130.0,
+                  InkWell(
+                    onTap: () {
+                      Get.isDarkMode
+                          ? Get.changeTheme(ThemeData.light())
+                          : Get.changeTheme(ThemeData.light());
+                    },
+                    child: Image.asset(
+                      'assets/logo/fans_logo1.png',
+                      scale: 3.4,
+                      height: 130.0,
+                      width: 130.0,
+                    ),
                   ),
                   heightBox(50.0),
                   Text('Join now and Start making money\nwith your content!',
-                      textAlign: TextAlign.center,
-                      style: FontStyleUtility.greyInter22W500),
+                      textAlign: TextAlign.center, style: greyInter22W500),
+                  // const ChangeThemeButtonWidget(),
                 ],
               ),
             ),
@@ -66,13 +76,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   // mainAxisSize: MainAxisSize.max,
                   children: [
                     commonTextField(
-                      preFixWidget: const Icon(Icons.mail_outline),
+                      preFixWidget: const Icon(
+                        Icons.mail_outline,
+                        color: colorPrimary,
+                      ),
                       hintText: 'Enter Your Email',
                       textEditingController: null,
                     ),
                     heightBox(10.0),
                     commonTextField(
-                      preFixWidget: const Icon(Icons.vpn_key_outlined),
+                      preFixWidget: const Icon(
+                        Icons.vpn_key_outlined,
+                        color: colorPrimary,
+                      ),
                       hintText: 'PassWord',
                       textEditingController: null,
                       isEnabled: true,
@@ -154,10 +170,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       onTap: () {
                         Get.to(() => const SignUpScreen());
                       },
-                      child: Text(
-                        'Don\'t have an account?',
-                        style: FontStyleUtility.whiteInter20W500
-                      ),
+                      child: Text('Don\'t have an account?',
+                          style: FontStyleUtility.whiteInter20W500),
                     )),
                     50.heightBox,
                     Row(

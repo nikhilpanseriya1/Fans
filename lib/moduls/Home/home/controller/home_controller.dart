@@ -9,8 +9,8 @@ class HomeController extends GetxController{
   RxBool likeButton = false.obs;
   RxBool bookmarkButton = false.obs;
   RxBool imageShowing = false.obs;
-
   ImagePicker imagePicker = ImagePicker();
   RxList<XFile>? selectedImages;
   RxList imageFileList = [].obs;
+  // RxList<Map<String, dynamic>> addFieldsModelList = <Map<String, dynamic>>[].obs;
 }
