@@ -426,40 +426,42 @@ class _MyPageScreenState extends State<MyPageScreen>
                 //   );
                 // }),
                 // 10.heightBox,
-                Container(
-                  // decoration: const BoxDecoration(color: colorWhite),
-                  child: TabBar(
-                    controller: tabController,
-                    unselectedLabelColor:
-                        isDarkOn.value == true ? colorWhite : colorGrey,
-                    indicatorColor: colorPrimary,
-                    labelColor: colorPrimary,
-                    tabs: const [
-                      Tab(
-                        icon: Icon(Icons.grid_view_rounded, size: 20),
-                        text: '10',
-                      ),
-                      Tab(
-                        icon: Icon(Icons.image, size: 20),
-                        text: '4',
-                      ),
-                      Tab(
-                        icon: Icon(Icons.videocam),
-                        text: '3',
-                      ),
-                      Tab(
-                        icon: Icon(Icons.mic),
-                        text: '1',
-                      ),
-                    ],
-                  ),
-                ),
+                StreamBuilder<Object>(
+                    stream: isDarkOn.stream,
+                    builder: (context, snapshot) {
+                      return TabBar(
+                        controller: tabController,
+                        unselectedLabelColor:
+                            isDarkOn.value == true ? colorWhite : colorGrey,
+                        indicatorColor: colorPrimary,
+                        labelColor: colorPrimary,
+                        tabs: const [
+                          Tab(
+                            icon: Icon(Icons.grid_view_rounded, size: 20),
+                            text: '10',
+                          ),
+                          Tab(
+                            icon: Icon(Icons.image, size: 20),
+                            text: '4',
+                          ),
+                          Tab(
+                            icon: Icon(Icons.videocam),
+                            text: '3',
+                          ),
+                          Tab(
+                            icon: Icon(Icons.mic),
+                            text: '1',
+                          ),
+                        ],
+                      );
+                    }),
                 10.heightBox,
                 SizedBox(
-                  height: getScreenHeight(context) * 0.78,
+                  height: getScreenHeight(context) * 0.70,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
                       controller: tabController,
                       children: <Widget>[
                         homeViewData(false, context),
@@ -619,15 +621,19 @@ class _MyPageScreenState extends State<MyPageScreen>
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
                 color: colorPrimary.withOpacity(0.2)),
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Image(
-                image: image,
-                height: 30,
-                width: 30,
-                color: isDarkOn.value == true ? colorWhite : colorPrimary,
-              ),
-            ),
+            child: StreamBuilder<Object>(
+                stream: isDarkOn.stream,
+                builder: (context, snapshot) {
+                  return Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Image(
+                      image: image,
+                      height: 30,
+                      width: 30,
+                      color: isDarkOn.value == true ? colorWhite : colorPrimary,
+                    ),
+                  );
+                }),
           ),
           20.heightBox,
           Text(

@@ -55,15 +55,19 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
             5.heightBox,
-            Text(
-              'You don\'t have any chat',
-              style: greyInter18W500.copyWith(
-                  color: isDarkOn.value == true
-                      ? colorWhite.withOpacity(0.7)
-                      : colorDarkBlue.withOpacity(0.7),
-                  letterSpacing: 1),
-              textAlign: TextAlign.center,
-            ),
+            StreamBuilder<Object>(
+                stream: isDarkOn.stream,
+                builder: (context, snapshot) {
+                  return Text(
+                    'You don\'t have any chat',
+                    style: greyInter18W500.copyWith(
+                        color: isDarkOn.value == true
+                            ? colorWhite.withOpacity(0.7)
+                            : colorDarkBlue.withOpacity(0.7),
+                        letterSpacing: 1),
+                    textAlign: TextAlign.center,
+                  );
+                }),
             30.heightBox,
           ],
         ));

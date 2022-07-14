@@ -114,12 +114,9 @@ Widget commonTextField(
             obscureText: passwordVisible,
             textInputAction: inputAction ?? TextInputAction.next,
             style: textStyle ??
-                const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
-                  color: textColor,
-                ),
+                blackInter16W500.copyWith(
+                    color:
+                        isDarkOn.value == true ? colorLightWhite : colorBlack),
             inputFormatters: inputFormatter,
             decoration: InputDecoration(
               counterText: '',
@@ -156,14 +153,14 @@ Widget commonTextField(
                           passwordVisible = !passwordVisible;
                         });
                       },
-                      child: passwordVisible
+                      child: passwordVisible == true
                           ? const Icon(
-                              CupertinoIcons.eye,
-                              /*color: textColor,*/
-                            )
-                          : const Icon(
                               CupertinoIcons.eye_slash,
                               /* color: textColor,*/
+                            )
+                          : const Icon(
+                              CupertinoIcons.eye,
+                              /*color: textColor,*/
                             ))
                   : suffixIcon ??
                       const SizedBox(

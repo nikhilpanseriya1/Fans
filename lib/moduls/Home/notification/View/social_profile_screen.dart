@@ -19,59 +19,64 @@ class _SocialProfileScreenState extends State<SocialProfileScreen> {
     return commonStructure(
       context: context,
       appBar: commonAppBar(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          commonScreenView(
-              icon: Icons.monetization_on_outlined,
-              title: 'Social Profiles',
-              subTitle: 'Add your social media profiles here.'),
-          Text(
-            'Social Profiles',
-            style: greyInter22W800.copyWith(
-                color: isDarkOn.value == true ? colorWhite : colorGrey),
-          ),
-          10.heightBox,
-          Expanded(
-            child: RawScrollbar(
-              thickness: 5.0,
-              thumbColor: colorSplash.withOpacity(0.5),
-              child: ListView.builder(
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: kNotificationController.socialProfileList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 15.0),
-                    child: commonTextField(
-                      filledColor:
-                          isDarkOn.value == true ? colorBlack : colorWhite,
-                      textStyle: blackInter16W500.copyWith(
-                          color:
-                              isDarkOn.value == true ? colorWhite : colorGrey),
-                      hintStyle: blackInter16W500.copyWith(
-                          color: isDarkOn.value == true
-                              ? colorLightWhite
-                              : colorGrey),
-                      preFixWidget: Container(
-                          padding: const EdgeInsets.all(15),
-                          width: 20,
-                          height: 20,
-                          child: kNotificationController.socialProfileList[index].icon),
-                      hintText: kNotificationController.socialProfileList[index].hint,
-                      textEditingController: kNotificationController
-                          .socialProfileList[index].controller,
-                      // validationFunction: (val) {
-                      //   return emailValidation(val);
-                      // },
-                    ),
-                  );
-                },
+      child: StreamBuilder<Object>(
+        stream: isDarkOn.stream,
+        builder: (context, snapshot) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              commonScreenView(
+                  icon: Icons.monetization_on_outlined,
+                  title: 'Social Profiles',
+                  subTitle: 'Add your social media profiles here.'),
+              Text(
+                'Social Profiles',
+                style: greyInter22W800.copyWith(
+                    color: isDarkOn.value == true ? colorWhite : colorGrey),
               ),
-            ),
-          ),
-          20.heightBox,
-        ],
+              10.heightBox,
+              Expanded(
+                child: RawScrollbar(
+                  thickness: 5.0,
+                  thumbColor: colorSplash.withOpacity(0.5),
+                  child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: kNotificationController.socialProfileList.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 15.0),
+                        child: commonTextField(
+                          filledColor:
+                              isDarkOn.value == true ? colorBlack : colorWhite,
+                          textStyle: blackInter16W500.copyWith(
+                              color:
+                                  isDarkOn.value == true ? colorWhite : colorGrey),
+                          hintStyle: blackInter16W500.copyWith(
+                              color: isDarkOn.value == true
+                                  ? colorLightWhite
+                                  : colorGrey),
+                          preFixWidget: Container(
+                              padding: const EdgeInsets.all(15),
+                              width: 20,
+                              height: 20,
+                              child: kNotificationController.socialProfileList[index].icon),
+                          hintText: kNotificationController.socialProfileList[index].hint,
+                          textEditingController: kNotificationController
+                              .socialProfileList[index].controller,
+                          // validationFunction: (val) {
+                          //   return emailValidation(val);
+                          // },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              20.heightBox,
+            ],
+          );
+        }
       ),
       bottomNavigation: Padding(
         padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),

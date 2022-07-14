@@ -141,8 +141,7 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
                                     children: [
                                       Text(
                                         element,
-                                        style:
-                                            blackInter14W500,
+                                        style: blackInter14W500.copyWith(color: colorWhite),
                                         textAlign: TextAlign.center,
                                       ),
                                       10.widthBox,

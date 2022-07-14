@@ -211,7 +211,7 @@ Widget homeViewData(bool? visible, BuildContext context) {
     child: ListView(
       shrinkWrap: true,
       physics: visible == false
-          ? const NeverScrollableScrollPhysics()
+          ? const ClampingScrollPhysics()
           : const ClampingScrollPhysics(),
       children: [
         /* visible == false
