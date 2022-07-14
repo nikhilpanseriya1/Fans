@@ -9,7 +9,6 @@ Widget commonStructure({
   double? padding,
   Widget? bottomNavigation,
 }) {
-  ///Pass null in appbar when it's optional ex = appBar : null
   return SafeArea(
     child: Stack(
       children: [

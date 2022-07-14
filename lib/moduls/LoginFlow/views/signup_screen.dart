@@ -155,13 +155,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/appIcons/icon_google.png',
-                          scale: 3.5,
+                        const Icon(
+                          Icons.phone_android_sharp,
+                          color: colorWhite,
                         ),
-                        widthBox(30.0),
+                        widthBox(20.0),
                         Text(
-                          'Login with Google',
+                          'Login with Mobile Number',
                           style: FontStyleUtility.whiteInter16W500,
                         )
                       ],

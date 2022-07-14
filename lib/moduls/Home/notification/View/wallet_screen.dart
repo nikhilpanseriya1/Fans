@@ -1,3 +1,4 @@
+import 'package:fans/utility/theme_data.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,7 +74,8 @@ class _WalletScreenState extends State<WalletScreen> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               decoration: BoxDecoration(
-                border: Border.all(color: colorGrey),
+                border: Border.all(
+                    color: isDarkOn.value == true ? colorLightWhite : colorGrey),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -83,11 +85,11 @@ class _WalletScreenState extends State<WalletScreen> {
                     children: [
                       Text(
                         'Transaction Fee: ',
-                        style: FontStyleUtility.greyInter18W500,
+                        style: greyInter18W500,
                       ),
                       Text(
                         'TZS0',
-                        style: FontStyleUtility.greyInter18W500,
+                        style: greyInter18W500,
                       )
                     ],
                   ),
@@ -97,11 +99,11 @@ class _WalletScreenState extends State<WalletScreen> {
                     children: [
                       Text(
                         'Total: ',
-                        style: FontStyleUtility.greyInter18W500,
+                        style: greyInter18W500,
                       ),
                       Text(
                         'TZS0',
-                        style: FontStyleUtility.greyInter18W500,
+                        style: greyInter18W500,
                       )
                     ],
                   ),
@@ -133,7 +135,7 @@ class _WalletScreenState extends State<WalletScreen> {
                     ),
                     Text(
                       'Transaction Fee:3.0%',
-                      style: FontStyleUtility.greyInter14W400,
+                      style: greyInter14W400,
                     )
                   ],
                 ),

@@ -55,8 +55,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     textEditingController: newPasswordController,
                     isPassword: true,
                     errorMaxLines: 2,
-                    filledColor:
-                        isDarkOn.value == true ? colorLightBlack : colorWhite,
                     hintStyle: blackInter16W500.copyWith(
                         color: isDarkOn.value == true
                             ? colorLightWhite

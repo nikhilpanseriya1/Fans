@@ -22,7 +22,8 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
   @override
   Widget build(BuildContext context) {
     return commonStructure(
-      padding: 0.0,
+        appBar: commonAppBar(),
+        padding: 0.0,
         context: context,
         child: RawScrollbar(
           thickness: 5.0,
@@ -74,9 +75,10 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                             freeSubscriptionBool.value = val;
                           }).paddingOnly(left: 10.0),
                     ),
+                    5.widthBox,
                     Text(
                       'Free Subscription',
-                      style: FontStyleUtility.greyInter14W400,
+                      style: greyInter14W400,
                     )
                   ],
                 ),
@@ -125,18 +127,19 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
               ),
               15.heightBox,
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 width: getScreenWidth(context),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    border:
-                        Border.all(color: colorBlack.withOpacity(0.5), width: 1)),
+                    border: Border.all(
+                        color: colorBlack.withOpacity(0.5), width: 1)),
                 child: RichText(
                     text: TextSpan(children: [
                   TextSpan(
                     text: 'TZS: ',
-                    style: FontStyleUtility.blackInter18W500
-                        .copyWith(color: colorGrey, fontWeight: FontWeight.w400),
+                    style: FontStyleUtility.blackInter18W500.copyWith(
+                        color: colorGrey, fontWeight: FontWeight.w400),
                   ),
                   TextSpan(
                     text: price,
@@ -150,7 +153,7 @@ class _SubscriptionPriceState extends State<SubscriptionPrice> {
                       children: [
                         Obx(
                           () => Switch(
-                            activeColor: deepPurpleColor,
+                              activeColor: deepPurpleColor,
                               value: isSwitchOn.value,
                               onChanged: (val) {
                                 isSwitchOn.value = val;

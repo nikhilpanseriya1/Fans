@@ -315,11 +315,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               TextSpan(
                                   text:
                                       'Your video has been processed successfully (Post) ',
-                                  style: blackInter16W600.copyWith(
-                                      color: isDarkOn.value == true
-                                          ? colorWhite
-                                          : colorGrey,
-                                      height: 1.2)),
+                                  style: blackInter16W600.copyWith(height: 1.2)),
                               TextSpan(
                                   text: 'Testing 1',
                                   style: blackInter16W600.copyWith(

@@ -7,10 +7,7 @@ import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-import '../../../utility/theme_data.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -177,13 +174,13 @@ class _SignInScreenState extends State<SignInScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/appIcons/icon_google.png',
-                          scale: 3.5,
+                        const Icon(
+                          Icons.phone_android_sharp,
+                          color: colorWhite,
                         ),
-                        widthBox(30.0),
+                        widthBox(20.0),
                         Text(
-                          'Login with Google',
+                          'Login with Mobile Number',
                           style: FontStyleUtility.whiteInter16W500,
                         )
                       ],

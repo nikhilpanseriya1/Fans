@@ -1,4 +1,5 @@
 import 'package:fans/moduls/Home/notification/notification_screen.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -86,11 +87,18 @@ class _EditPageScreenState extends State<EditPageScreen> {
                 //     }),
                 // 20.heightBox,
                 commonTextField(
-                  preFixWidget: const Icon(Icons.person_outline),
-                  hintText: 'Admin*',
-                  // labelText: 'Full name*',
-                  textEditingController: null,
-                ),
+                    preFixWidget: const Icon(
+                      Icons.person_outline,
+                    ),
+                    hintText: 'Admin*',
+                    // labelText: 'Full name*',
+                    textEditingController: null,
+                    filledColor:
+                        isDarkOn.value == true ? colorLightBlack : colorWhite,
+                    hintStyle: blackInter16W500.copyWith(
+                        color: isDarkOn.value == true
+                            ? colorLightWhite
+                            : colorGrey)),
                 20.heightBox,
                 commonTextField(
                   hintText: 'User name*',

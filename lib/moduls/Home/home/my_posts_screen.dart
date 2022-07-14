@@ -13,6 +13,7 @@ class MyPostsScreen extends StatefulWidget {
 
   @override
   State<MyPostsScreen> createState() => _MyPostsScreenState();
+
 }
 
 class _MyPostsScreenState extends State<MyPostsScreen> {

@@ -51,7 +51,7 @@ class MyTheme {
       scaffoldBackgroundColor: Colors.white,
       primaryColor: Colors.white,
       colorScheme: const ColorScheme.light(),
-      iconTheme: IconThemeData(color: colorPrimary),
+      // iconTheme: IconThemeData(color: colorPrimary),
       unselectedWidgetColor: colorGrey,
       fontFamily: 'Inter');
 }

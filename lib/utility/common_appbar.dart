@@ -25,46 +25,48 @@ PreferredSize commonAppBar({
 }) {
   return PreferredSize(
       preferredSize: Size.fromHeight(height ?? 50.0),
-      child: AppBar(
-        bottom: bottom,
-        toolbarHeight: height ?? 50.0,
-        elevation: elevation ?? 0.0,
-        backgroundColor: isDarkOn.value != true ? colorWhite : appbarBgColor,
-        automaticallyImplyLeading: false,
-        titleSpacing: 0,
-        centerTitle: true,
-        leading: leadingIcon ??
-            InkWell(
-              highlightColor: appbarBgColor ?? colorWhite,
-              focusColor: appbarBgColor ?? colorWhite,
-              onTap: () {
-                if (backButtonCallBack != null) {
-                  backButtonCallBack();
-                } else {
-                  Get.back();
-                }
-              },
-              child: InkWell(
+      child: Obx(()=>
+         AppBar(
+          bottom: bottom,
+          toolbarHeight: height ?? 50.0,
+          elevation: elevation ?? 0.0,
+          backgroundColor: isDarkOn.value != true ? colorWhite : appbarBgColor,
+          automaticallyImplyLeading: false,
+          titleSpacing: 0,
+          centerTitle: true,
+          leading: leadingIcon ??
+              InkWell(
                 highlightColor: appbarBgColor ?? colorWhite,
                 focusColor: appbarBgColor ?? colorWhite,
                 onTap: () {
-                  Get.back();
+                  if (backButtonCallBack != null) {
+                    backButtonCallBack();
+                  } else {
+                    Get.back();
+                  }
                 },
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  /*color: colorBlack,*/
-                  size: 25,
+                child: InkWell(
+                  highlightColor: appbarBgColor ?? colorWhite,
+                  focusColor: appbarBgColor ?? colorWhite,
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: isDarkOn.value == true ? colorWhite : colorBlack,
+                    size: 25,
+                  ),
                 ),
               ),
-            ),
-        title: titleWidget ??
-            Text(
-              title ?? "",
-              textAlign: TextAlign.center,
-              style: FontStyleUtility.blackDMSerifDisplay20W400,
-            ),
-        actions: actionWidgets,
-        // actions: actions != null ? actions : null,
+          title: titleWidget ??
+              Text(
+                title ?? "",
+                textAlign: TextAlign.center,
+                style: FontStyleUtility.blackDMSerifDisplay20W400,
+              ),
+          actions: actionWidgets,
+          // actions: actions != null ? actions : null,
+        ),
       ));
 }
 
