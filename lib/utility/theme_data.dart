@@ -48,8 +48,8 @@ class MyTheme {
 
   static final lightTheme = ThemeData(
       brightness: Brightness.light,
-      scaffoldBackgroundColor: Colors.white,
-      primaryColor: Colors.white,
+      scaffoldBackgroundColor: colorWhite,
+      primaryColor: colorWhite,
       colorScheme: const ColorScheme.light(),
       // iconTheme: IconThemeData(color: colorPrimary),
       unselectedWidgetColor: colorGrey,

@@ -1,3 +1,4 @@
+import 'package:fans/utility/theme_data.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -30,17 +31,24 @@ class _RestrictedUsersScreenState extends State<RestrictedUsersScreen> {
                   Container(
                       padding: const EdgeInsets.all(25),
                       decoration: BoxDecoration(
-                          border: Border.all(color: colorGrey.withOpacity(0.5)),
+                          border: Border.all(
+                              color: isDarkOn.value == true
+                                  ? colorWhite.withOpacity(0.5)
+                                  : colorLightBlack.withOpacity(0.5),
+                              width: 3),
                           borderRadius: BorderRadius.circular(100)),
                       child: Icon(
                         Icons.block_flipped,
+                        color: isDarkOn.value == true
+                            ? colorWhite.withOpacity(0.5)
+                            : colorLightBlack.withOpacity(0.5),
                         size: 75,
-                        color: colorGrey.withOpacity(0.8),
+                        // color: colorGrey.withOpacity(0.8),
                       )),
                   20.heightBox,
                   Text(
                     'No results have been found',
-                    style: FontStyleUtility.greyInter18W500,
+                    style: greyInter18W500,
                   ),
                   5.heightBox,
                 ],

@@ -35,19 +35,19 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   30.heightBox,
                   Text('Password Recover',
                       textAlign: TextAlign.center,
-                      style: FontStyleUtility.greyInter22W500.copyWith(fontWeight: FontWeight.w800,fontSize: 28)),
+                      style: greyInter22W500.copyWith(fontWeight: FontWeight.w800,fontSize: 28)),
 
                   heightBox(20.0),
                   Text('You will receive an email to reset your password',
                       textAlign: TextAlign.center,
-                      style: FontStyleUtility.greyInter22W500),
+                      style: greyInter22W500),
                 ],
               ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: getScreenHeight(context) * 0.6,
+                height: getScreenHeight(context) * 0.5,
                 padding:  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0)
                     .copyWith(top: 25),
                 decoration: const BoxDecoration(
@@ -91,7 +91,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         ),
                       ),
                     ),
-                    heightBox(20.0),
+                   /* heightBox(20.0),*/
                   ],
                 ),
               ),

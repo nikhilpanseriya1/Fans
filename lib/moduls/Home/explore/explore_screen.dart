@@ -1,6 +1,7 @@
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/font_style_utility.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -17,6 +18,8 @@ class _ExploreScreenState extends State<ExploreScreen>
     with TickerProviderStateMixin {
   RxBool isExpansionTileOpen = false.obs;
   TabController? tabController;
+  RxInt scrollIndex = 0.obs;
+  PageController pageController = PageController(initialPage: 0, keepPage: true,);
 
   final List<StaggeredGridTile> _cardTile = <StaggeredGridTile>[
     const StaggeredGridTile.count(
@@ -65,7 +68,8 @@ class _ExploreScreenState extends State<ExploreScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController = TabController(vsync: this, length: 7);
+    tabController =
+        TabController(vsync: this, length: 7, initialIndex: scrollIndex.value);
   }
 
   @override
@@ -84,42 +88,49 @@ class _ExploreScreenState extends State<ExploreScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             18.heightBox,
-            TabBar(
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.only(left: 12.0,right: 5.0),
-              indicator: BoxDecoration(
-                  color: deepPurpleColor,
-                  borderRadius: BorderRadius.circular(25.0)),
-              controller: tabController,
-              isScrollable: true,
-              unselectedLabelColor: colorGrey,
-              indicatorColor: colorPrimary,
-              labelColor: colorWhite,
-              unselectedLabelStyle: FontStyleUtility.blackInter15W500,
-              tabs: const [
-                Tab(
-                  text: 'Music',
-                ),
-                Tab(
-                  text: 'Photography',
-                ),
-                Tab(
-                  text: 'Yoga',
-                ),
-                Tab(
-                  text: 'Developer',
-                ),
-                Tab(
-                  text: 'Church',
-                ),
-                Tab(
-                  text: 'Products',
-                ),
-                Tab(
-                  text: 'Artist',
-                ),
-              ],
-            ),
+            Obx(() => TabBar(
+                  physics: const ClampingScrollPhysics(),
+                  padding: const EdgeInsets.only(left: 12.0, right: 5.0),
+                  indicator: BoxDecoration(
+                      color: deepPurpleColor,
+                      borderRadius: BorderRadius.circular(25.0)),
+                  controller: tabController,
+                  isScrollable: true,
+                  unselectedLabelColor:
+                      isDarkOn.value == true ? colorLightWhite : colorGrey,
+                  onTap: (index) {
+                    scrollIndex.value = index;
+                    pageController.animateToPage(index,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease);
+                  },
+                  indicatorColor: colorPrimary,
+                  labelColor: colorWhite,
+                  unselectedLabelStyle: blackInter15W500,
+                  tabs: const [
+                    Tab(
+                      text: 'Music',
+                    ),
+                    Tab(
+                      text: 'Photography',
+                    ),
+                    Tab(
+                      text: 'Yoga',
+                    ),
+                    Tab(
+                      text: 'Developer',
+                    ),
+                    Tab(
+                      text: 'Church',
+                    ),
+                    Tab(
+                      text: 'Products',
+                    ),
+                    Tab(
+                      text: 'Artist',
+                    ),
+                  ],
+                )),
             20.heightBox,
             /* Text(
               'Explore our Craters',
@@ -381,224 +392,255 @@ class _ExploreScreenState extends State<ExploreScreen>
             ),*/
 
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                child: RawScrollbar(
-                  thickness: 5.0,
-                  thumbColor: colorSplash.withOpacity(0.5),
-                  child: SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    child: StaggeredGrid.count(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      children: [
-                        StaggeredGridTile.count(
-                          crossAxisCellCount: 2,
-                          mainAxisCellCount: 2,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18.0),
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  Image.asset('assets/images/profile.jpeg',
-                                      fit: BoxFit.cover),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          right: 10, bottom: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
-                                        color: colorDarkBlack.withOpacity(0.5),
-                                      ),
-                                      height: 30,
-                                      width: 30,
-                                      child: Center(
-                                        child: Text(
-                                          '55',
-                                          style:
-                                              FontStyleUtility.whiteInter14W500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        StaggeredGridTile.count(
-                          crossAxisCellCount: 2,
-                          mainAxisCellCount: 3,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18.0),
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  Image.asset('assets/images/profile2.jpg',
-                                      fit: BoxFit.cover),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          right: 10, bottom: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
-                                        color: colorDarkBlack.withOpacity(0.5),
-                                      ),
-                                      height: 30,
-                                      width: 30,
-                                      child: Center(
-                                        child: Text(
-                                          '20',
-                                          style:
-                                              FontStyleUtility.whiteInter14W500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        StaggeredGridTile.count(
-                          crossAxisCellCount: 2,
-                          mainAxisCellCount: 3,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18.0),
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  Image.asset('assets/images/profile3.jpg',
-                                      fit: BoxFit.cover),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          right: 10, bottom: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
-                                        color: colorDarkBlack.withOpacity(0.5),
-                                      ),
-                                      height: 30,
-                                      width: 30,
-                                      child: Center(
-                                        child: Text(
-                                          '12',
-                                          style:
-                                              FontStyleUtility.whiteInter14W500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        StaggeredGridTile.count(
-                          crossAxisCellCount: 2,
-                          mainAxisCellCount: 2,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18.0),
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  Image.asset('assets/images/profile4.png',
-                                      fit: BoxFit.cover),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          right: 10, bottom: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
-                                        color: colorDarkBlack.withOpacity(0.5),
-                                      ),
-                                      height: 30,
-                                      width: 30,
-                                      child: Center(
-                                        child: Text(
-                                          '14',
-                                          style:
-                                              FontStyleUtility.whiteInter14W500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        StaggeredGridTile.count(
-                          crossAxisCellCount: 2,
-                          mainAxisCellCount: 2,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18.0),
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  Image.asset('assets/images/profile.jpeg',
-                                      fit: BoxFit.cover),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          right: 10, bottom: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
-                                        color: colorDarkBlack.withOpacity(0.5),
-                                      ),
-                                      height: 30,
-                                      width: 30,
-                                      child: Center(
-                                        child: Text(
-                                          '8',
-                                          style:
-                                              FontStyleUtility.whiteInter14W500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        StaggeredGridTile.count(
-                          crossAxisCellCount: 2,
-                          mainAxisCellCount: 3,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18.0),
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  Image.asset('assets/images/post1.jpeg',
-                                      fit: BoxFit.cover),
-                                  Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          right: 10, bottom: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
-                                        color: colorDarkBlack.withOpacity(0.5),
-                                      ),
-                                      height: 30,
-                                      width: 30,
-                                      child: Center(
-                                        child: Text(
-                                          '1',
-                                          style:
-                                              FontStyleUtility.whiteInter14W500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              child: StreamBuilder<Object>(
+                  stream: scrollIndex.stream,
+                  builder: (context, snapshot) {
+                    return PageView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      onPageChanged: (index) {
+                        scrollIndex.value = index;
+                        tabController?.animateTo(index, duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                      },
+                      controller: pageController,
+                      itemCount: 7,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return RawScrollbar(
+                          thickness: 5.0,
+                          thumbColor: colorSplash.withOpacity(0.5),
+                          child: SingleChildScrollView(
+                            physics: const ClampingScrollPhysics(),
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: StaggeredGrid.count(
+                              crossAxisCount: 4,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 8,
+                              children: [
+                                StaggeredGridTile.count(
+                                  crossAxisCellCount: 2,
+                                  mainAxisCellCount: 2,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      child: Stack(
+                                        fit: StackFit.expand,
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/profile.jpeg',
+                                              fit: BoxFit.cover),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  right: 10, bottom: 10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: colorDarkBlack
+                                                    .withOpacity(0.5),
+                                              ),
+                                              height: 30,
+                                              width: 30,
+                                              child: Center(
+                                                child: Text(
+                                                  '55',
+                                                  style: FontStyleUtility
+                                                      .whiteInter14W500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                                StaggeredGridTile.count(
+                                  crossAxisCellCount: 2,
+                                  mainAxisCellCount: 3,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      child: Stack(
+                                        fit: StackFit.expand,
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/profile2.jpg',
+                                              fit: BoxFit.cover),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  right: 10, bottom: 10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: colorDarkBlack
+                                                    .withOpacity(0.5),
+                                              ),
+                                              height: 30,
+                                              width: 30,
+                                              child: Center(
+                                                child: Text(
+                                                  '20',
+                                                  style: FontStyleUtility
+                                                      .whiteInter14W500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                                StaggeredGridTile.count(
+                                  crossAxisCellCount: 2,
+                                  mainAxisCellCount: 3,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      child: Stack(
+                                        fit: StackFit.expand,
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/profile3.jpg',
+                                              fit: BoxFit.cover),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  right: 10, bottom: 10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: colorDarkBlack
+                                                    .withOpacity(0.5),
+                                              ),
+                                              height: 30,
+                                              width: 30,
+                                              child: Center(
+                                                child: Text(
+                                                  '12',
+                                                  style: FontStyleUtility
+                                                      .whiteInter14W500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                                StaggeredGridTile.count(
+                                  crossAxisCellCount: 2,
+                                  mainAxisCellCount: 2,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      child: Stack(
+                                        fit: StackFit.expand,
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/profile4.png',
+                                              fit: BoxFit.cover),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  right: 10, bottom: 10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: colorDarkBlack
+                                                    .withOpacity(0.5),
+                                              ),
+                                              height: 30,
+                                              width: 30,
+                                              child: Center(
+                                                child: Text(
+                                                  '14',
+                                                  style: FontStyleUtility
+                                                      .whiteInter14W500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                                StaggeredGridTile.count(
+                                  crossAxisCellCount: 2,
+                                  mainAxisCellCount: 2,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      child: Stack(
+                                        fit: StackFit.expand,
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/profile.jpeg',
+                                              fit: BoxFit.cover),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  right: 10, bottom: 10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: colorDarkBlack
+                                                    .withOpacity(0.5),
+                                              ),
+                                              height: 30,
+                                              width: 30,
+                                              child: Center(
+                                                child: Text(
+                                                  '8',
+                                                  style: FontStyleUtility
+                                                      .whiteInter14W500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                                StaggeredGridTile.count(
+                                  crossAxisCellCount: 2,
+                                  mainAxisCellCount: 3,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      child: Stack(
+                                        fit: StackFit.expand,
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/post1.jpeg',
+                                              fit: BoxFit.cover),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  right: 10, bottom: 10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                color: colorDarkBlack
+                                                    .withOpacity(0.5),
+                                              ),
+                                              height: 30,
+                                              width: 30,
+                                              child: Center(
+                                                child: Text(
+                                                  '1',
+                                                  style: FontStyleUtility
+                                                      .whiteInter14W500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }),
             ),
-           /* 20.heightBox*/
+            /* 20.heightBox*/
           ],
         ));
   }

@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:fans/moduls/Home/home/goto_post_screen.dart';
+import 'package:fans/moduls/Home/notification/View/may_page_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../../utility/theme_data.dart';
 import '../../../utility/utility_export.dart';
 
@@ -389,11 +388,7 @@ Widget homeViewData(bool? visible, BuildContext context) {
                                               )
                                             : InkWell(
                                                 onTap: () async {
-                                                  final List<XFile>?
-                                                      selectedImages =
-                                                      await kHomeController
-                                                          .imagePicker
-                                                          .pickMultiImage();
+                                                  final List<XFile>?selectedImages = await kHomeController.imagePicker.pickMultiImage();
                                                   if (selectedImages!
                                                       .isNotEmpty) {
                                                     kHomeController
@@ -434,8 +429,8 @@ Widget homeViewData(bool? visible, BuildContext context) {
                         )
                       : const SizedBox();
                 }),
-            Obx(()=>
-               Row(
+            Obx(
+              () => Row(
                 children: [
                   IconButton(
                     onPressed: () {
@@ -452,19 +447,22 @@ Widget homeViewData(bool? visible, BuildContext context) {
                   20.widthBox,
                   Icon(
                     Icons.folder_zip_outlined,
-                    color: isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                    color:
+                        isDarkOn.value == true ? colorWhite : deepPurpleColor,
                     size: 25,
                   ),
                   20.widthBox,
                   Icon(
                     Icons.lock_outline,
-                    color: isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                    color:
+                        isDarkOn.value == true ? colorWhite : deepPurpleColor,
                     size: 25,
                   ),
                   20.widthBox,
                   Icon(
                     Icons.emoji_emotions_outlined,
-                    color: isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                    color:
+                        isDarkOn.value == true ? colorWhite : deepPurpleColor,
                     size: 25,
                   ),
                 ],
@@ -789,77 +787,147 @@ Widget commonPost(BuildContext context) {
         ),
       ),
       5.heightBox,
-      Row(
-        children: [
-          StreamBuilder<Object>(
-              stream: kHomeController.likeButton.stream,
-              builder: (context, snapshot) {
-                return IconButton(
-                    splashColor: colorRed,
-                    splashRadius: 20.0,
+      StreamBuilder<Object>(
+          stream: isDarkOn.stream,
+          builder: (context, snapshot) {
+            return Row(
+              children: [
+                StreamBuilder<Object>(
+                    stream: kHomeController.likeButton.stream,
+                    builder: (context, snapshot) {
+                      return IconButton(
+                          splashColor: colorRed,
+                          splashRadius: 20.0,
+                          onPressed: () {
+                            kHomeController.likeButton.value =
+                                !kHomeController.likeButton.value;
+                          },
+                          icon: Icon(
+                            kHomeController.likeButton.value == true
+                                ? CupertinoIcons.heart_fill
+                                : CupertinoIcons.suit_heart,
+                            size: 25,
+                            color: kHomeController.likeButton.value == true
+                                ? colorRed
+                                : isDarkOn.value == true
+                                    ? colorLightWhite
+                                    : colorGrey,
+                          ));
+                    }),
+                Text(
+                  '1',
+                  overflow: TextOverflow.ellipsis,
+                  style: greyInter18W500.copyWith(
+                    color: isDarkOn.value == true ? colorLightWhite : colorGrey,
+                  ),
+                ),
+                2.widthBox,
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      CupertinoIcons.chat_bubble,
+                      size: 22,
+                      color:
+                          isDarkOn.value == true ? colorLightWhite : colorGrey,
+                    )),
+                Text(
+                  '1',
+                  overflow: TextOverflow.ellipsis,
+                  style: greyInter18W500.copyWith(
+                    color: isDarkOn.value == true ? colorLightWhite : colorGrey,
+                  ),
+                ),
+                2.widthBox,
+                IconButton(
                     onPressed: () {
-                      kHomeController.likeButton.value =
-                          !kHomeController.likeButton.value;
+                      showAlertDialog(
+                        context: context,
+                        callback: () {},
+                        actions: [
+                          TextButton(
+                            child: Text('Cancel', style: blackInter16W600),
+                            onPressed: () {
+                              Get.back();
+                            },
+                          )
+                        ],
+                        child: SizedBox(
+                          height: getScreenHeight(context) * 0.4,
+                          width: getScreenWidth(context) * 0.9,
+                          child: GridView(
+                            shrinkWrap: true,
+                            physics: const ClampingScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2, childAspectRatio: 1.5),
+                            children: [
+                              commonDialogItems(
+                                image: facebook,
+                                title: 'Facebook',
+                                callBack: () {},
+                              ),
+                              commonDialogItems(
+                                image: twitter,
+                                title: 'Twitter',
+                                callBack: () {},
+                              ),
+                              commonDialogItems(
+                                image: whatsApp,
+                                title: 'WhatsApp',
+                                callBack: () {},
+                              ),
+                              commonDialogItems(
+                                image: email,
+                                title: 'Email',
+                                callBack: () {},
+                              ),
+                              commonDialogItems(
+                                image: message,
+                                title: 'Text message',
+                                callBack: () {},
+                              ),
+                              commonDialogItems(
+                                image: copyLink,
+                                title: 'Copy link',
+                                callBack: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
                     },
                     icon: Icon(
-                      kHomeController.likeButton.value == true
-                          ? CupertinoIcons.heart_fill
-                          : CupertinoIcons.suit_heart,
-                      size: 25,
-                      color: kHomeController.likeButton.value == true
-                          ? colorRed
-                          : colorGrey,
-                    ));
-              }),
-          Text(
-            '1',
-            overflow: TextOverflow.ellipsis,
-            style: FontStyleUtility.greyInter18W500,
-          ),
-          2.widthBox,
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                CupertinoIcons.chat_bubble,
-                size: 22,
-                color: colorGrey,
-              )),
-          Text(
-            '1',
-            overflow: TextOverflow.ellipsis,
-            style: FontStyleUtility.greyInter18W500,
-          ),
-          2.widthBox,
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                CupertinoIcons.share,
-                size: 22,
-                color: colorGrey,
-              )),
-          const Spacer(),
-          StreamBuilder<Object>(
-              stream: kHomeController.bookmarkButton.stream,
-              builder: (context, snapshot) {
-                return IconButton(
-                    splashColor: deepPurpleColor,
-                    splashRadius: 20.0,
-                    onPressed: () {
-                      kHomeController.bookmarkButton.value =
-                          !kHomeController.bookmarkButton.value;
-                    },
-                    icon: Icon(
-                      kHomeController.bookmarkButton.value == true
-                          ? Icons.bookmark
-                          : Icons.bookmark_border,
-                      size: 23,
-                      color: kHomeController.bookmarkButton.value == true
-                          ? deepPurpleColor
-                          : colorGrey,
-                    ));
-              })
-        ],
-      ),
+                      CupertinoIcons.share,
+                      size: 22,
+                      color:
+                          isDarkOn.value == true ? colorLightWhite : colorGrey,
+                    )),
+                const Spacer(),
+                StreamBuilder<Object>(
+                    stream: kHomeController.bookmarkButton.stream,
+                    builder: (context, snapshot) {
+                      return IconButton(
+                          splashColor: deepPurpleColor,
+                          splashRadius: 20.0,
+                          onPressed: () {
+                            kHomeController.bookmarkButton.value =
+                                !kHomeController.bookmarkButton.value;
+                          },
+                          icon: Icon(
+                            kHomeController.bookmarkButton.value == true
+                                ? Icons.bookmark
+                                : Icons.bookmark_border,
+                            size: 23,
+                            color: kHomeController.bookmarkButton.value == true
+                                ? deepPurpleColor
+                                : isDarkOn.value == true
+                                    ? colorLightWhite
+                                    : colorGrey,
+                          ));
+                    })
+              ],
+            );
+          }),
       20.heightBox
     ],
   );

@@ -383,3 +383,8 @@ TextStyle blackInter20W500 = const TextStyle(
 
 TextStyle greyInter16W500 = const TextStyle(
     fontSize: 16, fontFamily: 'Inter', fontWeight: FontWeight.w500);
+
+TextStyle blackInter15W500 = const TextStyle(
+    fontSize: 15,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500);

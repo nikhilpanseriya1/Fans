@@ -431,8 +431,7 @@ class _MyPageScreenState extends State<MyPageScreen>
                     builder: (context, snapshot) {
                       return TabBar(
                         controller: tabController,
-                        unselectedLabelColor:
-                            isDarkOn.value == true ? colorWhite : colorGrey,
+                        unselectedLabelColor: isDarkOn.value == true ? colorWhite : colorGrey,
                         indicatorColor: colorPrimary,
                         labelColor: colorPrimary,
                         tabs: const [
@@ -605,43 +604,44 @@ class _MyPageScreenState extends State<MyPageScreen>
 //   );
 // }
 
-  Widget commonDialogItems(
-      {required ExactAssetImage image,
+
+}
+Widget commonDialogItems(
+    {required ExactAssetImage image,
       required String title,
       required Function() callBack}) {
-    return InkWell(
-      onTap: () {
-        Get.back();
-        callBack();
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: colorPrimary.withOpacity(0.2)),
-            child: StreamBuilder<Object>(
-                stream: isDarkOn.stream,
-                builder: (context, snapshot) {
-                  return Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Image(
-                      image: image,
-                      height: 30,
-                      width: 30,
-                      color: isDarkOn.value == true ? colorWhite : colorPrimary,
-                    ),
-                  );
-                }),
-          ),
-          20.heightBox,
-          Text(
-            title,
-            style: blackInter14W500,
-          )
-        ],
-      ),
-    );
-  }
+  return InkWell(
+    onTap: () {
+      Get.back();
+      callBack();
+    },
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: colorPrimary.withOpacity(0.2)),
+          child: StreamBuilder<Object>(
+              stream: isDarkOn.stream,
+              builder: (context, snapshot) {
+                return Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Image(
+                    image: image,
+                    height: 30,
+                    width: 30,
+                    color: isDarkOn.value == true ? colorWhite : colorPrimary,
+                  ),
+                );
+              }),
+        ),
+        20.heightBox,
+        Text(
+          title,
+          style: blackInter14W500,
+        )
+      ],
+    ),
+  );
 }
