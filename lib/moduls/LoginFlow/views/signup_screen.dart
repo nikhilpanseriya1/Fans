@@ -1,3 +1,4 @@
+import 'package:fans/moduls/LoginFlow/views/mobile_signin.dart';
 import 'package:fans/moduls/LoginFlow/views/signin_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
@@ -152,19 +153,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: FontStyleUtility.whiteInter20W500),
                     )),
                     heightBox(40.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.phone_android_sharp,
-                          color: colorWhite,
-                        ),
-                        widthBox(20.0),
-                        Text(
-                          'Login with Mobile Number',
-                          style: FontStyleUtility.whiteInter16W500,
-                        )
-                      ],
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const MobileSignIn());
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.phone_android_sharp,
+                            color: colorWhite,
+                          ),
+                          widthBox(20.0),
+                          Text(
+                            'Login with Mobile Number',
+                            style: FontStyleUtility.whiteInter16W500,
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),

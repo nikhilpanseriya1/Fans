@@ -19,7 +19,10 @@ class _ExploreScreenState extends State<ExploreScreen>
   RxBool isExpansionTileOpen = false.obs;
   TabController? tabController;
   RxInt scrollIndex = 0.obs;
-  PageController pageController = PageController(initialPage: 0, keepPage: true,);
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
 
   final List<StaggeredGridTile> _cardTile = <StaggeredGridTile>[
     const StaggeredGridTile.count(
@@ -399,7 +402,9 @@ class _ExploreScreenState extends State<ExploreScreen>
                       physics: const ClampingScrollPhysics(),
                       onPageChanged: (index) {
                         scrollIndex.value = index;
-                        tabController?.animateTo(index, duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                        tabController?.animateTo(index,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.ease);
                       },
                       controller: pageController,
                       itemCount: 7,

@@ -9,6 +9,9 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../utility/common_function.dart';
+import 'Home/home_structure.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -22,8 +25,13 @@ Brightness? brightness;
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 2),
-     () => Get.offAll(() => const SignInScreen()));
+    getIsLogin() == true
+        ? Timer(const Duration(seconds: 2),
+            () => Get.offAll(() => const HomeStructureView()))
+        : Timer(const Duration(seconds: 2),
+            () => Get.offAll(() => const SignInScreen()));
+
+    print('====>>> ${getIsLogin()}');
     super.initState();
   }
 

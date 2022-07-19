@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../API/api_config.dart';
+import 'constants.dart';
+
 // emailValidationFunction(String val) {
 //   if (val.isNotEmpty) {
 //     return GetUtils.isEmail(val) ? null : loginEmailError;
@@ -108,7 +111,7 @@ phoneValidationFunction(String val) {
   if (val.isNotEmpty) {
     return GetUtils.isPhoneNumber(val) ? null : phoneNumberError;
   } else {
-    return "Please enter phone number";
+    return "Please enter mobile number";
   }
 }
 
@@ -142,8 +145,11 @@ showLog(text) {
 }
 
 setIsLogin({required bool isLogin}) {
-  // return getPreference.write(ApiConfig.isLoginPref, isLogin);
-  // return getPreference.write(ApiConfig.isLoginPref, isLogin);
+  getPreference.write(PrefConstants.isLoginPref, isLogin);
+}
+
+bool getIsLogin() {
+  return getPreference.read(PrefConstants.isLoginPref) ?? false;
 }
 
 void showToast({required String message, Color? bgColor, Toast? toastLength}) {

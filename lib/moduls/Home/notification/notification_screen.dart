@@ -94,141 +94,143 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             CupertinoIcons.delete_solid,
                             color: colorPrimary,
                           )),
-                      IconButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(20),
-                                        topLeft: Radius.circular(20))),
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                      decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(20),
-                                              topLeft: Radius.circular(20))),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          // Align(
-                                          //     alignment: Alignment.topRight,
-                                          //     child: Padding(
-                                          //       padding: const EdgeInsets.only(
-                                          //           right: 15, top: 5),
-                                          //       child: IconButton(
-                                          //           onPressed: () {
-                                          //             Get.back();
-                                          //           },
-                                          //           icon: const Icon(Icons.close)),
-                                          //     )),
+                      Expanded(
+                        child: IconButton(
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(20),
+                                          topLeft: Radius.circular(20))),
+                                  context: context,
+                                  builder: (context) {
+                                    return Container(
+                                        decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(20),
+                                                topLeft: Radius.circular(20))),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            // Align(
+                                            //     alignment: Alignment.topRight,
+                                            //     child: Padding(
+                                            //       padding: const EdgeInsets.only(
+                                            //           right: 15, top: 5),
+                                            //       child: IconButton(
+                                            //           onPressed: () {
+                                            //             Get.back();
+                                            //           },
+                                            //           icon: const Icon(Icons.close)),
+                                            //     )),
 
-                                          Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            height: 5,
-                                            width: 125,
-                                            decoration: BoxDecoration(
-                                                color: colorGrey,
-                                                borderRadius:
-                                                    BorderRadius.circular(100)),
-                                          ),
+                                            Container(
+                                              margin: const EdgeInsets.symmetric(
+                                                  vertical: 20),
+                                              height: 5,
+                                              width: 125,
+                                              decoration: BoxDecoration(
+                                                  color: colorGrey,
+                                                  borderRadius:
+                                                      BorderRadius.circular(100)),
+                                            ),
 
-                                          ListTile(
-                                              onTap: () {
-                                                Get.back();
-                                                Get.to(() =>
-                                                    const VerifiedAccountView());
-                                              },
-                                              trailing: const Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                size: 18,
-                                                color: colorGrey,
-                                              ),
-                                              leading: const Icon(
-                                                  Icons.verified_outlined),
-                                              title: const Text(
-                                                  'Verified account!')),
+                                            ListTile(
+                                                onTap: () {
+                                                  Get.back();
+                                                  Get.to(() =>
+                                                      const VerifiedAccountView());
+                                                },
+                                                trailing: const Icon(
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  size: 18,
+                                                  color: colorGrey,
+                                                ),
+                                                leading: const Icon(
+                                                    Icons.verified_outlined),
+                                                title: const Text(
+                                                    'Verified account!')),
 
-                                          ListTile(
-                                              onTap: () {
-                                                Get.back();
-                                                Get.to(() =>
-                                                    const SubscriptionPrice());
-                                              },
-                                              trailing: const Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                size: 18,
-                                                color: colorGrey,
-                                              ),
-                                              leading: const Icon(
-                                                  Icons.subscriptions_outlined),
-                                              title: const Text(
-                                                  'Subscription price')),
-                                          ListTile(
-                                              onTap: () {
-                                                Get.back();
-                                              },
-                                              trailing: const Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                size: 18,
-                                                color: colorGrey,
-                                              ),
-                                              leading: const Icon(
-                                                  Icons.privacy_tip_outlined),
-                                              title: const Text(
-                                                  'Privacy and security')),
-                                          ListTile(
-                                              onTap: () {
-                                                Get.back();
-                                                Get.to(() =>
-                                                    const PasswordScreen());
-                                              },
-                                              trailing: const Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                size: 18,
-                                                color: colorGrey,
-                                              ),
-                                              leading: const Icon(Icons.key),
-                                              title: const Text('Password')),
-                                          ListTile(
-                                              onTap: () {
-                                                Get.back();
-                                                Get.to(() =>
-                                                    const BlockCountriesScreen());
-                                              },
-                                              trailing: const Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                size: 18,
-                                                color: colorGrey,
-                                              ),
-                                              leading: const Icon(
-                                                  CupertinoIcons.eye_slash),
-                                              title: const Text(
-                                                  'Block countries')),
-                                          ListTile(
-                                              onTap: () {
-                                                Get.back();
-                                                Get.to(() =>
-                                                    const RestrictedUsersScreen());
-                                              },
-                                              trailing: const Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                size: 18,
-                                                color: colorGrey,
-                                              ),
-                                              leading: const Icon(
-                                                  Icons.block_flipped),
-                                              title: const Text(
-                                                  'Restricted user')),
-                                        ],
-                                      ));
-                                });
-                          },
-                          icon: const Icon(
-                            Icons.grid_view_rounded,
-                            color: colorPrimary,
-                          )),
+                                            ListTile(
+                                                onTap: () {
+                                                  Get.back();
+                                                  Get.to(() =>
+                                                      const SubscriptionPrice());
+                                                },
+                                                trailing: const Icon(
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  size: 18,
+                                                  color: colorGrey,
+                                                ),
+                                                leading: const Icon(
+                                                    Icons.subscriptions_outlined),
+                                                title: const Text(
+                                                    'Subscription price')),
+                                            ListTile(
+                                                onTap: () {
+                                                  Get.back();
+                                                },
+                                                trailing: const Icon(
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  size: 18,
+                                                  color: colorGrey,
+                                                ),
+                                                leading: const Icon(
+                                                    Icons.privacy_tip_outlined),
+                                                title: const Text(
+                                                    'Privacy and security')),
+                                            ListTile(
+                                                onTap: () {
+                                                  Get.back();
+                                                  Get.to(() =>
+                                                      const PasswordScreen());
+                                                },
+                                                trailing: const Icon(
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  size: 18,
+                                                  color: colorGrey,
+                                                ),
+                                                leading: const Icon(Icons.key),
+                                                title: const Text('Password')),
+                                            ListTile(
+                                                onTap: () {
+                                                  Get.back();
+                                                  Get.to(() =>
+                                                      const BlockCountriesScreen());
+                                                },
+                                                trailing: const Icon(
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  size: 18,
+                                                  color: colorGrey,
+                                                ),
+                                                leading: const Icon(
+                                                    CupertinoIcons.eye_slash),
+                                                title: const Text(
+                                                    'Block countries')),
+                                            ListTile(
+                                                onTap: () {
+                                                  Get.back();
+                                                  Get.to(() =>
+                                                      const RestrictedUsersScreen());
+                                                },
+                                                trailing: const Icon(
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  size: 18,
+                                                  color: colorGrey,
+                                                ),
+                                                leading: const Icon(
+                                                    Icons.block_flipped),
+                                                title: const Text(
+                                                    'Restricted user')),
+                                          ],
+                                        ));
+                                  });
+                            },
+                            icon: const Icon(
+                              Icons.grid_view_rounded,
+                              color: colorPrimary,
+                            )),
+                      ),
                     ],
                   ),
                 ),

@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../LoginFlow/views/signin_screen.dart';
 import '../LoginFlow/views/verify_account_screen.dart';
 import 'chat/chat_screen.dart';
 import 'explore/explore_screen.dart';
@@ -346,7 +347,10 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   'Log Out',
                   style: blackInter16W500,
                 ),
-                onTap: () {},
+                onTap: () {
+                  setIsLogin(isLogin: false);
+                  Get.offAll(() => const SignInScreen());
+                },
               ),
               20.heightBox,
               Padding(
