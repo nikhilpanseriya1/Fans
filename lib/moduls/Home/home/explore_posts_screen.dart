@@ -218,7 +218,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                         15.heightBox,
                         Text(
                           'Testing',
-                          style: FontStyleUtility.greyInter18W500,
+                          style: greyInter16W500,
                         ),
                         10.heightBox,
                         ClipRRect(
@@ -238,19 +238,19 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                       splashColor: colorRed,
                                       splashRadius: 20.0,
                                       onPressed: () {
-                                        kHomeController.likeButton.value = !kHomeController.likeButton.value;
+                                        kHomeController.likeButton.value =
+                                            !kHomeController.likeButton.value;
                                       },
                                       icon: Icon(
-                                        kHomeController.likeButton.value ==
-                                                true
+                                        kHomeController.likeButton.value == true
                                             ? CupertinoIcons.heart_fill
                                             : CupertinoIcons.suit_heart,
                                         size: 25,
-                                        color: kHomeController
-                                                    .likeButton.value ==
-                                                true
-                                            ? colorRed
-                                            : colorGrey,
+                                        color:
+                                            kHomeController.likeButton.value ==
+                                                    true
+                                                ? colorRed
+                                                : colorGrey,
                                       ));
                                 }),
                             Text(
@@ -292,8 +292,7 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                                                 .bookmarkButton.value;
                                       },
                                       icon: Icon(
-                                        kHomeController
-                                                    .bookmarkButton.value ==
+                                        kHomeController.bookmarkButton.value ==
                                                 true
                                             ? Icons.bookmark
                                             : Icons.bookmark_border,

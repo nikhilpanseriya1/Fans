@@ -7,9 +7,11 @@ Widget commonStructure({
   PreferredSize? appBar,
   Color? bgColor,
   double? padding,
+  Key? key,
   Widget? bottomNavigation,
 }) {
   return SafeArea(
+    key: key,
     child: Stack(
       children: [
         Scaffold(

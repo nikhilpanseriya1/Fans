@@ -1,4 +1,5 @@
 import 'package:fans/moduls/LoginFlow/views/forget_password_screen.dart';
+import 'package:fans/moduls/LoginFlow/views/mobile_signin.dart';
 import 'package:fans/moduls/LoginFlow/views/signup_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
@@ -17,6 +18,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
   RxBool isRemember = false.obs;
 
   @override
@@ -77,7 +79,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Icons.mail_outline,
                         color: colorPrimary,
                       ),
-                      hintText: 'Enter Your Email',
+                      hintText: 'Enter your email',
                       textEditingController: null,
                     ),
                     heightBox(10.0),
@@ -86,7 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Icons.vpn_key_outlined,
                         color: colorPrimary,
                       ),
-                      hintText: 'PassWord',
+                      hintText: 'Password',
                       textEditingController: null,
                       isEnabled: true,
                     ),
@@ -96,7 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Get.to(() => const ForgetPasswordScreen());
                       },
                       child: Text(
-                        'Forget PassWord?',
+                        'Forget Password?',
                         style: FontStyleUtility.whiteInter16W500,
                       ),
                     ),
@@ -171,19 +173,24 @@ class _SignInScreenState extends State<SignInScreen> {
                           style: FontStyleUtility.whiteInter20W500),
                     )),
                     50.heightBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.phone_android_sharp,
-                          color: colorWhite,
-                        ),
-                        widthBox(20.0),
-                        Text(
-                          'Login with Mobile Number',
-                          style: FontStyleUtility.whiteInter16W500,
-                        )
-                      ],
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const MobileSignIn());
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.phone_android_sharp,
+                            color: colorWhite,
+                          ),
+                          widthBox(20.0),
+                          Text(
+                            'Login with Mobile Number',
+                            style: FontStyleUtility.whiteInter16W500,
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),

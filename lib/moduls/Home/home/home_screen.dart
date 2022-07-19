@@ -772,7 +772,7 @@ Widget commonPost(BuildContext context) {
       15.heightBox,
       Text(
         'Testing',
-        style: greyInter18W500,
+        style: greyInter16W500,
       ),
       10.heightBox,
       /*Container(

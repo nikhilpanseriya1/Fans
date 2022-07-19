@@ -108,7 +108,7 @@ phoneValidationFunction(String val) {
   if (val.isNotEmpty) {
     return GetUtils.isPhoneNumber(val) ? null : phoneNumberError;
   } else {
-    return "Please enter phone number";
+    return "Please enter mobile number";
   }
 }
 

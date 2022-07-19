@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:fans/utility/assets_utility.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_textfield.dart';
@@ -317,8 +318,8 @@ Future<void> showAlertDialog(
             <Widget>[
               showNegativeButton ?? true
                   ? TextButton(
-                      child: Text(negativeTitle ?? 'No',
-                          style: blackInter16W600),
+                      child:
+                          Text(negativeTitle ?? 'No', style: blackInter16W600),
                       onPressed: () {
                         Get.back();
                       },
@@ -326,8 +327,8 @@ Future<void> showAlertDialog(
                   : const SizedBox.shrink(),
               showPositiveButton ?? true
                   ? TextButton(
-                      child: Text(positiveTitle ?? 'Yes',
-                          style: blackInter16W600),
+                      child:
+                          Text(positiveTitle ?? 'Yes', style: blackInter16W600),
                       onPressed: () {
                         callback();
                         Get.back();
@@ -338,6 +339,90 @@ Future<void> showAlertDialog(
       );
     },
   );
+}
+
+commonCountryCodePicker({
+  required Function onChanged,
+  required String initialSelection,
+  required TextEditingController textController,
+  FocusNode? focusNode,
+  bool? hideMainText,
+  Color? borderColor,
+  double? height,
+  double? width,
+  bool? alignLeft = false,
+  bool isShowDropIcon = true,
+}) {
+  return Builder(builder: (context) {
+    return Container(
+      width: width ?? MediaQuery.of(context).size.width,
+      height: height ?? 60,
+      margin: const EdgeInsets.symmetric(horizontal: 5),
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: borderColor ?? colorBlack.withOpacity(0.1), width: 1),
+          borderRadius: BorderRadius.circular(5.0)),
+      child: Stack(
+        children: [
+          isShowDropIcon
+              ? const Positioned(
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                )
+              : const SizedBox(),
+          Center(
+            child: CountryCodePicker(
+              onInit: (code) {},
+              flagWidth: 30,
+              // hideMainText: true,
+              padding: const EdgeInsets.all(0),
+              onChanged: (cCode) {
+                onChanged(cCode);
+              },
+              initialSelection: initialSelection,
+              showCountryOnly: true,
+              showOnlyCountryWhenClosed: true,
+              searchStyle: FontStyleUtility.blackInter16W500,
+              dialogTextStyle: FontStyleUtility.blackInter18W500,
+              showFlagDialog: true,
+              alignLeft: alignLeft ?? true,
+              closeIcon: const Icon(
+                Icons.close_sharp,
+                size: 30,
+                color: colorBlack,
+              ),
+              hideMainText: hideMainText ?? false,
+              dialogBackgroundColor: Colors.black,
+              showFlag: true,
+              boxDecoration: BoxDecoration(
+                  color: colorWhite, borderRadius: BorderRadius.circular(20.0)),
+              searchDecoration: InputDecoration(
+                filled: true,
+                // prefixIcon: const Icon(
+                //   Icons.search,
+                //   color: colorBlack,
+                // ),
+                fillColor: textFieldColor,
+                contentPadding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                focusedBorder: countryBorder,
+                disabledBorder: countryBorder,
+                enabledBorder: countryBorder,
+                errorBorder: countryBorder,
+              ),
+              textStyle: FontStyleUtility.blackInter16W500,
+              dialogSize: Size(Get.width, Get.height - 60),
+            ),
+          ),
+        ],
+      ),
+    );
+  });
 }
 
 Widget heightBox(double height) {

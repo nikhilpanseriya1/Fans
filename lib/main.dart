@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
+import 'moduls/LoginFlow/views/example.dart';
+
 final getPreference = GetStorage();
 
 void main() async {
