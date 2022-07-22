@@ -1,4 +1,4 @@
-import 'package:fans/moduls/LoginFlow/views/signup_screen.dart';
+import 'package:fans/modules/LoginFlow/views/signin_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_textfield.dart';
@@ -6,46 +6,41 @@ import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+import '../../../modules/Home/home_structure.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   RxBool isRemember = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return commonStructure(
-        padding: 0.0,
+        padding: 0,
         context: context,
         child: ListView(
           physics: const ClampingScrollPhysics(),
-          /*padding: const EdgeInsets.symmetric(horizontal: 16.0),*/
           children: [
-            SizedBox(
-              height: getScreenHeight(context) * 0.4,
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  heightBox(50.0),
-                  Image.asset(
-                    'assets/logo/fans_logo1.png',
-                    scale: 3.4,
-                    height: 130.0,
-                    width: 130.0,
-                  ),
-                  heightBox(50.0),
-                  Text('Join now and Start making money\nwith your content!',
-                      textAlign: TextAlign.center,
-                      style: FontStyleUtility.greyInter22W500),
-                ],
-              ),
+            heightBox(50.0),
+            Image.asset(
+              'assets/logo/fans_logo1.png',
+              scale: 3.4,
+              height: 130.0,
+              width: 130.0,
             ),
+            heightBox(50.0),
+            Text('Join now and Start making money\nwith your content!',
+                textAlign: TextAlign.center,
+                style: FontStyleUtility.greyInter22W500),
+            heightBox(50.0),
+
+            heightBox(30.0),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -61,12 +56,18 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  // mainAxisSize: MainAxisSize.max,
                   children: [
                     commonTextField(
-                      preFixWidget: const Icon(Icons.mail_outline),
-                      hintText: 'Enter Your Email',
+                      preFixWidget: const Icon(Icons.account_circle_outlined),
+                      hintText: 'Full Name',
                       textEditingController: null,
+                    ),
+                    heightBox(10.0),
+                    commonTextField(
+                      preFixWidget: const Icon(Icons.email_outlined),
+                      hintText: 'Email',
+                      textEditingController: null,
+                      isEnabled: true,
                     ),
                     heightBox(10.0),
                     commonTextField(
@@ -75,14 +76,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       textEditingController: null,
                       isEnabled: true,
                     ),
-                    heightBox(10.0),
-                    Text(
-                      'Forget PassWord?',
-                      style: FontStyleUtility.blackInter15W500,
-                    ),
                     heightBox(20.0),
                     Row(
-                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Obx(
                           () => SizedBox(
@@ -103,7 +99,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         widthBox(10),
                         commonText(
-                            text: 'Remember me',
+                            text:
+                                'I agree with the processing of personal data privacy policy',
                             style: FontStyleUtility.greyInter16W500),
                       ],
                     ),
@@ -122,9 +119,11 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(() => const HomeStructureView());
+                        },
                         child: Text(
-                          "Login",
+                          "Sign up",
                           style: FontStyleUtility.blackInter16W500
                               .copyWith(color: colorWhite),
                         ),
@@ -134,16 +133,16 @@ class _SignInScreenState extends State<SignInScreen> {
                     Center(
                         child: InkWell(
                       onTap: () {
-                        Get.to(() => const SignUpScreen());
+                        Get.off(() => const SignInScreen());
                       },
                       child: Text(
-                        'Dont have an account?',
-                        style: FontStyleUtility.blackInter20W500
-                            .copyWith(color: deepPurpleColor),
+                        ' Already have account?',
+                        style: FontStyleUtility.blackInter20W500.copyWith(
+                            color: deepPurpleColor,
+                            fontWeight: FontWeight.w800),
                       ),
                     )),
-                    50.heightBox,
-
+                    heightBox(50.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

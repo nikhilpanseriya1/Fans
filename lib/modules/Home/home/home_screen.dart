@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:fans/moduls/Home/home/goto_post_screen.dart';
+import 'package:fans/modules/Home/home/goto_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:fans/moduls/splash_screen.dart';
+import 'package:fans/modules/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +17,7 @@ const String baseUri = "https://stagingrentech.rentechdigital.com:3001/";
 const String somethingWrong = "Something went wrong!";
 const String responseMessage = "No response data found!";
 const String interNetMessage = "please check your internet connection and try again latter.";
-const String connectionTimeOutMessage =
-    "Oops.. Server not working or might be in maintenance. Please Try Again Later";
+const String connectionTimeOutMessage = "Oops.. Server not working or might be in maintenance. Please Try Again Later";
 const String authenticationMessage = "The session has been expired. Please log in again.";
 const String tryAgain = "Try again";
 
@@ -44,6 +43,7 @@ class Api {
     MethodType methodType = MethodType.post,
     bool? isHideLoader = true,
     bool isProgressShow = true,
+    bool isPassHeader = true,
     getX.FormData? formValues,
   }) async {
     if (await checkInternet()) {
@@ -72,30 +72,40 @@ class Api {
       try {
         Response response;
         if (methodType == MethodType.get) {
-          response = await Dio().get(mainUrl,
-              queryParameters: params,
-              options: Options(
-                headers: headerParameters,
-                responseType: ResponseType.plain,
-              ));
+          response = await Dio().get(
+            mainUrl,
+            queryParameters: params,
+            options: isPassHeader
+                ? Options(
+                    headers: headerParameters,
+                    responseType: ResponseType.plain,
+                  )
+                : null,
+          );
         } else if (methodType == MethodType.put) {
           response = await Dio().put(mainUrl,
               data: params,
-              options: Options(
-                headers: headerParameters,
-                responseType: ResponseType.plain,
-              ));
+              options: isPassHeader
+                  ? Options(
+                      headers: headerParameters,
+                      responseType: ResponseType.plain,
+                    )
+                  : null);
         } else {
           response = await Dio().post(mainUrl,
               data: formValues ?? params,
-              options: Options(
-                headers: headerParameters,
-                responseType: ResponseType.plain,
-              ));
+              options: isPassHeader
+                  ? Options(
+                      headers: headerParameters,
+                      responseType: ResponseType.plain,
+                    )
+                  : null);
         }
         if (handleResponse(response)) {
           if (kDebugMode) {
-            print('LOGIN TOKEN ${storage.read('loginToken') ?? ''}');
+            isPassHeader
+                ? print('LOGIN TOKEN ${storage.read('loginToken') ?? ''}')
+                : print('LOGIN TOKEN Header did\'t pass here...');
             print(url);
             print(params);
             print(response.data);
@@ -103,43 +113,45 @@ class Api {
           }
 
           ///postman response Code guj
-          Map<String, dynamic>? responseData;
-          responseData = jsonDecode(response.data);
+          // Map<String, dynamic>? responseData;
+          // responseData = jsonDecode(response.data);
           if (isHideLoader!) {
             hideProgressDialog();
           }
-          if (responseData?['success'] ?? false) {
+          if (response.data != null && response.statusCode == 200) {
             //#region alert
-            if (errorMessageType == ErrorMessageType.snackBarOnlySuccess ||
-                errorMessageType == ErrorMessageType.snackBarOnResponse) {
-              getX.Get.snackbar('Error', responseData?['message']);
-            } else if (errorMessageType == ErrorMessageType.dialogOnlySuccess ||
-                errorMessageType == ErrorMessageType.dialogOnResponse) {
-              await apiAlertDialog(message: responseData?['message'], buttonTitle: 'Okay');
-            }
-            //#endregion alert
-            if ((responseData?.containsKey('data') ?? false) &&
-                (responseData?['data'].containsKey('token') ?? false) &&
-                (responseData?['data']['token'].toString().isNotEmpty ?? false)) {
-              storage.write('loginToken', responseData?['data']['token']);
-            }
-            success(responseData);
+            // if (errorMessageType == ErrorMessageType.snackBarOnlySuccess ||
+            //     errorMessageType == ErrorMessageType.snackBarOnResponse) {
+            //   getX.Get.snackbar('Error', responseData?['message']);
+            // } else if (errorMessageType == ErrorMessageType.dialogOnlySuccess ||
+            //     errorMessageType == ErrorMessageType.dialogOnResponse) {
+            //   await apiAlertDialog(message: responseData?['message'], buttonTitle: 'Okay');
+            // }
+            // //#endregion alert
+            // if ((responseData?.containsKey('data') ?? false) &&
+            //     (responseData?['data'].containsKey('token') ?? false) &&
+            //     (responseData?['data']['token'].toString().isNotEmpty ?? false)) {
+            //   storage.write('loginToken', responseData?['data']['token']);
+            // }
+            success(response);
           } else {
             //region 401 = Session Expired  Manage Authentication/Session Expire
-            if (response.statusCode == 401 || response.statusCode == 403) {
-              unauthorizedDialog(responseData?['message']);
-            } else if (error != null) {
-              //#region alert
-              if (errorMessageType == ErrorMessageType.snackBarOnlyError ||
-                  errorMessageType == ErrorMessageType.snackBarOnResponse) {
-                getX.Get.snackbar('Error', responseData?['message']);
-              } else if (errorMessageType == ErrorMessageType.dialogOnlyError ||
-                  errorMessageType == ErrorMessageType.dialogOnResponse) {
-                await apiAlertDialog(message: responseData?['message'], buttonTitle: 'Okay');
-              }
-              //#endregion alert
-              error(responseData);
+            if (response.statusCode == 401 || response.statusCode == 404) {
+              // unauthorizedDialog(responseData?['message']);
+              unauthorizedDialog('Api can\'t responding...');
             }
+            // else if (error != null) {
+            //   //#region alert
+            //   if (errorMessageType == ErrorMessageType.snackBarOnlyError ||
+            //       errorMessageType == ErrorMessageType.snackBarOnResponse) {
+            //     getX.Get.snackbar('Error', responseData?['message']);
+            //   } else if (errorMessageType == ErrorMessageType.dialogOnlyError ||
+            //       errorMessageType == ErrorMessageType.dialogOnResponse) {
+            //     await apiAlertDialog(message: responseData?['message'], buttonTitle: 'Okay');
+            //   }
+            //   //#endregion alert
+            //   error(responseData);
+            // }
             //endregion
           }
           isLoading.value = false;
@@ -147,6 +159,7 @@ class Api {
           if (isHideLoader!) {
             hideProgressDialog();
           }
+          showLog('No response data...!');
           showErrorMessage(
               message: responseMessage,
               isRecall: true,
@@ -173,6 +186,7 @@ class Api {
         dioErrorCall(
             dioError: dioError,
             onCallBack: (String message, bool isRecallError) {
+              showLog('dio error...!');
               showErrorMessage(
                   message: message,
                   isRecall: isRecallError,
@@ -210,6 +224,7 @@ class Api {
           print(e);
         }
         hideProgressDialog();
+        showLog('Something went wrong...!');
         showErrorMessage(
             message: e.toString(),
             isRecall: true,
@@ -230,6 +245,8 @@ class Api {
       }
     } else {
       //#region No Internet
+
+      showLog('No Internet connection...!');
       showErrorMessage(
           message: interNetMessage,
           isRecall: true,
@@ -355,10 +372,7 @@ bool handleResponse(Response response) {
 }
 
 apiAlertDialog(
-    {required String message,
-    String? buttonTitle,
-    Function? buttonCallBack,
-    bool isShowGoBack = true}) async {
+    {required String message, String? buttonTitle, Function? buttonCallBack, bool isShowGoBack = true}) async {
   if (!getX.Get.isDialogOpen!) {
     await getX.Get.dialog(
       WillPopScope(

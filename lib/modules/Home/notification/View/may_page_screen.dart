@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:fans/moduls/Home/notification/View/edit_page_screen.dart';
+import 'package:fans/modules/Home/notification/View/edit_page_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

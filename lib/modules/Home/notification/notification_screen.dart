@@ -1,10 +1,10 @@
-import 'package:fans/moduls/Home/notification/View/dashboard_screen.dart';
-import 'package:fans/moduls/Home/notification/View/may_page_screen.dart';
-import 'package:fans/moduls/Home/notification/View/mysubscriptions_screen.dart';
-import 'package:fans/moduls/Home/notification/View/password_screen.dart';
-import 'package:fans/moduls/Home/notification/View/restricted_users_screen.dart';
-import 'package:fans/moduls/Home/notification/View/subscription_price.dart';
-import 'package:fans/moduls/Home/notification/View/verified_account_screen.dart';
+import 'package:fans/modules/Home/notification/View/dashboard_screen.dart';
+import 'package:fans/modules/Home/notification/View/may_page_screen.dart';
+import 'package:fans/modules/Home/notification/View/mysubscriptions_screen.dart';
+import 'package:fans/modules/Home/notification/View/password_screen.dart';
+import 'package:fans/modules/Home/notification/View/restricted_users_screen.dart';
+import 'package:fans/modules/Home/notification/View/subscription_price.dart';
+import 'package:fans/modules/Home/notification/View/verified_account_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_widgets.dart';

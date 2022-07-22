@@ -1,4 +1,4 @@
-import 'package:fans/moduls/Home/home/home_screen.dart';
+import 'package:fans/modules/Home/home/home_screen.dart';
 import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';

@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../API/api_config.dart';
+import 'constants.dart';
+
 // emailValidationFunction(String val) {
 //   if (val.isNotEmpty) {
 //     return GetUtils.isEmail(val) ? null : loginEmailError;
@@ -16,11 +19,7 @@ import 'package:get/get.dart';
 // }
 
 showSnackBar(
-    {String title = appName,
-    required String message,
-    Color? color,
-    Color? textColor,
-    int? duration}) {
+    {String title = appName, required String message, Color? color, Color? textColor, int? duration}) {
   return Get.snackbar(
     title, // title
     message, // message
@@ -39,16 +38,14 @@ showSnackBar(
 }
 
 void showInSnackBar({String? text, required BuildContext context}) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(text ?? ""), duration: const Duration(seconds: 2)));
+  ScaffoldMessenger.of(context)
+      .showSnackBar(SnackBar(content: Text(text ?? ""), duration: const Duration(seconds: 2)));
 }
 
 /// Authentication Function
 
 getObject(String key) {
-  return getPreference.read(key) != null
-      ? json.decode(getPreference.read(key))
-      : null;
+  return getPreference.read(key) != null ? json.decode(getPreference.read(key)) : null;
 }
 
 setObject(String key, value) {
@@ -118,16 +115,20 @@ setFcmToken(String value) {
 
 // Api Functions
 
-RegExp passwordRegExpValid = RegExp(
-    r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#^()*?-_&])[A-Za-z\d@$!%*-_?&#^()]{8,}$");
+RegExp passwordRegExpValid =
+    RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#^()*?-_&])[A-Za-z\d@$!%*-_?&#^()]{8,}$");
 
 isNotEmptyString(String? data) {
   return data != null && data.isNotEmpty;
 }
 
-getFcmToken() {
-  // return getPreference.read(ApiConfig.fcmTokenPref) ?? "";
+isNotEmptyValidationFunction(String? data) {
+  return data != null && data.isNotEmpty ? null : notEmptyFieldMessage;
 }
+
+// getFcmToken() {
+//   return getPreference.read(ApiConfig.fcmTokenPref) ?? "";
+// }
 
 hideKeyBoard(BuildContext context) {
   FocusScope.of(context).requestFocus(FocusNode());
@@ -142,8 +143,12 @@ showLog(text) {
 }
 
 setIsLogin({required bool isLogin}) {
+  getPreference.write(PrefConstants.isLoginPref, isLogin);
   // return getPreference.write(ApiConfig.isLoginPref, isLogin);
-  // return getPreference.write(ApiConfig.isLoginPref, isLogin);
+}
+
+bool getIsLogin() {
+  return getPreference.read(PrefConstants.isLoginPref) ?? false;
 }
 
 void showToast({required String message, Color? bgColor, Toast? toastLength}) {
@@ -156,10 +161,6 @@ void showToast({required String message, Color? bgColor, Toast? toastLength}) {
       textColor: Colors.white,
       fontSize: 16.0);
 }
-
-/*bool getIsLogin() {
-  return (getPreference.read(ApiConfig.isLoginPref) ?? false);
-}*/
 
 /*String getLoginToken() {
    return (getPreference.read(PrefConstants.loginToken));
@@ -249,8 +250,7 @@ DateTime? currentBackPressTime;
 
 Future<bool> onWillPop() {
   DateTime now = DateTime.now();
-  if (currentBackPressTime == null ||
-      now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+  if (currentBackPressTime == null || now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
     currentBackPressTime = now;
     // Fluttertoast.showToast(msg: 'press again to Exit!');
     return Future.value(false);
@@ -263,7 +263,7 @@ passwordValidation(String value) {
       ? notEmptyFieldMessage
       : passwordRegExpValid.hasMatch(value)
           ? null
-          : 'Password must be contain capital letter, small letter, special character and 8 characters';
+          : 'Password must be contain capital letter, small letter, special character and minimum 8 characters';
 }
 
 // launchURL(String url, {bool forceWeb = false}) async {

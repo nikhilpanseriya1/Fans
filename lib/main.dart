@@ -1,9 +1,7 @@
+import 'dart:io';
+
 import 'package:country_code_picker/country_localizations.dart';
-import 'package:fans/moduls/Home/home/home_screen.dart';
-import 'package:fans/moduls/Home/home/my_posts_screen.dart';
-import 'package:fans/moduls/Home/home_structure.dart';
-import 'package:fans/moduls/Home/notification/View/dashboard_screen.dart';
-import 'package:fans/moduls/splash_screen.dart';
+import 'package:fans/modules/splash_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/string_utility.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +10,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 
-import 'moduls/Home/notification/View/edit_page_screen.dart';
-import 'moduls/Home/notification/View/may_page_screen.dart';
+import 'MyHttpOverrides.dart';
 
 final getPreference = GetStorage();
 
-void main() {
+void main() async{
+  HttpOverrides.global = MyHttpOverrides();
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -42,8 +41,7 @@ class MyApp extends StatelessWidget {
           hoverColor: Colors.transparent
           // primarySwatch: Colors.blue,
           ),
-      builder: (context, widget) => ResponsiveWrapper.builder(
-          BouncingScrollWrapper.builder(context, widget!),
+      builder: (context, widget) => ResponsiveWrapper.builder(BouncingScrollWrapper.builder(context, widget!),
           maxWidth: MediaQuery.of(context).size.width,
           minWidth: 420,
           defaultScale: true,

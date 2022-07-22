@@ -1,4 +1,4 @@
-import 'package:fans/moduls/Home/home/home_screen.dart';
+import 'package:fans/modules/Home/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';

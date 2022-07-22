@@ -1,11 +1,14 @@
 import 'dart:async';
 
-import 'package:fans/moduls/LoginFlow/views/signin_screen.dart';
+import 'package:fans/modules/Home/home_structure.dart';
+import 'package:fans/modules/LoginFlow/views/signin_screen.dart';
 import 'package:fans/utility/colors_utility.dart';
 import 'package:fans/utility/font_style_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../utility/common_function.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,8 +20,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 2),
-        () => Get.offAll(() => const SignInScreen()));
+    getIsLogin() == true
+        ? Timer(const Duration(seconds: 2), () => Get.offAll(() => const HomeStructureView()))
+        : Timer(const Duration(seconds: 2), () => Get.offAll(() => const SignInScreen()));
+
+    print('====>>> ${getIsLogin()}');
+
     super.initState();
   }
 
@@ -28,7 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: colorSplash,
         body: Stack(
           children: [
-
             Align(
                 alignment: Alignment.topCenter,
                 child: Column(

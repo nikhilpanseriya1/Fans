@@ -1,4 +1,4 @@
-import 'package:fans/moduls/Home/notification/notification_screen.dart';
+import 'package:fans/modules/Home/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 

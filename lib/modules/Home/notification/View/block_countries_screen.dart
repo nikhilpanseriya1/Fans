@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:fans/moduls/Home/notification/notification_screen.dart';
+import 'package:fans/modules/Home/notification/notification_screen.dart';
 import 'package:fans/utility/country_code_picker.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/cupertino.dart';
@@ -100,8 +100,7 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
                           // hideMainText: true,
                           // showFlag: true,
                           showFlagMain: false,
-                          textStyle:
-                              FontStyleUtility.blackInter16W500.copyWith(color: colorWhite.withOpacity(0)),
+                          textStyle: FontStyleUtility.blackInter16W500.copyWith(color: colorWhite.withOpacity(0)),
                           onChanged: (val) {
                             if (!kNotificationController.blockedCountriesList.contains(val.name)) {
                               kNotificationController.blockedCountriesList.add(val.name!);
@@ -119,8 +118,7 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
                             .map((element) => Container(
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      color: deepPurpleColor.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(10)),
+                                      color: deepPurpleColor.withOpacity(0.2), borderRadius: BorderRadius.circular(10)),
                                   padding: const EdgeInsets.symmetric(horizontal: 10),
                                   margin: const EdgeInsets.all(5),
                                   child: Row(
@@ -133,23 +131,23 @@ class _BlockCountriesScreenState extends State<BlockCountriesScreen> {
                                       ),
                                       10.widthBox,
                                       InkWell(
-                                          onTap: () {
-                                            if (kNotificationController.blockedCountriesList
-                                                .contains(element)) {
-                                              kNotificationController.blockedCountriesList.remove(element);
-                                            }
-                                          },
-                                          child: Container(
-                                              height: 25,
-                                              width: 25,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  color: deepPurpleColor),
-                                              child: const Icon(
-                                                Icons.close,
-                                                size: 16,
-                                                color: colorWhite,
-                                              )))
+                                        onTap: () {
+                                          if (kNotificationController.blockedCountriesList.contains(element)) {
+                                            kNotificationController.blockedCountriesList.remove(element);
+                                          }
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(100), color: deepPurpleColor),
+                                          child: const Icon(
+                                            Icons.close,
+                                            size: 16,
+                                            color: colorWhite,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ))
