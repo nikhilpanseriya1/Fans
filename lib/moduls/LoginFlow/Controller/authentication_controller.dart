@@ -19,6 +19,7 @@ class AuthenticationController extends GetxController {
             loginModel.value = LoginModel.fromJson(response.data);
 
             if (loginModel.value.token == null) {
+
               // showSnackBar(message: response.data['message']);
               showToast(
                   message: response.data['message'],
