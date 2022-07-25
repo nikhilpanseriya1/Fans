@@ -82,8 +82,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     title: 'Save changes',
                     tapOnButton: () {
                       if (formKey.currentState!.validate()) {
-                        if (newPasswordController.text ==
-                            confirmPasswordController.text) {
+                        if (newPasswordController.text == confirmPasswordController.text) {
                           showToast(message: 'Password changed successfully!');
                         } else {
                           showSnackBar(

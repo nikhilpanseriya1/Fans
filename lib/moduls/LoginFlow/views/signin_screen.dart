@@ -1,17 +1,10 @@
 import 'package:fans/moduls/LoginFlow/views/forget_password_screen.dart';
 import 'package:fans/moduls/LoginFlow/views/mobile_signin.dart';
 import 'package:fans/moduls/LoginFlow/views/signup_screen.dart';
-import 'package:fans/utility/colors_utility.dart';
-import 'package:fans/utility/common_structure.dart';
-import 'package:fans/utility/common_textfield.dart';
-import 'package:fans/utility/common_widgets.dart';
-import 'package:fans/utility/font_style_utility.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-import '../../../utility/constants.dart';
 import '../../Home/home_structure.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -89,17 +82,25 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                         hintText: 'Enter your email',
                         textEditingController: emailController,
+                        validationFunction: (val) {
+                          return emptyFieldValidation(
+                              val, 'Please enter value');
+                        },
                       ),
                       heightBox(10.0),
                       commonTextField(
-                        preFixWidget: const Icon(
-                          Icons.vpn_key_outlined,
-                          color: colorPrimary,
-                        ),
-                        hintText: 'Password',
-                        textEditingController: passController,
-                        isEnabled: true,
-                      ),
+                          preFixWidget: const Icon(
+                            Icons.vpn_key_outlined,
+                            color: colorPrimary,
+                          ),
+                          hintText: 'Password',
+                          textEditingController: passController,
+                          validationFunction: (val) {
+                            return emptyFieldValidation(
+                                val, 'Please enter value');
+                          },
+                          isEnabled: true,
+                          isPassword: true),
                       heightBox(13.0),
                       InkWell(
                         onTap: () {

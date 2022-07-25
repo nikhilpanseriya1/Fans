@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Utility/common_function.dart';
 import '../../../moduls/Home/home_structure.dart';
 import '../../../utility/theme_data.dart';
 
@@ -21,162 +22,185 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   RxBool isRemember = false.obs;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return commonStructure(
         padding: 0,
         context: context,
-        child: ListView(
-          physics: const ClampingScrollPhysics(),
-          children: [
-            heightBox(50.0),
-            Image.asset(
-              'assets/logo/fans_logo1.png',
-              scale: 3.4,
-              height: 130.0,
-              width: 130.0,
-            ),
-            heightBox(50.0),
-            Text('Join now and Start making money\nwith your content!',
-                textAlign: TextAlign.center, style: greyInter22W500),
-            heightBox(50.0),
-            heightBox(30.0),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: getScreenHeight(context) * 0.6,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0)
-                        .copyWith(top: 25),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(28),
-                      topLeft: Radius.circular(28)),
-                  color: deepPurpleColor,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    commonTextField(
-                      preFixWidget: const Icon(
-                        Icons.account_circle_outlined,
-                        color: colorPrimary,
-                      ),
-                      hintText: 'Full Name',
-                      textEditingController: null,
-                    ),
-                    heightBox(10.0),
-                    commonTextField(
-                      preFixWidget: const Icon(
-                        Icons.email_outlined,
-                        color: colorPrimary,
-                      ),
-                      hintText: 'Email',
-                      textEditingController: null,
-                      isEnabled: true,
-                    ),
-                    heightBox(10.0),
-                    commonTextField(
-                      preFixWidget: const Icon(
-                        Icons.vpn_key_outlined,
-                        color: colorPrimary,
-                      ),
-                      hintText: 'PassWord',
-                      textEditingController: null,
-                      isEnabled: true,
-                    ),
-                    heightBox(20.0),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Obx(
-                          () => SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: Theme(
-                              data:
-                                  ThemeData(unselectedWidgetColor: colorWhite),
-                              child: Checkbox(
-                                  side: MaterialStateBorderSide.resolveWith(
-                                    (states) => const BorderSide(
-                                        width: 1.0, color: Colors.white),
-                                  ),
-                                  activeColor: deepPurpleColor,
-                                  value: isRemember.value,
-                                  onChanged: (bool? value) {
-                                    isRemember.value = value ?? false;
-                                  }),
-                            ),
+        child: Form(
+          key: formKey,
+          child: ListView(
+            physics: const ClampingScrollPhysics(),
+            children: [
+              heightBox(50.0),
+              Image.asset(
+                'assets/logo/fans_logo1.png',
+                scale: 3.4,
+                height: 130.0,
+                width: 130.0,
+              ),
+              heightBox(50.0),
+              Text('Join now and Start making money\nwith your content!',
+                  textAlign: TextAlign.center, style: greyInter22W500),
+              heightBox(50.0),
+              heightBox(30.0),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: getScreenHeight(context) * 0.6,
+                  padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 20.0)
+                      .copyWith(top: 25),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(28),
+                        topLeft: Radius.circular(28)),
+                    color: deepPurpleColor,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      commonTextField(
+                          preFixWidget: const Icon(
+                            Icons.account_circle_outlined,
+                            color: colorPrimary,
                           ),
-                        ),
-                        widthBox(10),
-                        commonText(
-                            text:
-                                'I agree with the processing of personal data privacy policy',
-                            style: FontStyleUtility.whiteInter16W500),
-                      ],
-                    ),
-                    heightBox(30.0),
-                    SizedBox(
-                      height: 50,
-                      width: getScreenWidth(context),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(lightPurpleColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                            ),
+                          hintText: 'Full Name',
+                          textEditingController: userNameController,
+                          validationFunction: (val) {
+                            return emptyFieldValidation(
+                                val, 'Please enter value');
+                          }),
+                      heightBox(10.0),
+                      commonTextField(
+                          preFixWidget: const Icon(
+                            Icons.email_outlined,
+                            color: colorPrimary,
                           ),
-                        ),
-                        onPressed: () {
-                          Get.to(() => const HomeStructureView());
-                        },
-                        child: Text(
-                          "Sign up",
-                          style: FontStyleUtility.blackInter16W500
-                              .copyWith(color: colorWhite),
-                        ),
-                      ),
-                    ),
-                    heightBox(25.0),
-                    Center(
-                        child: InkWell(
-                      onTap: () {
-                        Get.off(() => const SignInScreen());
-                      },
-                      child: Text(' Already have account?',
-                          style: FontStyleUtility.whiteInter20W500),
-                    )),
-                    heightBox(40.0),
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => const MobileSignIn());
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                          hintText: 'Email',
+                          textEditingController: emailController,
+                          isEnabled: true,
+                          validationFunction: (val) {
+                            return emailValidation(val);
+                          }),
+                      heightBox(10.0),
+                      commonTextField(
+                          preFixWidget: const Icon(
+                            Icons.vpn_key_outlined,
+                            color: colorPrimary,
+                          ),
+                          hintText: 'PassWord',
+                          textEditingController: passController,
+                          isEnabled: true,
+                          isPassword: true,
+                          validationFunction: (val) {
+                            return passwordValidation(val);
+                          }),
+                      heightBox(20.0),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(
-                            Icons.phone_android_sharp,
-                            color: colorWhite,
+                          Obx(
+                            () => SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: Theme(
+                                data: ThemeData(
+                                    unselectedWidgetColor: colorWhite),
+                                child: Checkbox(
+                                    side: MaterialStateBorderSide.resolveWith(
+                                      (states) => const BorderSide(
+                                          width: 1.0, color: Colors.white),
+                                    ),
+                                    activeColor: deepPurpleColor,
+                                    value: isRemember.value,
+                                    onChanged: (bool? value) {
+                                      isRemember.value = value ?? false;
+                                    }),
+                              ),
+                            ),
                           ),
-                          widthBox(20.0),
-                          Text(
-                            'Login with Mobile Number',
-                            style: FontStyleUtility.whiteInter16W500,
-                          )
+                          widthBox(10),
+                          commonText(
+                              text:
+                                  'I agree with the processing of personal data privacy policy',
+                              style: FontStyleUtility.whiteInter16W500),
                         ],
                       ),
-                    ),
-                  ],
+                      heightBox(30.0),
+                      SizedBox(
+                        height: 50,
+                        width: getScreenWidth(context),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(lightPurpleColor),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (formKey.currentState?.validate() == true) {
+                              Map<String, dynamic> params = {
+                                'name': userNameController.text.tr,
+                                'email': emailController.text.tr,
+                                'password': passController.text.tr
+                              };
+                            }
+
+                            Get.to(() => const HomeStructureView());
+                          },
+                          child: Text(
+                            "Sign up",
+                            style: FontStyleUtility.blackInter16W500
+                                .copyWith(color: colorWhite),
+                          ),
+                        ),
+                      ),
+                      heightBox(25.0),
+                      Center(
+                          child: InkWell(
+                        onTap: () {
+                          Get.off(() => const SignInScreen());
+                        },
+                        child: Text(' Already have account?',
+                            style: FontStyleUtility.whiteInter20W500),
+                      )),
+                      heightBox(40.0),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const MobileSignIn());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.phone_android_sharp,
+                              color: colorWhite,
+                            ),
+                            widthBox(20.0),
+                            Text(
+                              'Login with Mobile Number',
+                              style: FontStyleUtility.whiteInter16W500,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

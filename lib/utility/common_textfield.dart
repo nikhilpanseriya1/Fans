@@ -9,8 +9,7 @@ import 'package:get/get.dart';
 Color? borderColor;
 
 OutlineInputBorder textFieldBorderStyle = OutlineInputBorder(
-  borderSide:
-      BorderSide(color: borderColor ?? colorBlack.withOpacity(0.5), width: 1),
+  borderSide: BorderSide(color: borderColor ?? colorBlack.withOpacity(0.5), width: 1),
   borderRadius: BorderRadius.circular(25.0),
 );
 

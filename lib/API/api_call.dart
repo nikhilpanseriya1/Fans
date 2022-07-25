@@ -22,6 +22,7 @@ const String authenticationMessage =
 const String tryAgain = "Try again";
 
 int serviceCallCount = 0;
+
 final storage = GetStorage();
 
 ///Status Code with message type array or string

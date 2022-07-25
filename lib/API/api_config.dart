@@ -16,4 +16,7 @@ class ApiConfig {
 
 
   static const String loginUser = '$baseUrl/login';
+  static const String signupUser = '$baseUrl/register';
+  static const String forgotPassword = '$baseUrl/password/email';
+  static const String mySubscribers = '$baseUrl/my/subscribers';
 }

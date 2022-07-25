@@ -6,6 +6,7 @@ import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_textfield.dart';
 import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
+import 'package:fans/utility/utility_export.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,16 +32,17 @@ class _MobileSignInScreenState extends State<MobileSignIn> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   TextEditingController countyController = TextEditingController();
-  String dialCode = '+91';
+  String dialCode = '+255';
 
   @override
   Widget build(BuildContext context) {
     return commonStructure(
+        appBar: commonAppBar(),
         key: scaffoldKey,
         padding: 0.0,
         context: context,
         child: Form(
-            key: globalKey,
+          key: globalKey,
           child: Stack(
             children: [
               SingleChildScrollView(
@@ -125,8 +127,8 @@ class _MobileSignInScreenState extends State<MobileSignIn> {
                               width: getScreenWidth(context),
                               child: ElevatedButton(
                                 style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(lightPurpleColor),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      lightPurpleColor),
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
@@ -161,8 +163,8 @@ class _MobileSignInScreenState extends State<MobileSignIn> {
                                             msg: 'Invalid Number',
                                             toastLength: Toast.LENGTH_SHORT);
                                       },
-                                      codeSent:
-                                          (verificationId, resendingToken) async {
+                                      codeSent: (verificationId,
+                                          resendingToken) async {
                                         setState(() {
                                           showLoading = false;
                                           this.verificationId = verificationId;

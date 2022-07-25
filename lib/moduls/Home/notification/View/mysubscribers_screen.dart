@@ -15,9 +15,15 @@ class MySubscribersScreen extends StatefulWidget {
 
 class _MySubscribersScreenState extends State<MySubscribersScreen> {
   @override
+  void initState() {
+    kNotificationController.mySubscriber({}, () => {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return commonStructure(
-      padding: 0.0,
+        padding: 0.0,
         context: context,
         appBar: commonAppBar(),
         child: RawScrollbar(
@@ -89,7 +95,8 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 7,horizontal: 12),
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 7, horizontal: 12),
                             padding: const EdgeInsets.symmetric(vertical: 15),
                             decoration: BoxDecoration(
                                 boxShadow: [
@@ -167,8 +174,8 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                                     child: Text(
                                       textAlign: TextAlign.center,
                                       'Cancelled',
-                                      style: greyInter16W500
-                                          .copyWith(color: colorWhite),
+                                      style: greyInter16W500.copyWith(
+                                          color: colorWhite),
                                     ),
                                   ),
                                 ),

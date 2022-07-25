@@ -1,9 +1,14 @@
+import 'package:fans/moduls/Home/notification/Model/my_subscriber_model.dart';
+import 'package:fans/moduls/Home/notification/View/mysubscribers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../API/api_call.dart';
+import '../../../../API/api_config.dart';
 import '../../../../utility/theme_data.dart';
 import '../../../../utility/utility_export.dart';
 import '../Model/notification_settings_model.dart';
+import 'package:dio/dio.dart' as dio;
 
 class NotificationController extends GetxController {
   RxList<String> blockedCountriesList = <String>[].obs;
@@ -136,4 +141,25 @@ class NotificationController extends GetxController {
         hint: 'https://vk.com/username',
         controller: TextEditingController()),
   ].obs;
+
+  ///My Subscriber Api Call
+
+  Rx<MySubscriberModel> mySubscriberModel = MySubscriberModel().obs;
+
+  mySubscriber(Map<String, dynamic> params, Function callback) async {
+    Api().call(
+        url: ApiConfig.mySubscribers,
+        success: (dio.Response<dynamic> response) async {
+          mySubscriberModel.value = MySubscriberModel.fromJson(response.data);
+          print(mySubscriberModel.value);
+        },
+        error: (dio.Response<dynamic> response) {
+          showLog(response.toString());
+        },
+        params: params,
+        isProgressShow: true,
+        methodType: MethodType.get,
+        isPassHeader: true);
+  }
+
 }
