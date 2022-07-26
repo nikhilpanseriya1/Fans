@@ -388,7 +388,11 @@ Widget homeViewData(bool? visible, BuildContext context) {
                                               )
                                             : InkWell(
                                                 onTap: () async {
-                                                  final List<XFile>?selectedImages = await kHomeController.imagePicker.pickMultiImage();
+                                                  final List<XFile>?
+                                                      selectedImages =
+                                                      await kHomeController
+                                                          .imagePicker
+                                                          .pickMultiImage();
                                                   if (selectedImages!
                                                       .isNotEmpty) {
                                                     kHomeController
@@ -660,49 +664,53 @@ Widget commonPost(BuildContext context) {
             ),
           ),
           20.widthBox,
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    'Admin',
-                    style: FontStyleUtility.blackInter22W500.copyWith(
-                        color: isDarkOn.value == true
-                            ? colorWhite
-                            : deepPurpleColor,
-                        fontWeight: FontWeight.w900),
-                  ),
-                  5.widthBox,
-                  const Icon(
-                    Icons.verified,
-                    color: blueColor,
-                  ),
-                  5.widthBox,
-                  Text(
-                    '@Admin',
-                    style: greyInter14W500,
-                  )
-                ],
-              ),
-              5.heightBox,
-              Row(
-                children: [
-                  Text(
-                    '5 day to ago',
-                    style: FontStyleUtility.greyInter16W500,
-                  ),
-                  10.widthBox,
-                  const Icon(
-                    Icons.lock_outline,
-                    color: colorGrey,
-                    size: 20.0,
-                  )
-                ],
-              ),
-            ],
-          ),
+          StreamBuilder<Object>(
+              stream: isDarkOn.stream,
+              builder: (context, snapshot) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          'Admin',
+                          style: FontStyleUtility.blackInter22W500.copyWith(
+                              color: isDarkOn.value == true
+                                  ? colorWhite
+                                  : deepPurpleColor,
+                              fontWeight: FontWeight.w900),
+                        ),
+                        5.widthBox,
+                        const Icon(
+                          Icons.verified,
+                          color: blueColor,
+                        ),
+                        5.widthBox,
+                        Text(
+                          '@Admin',
+                          style: greyInter14W500,
+                        )
+                      ],
+                    ),
+                    5.heightBox,
+                    Row(
+                      children: [
+                        Text(
+                          '5 day to ago',
+                          style: FontStyleUtility.greyInter16W500,
+                        ),
+                        10.widthBox,
+                        const Icon(
+                          Icons.lock_outline,
+                          color: colorGrey,
+                          size: 20.0,
+                        )
+                      ],
+                    ),
+                  ],
+                );
+              }),
           const Spacer(),
           PopupMenuButton(
             icon: const Icon(

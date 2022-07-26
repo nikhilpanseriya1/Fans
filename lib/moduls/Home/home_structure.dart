@@ -275,7 +275,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
                   size: 30,
                 ),
                 title: Text(
-                  'My Subscriber',
+                  'My Subscribers',
                   style: blackInter16W500,
                 ),
                 onTap: () {

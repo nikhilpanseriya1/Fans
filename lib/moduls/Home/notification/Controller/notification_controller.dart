@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:fans/moduls/Home/notification/Model/my_subscriber_model.dart';
-import 'package:fans/moduls/Home/notification/View/mysubscribers_screen.dart';
+import 'package:fans/moduls/Home/notification/Model/my_subscriptions_model.dart';
+import 'package:fans/moduls/Home/notification/Model/notification_delete_model.dart';
+import 'package:fans/moduls/Home/notification/Model/notification_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../../../API/api_call.dart';
@@ -150,16 +155,96 @@ class NotificationController extends GetxController {
     Api().call(
         url: ApiConfig.mySubscribers,
         success: (dio.Response<dynamic> response) async {
-          mySubscriberModel.value = MySubscriberModel.fromJson(response.data);
-          print(mySubscriberModel.value);
+          try {
+            // mySubscriberModel.value = MySubscriberModel.fromJson(response.data);
+            mySubscriberModel.value =
+                MySubscriberModel.fromJson(json.decode(response.data));
+            print('><><><><>${mySubscriberModel.value}');
+          } catch (e) {
+            Fluttertoast.showToast(msg: e.toString());
+          }
         },
         error: (dio.Response<dynamic> response) {
           showLog(response.toString());
         },
-        params: params,
+        params: {},
         isProgressShow: true,
         methodType: MethodType.get,
         isPassHeader: true);
   }
 
+  ///My Subscriptions Api Call
+  Rx<MySubscriptionsModel> mySubscriptionsModel = MySubscriptionsModel().obs;
+
+  mySubscriptions(Map<String, dynamic> params, Function callback) async {
+    Api().call(
+        url: ApiConfig.mySubscriptions,
+        success: (dio.Response<dynamic> response) async {
+          try {
+            mySubscriptionsModel.value =
+                MySubscriptionsModel.fromJson(json.decode(response.data));
+            print('><><><><>${mySubscriptionsModel.value}');
+          } catch (e) {
+            Fluttertoast.showToast(msg: e.toString());
+          }
+        },
+        error: (dio.Response<dynamic> response) {
+          showLog(response.toString());
+        },
+        params: {},
+        isProgressShow: true,
+        methodType: MethodType.get,
+        isPassHeader: true);
+  }
+
+  ///Notification Api Call
+  Rx<NotificationModel> notificationModel = NotificationModel().obs;
+
+  notificationApiCall(Map<String, dynamic> params, Function callback) async {
+    Api().call(
+        url: ApiConfig.notifications,
+        success: (dio.Response<dynamic> response) async {
+          try {
+            notificationModel.value =
+                NotificationModel.fromJson(json.decode(response.data));
+            print('><><><><>${notificationModel.value}');
+          } catch (e) {
+            Fluttertoast.showToast(msg: e.toString());
+          }
+        },
+        error: (dio.Response<dynamic> response) {
+          showLog(response.toString());
+        },
+        params: {},
+        isProgressShow: true,
+        methodType: MethodType.get,
+        isPassHeader: true);
+  }
+
+  ///Notification Api Call
+  Rx<NotificationDeleteModel> notificationDeleteModel =
+      NotificationDeleteModel().obs;
+
+  notificationDeleteApiCall(
+      Map<String, dynamic> params, Function callback) async {
+    Api().call(
+        url: ApiConfig.notificationsDelete,
+        success: (dio.Response<dynamic> response) async {
+          try {
+            notificationDeleteModel.value =
+                NotificationDeleteModel.fromJson(json.decode(response.data));
+            print('><><><><>${notificationDeleteModel.value}');
+            callback();
+          } catch (e) {
+            Fluttertoast.showToast(msg: e.toString());
+          }
+        },
+        error: (dio.Response<dynamic> response) {
+          showLog(response.toString());
+        },
+        params: {},
+        isProgressShow: true,
+        methodType: MethodType.post,
+        isPassHeader: true);
+  }
 }

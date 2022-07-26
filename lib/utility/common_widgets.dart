@@ -327,8 +327,7 @@ Future<void> showAlertDialog(
                   : const SizedBox.shrink(),
               showPositiveButton ?? true
                   ? TextButton(
-                      child:
-                          Text(positiveTitle ?? 'Yes', style: blackInter16W600),
+                      child: Text(positiveTitle ?? 'Yes', style: blackInter16W600),
                       onPressed: () {
                         callback();
                         Get.back();

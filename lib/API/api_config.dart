@@ -14,9 +14,12 @@ class ApiConfig {
 
   static const String baseUrl = "https://fans2.co.tz/api";
 
-
   static const String loginUser = '$baseUrl/login';
   static const String signupUser = '$baseUrl/register';
   static const String forgotPassword = '$baseUrl/password/email';
   static const String mySubscribers = '$baseUrl/my/subscribers';
+  static const String mySubscriptions = '$baseUrl/my/subscriptions';
+  static const String myPosts = '$baseUrl/my/posts';
+  static const String notifications = '$baseUrl/notifications';
+  static const String notificationsDelete = '$baseUrl/notifications/delete';
 }

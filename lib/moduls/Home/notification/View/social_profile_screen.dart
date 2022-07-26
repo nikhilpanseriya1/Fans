@@ -29,11 +29,11 @@ class _SocialProfileScreenState extends State<SocialProfileScreen> {
                   icon: Icons.monetization_on_outlined,
                   title: 'Social Profiles',
                   subTitle: 'Add your social media profiles here.'),
-              Text(
+              /*Text(
                 'Social Profiles',
                 style: greyInter22W800.copyWith(
                     color: isDarkOn.value == true ? colorWhite : colorGrey),
-              ),
+              ),*/
               10.heightBox,
               Expanded(
                 child: RawScrollbar(

@@ -10,7 +10,7 @@ import '../../../utility/utility_export.dart';
 import '../Model/login_model.dart';
 
 class AuthenticationController extends GetxController {
-  /// Login API CALL
+  ///Login API CALL
   Rx<LoginModel> loginModel = LoginModel().obs;
 
   loginApiCall(Map<String, dynamic> params, Function callBack) async {

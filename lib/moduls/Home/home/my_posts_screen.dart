@@ -13,10 +13,15 @@ class MyPostsScreen extends StatefulWidget {
 
   @override
   State<MyPostsScreen> createState() => _MyPostsScreenState();
-
 }
 
 class _MyPostsScreenState extends State<MyPostsScreen> {
+  @override
+  void initState() {
+    kHomeController.myPostApiCall({}, () => {});
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return commonStructure(
@@ -27,6 +32,7 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
           thickness: 5.0,
           thumbColor: colorSplash.withOpacity(0.5),
           child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
             child: Column(
               children: [
                 commonScreenView(
@@ -56,58 +62,71 @@ class _MyPostsScreenState extends State<MyPostsScreen> {
                   ],
                 ),
                 30.heightBox,
-                ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    itemCount: 5,
-                    physics: const ClampingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                spreadRadius: 1,
-                                blurRadius: 5,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
+                Obx(
+                  () => ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      itemCount: kHomeController.myPostModel.value.posts?.length ?? 0,
+                      // scrollDirection: Axis.horizontal,
+                      physics: const ClampingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: colorPrimary, width: 1),
+                              color: isDarkOn.value == true
+                                  ? colorLightBlack
+                                  : colorWhite),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                child: Text(
+                                  kHomeController
+                                          .myPostModel.value.posts?[index].id
+                                          .toString() ??
+                                      '',
+                                  style: greyInter16W500,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.start,
+                                ),
                               ),
+                              const Icon(Icons.text_format_outlined),
+                              SizedBox(
+                                width: 80,
+                                child: Text(
+                                  kHomeController.myPostModel.value
+                                          .posts?[index].description ??
+                                      '',
+                                  maxLines: 3,
+                                  textAlign: TextAlign.center,
+                                  style: greyInter16W500,
+                                ),
+                              ),
+                              Icon(kHomeController.myPostModel.value
+                                          .posts?[index].locked ==
+                                      'yes'
+                                  ? Icons.lock_outline
+                                  : Icons.lock_open_outlined),
                             ],
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: colorPrimary, width: 1),
-                            color: isDarkOn.value == true
-                                ? colorLightBlack
-                                : colorWhite),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 20,
-                              child: Text(
-                                '1231334545445',
-                                style: greyInter16W500,
-                                maxLines: 1,
-                                textAlign: TextAlign.start,
-                              ),
-                            ),
-                            const Icon(Icons.text_format_outlined),
-                            SizedBox(
-                              width: 80,
-                              child: Text(
-                                maxLines: 3,
-                                textAlign: TextAlign.center,
-                                'My new post',
-                                style: greyInter16W500,
-                              ),
-                            ),
-                            const Icon(Icons.lock_outline),
-                          ],
-                        ),
-                      );
-                    })
+                          ),
+                        );
+                      }),
+                ),
+                20.heightBox
               ],
             ),
           ),

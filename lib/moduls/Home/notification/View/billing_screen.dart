@@ -28,10 +28,10 @@ class _BillingScreenState extends State<BillingScreen> {
               icon: Icons.monetization_on_outlined,
               title: 'Billing',
               subTitle: 'Add your billing information.'),
-          Text(
+         /* Text(
             'Billing Information',
             style: greyInter22W800,
-          ),
+          ),*/
           10.heightBox,
           commonTextField(
               preFixWidget: Icon(

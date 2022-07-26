@@ -21,7 +21,6 @@ import 'package:velocity_x/velocity_x.dart';
 import 'View/block_countries_screen.dart';
 import 'View/edit_page_screen.dart';
 import 'View/mysubscribers_screen.dart';
-import 'View/wallet_screen.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -32,6 +31,12 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   RxBool isExpansionTileOpen = false.obs;
+
+  @override
+  void initState() {
+    kNotificationController.notificationApiCall({}, () {});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +92,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     'Are you sure you want to delete all notifications?',
                                 context: context,
                                 callback: () {
-                                  print('Delete notification callback');
+                                  kNotificationController
+                                      .notificationDeleteApiCall({}, () {
+                                    kNotificationController
+                                        .notificationApiCall({}, () {});
+                                  });
                                 });
                           },
                           icon: const Icon(
@@ -125,14 +134,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                             //     )),
 
                                             Container(
-                                              margin: const EdgeInsets.symmetric(
-                                                  vertical: 20),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 20),
                                               height: 5,
                                               width: 125,
                                               decoration: BoxDecoration(
                                                   color: colorGrey,
                                                   borderRadius:
-                                                      BorderRadius.circular(100)),
+                                                      BorderRadius.circular(
+                                                          100)),
                                             ),
 
                                             ListTile(
@@ -142,7 +153,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                       const VerifiedAccountView());
                                                 },
                                                 trailing: const Icon(
-                                                  Icons.arrow_forward_ios_rounded,
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
                                                   size: 18,
                                                   color: colorGrey,
                                                 ),
@@ -158,12 +170,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                       const SubscriptionPrice());
                                                 },
                                                 trailing: const Icon(
-                                                  Icons.arrow_forward_ios_rounded,
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
                                                   size: 18,
                                                   color: colorGrey,
                                                 ),
-                                                leading: const Icon(
-                                                    Icons.subscriptions_outlined),
+                                                leading: const Icon(Icons
+                                                    .subscriptions_outlined),
                                                 title: const Text(
                                                     'Subscription price')),
                                             ListTile(
@@ -171,7 +184,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                   Get.back();
                                                 },
                                                 trailing: const Icon(
-                                                  Icons.arrow_forward_ios_rounded,
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
                                                   size: 18,
                                                   color: colorGrey,
                                                 ),
@@ -186,7 +200,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                       const PasswordScreen());
                                                 },
                                                 trailing: const Icon(
-                                                  Icons.arrow_forward_ios_rounded,
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
                                                   size: 18,
                                                   color: colorGrey,
                                                 ),
@@ -199,7 +214,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                       const BlockCountriesScreen());
                                                 },
                                                 trailing: const Icon(
-                                                  Icons.arrow_forward_ios_rounded,
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
                                                   size: 18,
                                                   color: colorGrey,
                                                 ),
@@ -214,7 +230,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                       const RestrictedUsersScreen());
                                                 },
                                                 trailing: const Icon(
-                                                  Icons.arrow_forward_ios_rounded,
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
                                                   size: 18,
                                                   color: colorGrey,
                                                 ),
@@ -300,56 +317,95 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 //         ),
                 //       );
                 //     }),
-                StreamBuilder<Object>(
-                    stream: isDarkOn.stream,
-                    builder: (context, snapshot) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 5,
-                        physics: const ClampingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                  color: colorGrey.withOpacity(0.2), width: 1),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: ListTile(
-                                title: RichText(
-                                  text: TextSpan(children: [
-                                    TextSpan(
-                                        text:
-                                            'Your video has been processed successfully (Post) ',
-                                        style: blackInter16W600.copyWith(
-                                            color: isDarkOn.value == true
-                                                ? colorWhite
-                                                : colorGrey,
-                                            height: 1.2)),
-                                    TextSpan(
-                                        text: 'Testing 1',
-                                        style: blackInter16W600.copyWith(
-                                            color: colorPrimary, height: 1.2)),
-                                  ]),
-                                ),
-                                subtitle: Text(
-                                  '5 days ago',
-                                  style: FontStyleUtility.greyInter14W400
-                                      .copyWith(height: 2),
-                                ),
-                                leading: const Icon(
-                                  Icons.play_circle_outline,
-                                  color: colorPrimary,
-                                  size: 40,
+                Obx(
+                  () => kNotificationController
+                                  .notificationModel.value.notifications !=
+                              null &&
+                          kNotificationController.notificationModel.value
+                                  .notifications?.isNotEmpty ==
+                              true
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: kNotificationController.notificationModel
+                                  .value.notifications?.length ??
+                              0,
+                          physics: const ClampingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    color: colorGrey.withOpacity(0.2),
+                                    width: 1),
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                child: ListTile(
+                                  title: RichText(
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                          text:
+                                              'Your video has been processed successfully (Post) ',
+                                          style: blackInter16W600.copyWith(
+                                              color: isDarkOn.value == true
+                                                  ? colorWhite
+                                                  : colorGrey,
+                                              height: 1.2)),
+                                      TextSpan(
+                                          text: kNotificationController
+                                                  .notificationModel
+                                                  .value
+                                                  .notifications?[index]
+                                                  .description ??
+                                              '',
+                                          style: blackInter16W600.copyWith(
+                                              color: colorPrimary,
+                                              height: 1.2)),
+                                    ]),
+                                  ),
+                                  subtitle: Text(
+                                    '5 days ago',
+                                    style: FontStyleUtility.greyInter14W400
+                                        .copyWith(height: 2),
+                                  ),
+                                  leading: const Icon(
+                                    Icons.play_circle_outline,
+                                    color: colorPrimary,
+                                    size: 40,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    })
+                            );
+                          },
+                        )
+                      : Container(
+                          color: colorRed,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Icon(
+                                Icons.notifications_off_outlined,
+                                size: 80.0,
+                                color: isDarkOn.value == true
+                                    ? colorLightWhite
+                                    : colorGreyOpacity30,
+                              ),
+                               Text(
+                                'No have Notifications',
+                                style: greyInter16W500.copyWith(
+                                  fontSize: 20,
+                                  color: isDarkOn.value == true
+                                      ? colorLightWhite
+                                      : colorGreyOpacity30,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                )
               ],
             ),
           ),

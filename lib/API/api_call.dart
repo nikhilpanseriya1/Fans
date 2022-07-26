@@ -79,7 +79,8 @@ class Api {
             options: isPassHeader
                 ? Options(
                     headers: headerParameters,
-                    responseType: ResponseType.plain,
+                    responseType: ResponseType.json,
+                    validateStatus: (_) => true,
                   )
                 : null,
           );

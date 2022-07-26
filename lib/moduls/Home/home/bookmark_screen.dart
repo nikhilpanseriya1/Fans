@@ -1,5 +1,6 @@
 import 'package:fans/moduls/Home/home/home_screen.dart';
 import 'package:fans/utility/common_structure.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -21,6 +22,7 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
           children: [
             30.heightBox,
             ListView.builder(
+              physics: const ClampingScrollPhysics(),
                 itemCount: 1,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
