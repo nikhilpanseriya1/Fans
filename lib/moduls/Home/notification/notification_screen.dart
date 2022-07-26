@@ -380,11 +380,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             );
                           },
                         )
-                      : Container(
-                          color: colorRed,
+                      : SizedBox(
+                          height: 500,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Icon(
                                 Icons.notifications_off_outlined,
@@ -393,7 +392,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     ? colorLightWhite
                                     : colorGreyOpacity30,
                               ),
-                               Text(
+                              Text(
                                 'No have Notifications',
                                 style: greyInter16W500.copyWith(
                                   fontSize: 20,
