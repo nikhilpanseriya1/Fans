@@ -5,11 +5,13 @@ import 'package:fans/utility/common_structure.dart';
 import 'package:fans/utility/common_textfield.dart';
 import 'package:fans/utility/common_widgets.dart';
 import 'package:fans/utility/font_style_utility.dart';
+import 'package:fans/utility/utility_export.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
-import '../../../Utility/common_function.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../moduls/Home/home_structure.dart';
 import '../../../utility/theme_data.dart';
 
@@ -26,6 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
+  final Uri _url = Uri.parse('https://fans2.co.tz/p/privacy');
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           isEnabled: true,
                           isPassword: true,
                           validationFunction: (val) {
-                            return passwordValidation(val);
+                            return emptyFieldValidation(val, 'error');
                           }),
                       heightBox(20.0),
                       Row(
@@ -127,10 +130,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           widthBox(10),
-                          commonText(
+                          Expanded(
+                            child: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text:
+                                        'I agree with the processing of personal data ',
+                                    style: FontStyleUtility.whiteInter16W500,
+                                    recognizer: /*TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Get.to(() {
+                                        print('kfghjdfjkghfkldgkl');
+                                        isRemember.value = !isRemember.value;
+                                      });
+                                    },*/
+                                        TapGestureRecognizer()
+                                          ..onTap = () => isRemember.value =
+                                              !isRemember.value),
+                                TextSpan(
+                                    text: 'Privacy policy',
+                                    style: FontStyleUtility.whiteInter16W500
+                                        .copyWith(color: colorPrimary),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () => _launchInBrowser(_url))
+                              ]),
+                            ),
+                          ),
+                          /* commonText(
                               text:
                                   'I agree with the processing of personal data privacy policy',
-                              style: FontStyleUtility.whiteInter16W500),
+                              style: FontStyleUtility.whiteInter16W500),*/
                         ],
                       ),
                       heightBox(30.0),
@@ -150,14 +179,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           onPressed: () {
                             if (formKey.currentState?.validate() == true) {
-                              Map<String, dynamic> params = {
-                                'name': userNameController.text.tr,
-                                'email': emailController.text.tr,
-                                'password': passController.text.tr
-                              };
-                            }
+                              if (isRemember.value == true) {
+                                Map<String, dynamic> params = {
+                                  'name': userNameController.text.trim(),
+                                  'email': emailController.text.trim(),
+                                  'password': passController.text.trim(),
+                                  'agree_gdpr': isRemember.value
+                                };
 
-                            Get.to(() => const HomeStructureView());
+                                kAuthenticationController.signupApiCall(params,
+                                    () {
+                                  Get.off(() => const SignInScreen());
+                                });
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg: 'select argument policy');
+                              }
+                            }
                           },
                           child: Text(
                             "Sign up",
@@ -176,23 +214,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             style: FontStyleUtility.whiteInter20W500),
                       )),
                       heightBox(40.0),
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => const MobileSignIn());
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.phone_android_sharp,
-                              color: colorWhite,
-                            ),
-                            widthBox(20.0),
-                            Text(
-                              'Login with Mobile Number',
-                              style: FontStyleUtility.whiteInter16W500,
-                            )
-                          ],
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(() => const MobileSignIn());
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.phone_android_sharp,
+                                color: colorWhite,
+                              ),
+                              widthBox(20.0),
+                              Text(
+                                'Login with Mobile Number',
+                                style: FontStyleUtility.whiteInter16W500,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -202,5 +242,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           ),
         ));
+  }
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }

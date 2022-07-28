@@ -1,7 +1,7 @@
 import 'package:fans/moduls/Home/home/my_posts_screen.dart';
 import 'package:fans/moduls/Home/notification/View/billing_screen.dart';
 import 'package:fans/moduls/Home/notification/View/dashboard_screen.dart';
-import 'package:fans/moduls/Home/notification/View/may_page_screen.dart';
+import 'package:fans/moduls/Home/notification/View/my_page_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscribers_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscriptions_screen.dart';
 import 'package:fans/moduls/Home/notification/View/social_profile_screen.dart';

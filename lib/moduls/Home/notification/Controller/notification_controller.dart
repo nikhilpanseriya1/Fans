@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:fans/moduls/Home/notification/Model/my_page_model.dart';
 import 'package:fans/moduls/Home/notification/Model/my_subscriber_model.dart';
 import 'package:fans/moduls/Home/notification/Model/my_subscriptions_model.dart';
 import 'package:fans/moduls/Home/notification/Model/notification_delete_model.dart';
 import 'package:fans/moduls/Home/notification/Model/notification_model.dart';
+import 'package:fans/moduls/Home/notification/Model/restiction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -245,6 +247,54 @@ class NotificationController extends GetxController {
         params: {},
         isProgressShow: true,
         methodType: MethodType.post,
+        isPassHeader: true);
+  }
+
+  ///My Page Api Call
+
+  Rx<MyPageModel> myPageModel = MyPageModel().obs;
+
+  myPageApiCall(Map<String, dynamic> params, Function callback) async {
+    Api().call(
+        url: ApiConfig.myPage,
+        success: (dio.Response<dynamic> response) {
+          try {
+            myPageModel.value =
+                MyPageModel.fromJson(json.decode(response.data));
+          } catch (e) {
+            Fluttertoast.showToast(msg: e.toString());
+          }
+        },
+        error: (dio.Response<dynamic> response) {
+          showLog(response.toString());
+        },
+        params: {},
+        methodType: MethodType.post,
+        isProgressShow: true,
+        isPassHeader: true);
+  }
+
+  ///My Page Api Call
+
+  Rx<RestrictionsModel> restrictionsModel = RestrictionsModel().obs;
+
+  restrictionsApiCall(Map<String, dynamic> params, Function callback) async {
+    Api().call(
+        url: ApiConfig.myPage,
+        success: (dio.Response<dynamic> response) {
+          try {
+            restrictionsModel.value =
+                RestrictionsModel.fromJson(json.decode(response.data));
+          } catch (e) {
+            Fluttertoast.showToast(msg: e.toString());
+          }
+        },
+        error: (dio.Response<dynamic> response) {
+          showLog(response.toString());
+        },
+        params: {},
+        methodType: MethodType.get,
+        isProgressShow: true,
         isPassHeader: true);
   }
 }

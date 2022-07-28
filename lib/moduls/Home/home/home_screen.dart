@@ -1,13 +1,17 @@
 import 'dart:io';
+import 'package:chewie/chewie.dart';
 import 'package:fans/moduls/Home/home/goto_post_screen.dart';
-import 'package:fans/moduls/Home/notification/View/may_page_screen.dart';
+import 'package:fans/moduls/Home/notification/View/my_page_screen.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:video_player/video_player.dart';
 import '../../../utility/theme_data.dart';
 import '../../../utility/utility_export.dart';
 
@@ -19,17 +23,52 @@ class HomeScreen extends StatefulWidget {
 }
 
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+VideoPlayerController? videoPlayerController;
+Future<void>? videoPlayerFuture;
+ChewieController? chewieController;
+File? zipFileData;
+RxBool zipBool = false.obs;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    videoPlayerController = VideoPlayerController.network(
+        "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4");
+    videoPlayerFuture = videoPlayerController!.initialize();
+    chewieController = ChewieController(
+      videoPlayerController: videoPlayerController!,
+      autoPlay: true,
+      looping: true,
+    );
+    videoPlayerController?.setLooping(true); // videoPlayerController?.play();
   }
+
+  /* @override
+  void dispose() {
+    chewieController!.dispose();
+    videoPlayerController!.dispose();
+    super.dispose();
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
+        /*floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              videoPlayerController!.value.isPlaying
+                  ? videoPlayerController?.pause()
+                  : videoPlayerController?.play();
+            });
+          },
+          child: Icon(
+            videoPlayerController!.value.isPlaying
+                ? Icons.pause
+                : Icons.play_arrow,
+          ),
+        ),*/
         child: GestureDetector(
             onTap: () {
               disableFocusScopeNode(context);
@@ -324,6 +363,45 @@ Widget homeViewData(bool? visible, BuildContext context) {
               ],
             ),
             StreamBuilder<Object>(
+                stream: zipBool.stream,
+                builder: (context, snapshot) {
+                  return zipFileData != null
+                      ? Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5.0)
+                                .copyWith(bottom: 10.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.attachment,
+                                  color: blueColor,
+                                ),
+                                10.widthBox,
+                                Text(
+                                  (zipFileData!.path.split('/').last),
+                                  style: blackInter15W500,
+                                  textAlign: TextAlign.center,
+                                ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: IconButton(
+                                        onPressed: () {
+                                          zipBool.value = false;
+                                          zipFileData = null;
+                                        },
+                                        icon: const Icon(
+                                            Icons.highlight_remove_sharp)),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ))
+                      : const SizedBox.shrink();
+                }),
+            StreamBuilder<Object>(
                 stream: kHomeController.imageShowing.stream,
                 builder: (context, snapshot) {
                   return kHomeController.imageShowing.value == true
@@ -437,6 +515,9 @@ Widget homeViewData(bool? visible, BuildContext context) {
               () => Row(
                 children: [
                   IconButton(
+                    visualDensity: const VisualDensity(
+                        vertical: VisualDensity.minimumDensity),
+                    padding: EdgeInsets.zero,
                     onPressed: () {
                       kHomeController.imageShowing.value =
                           !kHomeController.imageShowing.value;
@@ -449,11 +530,27 @@ Widget homeViewData(bool? visible, BuildContext context) {
                     ),
                   ),
                   20.widthBox,
-                  Icon(
-                    Icons.folder_zip_outlined,
-                    color:
-                        isDarkOn.value == true ? colorWhite : deepPurpleColor,
-                    size: 25,
+                  IconButton(
+                    onPressed: () async {
+                      FilePickerResult? result = await FilePicker.platform
+                          .pickFiles(
+                              type: FileType.custom,
+                              allowedExtensions: ['zip']);
+
+                      if (result != null) {
+                        zipFileData = File(result.files.single.path ?? '');
+                        zipFileData != null ? zipBool.value = true : false;
+                        print('>>>>>???>>>$zipFileData');
+                      } else {
+                        // User canceled the picker
+                      }
+                    },
+                    icon: Icon(
+                      Icons.folder_zip_outlined,
+                      color:
+                          isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                      size: 25,
+                    ),
                   ),
                   20.widthBox,
                   Icon(
@@ -503,7 +600,7 @@ Widget homeViewData(bool? visible, BuildContext context) {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 3,
             itemBuilder: (context, index) {
-              return commonPost(context);
+              return commonPost(context, index);
             }),
       ],
     ),
@@ -643,7 +740,7 @@ Widget exploreCreatorData() {
       });
 }
 
-Widget commonPost(BuildContext context) {
+Widget commonPost(BuildContext context, [int? index]) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -787,13 +884,30 @@ Widget commonPost(BuildContext context) {
                   height: 200,
                   color: colorBlack,
                 ),*/
-      ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          'assets/images/post1.jpeg',
-          fit: BoxFit.cover,
-        ),
-      ),
+
+      index == 2
+          ? FutureBuilder(
+              future: videoPlayerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return AspectRatio(
+                    aspectRatio: videoPlayerController!.value.aspectRatio,
+                    child: Chewie(
+                      controller: chewieController!,
+                    ),
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            )
+          : ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/post1.jpeg',
+                fit: BoxFit.cover,
+              ),
+            ),
       5.heightBox,
       StreamBuilder<Object>(
           stream: isDarkOn.stream,

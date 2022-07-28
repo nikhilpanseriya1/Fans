@@ -22,4 +22,9 @@ class ApiConfig {
   static const String myPosts = '$baseUrl/my/posts';
   static const String notifications = '$baseUrl/notifications';
   static const String notificationsDelete = '$baseUrl/notifications/delete';
+  static const String register = '$baseUrl/register';
+  static const String bookmarks = '$baseUrl/my/user/bookmarks';
+  static const String addBookmark = '$baseUrl/add/bookmark';
+  static const String myPage = '$baseUrl/user';
+  static const String restrictions = '$baseUrl/settings/restrictions';
 }

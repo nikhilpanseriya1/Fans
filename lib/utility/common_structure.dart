@@ -9,6 +9,7 @@ Widget commonStructure({
   double? padding,
   Key? key,
   Widget? bottomNavigation,
+  FloatingActionButton? floatingActionButton
 }) {
   return SafeArea(
     key: key,
@@ -19,7 +20,7 @@ Widget commonStructure({
           resizeToAvoidBottomInset: true,
           appBar: appBar,
           bottomNavigationBar: bottomNavigation,
-
+          floatingActionButton: floatingActionButton,
           ///adding listView cause scroll issue
           body: Container(
             padding: EdgeInsets.symmetric(horizontal: padding ?? 12),

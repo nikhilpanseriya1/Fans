@@ -1,166 +1,145 @@
+// To parse this JSON data, do
+//
+//     final signupModel = signupModelFromJson(jsonString);
+
+import 'dart:convert';
+
+SignupModel signupModelFromJson(String str) =>
+    SignupModel.fromJson(json.decode(str));
+
+String signupModelToJson(SignupModel data) => json.encode(data.toJson());
+
 class SignupModel {
   SignupModel({
-      String? username, 
-      String? countriesId, 
-      String? name, 
-      String? email, 
-      String? avatar, 
-      String? cover, 
-      String? status, 
-      String? role, 
-      String? permission, 
-      String? confirmationCode, 
-      String? oauthUid, 
-      String? oauthProvider, 
-      String? token, 
-      String? story, 
-      String? verifiedId, 
-      String? ip, 
-      String? language, 
-      String? date, 
-      int? id,}){
-    _username = username;
-    _countriesId = countriesId;
-    _name = name;
-    _email = email;
-    _avatar = avatar;
-    _cover = cover;
-    _status = status;
-    _role = role;
-    _permission = permission;
-    _confirmationCode = confirmationCode;
-    _oauthUid = oauthUid;
-    _oauthProvider = oauthProvider;
-    _token = token;
-    _story = story;
-    _verifiedId = verifiedId;
-    _ip = ip;
-    _language = language;
-    _date = date;
-    _id = id;
+    this.success,
+    this.user,
+    this.errors,
+  });
+
+  bool? success;
+  User? user;
+  Errors? errors;
+
+  factory SignupModel.fromJson(Map<String, dynamic> json) => SignupModel(
+        success: json["success"] == null ? null : json["success"],
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        errors: json["errors"] == null ? null : Errors.fromJson(json["errors"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "success": success == null ? null : success,
+        "user": user == null ? null : user?.toJson(),
+        "errors": errors == null ? null : errors?.toJson(),
+      };
 }
 
-  SignupModel.fromJson(dynamic json) {
-    _username = json['username'];
-    _countriesId = json['countries_id'];
-    _name = json['name'];
-    _email = json['email'];
-    _avatar = json['avatar'];
-    _cover = json['cover'];
-    _status = json['status'];
-    _role = json['role'];
-    _permission = json['permission'];
-    _confirmationCode = json['confirmation_code'];
-    _oauthUid = json['oauth_uid'];
-    _oauthProvider = json['oauth_provider'];
-    _token = json['token'];
-    _story = json['story'];
-    _verifiedId = json['verified_id'];
-    _ip = json['ip'];
-    _language = json['language'];
-    _date = json['date'];
-    _id = json['id'];
-  }
-  String? _username;
-  String? _countriesId;
-  String? _name;
-  String? _email;
-  String? _avatar;
-  String? _cover;
-  String? _status;
-  String? _role;
-  String? _permission;
-  String? _confirmationCode;
-  String? _oauthUid;
-  String? _oauthProvider;
-  String? _token;
-  String? _story;
-  String? _verifiedId;
-  String? _ip;
-  String? _language;
-  String? _date;
-  int? _id;
-SignupModel copyWith({  String? username,
-  String? countriesId,
-  String? name,
-  String? email,
-  String? avatar,
-  String? cover,
-  String? status,
-  String? role,
-  String? permission,
-  String? confirmationCode,
-  String? oauthUid,
-  String? oauthProvider,
-  String? token,
-  String? story,
-  String? verifiedId,
-  String? ip,
-  String? language,
-  String? date,
-  int? id,
-}) => SignupModel(  username: username ?? _username,
-  countriesId: countriesId ?? _countriesId,
-  name: name ?? _name,
-  email: email ?? _email,
-  avatar: avatar ?? _avatar,
-  cover: cover ?? _cover,
-  status: status ?? _status,
-  role: role ?? _role,
-  permission: permission ?? _permission,
-  confirmationCode: confirmationCode ?? _confirmationCode,
-  oauthUid: oauthUid ?? _oauthUid,
-  oauthProvider: oauthProvider ?? _oauthProvider,
-  token: token ?? _token,
-  story: story ?? _story,
-  verifiedId: verifiedId ?? _verifiedId,
-  ip: ip ?? _ip,
-  language: language ?? _language,
-  date: date ?? _date,
-  id: id ?? _id,
-);
-  String? get username => _username;
-  String? get countriesId => _countriesId;
-  String? get name => _name;
-  String? get email => _email;
-  String? get avatar => _avatar;
-  String? get cover => _cover;
-  String? get status => _status;
-  String? get role => _role;
-  String? get permission => _permission;
-  String? get confirmationCode => _confirmationCode;
-  String? get oauthUid => _oauthUid;
-  String? get oauthProvider => _oauthProvider;
-  String? get token => _token;
-  String? get story => _story;
-  String? get verifiedId => _verifiedId;
-  String? get ip => _ip;
-  String? get language => _language;
-  String? get date => _date;
-  int? get id => _id;
+class User {
+  User({
+    this.username,
+    this.countriesId,
+    this.name,
+    this.email,
+    this.avatar,
+    this.cover,
+    this.status,
+    this.role,
+    this.permission,
+    this.confirmationCode,
+    this.oauthUid,
+    this.oauthProvider,
+    this.token,
+    this.story,
+    this.verifiedId,
+    this.ip,
+    this.language,
+    this.date,
+    this.id,
+  });
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['username'] = _username;
-    map['countries_id'] = _countriesId;
-    map['name'] = _name;
-    map['email'] = _email;
-    map['avatar'] = _avatar;
-    map['cover'] = _cover;
-    map['status'] = _status;
-    map['role'] = _role;
-    map['permission'] = _permission;
-    map['confirmation_code'] = _confirmationCode;
-    map['oauth_uid'] = _oauthUid;
-    map['oauth_provider'] = _oauthProvider;
-    map['token'] = _token;
-    map['story'] = _story;
-    map['verified_id'] = _verifiedId;
-    map['ip'] = _ip;
-    map['language'] = _language;
-    map['date'] = _date;
-    map['id'] = _id;
-    return map;
-  }
+  String? username;
+  String? countriesId;
+  String? name;
+  String? email;
+  String? avatar;
+  String? cover;
+  String? status;
+  String? role;
+  String? permission;
+  String? confirmationCode;
+  String? oauthUid;
+  String? oauthProvider;
+  String? token;
+  String? story;
+  String? verifiedId;
+  String? ip;
+  String? language;
+  DateTime? date;
+  int? id;
 
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        username: json["username"] == null ? null : json["username"],
+        countriesId: json["countries_id"] == null ? null : json["countries_id"],
+        name: json["name"] == null ? null : json["name"],
+        email: json["email"] == null ? null : json["email"],
+        avatar: json["avatar"] == null ? null : json["avatar"],
+        cover: json["cover"] == null ? null : json["cover"],
+        status: json["status"] == null ? null : json["status"],
+        role: json["role"] == null ? null : json["role"],
+        permission: json["permission"] == null ? null : json["permission"],
+        confirmationCode: json["confirmation_code"] == null
+            ? null
+            : json["confirmation_code"],
+        oauthUid: json["oauth_uid"] == null ? null : json["oauth_uid"],
+        oauthProvider:
+            json["oauth_provider"] == null ? null : json["oauth_provider"],
+        token: json["token"] == null ? null : json["token"],
+        story: json["story"] == null ? null : json["story"],
+        verifiedId: json["verified_id"] == null ? null : json["verified_id"],
+        ip: json["ip"] == null ? null : json["ip"],
+        language: json["language"] == null ? null : json["language"],
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        id: json["id"] == null ? null : json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "username": username == null ? null : username,
+        "countries_id": countriesId == null ? null : countriesId,
+        "name": name == null ? null : name,
+        "email": email == null ? null : email,
+        "avatar": avatar == null ? null : avatar,
+        "cover": cover == null ? null : cover,
+        "status": status == null ? null : status,
+        "role": role == null ? null : role,
+        "permission": permission == null ? null : permission,
+        "confirmation_code": confirmationCode == null ? null : confirmationCode,
+        "oauth_uid": oauthUid == null ? null : oauthUid,
+        "oauth_provider": oauthProvider == null ? null : oauthProvider,
+        "token": token == null ? null : token,
+        "story": story == null ? null : story,
+        "verified_id": verifiedId == null ? null : verifiedId,
+        "ip": ip == null ? null : ip,
+        "language": language == null ? null : language,
+        "date": date == null ? null : date?.toIso8601String(),
+        "id": id == null ? null : id,
+      };
+}
+
+class Errors {
+  Errors({
+    this.email,
+  });
+
+  List<String>? email;
+
+  factory Errors.fromJson(Map<String, dynamic> json) => Errors(
+        email: json["email"] == null
+            ? null
+            : List<String>.from(json["email"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "email": email == null
+            ? null
+            : List<dynamic>.from(email?.map((x) => x) ?? []),
+      };
 }

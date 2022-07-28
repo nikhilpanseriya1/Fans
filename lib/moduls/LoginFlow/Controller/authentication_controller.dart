@@ -29,7 +29,8 @@ class AuthenticationController extends GetxController {
               return;
             }
 
-            if (loginModel.value.token != null && loginModel.value.token!.isNotEmpty) {
+            if (loginModel.value.token != null &&
+                loginModel.value.token!.isNotEmpty) {
               storage.write('loginToken', loginModel.value.token);
             }
 
@@ -57,6 +58,18 @@ class AuthenticationController extends GetxController {
         url: ApiConfig.signupUser,
         success: (dio.Response<dynamic> response) async {
           signupModel.value = SignupModel.fromJson(response.data);
+          try {
+            if (signupModel.value.success == true) {
+              callback();
+            } else {
+               Fluttertoast.showToast(
+                  msg:   'Error',
+                  toastLength: Toast.LENGTH_LONG);
+            }
+          } catch (e) {
+            Fluttertoast.showToast(
+                msg: e.toString(), toastLength: Toast.LENGTH_LONG);
+          }
         },
         error: (dio.Response<dynamic> response) {
           showLog(response.toString());
