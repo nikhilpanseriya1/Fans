@@ -27,4 +27,6 @@ class ApiConfig {
   static const String addBookmark = '$baseUrl/add/bookmark';
   static const String myPage = '$baseUrl/user';
   static const String restrictions = '$baseUrl/settings/restrictions';
+  static const String deleteCover = '$baseUrl/delete/cover';
+  static const String messages = '$baseUrl/messages';
 }

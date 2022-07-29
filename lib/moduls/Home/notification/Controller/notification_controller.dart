@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fans/moduls/Home/notification/Model/delete_cover_image.dart';
 import 'package:fans/moduls/Home/notification/Model/my_page_model.dart';
 import 'package:fans/moduls/Home/notification/Model/my_subscriber_model.dart';
 import 'package:fans/moduls/Home/notification/Model/my_subscriptions_model.dart';
@@ -274,7 +275,7 @@ class NotificationController extends GetxController {
         isPassHeader: true);
   }
 
-  ///My Page Api Call
+  ///My Restrictions Api Call
 
   Rx<RestrictionsModel> restrictionsModel = RestrictionsModel().obs;
 
@@ -294,6 +295,29 @@ class NotificationController extends GetxController {
         },
         params: {},
         methodType: MethodType.get,
+        isProgressShow: true,
+        isPassHeader: true);
+  }
+
+  ///Cover Image Api Call
+
+  Rx<DeleteCoverImageModel> deleteCoverImagesModel = DeleteCoverImageModel().obs;
+
+  deleteCoverImagesApiCall(Map<String, dynamic> params, Function callback) async {
+    Api().call(
+        url: ApiConfig.deleteCover,
+        success: (dio.Response<dynamic> response) {
+          try {
+            restrictionsModel.value = RestrictionsModel.fromJson(json.decode(response.data));
+          } catch (e) {
+            Fluttertoast.showToast(msg: e.toString());
+          }
+        },
+        error: (dio.Response<dynamic> response) {
+          showLog(response.toString());
+        },
+        params: {},
+        methodType: MethodType.post,
         isProgressShow: true,
         isPassHeader: true);
   }

@@ -13,6 +13,13 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    kChatController.messagesApiCall({},() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,

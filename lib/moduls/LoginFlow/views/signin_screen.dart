@@ -83,8 +83,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         hintText: 'Enter your email',
                         textEditingController: emailController,
                         validationFunction: (val) {
-                          return emptyFieldValidation(
-                              val, 'Please enter value');
+                          // return emptyFieldValidation(
+                          //     val, 'Please enter value');
+                          GetUtils.isEmail(val);
                         },
                       ),
                       heightBox(10.0),

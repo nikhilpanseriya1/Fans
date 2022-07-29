@@ -69,7 +69,7 @@ class HomeController extends GetxController {
         methodType: MethodType.get,
         isPassHeader: true,
         error: (dio.Response<dynamic> response) {
-          showLog(response.toString());
+            showLog(response.toString());
         },
         url: ApiConfig.bookmarks);
   }

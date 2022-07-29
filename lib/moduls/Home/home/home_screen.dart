@@ -28,11 +28,16 @@ Future<void>? videoPlayerFuture;
 ChewieController? chewieController;
 File? zipFileData;
 RxBool zipBool = false.obs;
+RxBool isMessage = false.obs;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    kHomeController.myPostApiCall({}, () {
+      kHomeController.myPostModel.refresh();
+    });
+
     videoPlayerController = VideoPlayerController.network(
         "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4");
     videoPlayerFuture = videoPlayerController!.initialize();
@@ -595,13 +600,15 @@ Widget homeViewData(bool? visible, BuildContext context) {
           ],
         ),
         15.heightBox,
-        ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return commonPost(context, index);
-            }),
+        Obx(
+          () => ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: kHomeController.myPostModel.value.posts?.length ?? 0,
+              itemBuilder: (context, index) {
+                return commonPost(context, index);
+              }),
+        ),
       ],
     ),
   );
@@ -876,7 +883,7 @@ Widget commonPost(BuildContext context, [int? index]) {
       ),
       15.heightBox,
       Text(
-        'Testing',
+        kHomeController.myPostModel.value.posts?[index ?? 0].description ?? '',
         style: greyInter16W500,
       ),
       10.heightBox,
@@ -945,7 +952,9 @@ Widget commonPost(BuildContext context, [int? index]) {
                 ),
                 2.widthBox,
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      isMessage.value = !isMessage.value;
+                    },
                     icon: Icon(
                       CupertinoIcons.chat_bubble,
                       size: 22,
@@ -1050,6 +1059,181 @@ Widget commonPost(BuildContext context, [int? index]) {
               ],
             );
           }),
+      Obx(
+        () => isMessage.value == true
+            ? ListView.builder(
+                itemCount: 2 + 1,
+                physics: const ClampingScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return index != 2
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipOval(
+                              child: SizedBox.fromSize(
+                                size: const Size.fromRadius(20), // Image radius
+                                child: Image.asset(
+                                  'assets/images/profile.jpeg',
+                                  scale: 3.5,
+                                  height: 30.0,
+                                  width: 30.0,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            15.widthBox,
+                            Expanded(
+                              child: StreamBuilder<Object>(
+                                  stream: isDarkOn.stream,
+                                  builder: (context, snapshot) {
+                                    return Column(
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Admin Account',
+                                              style: blackInter15W500.copyWith(
+                                                  color: isDarkOn.value == true
+                                                      ? colorWhite
+                                                      : deepPurpleColor,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w900),
+                                            ),
+                                            Icon(Icons.verified,
+                                                size: 18,
+                                                color: isDarkOn.value == true
+                                                    ? colorWhite
+                                                    : blueColor)
+                                          ],
+                                        ),
+                                        3.heightBox,
+                                        Text(
+                                          'best post',
+                                          style: blackInter15W500.copyWith(
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '1 Hour ago',
+                                              style: FontStyleUtility
+                                                  .blackInter22W500
+                                                  .copyWith(
+                                                      color:
+                                                          isDarkOn.value == true
+                                                              ? colorLightWhite
+                                                              : colorGrey,
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                            ),
+                                            IconButton(
+                                                onPressed: () {
+                                                  showAlertDialog(
+                                                      title: 'Are you sure?',
+                                                      child: Center(
+                                                        child: Lottie.asset(
+                                                          'assets/json/cancel.json',
+                                                          width: 100,
+                                                          height: 100,
+                                                          repeat: false,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      msg:
+                                                          'Are you sure you want to delete this comment ?',
+                                                      context: context,
+                                                      callback: () {
+                                                        kNotificationController
+                                                            .notificationDeleteApiCall(
+                                                                {}, () {
+                                                          kNotificationController
+                                                              .notificationApiCall(
+                                                                  {}, () {});
+                                                        });
+                                                      });
+                                                },
+                                                icon: const Icon(
+                                                    Icons.delete_outline,
+                                                    size: 20.0),
+                                                padding: EdgeInsets.zero,
+                                                visualDensity:
+                                                    const VisualDensity(
+                                                        vertical: VisualDensity
+                                                            .minimumDensity)),
+                                            const Spacer(),
+                                            StreamBuilder<Object>(
+                                                stream: kHomeController
+                                                    .likeButton.stream,
+                                                builder: (context, snapshot) {
+                                                  return IconButton(
+                                                      splashColor: colorRed,
+                                                      splashRadius: 20.0,
+                                                      padding: EdgeInsets.zero,
+                                                      visualDensity:
+                                                          const VisualDensity(
+                                                              vertical:
+                                                                  VisualDensity
+                                                                      .minimumDensity),
+                                                      onPressed: () {
+                                                        kHomeController
+                                                                .likeButton
+                                                                .value =
+                                                            !kHomeController
+                                                                .likeButton
+                                                                .value;
+                                                      },
+                                                      icon: Icon(
+                                                        kHomeController
+                                                                    .likeButton
+                                                                    .value ==
+                                                                true
+                                                            ? CupertinoIcons
+                                                                .heart_fill
+                                                            : CupertinoIcons
+                                                                .suit_heart,
+                                                        size: 18,
+                                                        color: kHomeController
+                                                                    .likeButton
+                                                                    .value ==
+                                                                true
+                                                            ? colorRed
+                                                            : isDarkOn.value ==
+                                                                    true
+                                                                ? colorLightWhite
+                                                                : colorGrey,
+                                                      ));
+                                                }),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  }),
+                            )
+                          ],
+                        ).paddingOnly(bottom: 10)
+                      : commonTextField(
+                          hintText: 'Write a comment press send..',
+                          textEditingController: null,
+                          inputAction: TextInputAction.send,
+                          borderRadiusColor: colorGreyOpacity30,
+                          isPassword: false,
+                          onFieldSubmit: (value) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          });
+                })
+            : const SizedBox(),
+      ),
       20.heightBox
     ],
   );

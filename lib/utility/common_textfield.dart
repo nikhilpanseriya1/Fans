@@ -152,7 +152,7 @@ Widget commonTextField(
                           passwordVisible = !passwordVisible;
                         });
                       },
-                      child: passwordVisible == true
+                      child: passwordVisible
                           ? const Icon(
                               CupertinoIcons.eye_slash,
                               /* color: textColor,*/
@@ -161,11 +161,7 @@ Widget commonTextField(
                               CupertinoIcons.eye,
                               /*color: textColor,*/
                             ))
-                  : suffixIcon ??
-                      const SizedBox(
-                        height: 0,
-                        width: 0,
-                      ),
+                  : suffixIcon ?? const SizedBox.shrink(),
               hintStyle: hintStyle ??
                   blackInter16W500.copyWith(
                       color:
