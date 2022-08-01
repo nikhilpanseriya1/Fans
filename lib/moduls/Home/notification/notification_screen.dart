@@ -324,62 +324,64 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           kNotificationController.notificationModel.value
                                   .notifications?.isNotEmpty ==
                               true
-                      ? ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: kNotificationController.notificationModel
-                                  .value.notifications?.length ??
-                              0,
-                          physics: const ClampingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(vertical: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                    color: colorGrey.withOpacity(0.2),
-                                    width: 1),
-                              ),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                child: ListTile(
-                                  title: RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                          text:
-                                              'Your video has been processed successfully (Post) ',
-                                          style: blackInter16W600.copyWith(
-                                              color: isDarkOn.value == true
-                                                  ? colorWhite
-                                                  : colorGrey,
-                                              height: 1.2)),
-                                      TextSpan(
-                                          text: kNotificationController
-                                                  .notificationModel
-                                                  .value
-                                                  .notifications?[index]
-                                                  .description ??
-                                              '',
-                                          style: blackInter16W600.copyWith(
-                                              color: colorPrimary,
-                                              height: 1.2)),
-                                    ]),
-                                  ),
-                                  subtitle: Text(
-                                    '5 days ago',
-                                    style: FontStyleUtility.greyInter14W400
-                                        .copyWith(height: 2),
-                                  ),
-                                  leading: const Icon(
-                                    Icons.play_circle_outline,
-                                    color: colorPrimary,
-                                    size: 40,
+                      ? Obx(()=>
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: kNotificationController.notificationModel
+                                    .value.notifications?.length ??
+                                0,
+                            physics: const ClampingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: const EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                      color: colorGrey.withOpacity(0.2),
+                                      width: 1),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: ListTile(
+                                    title: RichText(
+                                      text: TextSpan(children: [
+                                        TextSpan(
+                                            text:
+                                                'Your video has been processed successfully (Post) ',
+                                            style: blackInter16W600.copyWith(
+                                                color: isDarkOn.value == true
+                                                    ? colorWhite
+                                                    : colorGrey,
+                                                height: 1.2)),
+                                        TextSpan(
+                                            text: kNotificationController
+                                                    .notificationModel
+                                                    .value
+                                                    .notifications?[index]
+                                                    .description ??
+                                                '',
+                                            style: blackInter16W600.copyWith(
+                                                color: colorPrimary,
+                                                height: 1.2)),
+                                      ]),
+                                    ),
+                                    subtitle: Text(
+                                      '5 days ago',
+                                      style: FontStyleUtility.greyInter14W400
+                                          .copyWith(height: 2),
+                                    ),
+                                    leading: const Icon(
+                                      Icons.play_circle_outline,
+                                      color: colorPrimary,
+                                      size: 40,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        )
+                              );
+                            },
+                          ),
+                      )
                       : SizedBox(
                           height: 500,
                           child: Column(

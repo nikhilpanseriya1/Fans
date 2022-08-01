@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -30,6 +31,17 @@ class _OtpScreenScreenState extends State<OtpScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   RxBool showLoading = false.obs;
   GlobalKey<FormState> globalKey = GlobalKey();
+  RxString codeValue = "".obs;
+
+  @override
+  void initState() {
+    super.initState();
+    smsOtp();
+  }
+
+  void smsOtp() async {
+    await SmsAutoFill().listenForCode;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +104,26 @@ class _OtpScreenScreenState extends State<OtpScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // mainAxisSize: MainAxisSize.max,
                           children: [
-                            commonTextField(
+                            20.heightBox,
+                            PinFieldAutoFill(
+                              decoration: UnderlineDecoration(
+                                textStyle: const TextStyle(
+                                    fontSize: 20, color: colorWhite),
+                                colorBuilder: FixedColorBuilder(
+                                    colorWhite.withOpacity(0.5)),
+                              ),
+                              currentCode: codeValue.value,
+                              controller: otpController,
+                              onCodeSubmitted: (code) {},
+                              onCodeChanged: (code) {
+                                if (code!.length == 6) {
+                                  codeValue.value = code;
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                }
+                              },
+                            ),
+                            /* commonTextField(
                                 preFixWidget: const Icon(
                                   Icons.phone_android_sharp,
                                   color: colorPrimary,
@@ -107,8 +138,8 @@ class _OtpScreenScreenState extends State<OtpScreen> {
                                 },
                                 textEditingController: otpController,
                                 // inputAction: [],
-                                keyboardType: TextInputType.phone),
-                            heightBox(25.0),
+                                keyboardType: TextInputType.phone),*/
+                            heightBox(60.0),
                             SizedBox(
                               height: 50,
                               width: getScreenWidth(context),
@@ -124,8 +155,6 @@ class _OtpScreenScreenState extends State<OtpScreen> {
                                   ),
                                 ),
                                 onPressed: () async {
-
-
                                   if (globalKey.currentState?.validate() ==
                                       true) {
                                     showLoading.value = true;
@@ -148,8 +177,10 @@ class _OtpScreenScreenState extends State<OtpScreen> {
                                     } on FirebaseAuthException catch (e) {
                                       showLoading.value = false;
                                       Fluttertoast.showToast(
-                                          msg: e.message ?? '',
-                                          timeInSecForIosWeb: 5);
+                                        msg: e.message ?? '',
+                                        toastLength: Toast.LENGTH_LONG,
+                                        timeInSecForIosWeb: 5,
+                                      );
                                     }
                                   }
                                 },

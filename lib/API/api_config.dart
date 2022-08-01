@@ -29,4 +29,5 @@ class ApiConfig {
   static const String restrictions = '$baseUrl/settings/restrictions';
   static const String deleteCover = '$baseUrl/delete/cover';
   static const String messages = '$baseUrl/messages';
+  static const String pinPost = '$baseUrl/pin/post';
 }

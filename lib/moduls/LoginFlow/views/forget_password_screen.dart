@@ -1,6 +1,7 @@
 import 'package:fans/utility/utility_export.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   GlobalKey<FormState> formKey = GlobalKey();
+
   TextEditingController emailController = TextEditingController();
 
   @override
@@ -91,9 +93,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                             ),
                             onPressed: () {
                               if (formKey.currentState?.validate() == true) {
-                                Map<String, dynamic> params = {
+                                /* Map<String, dynamic> params = {
                                   'email': emailController.text.trim()
-                                };
+                                };*/
+                                forgetPassword();
                               }
                             },
                             child: Text(
@@ -112,5 +115,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             ],
           ),
         ));
+  }
+
+  forgetPassword() async {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      Navigator.of(context).pop();
+    }
   }
 }
