@@ -1,18 +1,13 @@
+
 import 'package:fans/moduls/LoginFlow/views/mobile_signin.dart';
 import 'package:fans/moduls/LoginFlow/views/signin_screen.dart';
-import 'package:fans/utility/colors_utility.dart';
-import 'package:fans/utility/common_structure.dart';
-import 'package:fans/utility/common_textfield.dart';
-import 'package:fans/utility/common_widgets.dart';
-import 'package:fans/utility/font_style_utility.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../moduls/Home/home_structure.dart';
+import 'package:velocity_x/velocity_x.dart';
 import '../../../utility/theme_data.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -29,6 +24,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
   final Uri _url = Uri.parse('https://fans2.co.tz/p/privacy');
+
+  String? privacyPolicy;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    loadAsset(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     style: FontStyleUtility.whiteInter16W500
                                         .copyWith(color: colorPrimary),
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () => _launchInBrowser(_url))
+                                      ..onTap = () => conditionDialog())
                               ]),
                             ),
                           ),
@@ -251,5 +256,56 @@ class _SignUpScreenState extends State<SignUpScreen> {
     )) {
       throw 'Could not launch $url';
     }
+  }
+
+  conditionDialog() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            insetPadding: const EdgeInsets.symmetric(horizontal: 15),
+            contentPadding: EdgeInsets.zero,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            content: SizedBox(
+              height: getScreenHeight(context) * 0.70,
+              // Change as per your requirement
+              width: getScreenWidth(context),
+              // Cha
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: const Icon(Icons.close)),
+                    ),
+                    20.heightBox,
+                    Text(privacyPolicy ?? ''),
+                    /*Text(loadAsset.toString(),
+                        style: blackInter18W600.copyWith(
+                            color: isDarkOn.value == true
+                                ? colorWhite
+                                : colorGrey)),*/
+                    10.heightBox
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  void loadAsset(BuildContext context) async {
+    privacyPolicy = await DefaultAssetBundle.of(context)
+        .loadString('assets/privacy_policy.txt');
   }
 }

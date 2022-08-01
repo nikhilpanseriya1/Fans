@@ -346,9 +346,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   child: ListTile(
                                     title: RichText(
                                       text: TextSpan(children: [
-                                        TextSpan(
-                                            text:
-                                                'Your video has been processed successfully (Post) ',
+                                        TextSpan(text: 'Your video has been processed successfully (Post) ',
                                             style: blackInter16W600.copyWith(
                                                 color: isDarkOn.value == true
                                                     ? colorWhite
