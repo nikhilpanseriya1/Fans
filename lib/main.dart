@@ -5,6 +5,7 @@ import 'package:fans/utility/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
@@ -13,14 +14,17 @@ import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 final getPreference = GetStorage();
 
+Future<void> secureScreen() async {
+  await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  secureScreen();
   await Firebase.initializeApp();
   await GetStorage.init();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
 }
 

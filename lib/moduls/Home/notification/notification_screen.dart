@@ -1,3 +1,4 @@
+import 'package:external_path/external_path.dart';
 import 'package:fans/moduls/Home/notification/View/dashboard_screen.dart';
 import 'package:fans/moduls/Home/notification/View/my_page_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscriptions_screen.dart';
@@ -324,8 +325,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           kNotificationController.notificationModel.value
                                   .notifications?.isNotEmpty ==
                               true
-                      ? Obx(()=>
-                        ListView.builder(
+                      ? Obx(
+                          () => ListView.builder(
                             shrinkWrap: true,
                             itemCount: kNotificationController.notificationModel
                                     .value.notifications?.length ??
@@ -333,7 +334,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             physics: const ClampingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return Container(
-                                margin: const EdgeInsets.symmetric(vertical: 10),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   border: Border.all(
@@ -346,7 +348,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   child: ListTile(
                                     title: RichText(
                                       text: TextSpan(children: [
-                                        TextSpan(text: 'Your video has been processed successfully (Post) ',
+                                        TextSpan(
+                                            text:
+                                                'Your video has been processed successfully (Post) ',
                                             style: blackInter16W600.copyWith(
                                                 color: isDarkOn.value == true
                                                     ? colorWhite
@@ -379,7 +383,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                               );
                             },
                           ),
-                      )
+                        )
                       : SizedBox(
                           height: 500,
                           child: Column(
