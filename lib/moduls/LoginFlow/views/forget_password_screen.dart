@@ -2,6 +2,7 @@ import 'package:fans/utility/utility_export.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -44,10 +45,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     Text('Password Recover',
                         textAlign: TextAlign.center,
                         style: greyInter22W500.copyWith(
-                            fontWeight: FontWeight.w800, fontSize: 28)),
+                            fontWeight: FontWeight.w700, fontSize: 25)),
                     heightBox(20.0),
                     Text('You will receive an email to reset your password',
-                        textAlign: TextAlign.center, style: greyInter22W500),
+                        textAlign: TextAlign.center, style: greyInter22W500.copyWith(fontWeight: FontWeight.w500,fontSize: 20)).paddingSymmetric(horizontal: 10.0),
                   ],
                 ),
               ),
