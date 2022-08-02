@@ -31,6 +31,7 @@ File? zipFileData;
 RxBool zipBool = false.obs;
 RxBool isMessage = false.obs;
 TextEditingController postTextController = TextEditingController();
+TextEditingController editPostTextController = TextEditingController();
 RxString postText = ''.obs;
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -85,8 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-void actionPopUpItemSelected(
-    String value, String? name, BuildContext context, int? id) {
+void actionPopUpItemSelected(String value, String? name, BuildContext context,
+    int? id, String? description) {
   kHomeController.scaffoldkey.currentState?.hideCurrentSnackBar();
   String message;
   if (value == 'GoToPost') {
@@ -97,6 +98,7 @@ void actionPopUpItemSelected(
   } else if (value == 'CopyLink') {
     message = 'You selected delete for $name';
   } else if (value == 'EditPost') {
+    editPostTextController.text = description ?? '';
     editPost(context);
   } else if (value == 'DeletePost') {
     deletePost(context);
@@ -116,7 +118,9 @@ void pinYourProfile(int? id) {
   });
 }
 
-Future<void> editPost(BuildContext context) {
+Future<void> editPost(
+  BuildContext context,
+) {
   return showDialog(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -164,6 +168,8 @@ Future<void> editPost(BuildContext context) {
                       minLines: 4,
                       maxLines: null,
                       keyboardType: TextInputType.multiline,
+                      controller: editPostTextController,
+                      style: greyInter16W500,
                       decoration: const InputDecoration(
                         hintText: 'Write something...',
                         hintStyle: TextStyle(color: Colors.grey),
@@ -235,8 +241,8 @@ Future deletePost(BuildContext context) {
               SizedBox(
                 width: 160,
                 child: materialButton(
-                    background:
-                    MaterialStateProperty.all(deepPurpleColor.withOpacity(0.5)),
+                    background: MaterialStateProperty.all(
+                        deepPurpleColor.withOpacity(0.5)),
                     textStyle: const TextStyle(color: colorWhite),
                     text: 'No cancel !',
                     onTap: () {
@@ -247,8 +253,7 @@ Future deletePost(BuildContext context) {
               SizedBox(
                 width: 160,
                 child: materialButton(
-                    background:
-                    MaterialStateProperty.all(deepPurpleColor),
+                    background: MaterialStateProperty.all(deepPurpleColor),
                     text: 'Yes, delete it!',
                     textStyle: const TextStyle(color: colorWhite),
                     onTap: () {
@@ -394,38 +399,38 @@ Widget homeViewData(bool? visible, BuildContext context) {
                 builder: (context, snapshot) {
                   return zipFileData != null
                       ? Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 5.0)
-                            .copyWith(bottom: 10.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.attachment,
-                              color: blueColor,
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5.0)
+                                .copyWith(bottom: 10.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.attachment,
+                                  color: blueColor,
+                                ),
+                                10.widthBox,
+                                Text(
+                                  (zipFileData!.path.split('/').last),
+                                  style: blackInter15W500,
+                                  textAlign: TextAlign.center,
+                                ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: IconButton(
+                                        onPressed: () {
+                                          zipBool.value = false;
+                                          zipFileData = null;
+                                        },
+                                        icon: const Icon(
+                                            Icons.highlight_remove_sharp)),
+                                  ),
+                                )
+                              ],
                             ),
-                            10.widthBox,
-                            Text(
-                              (zipFileData!.path.split('/').last),
-                              style: blackInter15W500,
-                              textAlign: TextAlign.center,
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: IconButton(
-                                    onPressed: () {
-                                      zipBool.value = false;
-                                      zipFileData = null;
-                                    },
-                                    icon: const Icon(
-                                        Icons.highlight_remove_sharp)),
-                              ),
-                            )
-                          ],
-                        ),
-                      ))
+                          ))
                       : const SizedBox.shrink();
                 }),
             StreamBuilder<Object>(
@@ -433,113 +438,113 @@ Widget homeViewData(bool? visible, BuildContext context) {
                 builder: (context, snapshot) {
                   return kHomeController.imageShowing.value == true
                       ? Container(
-                    margin: const EdgeInsets.only(bottom: 10.0),
-                    height: 130,
-                    child: StreamBuilder<Object>(
-                        stream: kHomeController.imageFileList.stream,
-                        builder: (context, snapshot) {
-                          return Align(
-                            alignment: Alignment.centerLeft,
-                            child: ListView.builder(
-                                itemCount: (kHomeController
-                                    .imageFileList.length) +
-                                    1,
-                                physics: const ClampingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return index !=
-                                      kHomeController
-                                          .imageFileList.length
-                                      ? Stack(
-                                    children: [
-                                      Container(
-                                          margin:
-                                          const EdgeInsets.only(
-                                              right: 12,
-                                              top: 5),
-                                          child: Center(
-                                            child: Image.file(
-                                              File(kHomeController
-                                                  .imageFileList[
-                                              index]
-                                                  .path),
-                                              fit: BoxFit.cover,
-                                              width: 130,
-                                            ),
-                                          )),
-                                      Positioned(
-                                        top: 5,
-                                        right: 5,
-                                        child: IconButton(
-                                          visualDensity:
-                                          const VisualDensity(
-                                              vertical:
-                                              VisualDensity
-                                                  .minimumDensity),
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () {
-                                            kHomeController
-                                                .imageFileList
-                                                .removeAt(index);
-                                          },
-                                          icon: const Icon(
-                                            Icons.remove_circle,
-                                            color: colorRed,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                      : InkWell(
-                                    onTap: () async {
-                                      final List<XFile>?
-                                      selectedImages =
-                                      await kHomeController
-                                          .imagePicker
-                                          .pickMultiImage();
-                                      if (selectedImages!
-                                          .isNotEmpty) {
-                                        kHomeController
-                                            .imageFileList
-                                            .addAll(selectedImages);
-                                      }
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(
-                                              20.0),
-                                          border: Border.all(
-                                              color: isDarkOn
-                                                  .value ==
-                                                  true
-                                                  ? colorLightWhite
-                                                  : colorBlack
-                                                  .withOpacity(
-                                                  0.5))),
-                                      margin: const EdgeInsets.only(
-                                          right: 12),
-                                      width: 130,
-                                      child: Center(
-                                          child: Icon(Icons.add,
-                                              color: isDarkOn
-                                                  .value ==
-                                                  true
-                                                  ? colorLightWhite
-                                                  : colorBlack
-                                                  .withOpacity(
-                                                  0.5))),
-                                    ),
-                                  );
-                                }),
-                          );
-                        }),
-                  )
+                          margin: const EdgeInsets.only(bottom: 10.0),
+                          height: 130,
+                          child: StreamBuilder<Object>(
+                              stream: kHomeController.imageFileList.stream,
+                              builder: (context, snapshot) {
+                                return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: ListView.builder(
+                                      itemCount: (kHomeController
+                                              .imageFileList.length) +
+                                          1,
+                                      physics: const ClampingScrollPhysics(),
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index) {
+                                        return index !=
+                                                kHomeController
+                                                    .imageFileList.length
+                                            ? Stack(
+                                                children: [
+                                                  Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              right: 12,
+                                                              top: 5),
+                                                      child: Center(
+                                                        child: Image.file(
+                                                          File(kHomeController
+                                                              .imageFileList[
+                                                                  index]
+                                                              .path),
+                                                          fit: BoxFit.cover,
+                                                          width: 130,
+                                                        ),
+                                                      )),
+                                                  Positioned(
+                                                    top: 5,
+                                                    right: 5,
+                                                    child: IconButton(
+                                                      visualDensity:
+                                                          const VisualDensity(
+                                                              vertical:
+                                                                  VisualDensity
+                                                                      .minimumDensity),
+                                                      padding: EdgeInsets.zero,
+                                                      onPressed: () {
+                                                        kHomeController
+                                                            .imageFileList
+                                                            .removeAt(index);
+                                                      },
+                                                      icon: const Icon(
+                                                        Icons.remove_circle,
+                                                        color: colorRed,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            : InkWell(
+                                                onTap: () async {
+                                                  final List<XFile>?
+                                                      selectedImages =
+                                                      await kHomeController
+                                                          .imagePicker
+                                                          .pickMultiImage();
+                                                  if (selectedImages!
+                                                      .isNotEmpty) {
+                                                    kHomeController
+                                                        .imageFileList
+                                                        .addAll(selectedImages);
+                                                  }
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      border: Border.all(
+                                                          color: isDarkOn
+                                                                      .value ==
+                                                                  true
+                                                              ? colorLightWhite
+                                                              : colorBlack
+                                                                  .withOpacity(
+                                                                      0.5))),
+                                                  margin: const EdgeInsets.only(
+                                                      right: 12),
+                                                  width: 130,
+                                                  child: Center(
+                                                      child: Icon(Icons.add,
+                                                          color: isDarkOn
+                                                                      .value ==
+                                                                  true
+                                                              ? colorLightWhite
+                                                              : colorBlack
+                                                                  .withOpacity(
+                                                                      0.5))),
+                                                ),
+                                              );
+                                      }),
+                                );
+                              }),
+                        )
                       : const SizedBox();
                 }),
             Obx(
-                  () => Row(
+              () => Row(
                 children: [
                   IconButton(
                     visualDensity: const VisualDensity(
@@ -547,12 +552,12 @@ Widget homeViewData(bool? visible, BuildContext context) {
                     padding: EdgeInsets.zero,
                     onPressed: () {
                       kHomeController.imageShowing.value =
-                      !kHomeController.imageShowing.value;
+                          !kHomeController.imageShowing.value;
                     },
                     icon: Icon(
                       Icons.image_outlined,
                       color:
-                      isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                          isDarkOn.value == true ? colorWhite : deepPurpleColor,
                       size: 25,
                     ),
                   ),
@@ -561,8 +566,8 @@ Widget homeViewData(bool? visible, BuildContext context) {
                     onPressed: () async {
                       FilePickerResult? result = await FilePicker.platform
                           .pickFiles(
-                          type: FileType.custom,
-                          allowedExtensions: ['zip']);
+                              type: FileType.custom,
+                              allowedExtensions: ['zip']);
 
                       if (result != null) {
                         zipFileData = File(result.files.single.path ?? '');
@@ -575,7 +580,7 @@ Widget homeViewData(bool? visible, BuildContext context) {
                     icon: Icon(
                       Icons.folder_zip_outlined,
                       color:
-                      isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                          isDarkOn.value == true ? colorWhite : deepPurpleColor,
                       size: 25,
                     ),
                   ),
@@ -583,14 +588,14 @@ Widget homeViewData(bool? visible, BuildContext context) {
                   Icon(
                     Icons.lock_outline,
                     color:
-                    isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                        isDarkOn.value == true ? colorWhite : deepPurpleColor,
                     size: 25,
                   ),
                   20.widthBox,
                   Icon(
                     Icons.emoji_emotions_outlined,
                     color:
-                    isDarkOn.value == true ? colorWhite : deepPurpleColor,
+                        isDarkOn.value == true ? colorWhite : deepPurpleColor,
                     size: 25,
                   ),
                 ],
@@ -627,40 +632,40 @@ Widget homeViewData(bool? visible, BuildContext context) {
         ),
         15.heightBox,
         Obx(
-              () => kHomeController.myPostModel.value.posts?.isNotEmpty == true &&
-              kHomeController.myPostModel.value.posts != null
+          () => kHomeController.myPostModel.value.posts?.isNotEmpty == true &&
+                  kHomeController.myPostModel.value.posts != null
               ? ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount:
-              kHomeController.myPostModel.value.posts?.length ?? 0,
-              itemBuilder: (context, index) {
-                return commonPost(context, index);
-              })
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount:
+                      kHomeController.myPostModel.value.posts?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return commonPost(context, index);
+                  })
               : SizedBox(
-            height: getScreenHeight(context) * 0.4,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.image_not_supported,
-                  color: isDarkOn.value == true
-                      ? colorLightWhite
-                      : colorGreyOpacity30,
-                  size: 65.0,
-                ),
-                Text(
-                  'No Post Posted',
-                  style: blackInter15W500.copyWith(
-                    fontSize: 20,
-                    color: isDarkOn.value == true
-                        ? colorLightWhite
-                        : colorGreyOpacity30,
+                  height: getScreenHeight(context) * 0.4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.image_not_supported,
+                        color: isDarkOn.value == true
+                            ? colorLightWhite
+                            : colorGreyOpacity30,
+                        size: 65.0,
+                      ),
+                      Text(
+                        'No Post Posted',
+                        style: blackInter15W500.copyWith(
+                          fontSize: 20,
+                          color: isDarkOn.value == true
+                              ? colorLightWhite
+                              : colorGreyOpacity30,
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
-          ),
+                ),
         ),
       ],
     ),
@@ -710,7 +715,7 @@ Widget exploreCreatorData() {
                             ),
                             color: const Color(0xff7c94b6),
                             borderRadius:
-                            const BorderRadius.all(Radius.circular(50.0)),
+                                const BorderRadius.all(Radius.circular(50.0)),
                             border: Border.all(
                               color: colorWhite,
                               width: 2.0,
@@ -810,7 +815,7 @@ Widget commonPost(BuildContext context, [int? index]) {
           Icon(
             CupertinoIcons.pin,
             color:
-            isDarkOn.value == true ? colorLightWhite : colorGreyOpacity30,
+                isDarkOn.value == true ? colorLightWhite : colorGreyOpacity30,
             size: 20,
           ),
           5.widthBox,
@@ -953,7 +958,9 @@ Widget commonPost(BuildContext context, [int? index]) {
                 value,
                 'name',
                 context,
-                kHomeController.myPostModel.value.posts?[index ?? 0].id),
+                kHomeController.myPostModel.value.posts?[index ?? 0].id,
+                kHomeController
+                    .myPostModel.value.posts?[index ?? 0].description),
           ),
         ],
       ),
@@ -970,27 +977,27 @@ Widget commonPost(BuildContext context, [int? index]) {
 
       index == 2
           ? FutureBuilder(
-        future: videoPlayerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return AspectRatio(
-              aspectRatio: videoPlayerController!.value.aspectRatio,
-              child: Chewie(
-                controller: chewieController!,
-              ),
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
-      )
+              future: videoPlayerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return AspectRatio(
+                    aspectRatio: videoPlayerController!.value.aspectRatio,
+                    child: Chewie(
+                      controller: chewieController!,
+                    ),
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            )
           : ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          'assets/images/post1.jpeg',
-          fit: BoxFit.cover,
-        ),
-      ),
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/post1.jpeg',
+                fit: BoxFit.cover,
+              ),
+            ),
       5.heightBox,
       StreamBuilder<Object>(
           stream: isDarkOn.stream,
@@ -1005,7 +1012,7 @@ Widget commonPost(BuildContext context, [int? index]) {
                           splashRadius: 20.0,
                           onPressed: () {
                             kHomeController.likeButton.value =
-                            !kHomeController.likeButton.value;
+                                !kHomeController.likeButton.value;
                           },
                           icon: Icon(
                             kHomeController.likeButton.value == true
@@ -1015,8 +1022,8 @@ Widget commonPost(BuildContext context, [int? index]) {
                             color: kHomeController.likeButton.value == true
                                 ? colorRed
                                 : isDarkOn.value == true
-                                ? colorLightWhite
-                                : colorGrey,
+                                    ? colorLightWhite
+                                    : colorGrey,
                           ));
                     }),
                 Text(
@@ -1035,7 +1042,7 @@ Widget commonPost(BuildContext context, [int? index]) {
                       CupertinoIcons.chat_bubble,
                       size: 22,
                       color:
-                      isDarkOn.value == true ? colorLightWhite : colorGrey,
+                          isDarkOn.value == true ? colorLightWhite : colorGrey,
                     )),
                 Text(
                   '1',
@@ -1059,14 +1066,14 @@ Widget commonPost(BuildContext context, [int? index]) {
                           )
                         ],
                         child: SizedBox(
-                          height: getScreenHeight(context) * 0.4,
+                          height: getScreenHeight(context) * 0.3,
                           width: getScreenWidth(context) * 0.9,
                           child: GridView(
                             shrinkWrap: true,
                             physics: const ClampingScrollPhysics(),
                             gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 1.5),
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2, childAspectRatio: 1.5),
                             children: [
                               commonDialogItems(
                                 image: facebook,
@@ -1084,18 +1091,8 @@ Widget commonPost(BuildContext context, [int? index]) {
                                 callBack: () {},
                               ),
                               commonDialogItems(
-                                image: email,
-                                title: 'Email',
-                                callBack: () {},
-                              ),
-                              commonDialogItems(
                                 image: message,
                                 title: 'Text message',
-                                callBack: () {},
-                              ),
-                              commonDialogItems(
-                                image: copyLink,
-                                title: 'Copy link',
                                 callBack: () {},
                               ),
                             ],
@@ -1107,7 +1104,7 @@ Widget commonPost(BuildContext context, [int? index]) {
                       CupertinoIcons.share,
                       size: 22,
                       color:
-                      isDarkOn.value == true ? colorLightWhite : colorGrey,
+                          isDarkOn.value == true ? colorLightWhite : colorGrey,
                     )),
                 const Spacer(),
                 StreamBuilder<Object>(
@@ -1118,7 +1115,7 @@ Widget commonPost(BuildContext context, [int? index]) {
                           splashRadius: 20.0,
                           onPressed: () {
                             kHomeController.bookmarkButton.value =
-                            !kHomeController.bookmarkButton.value;
+                                !kHomeController.bookmarkButton.value;
                           },
                           icon: Icon(
                             kHomeController.bookmarkButton.value == true
@@ -1128,186 +1125,186 @@ Widget commonPost(BuildContext context, [int? index]) {
                             color: kHomeController.bookmarkButton.value == true
                                 ? deepPurpleColor
                                 : isDarkOn.value == true
-                                ? colorLightWhite
-                                : colorGrey,
+                                    ? colorLightWhite
+                                    : colorGrey,
                           ));
                     })
               ],
             );
           }),
       Obx(
-            () => isMessage.value == true
+        () => isMessage.value == true
             ? ListView.builder(
-            itemCount: 2 + 1,
-            physics: const ClampingScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return index != 2
-                  ? Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipOval(
-                    child: SizedBox.fromSize(
-                      size: const Size.fromRadius(20), // Image radius
-                      child: Image.asset(
-                        'assets/images/profile.jpeg',
-                        scale: 3.5,
-                        height: 30.0,
-                        width: 30.0,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  15.widthBox,
-                  Expanded(
-                    child: StreamBuilder<Object>(
-                        stream: isDarkOn.stream,
-                        builder: (context, snapshot) {
-                          return Column(
-                            // mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'Admin Account',
-                                    style: blackInter15W500.copyWith(
-                                        color: isDarkOn.value == true
-                                            ? colorWhite
-                                            : deepPurpleColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                  Icon(Icons.verified,
-                                      size: 18,
-                                      color: isDarkOn.value == true
-                                          ? colorWhite
-                                          : blueColor)
-                                ],
+                itemCount: 2 + 1,
+                physics: const ClampingScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return index != 2
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipOval(
+                              child: SizedBox.fromSize(
+                                size: const Size.fromRadius(20), // Image radius
+                                child: Image.asset(
+                                  'assets/images/profile.jpeg',
+                                  scale: 3.5,
+                                  height: 30.0,
+                                  width: 30.0,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
-                              3.heightBox,
-                              Text(
-                                'best post',
-                                style: blackInter15W500.copyWith(
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '1 Hour ago',
-                                    style: FontStyleUtility
-                                        .blackInter22W500
-                                        .copyWith(
-                                        color:
-                                        isDarkOn.value == true
-                                            ? colorLightWhite
-                                            : colorGrey,
-                                        fontSize: 13,
-                                        fontWeight:
-                                        FontWeight.w400),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        showAlertDialog(
-                                            title: 'Are you sure?',
-                                            child: Center(
-                                              child: Lottie.asset(
-                                                'assets/json/cancel.json',
-                                                width: 100,
-                                                height: 100,
-                                                repeat: false,
-                                                fit: BoxFit.fill,
-                                              ),
+                            ),
+                            15.widthBox,
+                            Expanded(
+                              child: StreamBuilder<Object>(
+                                  stream: isDarkOn.stream,
+                                  builder: (context, snapshot) {
+                                    return Column(
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Admin Account',
+                                              style: blackInter15W500.copyWith(
+                                                  color: isDarkOn.value == true
+                                                      ? colorWhite
+                                                      : deepPurpleColor,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w900),
                                             ),
-                                            textAlign:
-                                            TextAlign.center,
-                                            msg:
-                                            'Are you sure you want to delete this comment ?',
-                                            context: context,
-                                            callback: () {
-                                              kNotificationController
-                                                  .notificationDeleteApiCall(
-                                                  {}, () {
-                                                kNotificationController
-                                                    .notificationApiCall(
-                                                    {}, () {});
-                                              });
-                                            });
-                                      },
-                                      icon: const Icon(
-                                          Icons.delete_outline,
-                                          size: 20.0),
-                                      padding: EdgeInsets.zero,
-                                      visualDensity:
-                                      const VisualDensity(
-                                          vertical: VisualDensity
-                                              .minimumDensity)),
-                                  const Spacer(),
-                                  StreamBuilder<Object>(
-                                      stream: kHomeController
-                                          .likeButton.stream,
-                                      builder: (context, snapshot) {
-                                        return IconButton(
-                                            splashColor: colorRed,
-                                            splashRadius: 20.0,
-                                            padding: EdgeInsets.zero,
-                                            visualDensity:
-                                            const VisualDensity(
-                                                vertical:
-                                                VisualDensity
-                                                    .minimumDensity),
-                                            onPressed: () {
-                                              kHomeController
-                                                  .likeButton
-                                                  .value =
-                                              !kHomeController
-                                                  .likeButton
-                                                  .value;
-                                            },
-                                            icon: Icon(
-                                              kHomeController
-                                                  .likeButton
-                                                  .value ==
-                                                  true
-                                                  ? CupertinoIcons
-                                                  .heart_fill
-                                                  : CupertinoIcons
-                                                  .suit_heart,
-                                              size: 18,
-                                              color: kHomeController
-                                                  .likeButton
-                                                  .value ==
-                                                  true
-                                                  ? colorRed
-                                                  : isDarkOn.value ==
-                                                  true
-                                                  ? colorLightWhite
-                                                  : colorGrey,
-                                            ));
-                                      }),
-                                ],
-                              )
-                            ],
-                          );
-                        }),
-                  )
-                ],
-              ).paddingOnly(bottom: 10)
-                  : commonTextField(
-                  hintText: 'Write a comment press send..',
-                  textEditingController: null,
-                  inputAction: TextInputAction.send,
-                  borderRadiusColor: colorGreyOpacity30,
-                  isPassword: false,
-                  onFieldSubmit: (value) {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                  });
-            })
+                                            Icon(Icons.verified,
+                                                size: 18,
+                                                color: isDarkOn.value == true
+                                                    ? colorWhite
+                                                    : blueColor)
+                                          ],
+                                        ),
+                                        3.heightBox,
+                                        Text(
+                                          'best post',
+                                          style: blackInter15W500.copyWith(
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '1 Hour ago',
+                                              style: FontStyleUtility
+                                                  .blackInter22W500
+                                                  .copyWith(
+                                                      color:
+                                                          isDarkOn.value == true
+                                                              ? colorLightWhite
+                                                              : colorGrey,
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                            ),
+                                            IconButton(
+                                                onPressed: () {
+                                                  showAlertDialog(
+                                                      title: 'Are you sure?',
+                                                      child: Center(
+                                                        child: Lottie.asset(
+                                                          'assets/json/cancel.json',
+                                                          width: 100,
+                                                          height: 100,
+                                                          repeat: false,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      msg:
+                                                          'Are you sure you want to delete this comment ?',
+                                                      context: context,
+                                                      callback: () {
+                                                        kNotificationController
+                                                            .notificationDeleteApiCall(
+                                                                {}, () {
+                                                          kNotificationController
+                                                              .notificationApiCall(
+                                                                  {}, () {});
+                                                        });
+                                                      });
+                                                },
+                                                icon: const Icon(
+                                                    Icons.delete_outline,
+                                                    size: 20.0),
+                                                padding: EdgeInsets.zero,
+                                                visualDensity:
+                                                    const VisualDensity(
+                                                        vertical: VisualDensity
+                                                            .minimumDensity)),
+                                            const Spacer(),
+                                            StreamBuilder<Object>(
+                                                stream: kHomeController
+                                                    .likeButton.stream,
+                                                builder: (context, snapshot) {
+                                                  return IconButton(
+                                                      splashColor: colorRed,
+                                                      splashRadius: 20.0,
+                                                      padding: EdgeInsets.zero,
+                                                      visualDensity:
+                                                          const VisualDensity(
+                                                              vertical:
+                                                                  VisualDensity
+                                                                      .minimumDensity),
+                                                      onPressed: () {
+                                                        kHomeController
+                                                                .likeButton
+                                                                .value =
+                                                            !kHomeController
+                                                                .likeButton
+                                                                .value;
+                                                      },
+                                                      icon: Icon(
+                                                        kHomeController
+                                                                    .likeButton
+                                                                    .value ==
+                                                                true
+                                                            ? CupertinoIcons
+                                                                .heart_fill
+                                                            : CupertinoIcons
+                                                                .suit_heart,
+                                                        size: 18,
+                                                        color: kHomeController
+                                                                    .likeButton
+                                                                    .value ==
+                                                                true
+                                                            ? colorRed
+                                                            : isDarkOn.value ==
+                                                                    true
+                                                                ? colorLightWhite
+                                                                : colorGrey,
+                                                      ));
+                                                }),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  }),
+                            )
+                          ],
+                        ).paddingOnly(bottom: 10)
+                      : commonTextField(
+                          hintText: 'Write a comment press send..',
+                          textEditingController: null,
+                          inputAction: TextInputAction.send,
+                          borderRadiusColor: colorGreyOpacity30,
+                          isPassword: false,
+                          onFieldSubmit: (value) {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                          });
+                })
             : const SizedBox(),
       ),
       20.heightBox

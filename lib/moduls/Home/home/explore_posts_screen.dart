@@ -1,6 +1,7 @@
 import 'package:fans/moduls/Home/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../utility/utility_export.dart';
@@ -211,7 +212,13 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                               },
                               onSelected: (String value) =>
                                   actionPopUpItemSelected(
-                                      value, 'name', context,kHomeController.myPostModel.value.posts?[index].id),
+                                      value,
+                                      'name',
+                                      context,
+                                      kHomeController
+                                          .myPostModel.value.posts?[index].id,
+                                      kHomeController.myPostModel.value
+                                          .posts?[index].description),
                             ),
                           ],
                         ),

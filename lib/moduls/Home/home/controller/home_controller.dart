@@ -59,8 +59,7 @@ class HomeController extends GetxController {
     Api().call(
         success: (dio.Response<dynamic> response) {
           try {
-            bookMarkModel.value =
-                BookmarkModel.fromJson(json.decode(response.data));
+            bookMarkModel.value = BookmarkModel.fromJson(json.decode(response.data));
           } catch (e) {
             Fluttertoast.showToast(msg: e.toString());
           }

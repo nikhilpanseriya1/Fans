@@ -21,6 +21,17 @@ class _SignInScreenState extends State<SignInScreen> {
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      isRemember.value = getObject('Remember') ?? false;
+      emailController.text = getObject('email') ?? '';
+      passController.text = getObject('password') ?? '';
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return commonStructure(
         padding: 0.0,
@@ -176,6 +187,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               kAuthenticationController.loginApiCall(params,
                                   () {
                                 showLog('Login Success...');
+                                if (isRemember.value) {
+                                  setObject('Remember', true);
+                                  setObject('email', emailController.text);
+                                  setObject('password', passController.text);
+                                }
                                 Get.offAll(() => const HomeStructureView());
                               });
                             }
