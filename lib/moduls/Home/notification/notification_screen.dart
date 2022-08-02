@@ -1,4 +1,3 @@
-import 'package:external_path/external_path.dart';
 import 'package:fans/moduls/Home/notification/View/dashboard_screen.dart';
 import 'package:fans/moduls/Home/notification/View/my_page_screen.dart';
 import 'package:fans/moduls/Home/notification/View/mysubscriptions_screen.dart';
