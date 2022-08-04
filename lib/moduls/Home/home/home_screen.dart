@@ -498,11 +498,14 @@ Widget homeViewData(bool? visible, BuildContext context) {
                                               )
                                             : InkWell(
                                                 onTap: () async {
+                                                  // FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+
                                                   final List<XFile>?
                                                       selectedImages =
                                                       await kHomeController
                                                           .imagePicker
                                                           .pickMultiImage();
+
                                                   if (selectedImages!
                                                       .isNotEmpty) {
                                                     kHomeController
@@ -805,29 +808,36 @@ Widget exploreCreatorData() {
       });
 }
 
-Widget commonPost(BuildContext context, [int? index]) {
+Widget commonPost(BuildContext context, [int? index, String? data]) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            CupertinoIcons.pin,
-            color:
-                isDarkOn.value == true ? colorLightWhite : colorGreyOpacity30,
-            size: 20,
-          ),
-          5.widthBox,
-          Text(
-            'Pinned Post',
-            style: greyInter14W500.copyWith(
-                color: isDarkOn.value == true
-                    ? colorLightWhite
-                    : colorGreyOpacity30),
-          )
-        ],
-      ),
+      StreamBuilder<Object>(
+          stream: kHomeController.pinPostModel.stream,
+          builder: (context, snapshot) {
+            return kHomeController.pinPostModel.value.status == 'pin'
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(
+                        CupertinoIcons.pin,
+                        color: isDarkOn.value == true
+                            ? colorLightWhite
+                            : colorGreyOpacity30,
+                        size: 20,
+                      ),
+                      5.widthBox,
+                      Text(
+                        'Pinned Post',
+                        style: greyInter14W500.copyWith(
+                            color: isDarkOn.value == true
+                                ? colorLightWhite
+                                : colorGreyOpacity30),
+                      )
+                    ],
+                  )
+                : const SizedBox();
+          }),
       10.heightBox,
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -883,11 +893,23 @@ Widget commonPost(BuildContext context, [int? index]) {
                           style: FontStyleUtility.greyInter16W500,
                         ),
                         10.widthBox,
-                        const Icon(
-                          Icons.lock_outline,
+                        Icon(
+                          kHomeController.myPostModel.value.posts?[index ?? 0]
+                                      .locked ==
+                                  'yes'
+                              ? Icons.lock_outline
+                              : Icons.public_outlined,
                           color: colorGrey,
                           size: 20.0,
-                        )
+                        ),
+                        5.widthBox,
+                        kHomeController.myPostModel.value.posts?[index ?? 0]
+                                    .locked ==
+                                'yes'
+                            ? Text(kHomeController.myPostModel.value
+                                    .posts?[index ?? 0].price ??
+                                '')
+                            : const SizedBox()
                       ],
                     ),
                   ],
@@ -966,7 +988,13 @@ Widget commonPost(BuildContext context, [int? index]) {
       ),
       15.heightBox,
       Text(
-        kHomeController.myPostModel.value.posts?[index ?? 0].description ?? '',
+        data == 'bookmark'
+            ? (kHomeController
+                    .bookMarkModel.value.updates?[index ?? 0].description ??
+                '')
+            : kHomeController
+                    .myPostModel.value.posts?[index ?? 0].description ??
+                '',
         style: greyInter16W500,
       ),
       10.heightBox,
@@ -1116,6 +1144,20 @@ Widget commonPost(BuildContext context, [int? index]) {
                           onPressed: () {
                             kHomeController.bookmarkButton.value =
                                 !kHomeController.bookmarkButton.value;
+                            Map<String, dynamic> params = {
+                              'id': data == 'bookmark'
+                                  ? (kHomeController.bookMarkModel.value
+                                          .updates?[index ?? 0].id ??
+                                      '')
+                                  : kHomeController.myPostModel.value
+                                          .posts?[index ?? 0].id ??
+                                      '',
+                            };
+                            kHomeController.addBookMarkApiCall(params, () {
+                              data == 'bookmark'
+                                  ? kHomeController.bookMarkApiCall({}, () {})
+                                  : () {};
+                            });
                           },
                           icon: Icon(
                             kHomeController.bookmarkButton.value == true

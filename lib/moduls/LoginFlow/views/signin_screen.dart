@@ -1,6 +1,8 @@
 import 'package:fans/moduls/LoginFlow/views/forget_password_screen.dart';
 import 'package:fans/moduls/LoginFlow/views/mobile_signin.dart';
 import 'package:fans/moduls/LoginFlow/views/signup_screen.dart';
+import 'package:fans/moduls/splash_screen.dart';
+import 'package:fans/utility/theme_data.dart';
 import 'package:fans/utility/utility_export.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -207,6 +209,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Center(
                           child: InkWell(
                         onTap: () {
+                          brightness?.index == 1 ? isDarkOn.value = false : isDarkOn.value = true;
                           Get.to(() => const SignUpScreen());
                         },
                         child: Text('Don\'t have an account?',

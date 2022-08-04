@@ -80,7 +80,7 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                           style: greyInter16W500,
                         ),
                         Text(
-                          'Endsat',
+                          'Ends at',
                           style: greyInter16W500,
                         ),
                         Text(
@@ -91,127 +91,171 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
                     ),
                     20.heightBox,
                     Obx(
-                      () => ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: kNotificationController.mySubscriberModel
-                                  .value.subscribers?.length ??
-                              0,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 7, horizontal: 12),
-                              padding: const EdgeInsets.symmetric(vertical: 15),
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      spreadRadius: 1,
-                                      blurRadius: 5,
-                                      offset: const Offset(
-                                          0, 3), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(10),
-                                  border:
-                                      Border.all(color: colorPrimary, width: 1),
-                                  color: isDarkOn.value == true
-                                      ? colorLightBlack
-                                      : colorWhite),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
+                      () => (kNotificationController.mySubscriberModel.value
+                                  .subscribers?.isNotEmpty ==
+                              true)
+                          ? ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: kNotificationController
+                                      .mySubscriberModel
+                                      .value
+                                      .subscribers
+                                      ?.length ??
+                                  0,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 7, horizontal: 12),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.3),
+                                          spreadRadius: 1,
+                                          blurRadius: 5,
+                                          offset: const Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: colorPrimary, width: 1),
+                                      color: isDarkOn.value == true
+                                          ? colorLightBlack
+                                          : colorWhite),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      const Icon(
-                                        Icons.supervised_user_circle,
-                                        size: 50,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.supervised_user_circle,
+                                            size: 50,
+                                          ),
+                                          SizedBox(
+                                            width: 80,
+                                            child: Text(
+                                              kNotificationController
+                                                      .mySubscriberModel
+                                                      .value
+                                                      .subscribers?[index]
+                                                      .name ??
+                                                  'Gym Guy',
+                                              style: greyInter16W500,
+                                              maxLines: 1,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(
-                                        width: 80,
+                                        width: 50,
+                                        child: Text(
+                                          getFormattedDate(
+                                              kNotificationController
+                                                      .mySubscriberModel
+                                                      .value
+                                                      .subscribers?[index]
+                                                      .createdAt
+                                                      .toString() ??
+                                                  ''),
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                          style: greyInter16W500,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 64,
                                         child: Text(
                                           kNotificationController
                                                   .mySubscriberModel
                                                   .value
                                                   .subscribers?[index]
-                                                  .name ??
-                                              'Gym Guy',
-                                          style: greyInter16W500,
-                                          maxLines: 1,
+                                                  .interval ??
+                                              '',
+                                          maxLines: 2,
                                           textAlign: TextAlign.center,
+                                          style: greyInter16W500,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 50,
+                                        child: Text(
+                                          getFormattedDate(
+                                              kNotificationController
+                                                      .mySubscriberModel
+                                                      .value
+                                                      .subscribers?[index]
+                                                      .updatedAt
+                                                      .toString() ??
+                                                  ''),
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                          style: greyInter16W500,
+                                        ),
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: colorRed,
+                                            borderRadius:
+                                                BorderRadius.circular(100)),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 10),
+                                        child: Center(
+                                          child: Text(
+                                            textAlign: TextAlign.center,
+                                            'Cancelled',
+                                            style: greyInter16W500.copyWith(
+                                                color: colorWhite),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    width: 50,
-                                    child: Text(
-                                      getFormattedDate(kNotificationController
-                                              .mySubscriberModel
-                                              .value
-                                              .subscribers?[index]
-                                              .createdAt
-                                              .toString() ??
-                                          ''),
-                                      maxLines: 3,
-                                      textAlign: TextAlign.center,
-                                      style: greyInter16W500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 64,
-                                    child: Text(
-                                      kNotificationController
-                                              .mySubscriberModel
-                                              .value
-                                              .subscribers?[index]
-                                              .interval ??
-                                          '',
-                                      maxLines: 2,
-                                      textAlign: TextAlign.center,
-                                      style: greyInter16W500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 50,
-                                    child: Text(
-                                      getFormattedDate(kNotificationController
-                                              .mySubscriberModel
-                                              .value
-                                              .subscribers?[index]
-                                              .updatedAt
-                                              .toString() ??
-                                          ''),
-                                      maxLines: 3,
-                                      textAlign: TextAlign.center,
-                                      style: greyInter16W500,
-                                    ),
-                                  ),
+                                );
+                              })
+                          : SizedBox(
+                              height: getScreenHeight(context) * 0.4,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
                                   Container(
-                                    decoration: BoxDecoration(
-                                        color: colorRed,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 10),
-                                    child: Center(
-                                      child: Text(
-                                        textAlign: TextAlign.center,
-                                        'Cancelled',
-                                        style: greyInter16W500.copyWith(
-                                            color: colorWhite),
-                                      ),
+                                      padding: const EdgeInsets.all(25),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color:
+                                                  colorGrey.withOpacity(0.3)),
+                                          borderRadius:
+                                              BorderRadius.circular(100)),
+                                      child: Icon(
+                                        Icons.group_rounded,
+                                        size: 75,
+                                        color: isDarkOn.value == true
+                                            ? colorLightWhite
+                                            : colorGreyOpacity30,
+                                      )),
+                                  20.heightBox,
+                                  Text(
+                                    'You don\'t have any subscribers',
+                                    style: FontStyleUtility.greyInter18W500
+                                        .copyWith(
+                                      color: isDarkOn.value == true
+                                          ? colorLightWhite
+                                          : colorGreyOpacity30,
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
-                            );
-                          }),
+                            ),
                     ),
                     20.heightBox,
                   ],
@@ -223,7 +267,6 @@ class _MySubscribersScreenState extends State<MySubscribersScreen> {
   }
 
   String getFormattedDate(String date) {
-
     var localDate = DateTime.parse(date).toLocal();
 
     var inputFormat = DateFormat('yyyy-MM-dd HH:mm');

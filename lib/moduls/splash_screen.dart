@@ -6,6 +6,7 @@ import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -41,7 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
         create: (context) => ThemeProvider(),
         builder: (context, _) {
           callDarkEnable();
-          print('JKJKKJJKJJKJKJ ${themeMode}');
           brightness?.index == 1
               ? isDarkOn.value = false
               : isDarkOn.value = true;

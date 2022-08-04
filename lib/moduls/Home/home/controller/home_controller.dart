@@ -59,7 +59,8 @@ class HomeController extends GetxController {
     Api().call(
         success: (dio.Response<dynamic> response) {
           try {
-            bookMarkModel.value = BookmarkModel.fromJson(json.decode(response.data));
+            bookMarkModel.value =
+                BookmarkModel.fromJson(json.decode(response.data));
           } catch (e) {
             Fluttertoast.showToast(msg: e.toString());
           }
@@ -82,14 +83,14 @@ class HomeController extends GetxController {
     Api().call(
         success: (dio.Response<dynamic> response) {
           try {
-            addBookMarkModel.value =
-                AddBookmarkModel.fromJson(json.decode(response.data));
+            addBookMarkModel.value = AddBookmarkModel.fromJson(json.decode(response.data));
+            callback();
           } catch (e) {
             Fluttertoast.showToast(msg: e.toString());
           }
         },
         isProgressShow: true,
-        params: {},
+        params: params,
         methodType: MethodType.post,
         isPassHeader: true,
         error: (dio.Response<dynamic> response) {
@@ -106,7 +107,8 @@ class HomeController extends GetxController {
     Api().call(
         success: (dio.Response<dynamic> response) {
           try {
-            pinPostModel.value = PinPostModel.fromJson(json.decode(response.data));
+            pinPostModel.value =
+                PinPostModel.fromJson(json.decode(response.data));
             callback();
           } catch (e) {
             Fluttertoast.showToast(msg: e.toString());

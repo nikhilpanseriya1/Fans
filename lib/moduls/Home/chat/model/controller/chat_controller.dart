@@ -11,11 +11,12 @@ import '../../../../../Utility/common_function.dart';
 class ChatController extends GetxController {
   Rx<MessegesModel> messagesModel = MessegesModel().obs;
 
-  messagesApiCall(Map<String,dynamic>params,Function callback) {
+  messagesApiCall(Map<String, dynamic> params, Function callback) {
     Api().call(
         url: ApiConfig.messages,
         success: (dio.Response<dynamic> response) {
-          messagesModel.value = MessegesModel.fromJson(json.decode(response.data));
+          messagesModel.value =
+              MessegesModel.fromJson(json.decode(response.data));
         },
         isProgressShow: true,
         params: {},

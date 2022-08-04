@@ -19,7 +19,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _SalesData('Feb', 28),
     _SalesData('Mar', 34),
     _SalesData('Apr', 32),
-    _SalesData('May', 40)
+    _SalesData('May', 40),
   ];
 
   @override
@@ -193,12 +193,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           color: Colors.black.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 5,
-                          offset: const Offset(0, 3), // changes position of shadow
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
                         ),
                       ],
-                      color:  isDarkOn.value == true
-                          ? colorLightBlack
-                          : colorWhite,
+                      color:
+                          isDarkOn.value == true ? colorLightBlack : colorWhite,
                       border: Border.all(color: colorPrimary, width: 1),
                       borderRadius: BorderRadius.circular(15)),
                   child: Column(
