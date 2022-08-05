@@ -212,13 +212,16 @@ class _ExplorePostsScreenState extends State<ExplorePostsScreen> {
                               },
                               onSelected: (String value) =>
                                   actionPopUpItemSelected(
-                                      value,
-                                      'name',
-                                      context,
-                                      kHomeController
-                                          .myPostModel.value.posts?[index].id,
-                                      kHomeController.myPostModel.value
-                                          .posts?[index].description),
+                                value,
+                                'name',
+                                context,
+                                kHomeController
+                                    .myPostModel.value.posts?[index].id,
+                                kHomeController.myPostModel.value.posts?[index]
+                                    .description,
+                                kHomeController
+                                    .myPostModel.value.posts?[index ?? 0].image,
+                              ),
                             ),
                           ],
                         ),

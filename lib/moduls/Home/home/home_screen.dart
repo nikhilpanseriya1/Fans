@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -87,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 void actionPopUpItemSelected(String value, String? name, BuildContext context,
-    int? id, String? description) {
+    int? id, String? description, String? image) {
   kHomeController.scaffoldkey.currentState?.hideCurrentSnackBar();
   String message;
   if (value == 'GoToPost') {
@@ -906,9 +905,8 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                         kHomeController.myPostModel.value.posts?[index ?? 0]
                                     .locked ==
                                 'yes'
-                            ? Text(kHomeController.myPostModel.value
-                                    .posts?[index ?? 0].price ??
-                                '')
+                            ? Text(kHomeController.myPostModel.value.posts?[index ?? 0].price ??
+                                '',style: blackInter14W500,)
                             : const SizedBox()
                       ],
                     ),
@@ -977,12 +975,13 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
               ];
             },
             onSelected: (String value) => actionPopUpItemSelected(
-                value,
-                'name',
-                context,
-                kHomeController.myPostModel.value.posts?[index ?? 0].id,
-                kHomeController
-                    .myPostModel.value.posts?[index ?? 0].description),
+              value,
+              'name',
+              context,
+              kHomeController.myPostModel.value.posts?[index ?? 0].id,
+              kHomeController.myPostModel.value.posts?[index ?? 0].description,
+              kHomeController.myPostModel.value.posts?[index ?? 0].image,
+            ),
           ),
         ],
       ),

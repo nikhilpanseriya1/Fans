@@ -20,7 +20,7 @@ class _GoToPostScreenState extends State<GoToPostScreen> {
         padding: 10.0,
         context: context,
         child: Column(
-          children: [30.heightBox, commonPost(context)],
+          children: [30.heightBox, commonPost(context,),],
         ));
   }
 }
