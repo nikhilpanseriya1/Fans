@@ -259,7 +259,7 @@ class _MyPageScreenState extends State<MyPageScreen>
                               ],
                             ),
                             tapOnButton: () {
-                              Get.to(() => const EditPageScreen());
+                              Get.to(() =>  EditPageScreen());
                             },
                           ),
                         ),
@@ -478,10 +478,10 @@ class _MyPageScreenState extends State<MyPageScreen>
                         physics: const NeverScrollableScrollPhysics(),
                         controller: tabController,
                         children: <Widget>[
-                          homeViewData(false, context),
-                          homeViewData(false, context),
-                          homeViewData(false, context),
-                          homeViewData(false, context),
+                          homeViewData(false, context,'All Post'),
+                          homeViewData(false, context,'Images'),
+                          homeViewData(false, context,'Videos'),
+                          homeViewData(false, context,'Music'),
                         ],
                       ),
                     ),

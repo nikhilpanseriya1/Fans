@@ -6,7 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
+import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import '../API/api_config.dart';
 import 'constants.dart';
 
@@ -171,8 +172,8 @@ void showToast({required String message, Color? bgColor, Toast? toastLength}) {
    return (getPreference.read(PrefConstants.loginToken));
 }*/
 
-/*dateFormatter(String? dateTime, {String? myFormat}) {
-  final DateTime now = DateTime.now();
+dateFormatter(String? dateTime, {String? myFormat}) {
+  final DateTime now = DateTime.now().subtract(const Duration(minutes: 1));
 
   /// Your date format
   final DateFormat formatter = DateFormat(myFormat ?? 'MM/dd/yyyy');
@@ -185,7 +186,12 @@ void showToast({required String message, Color? bgColor, Toast? toastLength}) {
     // formatted = formatter.format(now);
   }
   return formatted;
-}*/
+}
+
+String timeUntil(DateTime? date) {
+  return timeago.format(date!.add(const Duration(minutes: 1)),
+      allowFromNow: true);
+}
 
 // bool getIsLogin() {
 //   return (getPreference.read(ApiConfig.isLoginPref) ?? false);

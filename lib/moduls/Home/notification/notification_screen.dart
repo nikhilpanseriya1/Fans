@@ -588,7 +588,7 @@ Widget commonAccountView() {
             title: const Text('My page')),
         ListTile(
             onTap: () {
-              Get.to(() => const EditPageScreen());
+              Get.to(() =>  EditPageScreen());
             },
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,

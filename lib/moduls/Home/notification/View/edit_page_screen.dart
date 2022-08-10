@@ -1,3 +1,4 @@
+import 'package:fans/moduls/Home/home_structure.dart';
 import 'package:fans/moduls/Home/notification/notification_screen.dart';
 import 'package:fans/utility/theme_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +10,11 @@ import 'package:fans/utility/utility_export.dart';
 
 import '../../../../utility/country_code_picker.dart';
 
+// ignore: must_be_immutable
 class EditPageScreen extends StatefulWidget {
-  const EditPageScreen({Key? key}) : super(key: key);
+  String? name;
+
+  EditPageScreen({Key? key, this.name}) : super(key: key);
 
   @override
   State<EditPageScreen> createState() => _EditPageScreenState();
@@ -39,7 +43,7 @@ class _EditPageScreenState extends State<EditPageScreen> {
               children: [
                 commonScreenView(
                     icon: Icons.mode_edit_outline_outlined,
-                    title: 'Edit my page',
+                    title: widget.name ?? 'Edit my page',
                     subTitle: 'Tell us something about you.'),
 
                 // StreamBuilder<Object>(
@@ -286,7 +290,9 @@ class _EditPageScreenState extends State<EditPageScreen> {
             height: 50,
             title: 'SUBMIT',
             tapOnButton: () {
-              Get.back();
+              widget.name == "User Profile Details"
+                  ? Get.to(() => const HomeStructureView())
+                  : Get.back();
             }),
       ),
     );

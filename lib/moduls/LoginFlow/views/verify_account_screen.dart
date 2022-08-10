@@ -91,7 +91,7 @@ class _VerifyAccountScreenState extends State<VerifyAccountScreen> {
                             style: FontStyleUtility.whiteInter16W500,
                           ),
                           TextSpan(
-                            recognizer: TapGestureRecognizer()..onTap = () => Get.to(()=>const EditPageScreen()),
+                            recognizer: TapGestureRecognizer()..onTap = () => Get.to(()=> EditPageScreen()),
                             text: 'Upload',
                             style: FontStyleUtility.whiteInter16W500
                                 .copyWith(decoration: TextDecoration.underline),

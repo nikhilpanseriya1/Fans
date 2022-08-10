@@ -16,7 +16,7 @@ class ChatController extends GetxController {
         url: ApiConfig.messages,
         success: (dio.Response<dynamic> response) {
           messagesModel.value =
-              MessegesModel.fromJson(json.decode(response.data));
+              MessegesModel.fromJson(response.data);
         },
         isProgressShow: true,
         params: {},

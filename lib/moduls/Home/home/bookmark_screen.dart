@@ -43,7 +43,10 @@ class _BookMarkScreenState extends State<BookMarkScreen> {
                               0,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return commonPost(context, index, 'bookmark');
+                            return commonPost(context,
+                                index: index,
+                                data: 'bookmark',
+                                description: kHomeController.bookMarkModel.value.updates?[index].description ?? '');
                           })
                       : SizedBox(
                           height: getScreenHeight(context) * 0.4,

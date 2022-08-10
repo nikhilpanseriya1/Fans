@@ -4,6 +4,7 @@ import 'package:fans/API/api_call.dart';
 import 'package:fans/API/api_config.dart';
 import 'package:fans/moduls/Home/home/model/add_bookmark_model.dart';
 import 'package:fans/moduls/Home/home/model/bookmark_model.dart';
+import 'package:fans/moduls/Home/home/model/home_model.dart';
 import 'package:fans/moduls/Home/home/model/my_post_model.dart';
 import 'package:fans/moduls/Home/home/model/pin_post_model.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +84,8 @@ class HomeController extends GetxController {
     Api().call(
         success: (dio.Response<dynamic> response) {
           try {
-            addBookMarkModel.value = AddBookmarkModel.fromJson(json.decode(response.data));
+            addBookMarkModel.value =
+                AddBookmarkModel.fromJson(json.decode(response.data));
             callback();
           } catch (e) {
             Fluttertoast.showToast(msg: e.toString());
@@ -122,5 +124,29 @@ class HomeController extends GetxController {
           showLog(response.toString());
         },
         url: ApiConfig.pinPost);
+  }
+
+  ///Home Api Call
+
+  Rx<HomePageModel> homePageModel = HomePageModel().obs;
+
+  homePageApiCall(Map<String, dynamic> params, Function callback) {
+    Api().call(
+      url: ApiConfig.home,
+      success: (dio.Response<dynamic> response) {
+        try {
+          homePageModel.value = HomePageModel.fromJson(response.data);
+        } catch (e) {
+          e.toString();
+        }
+      },
+      isPassHeader: true,
+      methodType: MethodType.get,
+      error: (dio.Response<dynamic> response) {
+        Fluttertoast.showToast(msg: json.decode(response.statusMessage??''), toastLength: Toast.LENGTH_LONG);
+      },
+      isProgressShow: true,
+      params: {},
+    );
   }
 }

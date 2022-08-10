@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     kHomeController.myPostApiCall({}, () {
       kHomeController.myPostModel.refresh();
     });
+    kHomeController.homePageApiCall({}, () {});
 
     videoPlayerController = VideoPlayerController.network(
         "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4");
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     videoPlayerController?.setLooping(true); // videoPlayerController?.play();
   }
+
 
   /* @override
   void dispose() {
@@ -81,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               disableFocusScopeNode(context);
             },
-            child: homeViewData(true, context)));
+            child: homeViewData(true, context, '')));
   }
 }
 
@@ -268,16 +270,14 @@ Future deletePost(BuildContext context) {
   );
 }
 
-Widget homeViewData(bool? visible, BuildContext context) {
+Widget homeViewData(bool? visible, BuildContext context, String? value) {
   RxBool isExpansionTileOpen = false.obs;
   return RawScrollbar(
     thickness: 5.0,
     thumbColor: colorSplash.withOpacity(0.5),
     child: ListView(
       shrinkWrap: true,
-      physics: visible == false
-          ? const ClampingScrollPhysics()
-          : const ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       children: [
         /* visible == false
             ? const SizedBox()
@@ -497,19 +497,17 @@ Widget homeViewData(bool? visible, BuildContext context) {
                                               )
                                             : InkWell(
                                                 onTap: () async {
-                                                  // FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+                                            /*      FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+                                                  if (result != null) {
+                                                    kHomeController.selectedImages?.value = result.paths.map((path) => XFile(path??'')).toList();
+                                                  } else {
+                                                    // User canceled the picker
+                                                  }*/
 
-                                                  final List<XFile>?
-                                                      selectedImages =
-                                                      await kHomeController
-                                                          .imagePicker
-                                                          .pickMultiImage();
+                                                  final List<XFile>?selectedImages = await kHomeController.imagePicker.pickMultiImage();
 
-                                                  if (selectedImages!
-                                                      .isNotEmpty) {
-                                                    kHomeController
-                                                        .imageFileList
-                                                        .addAll(selectedImages);
+                                                  if (selectedImages!.isNotEmpty) {
+                                                    kHomeController.imageFileList.addAll(selectedImages);
                                                   }
                                                 },
                                                 child: Container(
@@ -633,42 +631,64 @@ Widget homeViewData(bool? visible, BuildContext context) {
           ],
         ),
         15.heightBox,
-        Obx(
-          () => kHomeController.myPostModel.value.posts?.isNotEmpty == true &&
-                  kHomeController.myPostModel.value.posts != null
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount:
-                      kHomeController.myPostModel.value.posts?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return commonPost(context, index);
-                  })
-              : SizedBox(
-                  height: getScreenHeight(context) * 0.4,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.image_not_supported,
-                        color: isDarkOn.value == true
-                            ? colorLightWhite
-                            : colorGreyOpacity30,
-                        size: 65.0,
-                      ),
-                      Text(
-                        'No Post Posted',
-                        style: blackInter15W500.copyWith(
-                          fontSize: 20,
-                          color: isDarkOn.value == true
-                              ? colorLightWhite
-                              : colorGreyOpacity30,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-        ),
+        Obx(() =>
+                /*value == 'All Post'? (kHomeController.myPostModel.value.posts?.isNotEmpty == true && kHomeController.myPostModel.value.posts != null): (value == ''?kHomeController.homePageModel.value.data.updates.data.isNotEmpty==true kHomeController.homePageModel.value.data.updates !=null)
+              ?*/
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: value == 'All Post'
+                        ? (kHomeController.myPostModel.value.posts?.length ?? 0)
+                        : kHomeController.homePageModel.value.data?.updates
+                                ?.data?.length ??
+                            0,
+                    itemBuilder: (context, index) {
+                      return commonPost(
+                        context,
+                        index: index,
+                        name: kHomeController.homePageModel.value.data?.updates
+                            ?.data?[index].user?.name,
+                        date: kHomeController.homePageModel.value.data?.updates
+                            ?.data?[index].date,
+                        price: kHomeController.homePageModel.value.data?.updates
+                            ?.data?[index].price,
+                        username: kHomeController.homePageModel.value.data
+                            ?.updates?.data?[index].user?.username,
+                        description: kHomeController.homePageModel.value.data
+                            ?.updates?.data?[index].description,
+                        likeCounts: kHomeController.homePageModel.value.data
+                            ?.updates?.data?[index].likeCount
+                            .toString(),
+                        commentsCounts: kHomeController.homePageModel.value.data
+                            ?.updates?.data?[index].commentCount
+                            .toString(),
+                      );
+                    })
+            /*   : SizedBox(
+          height: getScreenHeight(context) * 0.4,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.image_not_supported,
+            color: isDarkOn.value == true
+                ? colorLightWhite
+                : colorGreyOpacity30,
+            size: 65.0,
+          ),
+          Text(
+            'No Post Posted',
+            style: blackInter15W500.copyWith(
+              fontSize: 20,
+              color: isDarkOn.value == true
+                  ? colorLightWhite
+                  : colorGreyOpacity30,
+            ),
+          )
+        ],
+      ),
+    ),*/
+            ),
       ],
     ),
   );
@@ -807,7 +827,16 @@ Widget exploreCreatorData() {
       });
 }
 
-Widget commonPost(BuildContext context, [int? index, String? data]) {
+Widget commonPost(BuildContext context,
+    {int index = 0,
+    String? data,
+    String? name,
+    String? username,
+    DateTime? date,
+    String? description,
+    String? commentsCounts,
+    String? likeCounts,
+    String? price}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -865,7 +894,7 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                     Row(
                       children: [
                         Text(
-                          'Admin',
+                          name ?? '',
                           style: FontStyleUtility.blackInter22W500.copyWith(
                               color: isDarkOn.value == true
                                   ? colorWhite
@@ -879,7 +908,7 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                         ),
                         5.widthBox,
                         Text(
-                          '@Admin',
+                          username ?? '',
                           style: greyInter14W500,
                         )
                       ],
@@ -888,26 +917,30 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                     Row(
                       children: [
                         Text(
-                          '5 day to ago',
-                          style: FontStyleUtility.greyInter16W500,
+                          timeUntil(date),
+                          style: greyInter16W500.copyWith(
+                              color: isDarkOn.value == true
+                                  ? colorLightWhite
+                                  : colorGrey),
                         ),
                         10.widthBox,
                         Icon(
-                          kHomeController.myPostModel.value.posts?[index ?? 0]
+                          kHomeController.myPostModel.value.posts?[index]
                                       .locked ==
                                   'yes'
                               ? Icons.lock_outline
                               : Icons.public_outlined,
-                          color: colorGrey,
+                          color: isDarkOn.value == true
+                              ? colorLightWhite
+                              : colorGrey,
                           size: 20.0,
                         ),
                         5.widthBox,
-                        kHomeController.myPostModel.value.posts?[index ?? 0]
-                                    .locked ==
-                                'yes'
-                            ? Text(kHomeController.myPostModel.value.posts?[index ?? 0].price ??
-                                '',style: blackInter14W500,)
-                            : const SizedBox()
+                        Text(
+                          price ??
+                              '' /*kHomeController.myPostModel.value.posts?[index].price ?? ''*/,
+                          style: blackInter14W500,
+                        )
                       ],
                     ),
                   ],
@@ -978,22 +1011,17 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
               value,
               'name',
               context,
-              kHomeController.myPostModel.value.posts?[index ?? 0].id,
-              kHomeController.myPostModel.value.posts?[index ?? 0].description,
-              kHomeController.myPostModel.value.posts?[index ?? 0].image,
+              kHomeController.myPostModel.value.posts?[index].id,
+              kHomeController.myPostModel.value.posts?[index].description,
+              kHomeController.myPostModel.value.posts?[index].image,
             ),
           ),
         ],
       ),
       15.heightBox,
       Text(
-        data == 'bookmark'
-            ? (kHomeController
-                    .bookMarkModel.value.updates?[index ?? 0].description ??
-                '')
-            : kHomeController
-                    .myPostModel.value.posts?[index ?? 0].description ??
-                '',
+        description ?? '',
+        /*kHomeController.myPostModel.value.posts?[index].description*/
         style: greyInter16W500,
       ),
       10.heightBox,
@@ -1002,7 +1030,7 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                   color: colorBlack,
                 ),*/
 
-      index == 2
+    /*  index == 2
           ? FutureBuilder(
               future: videoPlayerFuture,
               builder: (context, snapshot) {
@@ -1025,7 +1053,7 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                 fit: BoxFit.cover,
               ),
             ),
-      5.heightBox,
+      5.heightBox,*/
       StreamBuilder<Object>(
           stream: isDarkOn.stream,
           builder: (context, snapshot) {
@@ -1038,15 +1066,27 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                           splashColor: colorRed,
                           splashRadius: 20.0,
                           onPressed: () {
-                            kHomeController.likeButton.value =
-                                !kHomeController.likeButton.value;
+                            // kHomeController.likeButton.value = !kHomeController.likeButton.value;
+                            kHomeController.homePageModel.value.data?.updates
+                                ?.data?[index].isLiked = !(kHomeController
+                                    .homePageModel
+                                    .value
+                                    .data
+                                    ?.updates
+                                    ?.data?[index]
+                                    .isLiked ??
+                                false);
                           },
                           icon: Icon(
-                            kHomeController.likeButton.value == true
+                            kHomeController.homePageModel.value.data?.updates
+                                        ?.data?[index].isLiked ==
+                                    true
                                 ? CupertinoIcons.heart_fill
                                 : CupertinoIcons.suit_heart,
                             size: 25,
-                            color: kHomeController.likeButton.value == true
+                            color: kHomeController.homePageModel.value.data
+                                        ?.updates?.data?[index].isLiked ==
+                                    true
                                 ? colorRed
                                 : isDarkOn.value == true
                                     ? colorLightWhite
@@ -1054,7 +1094,7 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                           ));
                     }),
                 Text(
-                  '1',
+                  likeCounts ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: greyInter18W500.copyWith(
                     color: isDarkOn.value == true ? colorLightWhite : colorGrey,
@@ -1072,7 +1112,7 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                           isDarkOn.value == true ? colorLightWhite : colorGrey,
                     )),
                 Text(
-                  '1',
+                  commentsCounts ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: greyInter18W500.copyWith(
                     color: isDarkOn.value == true ? colorLightWhite : colorGrey,
@@ -1141,25 +1181,21 @@ Widget commonPost(BuildContext context, [int? index, String? data]) {
                           splashColor: deepPurpleColor,
                           splashRadius: 20.0,
                           onPressed: () {
-                            kHomeController.bookmarkButton.value =
-                                !kHomeController.bookmarkButton.value;
+                            kHomeController.bookmarkButton.value = !kHomeController.bookmarkButton.value;
                             Map<String, dynamic> params = {
                               'id': data == 'bookmark'
-                                  ? (kHomeController.bookMarkModel.value
-                                          .updates?[index ?? 0].id ??
-                                      '')
-                                  : kHomeController.myPostModel.value
-                                          .posts?[index ?? 0].id ??
-                                      '',
+                                  ? (kHomeController.bookMarkModel.value.updates?[index].id ?? '')
+                                  : kHomeController.myPostModel.value.posts?[index].id ?? '',
                             };
                             kHomeController.addBookMarkApiCall(params, () {
+                              kHomeController.homePageModel.refresh();
                               data == 'bookmark'
                                   ? kHomeController.bookMarkApiCall({}, () {})
                                   : () {};
                             });
                           },
                           icon: Icon(
-                            kHomeController.bookmarkButton.value == true
+                            kHomeController.homePageModel.value.data?.updates?.data?[index].isBookmarked == true
                                 ? Icons.bookmark
                                 : Icons.bookmark_border,
                             size: 23,

@@ -1,4 +1,11 @@
 class ApiConfig {
+
+  ///Old URL
+  // static const String baseUrl = "https://fans2.co.tz/api";
+  static const String baseUrl = "https://alpha.fans2.co.tz/api";
+
+
+
   static const String appName = "Fans";
 
   static const String methodPOST = "post";
@@ -9,10 +16,8 @@ class ApiConfig {
   static const String error = "Error";
   static const String success = "Success";
   static const String warning = "Warning";
-
   static const String subUrlUser = "/user/";
 
-  static const String baseUrl = "https://fans2.co.tz/api";
 
   static const String loginUser = '$baseUrl/login';
   static const String signupUser = '$baseUrl/register';
@@ -30,4 +35,5 @@ class ApiConfig {
   static const String deleteCover = '$baseUrl/delete/cover';
   static const String messages = '$baseUrl/messages';
   static const String pinPost = '$baseUrl/pin/post';
+  static const String home = '$baseUrl/home';
 }

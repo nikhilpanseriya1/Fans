@@ -384,7 +384,7 @@ class _HomeStructureViewState extends State<HomeStructureView> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                CupertinoIcons.compass_fill,
+                Icons.search,
                 size: 30,
               ),
               label: 'Explore',

@@ -1,4 +1,5 @@
 import 'package:fans/moduls/Home/home_structure.dart';
+import 'package:fans/moduls/Home/notification/View/edit_page_screen.dart';
 import 'package:fans/moduls/LoginFlow/views/forget_password_screen.dart';
 import 'package:fans/moduls/LoginFlow/views/mobile_signin.dart';
 import 'package:fans/moduls/LoginFlow/views/signup_screen.dart';
@@ -171,8 +172,8 @@ class _OtpScreenScreenState extends State<OtpScreen> {
                                         Fluttertoast.showToast(
                                             msg: 'Verification success',
                                             timeInSecForIosWeb: 5);
-                                        Get.offAll(
-                                            () => const HomeStructureView());
+                                        Get.offAll(() => EditPageScreen(
+                                            name: 'User Profile Details'));
                                       }
                                     } on FirebaseAuthException catch (e) {
                                       showLoading.value = false;
