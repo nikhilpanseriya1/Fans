@@ -4,8 +4,7 @@
 
 import 'dart:convert';
 
-HomePageModel homePageModelFromJson(String str) =>
-    HomePageModel.fromJson(json.decode(str));
+HomePageModel homePageModelFromJson(String str) => HomePageModel.fromJson(json.decode(str));
 
 String homePageModelToJson(HomePageModel data) => json.encode(data.toJson());
 

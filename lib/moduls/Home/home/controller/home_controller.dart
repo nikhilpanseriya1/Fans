@@ -143,7 +143,9 @@ class HomeController extends GetxController {
       isPassHeader: true,
       methodType: MethodType.get,
       error: (dio.Response<dynamic> response) {
-        Fluttertoast.showToast(msg: json.decode(response.statusMessage??''), toastLength: Toast.LENGTH_LONG);
+        Fluttertoast.showToast(
+            msg: json.decode(response.statusMessage ?? ''),
+            toastLength: Toast.LENGTH_LONG);
       },
       isProgressShow: true,
       params: {},

@@ -20,7 +20,7 @@ Future<void> secureScreen() async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  secureScreen();
+  // secureScreen();
   await Firebase.initializeApp();
   await GetStorage.init();
   SystemChrome.setPreferredOrientations(

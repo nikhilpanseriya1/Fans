@@ -37,9 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    kHomeController.myPostApiCall({}, () {
-      kHomeController.myPostModel.refresh();
-    });
+    // kHomeController.myPostApiCall({}, () {
+    //   kHomeController.myPostModel.refresh();
+    // });
     kHomeController.homePageApiCall({}, () {});
 
     videoPlayerController = VideoPlayerController.network(
@@ -53,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
     videoPlayerController?.setLooping(true); // videoPlayerController?.play();
   }
 
-
   /* @override
   void dispose() {
     chewieController!.dispose();
@@ -65,20 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return commonStructure(
         context: context,
-        /*floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              videoPlayerController!.value.isPlaying
-                  ? videoPlayerController?.pause()
-                  : videoPlayerController?.play();
-            });
-          },
-          child: Icon(
-            videoPlayerController!.value.isPlaying
-                ? Icons.pause
-                : Icons.play_arrow,
-          ),
-        ),*/
         child: GestureDetector(
             onTap: () {
               disableFocusScopeNode(context);
@@ -497,17 +482,27 @@ Widget homeViewData(bool? visible, BuildContext context, String? value) {
                                               )
                                             : InkWell(
                                                 onTap: () async {
-                                            /*      FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+                                                  FilePickerResult? result =
+                                                      await FilePicker.platform
+                                                          .pickFiles(
+                                                              allowMultiple:
+                                                                  true);
                                                   if (result != null) {
-                                                    kHomeController.selectedImages?.value = result.paths.map((path) => XFile(path??'')).toList();
+                                                    kHomeController.selectedImages?.value = result.paths.map((path) => XFile(path ?? '')).toList();
                                                   } else {
                                                     // User canceled the picker
-                                                  }*/
+                                                  }
 
-                                                  final List<XFile>?selectedImages = await kHomeController.imagePicker.pickMultiImage();
+                                                  // final List<XFile>?selectedImages = await kHomeController.imagePicker.pickMultiImage();
 
-                                                  if (selectedImages!.isNotEmpty) {
-                                                    kHomeController.imageFileList.addAll(selectedImages);
+                                                  if (kHomeController
+                                                          .selectedImages
+                                                          ?.isNotEmpty ==
+                                                      true) {
+                                                    kHomeController
+                                                        .imageFileList
+                                                        .addAll(kHomeController
+                                                            .selectedImages!);
                                                   }
                                                 },
                                                 child: Container(
@@ -639,9 +634,7 @@ Widget homeViewData(bool? visible, BuildContext context, String? value) {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: value == 'All Post'
                         ? (kHomeController.myPostModel.value.posts?.length ?? 0)
-                        : kHomeController.homePageModel.value.data?.updates
-                                ?.data?.length ??
-                            0,
+                        : kHomeController.homePageModel.value.data?.updates?.data?.length ?? 0,
                     itemBuilder: (context, index) {
                       return commonPost(
                         context,
@@ -925,8 +918,8 @@ Widget commonPost(BuildContext context,
                         ),
                         10.widthBox,
                         Icon(
-                          kHomeController.myPostModel.value.posts?[index]
-                                      .locked ==
+                          kHomeController
+                                      .myPostModel.value.posts?[index].locked ==
                                   'yes'
                               ? Icons.lock_outline
                               : Icons.public_outlined,
@@ -1030,7 +1023,7 @@ Widget commonPost(BuildContext context,
                   color: colorBlack,
                 ),*/
 
-    /*  index == 2
+      /*  index == 2
           ? FutureBuilder(
               future: videoPlayerFuture,
               builder: (context, snapshot) {
@@ -1181,11 +1174,16 @@ Widget commonPost(BuildContext context,
                           splashColor: deepPurpleColor,
                           splashRadius: 20.0,
                           onPressed: () {
-                            kHomeController.bookmarkButton.value = !kHomeController.bookmarkButton.value;
+                            kHomeController.bookmarkButton.value =
+                                !kHomeController.bookmarkButton.value;
                             Map<String, dynamic> params = {
                               'id': data == 'bookmark'
-                                  ? (kHomeController.bookMarkModel.value.updates?[index].id ?? '')
-                                  : kHomeController.myPostModel.value.posts?[index].id ?? '',
+                                  ? (kHomeController.bookMarkModel.value
+                                          .updates?[index].id ??
+                                      '')
+                                  : kHomeController
+                                          .myPostModel.value.posts?[index].id ??
+                                      '',
                             };
                             kHomeController.addBookMarkApiCall(params, () {
                               kHomeController.homePageModel.refresh();
@@ -1195,7 +1193,9 @@ Widget commonPost(BuildContext context,
                             });
                           },
                           icon: Icon(
-                            kHomeController.homePageModel.value.data?.updates?.data?[index].isBookmarked == true
+                            kHomeController.homePageModel.value.data?.updates
+                                        ?.data?[index].isBookmarked ==
+                                    true
                                 ? Icons.bookmark
                                 : Icons.bookmark_border,
                             size: 23,
